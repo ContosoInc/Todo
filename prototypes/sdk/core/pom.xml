@@ -7,12 +7,11 @@
     <parent>
         <groupId>com.microsoft.tfs.sdk</groupId>
         <artifactId>sdk</artifactId>
-        <version>${project.version}</version>
+        <version>0.1.0</version>
     </parent>
 
     <groupId>com.microsoft.tfs.sdk</groupId>
     <artifactId>core</artifactId>
-    <version>${project.version}</version>
 
     <name>Microsoft VSO SDK core</name>
     <description>This package contains Microsoft VSO SDK Core package.</description>

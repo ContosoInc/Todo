@@ -6,14 +6,13 @@
 
     <groupId>com.microsoft.tfs.sdk</groupId>
     <artifactId>sdk</artifactId>
-    <version>${project.version}</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
 
     <name>Microsoft VSO SDK</name>
     <description>This package contains Microsoft VSO SDK.</description>
 
     <properties>
-        <project.version>0.1.0</project.version>
         <jaxrs-api.version>2.0.1</jaxrs-api.version>
         <common-codec.version>1.10</common-codec.version>
         <mvn.compiler.version>3.0</mvn.compiler.version>
