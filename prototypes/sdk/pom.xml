@@ -21,6 +21,7 @@
     <modules>
         <module>core</module>
         <module>build</module>
+        <module>testapp</module>
     </modules>
     <build>
         <pluginManagement>
