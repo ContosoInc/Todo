@@ -1,13 +1,13 @@
 package com.microsoft.vss.client.build.model;
 
+import java.util.Date;
+
 import com.microsoft.vss.client.build.model.enumeration.BuildReason;
 import com.microsoft.vss.client.build.model.enumeration.BuildResult;
 import com.microsoft.vss.client.build.model.enumeration.BuildStatus;
 import com.microsoft.vss.client.build.model.enumeration.QueuePriority;
 import com.microsoft.vss.client.core.model.IdentityRef;
 import com.microsoft.vss.client.core.model.TeamProjectReference;
-
-import java.util.Date;
 
 /**
  * Created by yacao on 12/12/2014.

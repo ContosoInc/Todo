@@ -14,7 +14,7 @@ public class QueueReference
         return queueType;
     }
 
-    public void setQueueType(QueueType queueType) {
+    public void setQueueType(final QueueType queueType) {
         this.queueType = queueType;
     }
 }

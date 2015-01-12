@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import javax.ws.rs.HttpMethod;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -54,6 +53,26 @@ public abstract class VssHttpClientBase {
         return null;
     }
 
+    protected Response delete(final UUID locationId, final Map<String, Object> routeValues,
+        final ApiResourceVersion version) {
+        return delete(locationId, routeValues, version, null);
+    }
+
+    protected Response delete(final UUID locationId, final Map<String, Object> routeValues,
+        final ApiResourceVersion version, final Map<String, String> queryParameters) {
+
+        final Invocation request = createRequest(HttpMethod.DELETE, locationId, routeValues, version, queryParameters);
+        final Response response = sendRequest(request);
+
+        return response;
+    }
+
+    protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
+        final Class<TResult> resultClazz) {
+
+        return get(locationId, null, version, null, resultClazz);
+    }
+
     protected <TResult> TResult get(final UUID locationId, final Map<String, Object> routeValues,
         final ApiResourceVersion version, final Class<TResult> resultClazz) {
 
@@ -70,6 +89,46 @@ public abstract class VssHttpClientBase {
         final ApiResourceVersion version, final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
 
         final Invocation request = createRequest(HttpMethod.GET, locationId, routeValues, version, queryParameters);
+        final TResult result = sendRequest(request, resultClazz);
+
+        return result;
+    }
+
+    protected Response patch(final UUID locationId, final Map<String, Object> routeValues,
+        final ApiResourceVersion version, final Map<String, String> queryParameters) {
+
+        final Invocation request = createRequest(HttpMethod.PATCH, locationId, routeValues, version, queryParameters);
+        final Response response = sendRequest(request);
+
+        return response;
+    }
+
+    protected <TEntity> Response patch(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version,
+        final Map<String, String> queryParameters) {
+
+        final Invocation request =
+            createRequest(HttpMethod.PATCH, locationId, routeValues, version, value, queryParameters);
+        final Response response = sendRequest(request);
+
+        return response;
+    }
+
+    protected <TResult> TResult patch(final UUID locationId, final Map<String, Object> routeValues,
+        final ApiResourceVersion version, final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
+
+        final Invocation request = createRequest(HttpMethod.PATCH, locationId, routeValues, version, queryParameters);
+        final TResult result = sendRequest(request, resultClazz);
+
+        return result;
+    }
+
+    protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version,
+        final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
+
+        final Invocation request =
+            createRequest(HttpMethod.PATCH, locationId, routeValues, version, value, queryParameters);
         final TResult result = sendRequest(request, resultClazz);
 
         return result;
@@ -348,5 +407,15 @@ public abstract class VssHttpClientBase {
 
             throw (VssException) exceptionToThrow;
         }
+    }
+
+    protected static abstract class HttpMethod {
+        public static final String PATCH = "PATCH"; //$NON-NLS-1$
+        public static final String GET = "GET"; //$NON-NLS-1$
+        public static final String POST = "POST"; //$NON-NLS-1$
+        public static final String PUT = "PUT"; //$NON-NLS-1$
+        public static final String DELETE = "DELETE"; //$NON-NLS-1$
+        public static final String HEAD = "HEAD"; //$NON-NLS-1$
+        public static final String OPTIONS = "OPTIONS"; //$NON-NLS-1$
     }
 }

@@ -20,6 +20,8 @@
 
     <modules>
         <module>core</module>
+        <module>sourcecontrol</module>
+        <module>distributedtask</module>
         <module>build</module>
         <module>testapp</module>
     </modules>

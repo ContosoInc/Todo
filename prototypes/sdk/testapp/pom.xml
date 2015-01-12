@@ -49,6 +49,12 @@
 
         <dependency>
             <groupId>com.microsoft.tfs.sdk</groupId>
+            <artifactId>sourcecontrol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.tfs.sdk</groupId>
             <artifactId>build</artifactId>
             <version>${project.version}</version>
         </dependency>

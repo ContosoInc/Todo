@@ -30,16 +30,28 @@ import com.microsoft.vss.client.build.exception.BuildRequestValidationFailedExce
 import com.microsoft.vss.client.build.exception.BuildServerNotFoundException;
 import com.microsoft.vss.client.build.exception.CannotDeleteDefinitionBuildExistsException;
 import com.microsoft.vss.client.build.exception.DefinitionNotFoundException;
+import com.microsoft.vss.client.build.model.AgentPoolQueue;
 import com.microsoft.vss.client.build.model.Build;
+import com.microsoft.vss.client.build.model.BuildArtifact;
 import com.microsoft.vss.client.build.model.BuildDefinition;
-import com.microsoft.vss.client.build.model.BuildDefinitions;
-import com.microsoft.vss.client.build.model.Builds;
+import com.microsoft.vss.client.build.model.BuildDefinitionTemplate;
+import com.microsoft.vss.client.build.model.BuildOptionDefinition;
+import com.microsoft.vss.client.build.model.QueueReference;
 import com.microsoft.vss.client.build.model.enumeration.BuildReason;
 import com.microsoft.vss.client.build.model.enumeration.BuildResult;
 import com.microsoft.vss.client.build.model.enumeration.BuildStatus;
+import com.microsoft.vss.client.build.serialization.BuildArtifacts;
+import com.microsoft.vss.client.build.serialization.BuildDefinitionTemplates;
+import com.microsoft.vss.client.build.serialization.BuildDefinitions;
+import com.microsoft.vss.client.build.serialization.BuildOptionDefinitions;
+import com.microsoft.vss.client.build.serialization.Builds;
+import com.microsoft.vss.client.build.serialization.QueueReferences;
+import com.microsoft.vss.client.build.serialization.Tags;
 import com.microsoft.vss.client.core.StringUtil;
 import com.microsoft.vss.client.core.VssHttpClientBase;
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
+import com.microsoft.vss.client.sourcecontrol.model.GitCommitRef;
+import com.microsoft.vss.client.sourcecontrol.serialization.GitCommitRefs;
 
 public class BuildHttpClient
     extends VssHttpClientBase {
@@ -78,6 +90,15 @@ public class BuildHttpClient
         super(rsClient, baseUrl);
     }
 
+    @Override
+    protected Map<String, Class<? extends Exception>> getTranslatedExceptions() {
+        return TRANSLATED_EXCEPTIONS;
+    }
+
+    /*
+     * Build methods
+     */
+
     public BuildDefinition AddDefinition(final BuildDefinition definition) {
         return super.post(definition, BuildResourceIds.Definitions, API_VERSION, BuildDefinition.class);
     }
@@ -92,11 +113,8 @@ public class BuildHttpClient
 
     private BuildDefinition getDefinition(final UUID projectId, final Number definitionId, final Number revision) {
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>() {
-            {
-                put("definitionId", definitionId.intValue()); //$NON-NLS-1$
-            }
-        };
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("definitionId", definitionId.intValue()); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("project", projectId.toString()); //$NON-NLS-1$
@@ -105,11 +123,11 @@ public class BuildHttpClient
         return super.get(BuildResourceIds.Definitions, routeValues, API_VERSION, queryParameters, BuildDefinition.class);
     }
 
-    public BuildDefinitions getDefinitions(final UUID projectId) {
+    public List<BuildDefinition> getDefinitions(final UUID projectId) {
         return getDefinitions(projectId, "*"); //$NON-NLS-1$
     }
 
-    public BuildDefinitions getDefinitions(final UUID projectId, final String name) {
+    public List<BuildDefinition> getDefinitions(final UUID projectId, final String name) {
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("project", projectId.toString()); //$NON-NLS-1$
@@ -117,15 +135,16 @@ public class BuildHttpClient
         if (!StringUtil.isNullOrEmpty(name) && name != "*") { //$NON-NLS-1$
             queryParameters.put("name", name); //$NON-NLS-1$
         }
-        return super.get(BuildResourceIds.Definitions, API_VERSION, queryParameters, BuildDefinitions.class);
+        final BuildDefinitions result =
+            super.get(BuildResourceIds.Definitions, API_VERSION, queryParameters, BuildDefinitions.class);
+
+        return result.getValue();
     }
 
     public BuildDefinition updateDefinition(final BuildDefinition definition) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>() {
-            {
-                put("definitionId", definition); //$NON-NLS-1$
-            }
-        };
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("definitionId", definition); //$NON-NLS-1$
+
         return super.put(definition, BuildResourceIds.Definitions, routeValues, API_VERSION, BuildDefinition.class);
     }
 
@@ -133,24 +152,19 @@ public class BuildHttpClient
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("propertyFilters", propertyFilters); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>() {
-            {
-                put("buildId", buildId); //$NON-NLS-1$
-            }
-        };
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
         return super.get(BuildResourceIds.Builds, routeValues, API_VERSION, queryParameters, Build.class);
     }
 
-    public Builds getBuilds(final UUID projectId, final List<Integer> definitionIds, final List<Integer> queueIds,
+    public List<Build> getBuilds(final UUID projectId, final List<Integer> definitionIds, final List<Integer> queueIds,
         final String buildNumber, final Date minFinishTime, final Date maxFinishTime, final String requestedFor,
         final BuildReason reasonFilter, final BuildStatus statusFilter, final BuildResult resultFilter,
         final List<String> propertyFilters, final List<String> tagFilters, final Integer maxBuilds) {
 
-        final NameValueCollection queryParameters = new NameValueCollection() {
-            {
-                put("project", projectId.toString()); //$NON-NLS-1$
-            }
-        };
+        final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.put("project", projectId.toString()); //$NON-NLS-1$
 
         queryParameters.addIfNotEmpty("definitions", definitionIds); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("queues", queueIds); //$NON-NLS-1$
@@ -165,7 +179,9 @@ public class BuildHttpClient
         queryParameters.addIfNotEmpty("tagFilters", tagFilters); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", maxBuilds); //$NON-NLS-1$
 
-        return super.get(BuildResourceIds.Builds, API_VERSION, queryParameters, Builds.class);
+        final Builds result = super.get(BuildResourceIds.Builds, API_VERSION, queryParameters, Builds.class);
+
+        return result.getValue();
     }
 
     public Build queueBuild(final Build build) {
@@ -192,9 +208,210 @@ public class BuildHttpClient
         }
     }
 
-    @Override
-    protected Map<String, Class<? extends Exception>> getTranslatedExceptions() {
-        return TRANSLATED_EXCEPTIONS;
+    public Build updateBuild(final int buildId, final String buildNumber) {
+        Build build = new Build();
+        build.setId(buildId);
+        build.setBuildNumber(buildNumber);
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        return super.patch(build, BuildResourceIds.Builds, routeValues, API_VERSION, null, Build.class);
     }
 
+    public Build cancelBuild(final int buildId) {
+        Build build = new Build();
+        build.setId(buildId);
+        build.setStatus(BuildStatus.Cancelling);
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        return super.patch(build, BuildResourceIds.Builds, routeValues, API_VERSION, null, Build.class);
+    }
+
+    public void deleteBuild(final int buildId) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        super.delete(BuildResourceIds.Builds, routeValues, API_VERSION);
+    }
+
+    /*
+     * Artifact methods
+     */
+
+    public List<BuildArtifact> getArtifacts(final int buildId) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        return getArtifacts(buildId, null);
+    }
+
+    public List<BuildArtifact> getArtifacts(final int buildId, final String artifactName) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+        routeValues.put("artifactName", artifactName); //$NON-NLS-1$
+
+        final BuildArtifacts result =
+            super.get(BuildResourceIds.Artifacts, routeValues, API_VERSION, BuildArtifacts.class);
+
+        return result.getValue();
+    }
+
+    public BuildArtifact postArtifact(final int buildId, final BuildArtifact artifact) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        return super.post(artifact, BuildResourceIds.Artifacts, routeValues, API_VERSION, BuildArtifact.class);
+    }
+
+    /*
+     * Commit methods
+     */
+
+    public List<GitCommitRef> getCommits(final String project, final int buildId, final int top) {
+        return getCommits(project, buildId, (Integer) top);
+    }
+
+    public List<GitCommitRef> getCommits(final String project, final int buildId) {
+        return getCommits(project, buildId, null);
+    }
+
+    private List<GitCommitRef> getCommits(final String project, final int buildId, final Number top) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("$top", top.toString()); //$NON-NLS-1$
+
+        final GitCommitRefs result =
+            super.get(BuildResourceIds.BuildCommits, routeValues, API_VERSION, queryParameters, GitCommitRefs.class);
+
+        return result.getValue();
+    }
+
+    /*
+     * Definition template methods
+     */
+
+    public List<BuildDefinitionTemplate> getTemplates(final String project) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+
+        final BuildDefinitionTemplates result =
+            super.get(BuildResourceIds.Templates, routeValues, API_VERSION, BuildDefinitionTemplates.class);
+
+        return result.getValue();
+    }
+
+    public BuildDefinitionTemplate getTemplate(final String project, final String templateId) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+
+        final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("templateId", templateId); //$NON-NLS-1$
+
+        return super.get(
+            BuildResourceIds.Templates,
+            routeValues,
+            API_VERSION,
+            queryParameters,
+            BuildDefinitionTemplate.class);
+    }
+
+    public BuildDefinitionTemplate saveTemplate(final String project, final BuildDefinitionTemplate template) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("templateId", template.getId()); //$NON-NLS-1$
+
+        return super.put(template, BuildResourceIds.Templates, routeValues, API_VERSION, BuildDefinitionTemplate.class);
+    }
+
+    public void deleteTemplate(final String project, final String templateId) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("templateId", templateId); //$NON-NLS-1$
+
+        super.delete(BuildResourceIds.Templates, routeValues, API_VERSION);
+    }
+
+    /*
+     * Option definition methods
+     */
+
+    public List<BuildOptionDefinition> getBuildOptions() {
+
+        final BuildOptionDefinitions result =
+            super.get(BuildResourceIds.Options, API_VERSION, BuildOptionDefinitions.class);
+
+        return result.getValue();
+    }
+
+    /*
+     * Queue methods
+     */
+
+    public List<QueueReference> getQueues(final String name) {
+
+        final NameValueCollection queryParameters = new NameValueCollection();
+        if (!"*".equals(name)) {//$NON-NLS-1$
+            queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
+        }
+
+        final QueueReferences result =
+            super.get(BuildResourceIds.Queues, API_VERSION, queryParameters, QueueReferences.class);
+
+        return result.getValue();
+    }
+
+    public AgentPoolQueue addQueue(final AgentPoolQueue queue) {
+
+        return super.post(queue, BuildResourceIds.Queues, API_VERSION, null, AgentPoolQueue.class);
+    }
+
+    /*
+     * Tag methods
+     */
+
+    public List<String> getTags(final String project) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+
+        final Tags result = super.get(BuildResourceIds.Tags, routeValues, API_VERSION, Tags.class);
+
+        return result.getValue();
+    }
+
+    public List<String> addBuildTag(final String project, final int buildId, final String tag) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+        routeValues.put("tag", tag); //$NON-NLS-1$
+
+        final Tags result = super.put(tag, BuildResourceIds.Tags, routeValues, API_VERSION, Tags.class);
+
+        return result.getValue();
+    }
+
+    public void removeBuildTag(final String project, final int buildId, final String tag) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("buildId", buildId); //$NON-NLS-1$
+        routeValues.put("tag", tag); //$NON-NLS-1$
+
+        super.delete(BuildResourceIds.Tags, routeValues, API_VERSION);
+    }
 }

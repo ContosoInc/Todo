@@ -1,17 +1,16 @@
-package com.microsoft.vss.client.build.model;
+package com.microsoft.vss.client.core.serialization;
 
 import java.util.List;
 
-// TODO replace with VssCollectionWrapper and its JsonParser
-public class Builds {
+public class VssJsonCollectionWrapper<T> {
     private int count;
-    private List<Build> value;
+    private List<T> value;
 
-    public List<Build> getValue() {
+    public List<T> getValue() {
         return value;
     }
 
-    public void setValue(final List<Build> value) {
+    public void setValue(final List<T> value) {
         this.value = value;
     }
 
