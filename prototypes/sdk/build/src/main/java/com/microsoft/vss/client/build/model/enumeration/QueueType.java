@@ -6,9 +6,15 @@ package com.microsoft.vss.client.build.model.enumeration;
 public enum QueueType {
     BuildController(1), AgentPool(2);
 
-    private int type;
+    private final int value;
 
-    QueueType(int type) {
-        this.type = type;
+    QueueType(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        final String name = super.toString();
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
     }
 }

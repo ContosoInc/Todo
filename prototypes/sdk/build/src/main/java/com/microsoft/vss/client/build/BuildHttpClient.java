@@ -2,7 +2,6 @@ package com.microsoft.vss.client.build;
 
 import java.net.URI;
 import java.nio.file.AccessDeniedException;
-import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +49,7 @@ import com.microsoft.vss.client.build.serialization.Tags;
 import com.microsoft.vss.client.core.StringUtil;
 import com.microsoft.vss.client.core.VssHttpClientBase;
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
+import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.sourcecontrol.model.GitCommitRef;
 import com.microsoft.vss.client.sourcecontrol.serialization.GitCommitRefs;
 
@@ -58,10 +58,6 @@ public class BuildHttpClient
 
     private final static ApiResourceVersion API_VERSION = new ApiResourceVersion(2, 0, 2);
     private final static Map<String, Class<? extends Exception>> TRANSLATED_EXCEPTIONS;
-
-    private final static String externalizedStringSample = Messages.getString("BuildHttpClient.SampleMessage"); //$NON-NLS-1$
-    private final static String externalizedFormattedStringSample = MessageFormat.format(
-        Messages.getString("BuildHttpClient.SampleFormat"), " "); //$NON-NLS-1$ //$NON-NLS-2$
 
     static {
         TRANSLATED_EXCEPTIONS = new HashMap<String, Class<? extends Exception>>();
@@ -86,8 +82,8 @@ public class BuildHttpClient
         TRANSLATED_EXCEPTIONS.put("AccessDeniedException", AccessDeniedException.class); //$NON-NLS-1$
     }
 
-    protected BuildHttpClient(final Client rsClient, final URI baseUrl) {
-        super(rsClient, baseUrl);
+    public BuildHttpClient(final Client jaxrsClient, final URI baseUrl) {
+        super(jaxrsClient, baseUrl);
     }
 
     @Override
@@ -319,11 +315,7 @@ public class BuildHttpClient
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("templateId", templateId); //$NON-NLS-1$
 
-        return super.get(
-            BuildResourceIds.Templates,
-            routeValues,
-            API_VERSION,
-            queryParameters,
+        return super.get(BuildResourceIds.Templates, routeValues, API_VERSION, queryParameters,
             BuildDefinitionTemplate.class);
     }
 

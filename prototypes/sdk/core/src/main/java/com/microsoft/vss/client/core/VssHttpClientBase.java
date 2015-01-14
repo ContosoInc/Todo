@@ -3,9 +3,12 @@ package com.microsoft.vss.client.core;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -35,6 +38,7 @@ public abstract class VssHttpClientBase {
     private final static String OPTIONS_RELATIVE_PATH = "_apis"; //$NON-NLS-1$
     private final static String AREA_PARAMETER_NAME = "area"; //$NON-NLS-1$
     private final static String RESOURCE_PARAMETER_NAME = "resource"; //$NON-NLS-1$
+    private final static String ROUTE_TEMPLATE_SEPARATOR = "/"; //$NON-NLS-1$
     private final static ApiResourceVersion DEFAULT_API_VERSION = new ApiResourceVersion(1, 0);
 
     private final Client rsClient;
@@ -124,6 +128,11 @@ public abstract class VssHttpClientBase {
     }
 
     protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version, final Class<TResult> resultClazz) {
+        return patch(value, locationId, routeValues, version, null, resultClazz);
+    }
+
+    protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
         final Map<String, Object> routeValues, final ApiResourceVersion version,
         final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
 
@@ -208,9 +217,12 @@ public abstract class VssHttpClientBase {
             final Builder builder = optionsTarget.request(MediaType.APPLICATION_JSON_TYPE);
 
             try {
+                // String o = builder.async().options(String.class).get();
                 resourceLocations = builder.async().options(ApiResourceLocationCollection.class).get();
-            } catch (final InterruptedException | ExecutionException e) {
+            } catch (final InterruptedException e) {
                 // TODO log errors
+                return null;
+            } catch (final ExecutionException e) {
                 return null;
             }
         }
@@ -229,7 +241,9 @@ public abstract class VssHttpClientBase {
         final Map<String, Object> dictionary =
             toRouteDictionary(routeValues, location.getArea(), location.getResourceName());
 
-        final WebTarget targetTemplate = baseTarget.path(location.getRouteTemplate());
+        final String routeTemplate = location.getRouteTemplate();
+        final String actualTemplate = removeUnusedOptionalParameters(routeTemplate, dictionary.keySet());
+        final WebTarget targetTemplate = baseTarget.path(actualTemplate);
 
         WebTarget target = targetTemplate.resolveTemplates(dictionary);
 
@@ -240,6 +254,31 @@ public abstract class VssHttpClientBase {
         }
 
         return target;
+    }
+
+    private String removeUnusedOptionalParameters(final String template, final Set<String> parameterNames) {
+        final String[] templateParameters = template.split(ROUTE_TEMPLATE_SEPARATOR);
+        final List<String> actualParameters = new ArrayList<String>();
+
+        for (int i = 0; i < templateParameters.length; i++) {
+            final String parameter = templateParameters[i];
+
+            if (parameter.startsWith("{*")) { //$NON-NLS-1$
+                final String name = parameter.substring(2, parameter.length() - 1);
+                if (parameterNames.contains(name)) {
+                    actualParameters.add("{" + name + "}"); //$NON-NLS-1$ //$NON-NLS-2$
+                }
+            } else if (parameter.startsWith("{")) { //$NON-NLS-1$
+                final String name = parameter.substring(1, parameter.length() - 1);
+                if (parameterNames.contains(name)) {
+                    actualParameters.add("{" + name + "}"); //$NON-NLS-1$ //$NON-NLS-2$
+                }
+            } else {
+                actualParameters.add(parameter);
+            }
+        }
+
+        return StringUtil.join(ROUTE_TEMPLATE_SEPARATOR, actualParameters);
     }
 
     private Map<String, Object> toRouteDictionary(final Map<String, Object> routeValues, final String areaName,
@@ -263,6 +302,7 @@ public abstract class VssHttpClientBase {
 
         final StringBuilder sb = new StringBuilder(MediaType.APPLICATION_JSON);
         sb.append(";"); //$NON-NLS-1$
+        sb.append("api-version="); //$NON-NLS-1$
         sb.append(version);
 
         return sb.toString();
@@ -281,10 +321,10 @@ public abstract class VssHttpClientBase {
      * resource location, based on the client and server capabilities
      * 
      * @param location
-     *        - Location of the API resource
+     *            - Location of the API resource
      * @param version
-     *        - Client version to attempt to use (use the latest VSS API version
-     *        if unspecified)
+     *            - Client version to attempt to use (use the latest VSS API
+     *            version if unspecified)
      * @return - Max API version supported on the server that is less than or
      *         equal to the client version. Returns null if the server does not
      *         support this location or this version of the client.

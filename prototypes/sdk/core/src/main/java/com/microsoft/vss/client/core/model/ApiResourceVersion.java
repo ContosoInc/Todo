@@ -84,25 +84,24 @@ public class ApiResourceVersion {
             }
         }
 
-        if (!tryParseVersion(apiResourceVersionParts[1])) {
+        if (!tryParseVersion(apiResourceVersionParts[0])) {
             throw new IllegalArgumentException("ApiVersion: " + apiVersionString); //$NON-NLS-1$
         }
     }
 
     private boolean tryParseVersion(final String apiVersion) {
-        final String[] versionParts = apiVersion.split("."); //$NON-NLS-1$
+        final int p = apiVersion.indexOf('.');
 
-        if (versionParts.length == 2) {
+        if (p < 0) {
             try {
-                this.minor = Integer.parseInt(versionParts[1]);
+                this.major = Integer.parseInt(apiVersion);
             } catch (final NumberFormatException e) {
                 return false;
             }
-        }
-
-        if (versionParts.length > 0) {
+        } else {
             try {
-                this.minor = Integer.parseInt(versionParts[1]);
+                this.major = Integer.parseInt(apiVersion.substring(0, p));
+                this.minor = Integer.parseInt(apiVersion.substring(p + 1));
             } catch (final NumberFormatException e) {
                 return false;
             }

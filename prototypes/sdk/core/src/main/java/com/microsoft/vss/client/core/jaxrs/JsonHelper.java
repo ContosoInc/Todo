@@ -14,6 +14,7 @@ public class JsonHelper {
 
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+        objectMapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
     }
 
     public static ObjectMapper getObjectMapper() {

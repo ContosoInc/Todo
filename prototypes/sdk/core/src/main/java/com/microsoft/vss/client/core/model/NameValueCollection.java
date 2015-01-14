@@ -1,4 +1,4 @@
-package com.microsoft.vss.client.build;
+package com.microsoft.vss.client.core.model;
 
 import java.util.HashMap;
 import java.util.List;

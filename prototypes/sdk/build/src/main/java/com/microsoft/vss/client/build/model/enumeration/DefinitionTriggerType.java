@@ -43,9 +43,15 @@ public enum DefinitionTriggerType {
      */
     All(127);
 
-    private int value;
+    private final int value;
 
     DefinitionTriggerType(final int value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        final String name = super.toString();
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
     }
 }

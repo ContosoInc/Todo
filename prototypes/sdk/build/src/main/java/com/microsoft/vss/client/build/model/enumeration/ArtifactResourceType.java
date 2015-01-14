@@ -24,5 +24,11 @@ public enum ArtifactResourceType {
     /**
      * Build container reference E.g. #/2121/drop
      */
-    Container
+    Container;
+
+    @Override
+    public String toString() {
+        final String name = super.toString();
+        return name.substring(0, 1).toLowerCase() + name.substring(1);
+    }
 }

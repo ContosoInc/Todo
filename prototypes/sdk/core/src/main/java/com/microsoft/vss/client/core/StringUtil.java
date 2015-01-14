@@ -155,4 +155,38 @@ public abstract class StringUtil {
 
         return msg;
     }
+
+    public static String newString(final char padChar, final int width) {
+        final char[] buf = new char[width];
+
+        for (int i = 0; i < width; i++) {
+            buf[i] = padChar;
+        }
+
+        return new String(buf);
+    }
+
+    public static String pad(final String s, final int width, boolean leftJustified, final char padChar) {
+        if (leftJustified) {
+            return (s + newString(' ', width)).substring(0, width);
+        } else {
+            return (newString(' ', width) + s).substring(s.length());
+        }
+    }
+
+    public static String pad(final String s, final int width, boolean leftJustified) {
+        return pad(s, width, leftJustified, ' ');
+    }
+
+    public static String pad(final String s, final int width) {
+        return pad(s, width, true, ' ');
+    }
+
+    public static String pad(final Number n, final int width, final char padChar) {
+        return pad(n.toString(), width, false, padChar);
+    }
+
+    public static String pad(final Number n, final int width) {
+        return pad(n, width, ' ');
+    }
 }
