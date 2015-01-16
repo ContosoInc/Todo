@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.microsoft.tfs.sdk</groupId>
-    <artifactId>sdk</artifactId>
+    <groupId>com.microsoft.vss.sdk</groupId>
+    <artifactId>com.microsoft.vss.client</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
 
@@ -13,27 +13,56 @@
     <description>This package contains Microsoft VSO SDK.</description>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <version.major>0</version.major>
+        <version.minor>1</version.minor>
+        <version.service>0</version.service>
+        <version.build>SNAPSHOT</version.build>
+
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
+        <buildNumber>${version.major}.${version.minor}.${version.service}.${maven.build.timestamp}</buildNumber>
+
         <jaxrs-api.version>2.0.1</jaxrs-api.version>
         <common-codec.version>1.10</common-codec.version>
         <mvn.compiler.version>3.0</mvn.compiler.version>
     </properties>
 
     <modules>
-        <module>core</module>
-        <module>sourcecontrol</module>
-        <module>distributedtask</module>
-        <module>build</module>
+        <module>com.microsoft.vss.client.core</module>
+        <module>com.microsoft.vss.client.sourcecontrol</module>
+        <module>com.microsoft.vss.client.distributedtask</module>
+        <module>com.microsoft.vss.client.build</module>
         <module>testapp</module>
     </modules>
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptors>
+                            <descriptor>src/main/assembly/bin.xml</descriptor>
+                        </descriptors>
+                        <finalName>${project.artifactId}-${buildNumber}</finalName>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${mvn.compiler.version}</version>
                     <configuration>
                         <source>1.7</source>
                         <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <addMavenDescriptor>false</addMavenDescriptor>
+                        </archive>
                     </configuration>
                 </plugin>
             </plugins>
