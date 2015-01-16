@@ -1,5 +1,9 @@
 package com.microsoft.vss.client.test;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,15 +26,21 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.apache.connector.ApacheClientProperties;
 import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.vss.client.build.BuildHttpClient;
 import com.microsoft.vss.client.build.model.Build;
 import com.microsoft.vss.client.core.StringUtil;
 import com.microsoft.vss.client.core.jaxrs.ApiResourceEntityProvider;
+import com.microsoft.vss.client.core.jaxrs.JsonHelper;
 import com.microsoft.vss.client.core.model.ApiResourceLocationCollection;
+import com.microsoft.vss.client.core.model.TeamProject;
 import com.microsoft.vss.client.core.model.TeamProjectReference;
 import com.microsoft.vss.client.project.ProjectHttpClient;
 
@@ -44,11 +54,11 @@ public class Main
         final URI vsoUri = new URI("https://mseng.visualstudio.com/DefaultCollection"); //$NON-NLS-1$
 
         try (final Main tests = new Main()) {
-            final Client client = tests.getClient();
+            final Client client = tests.getClient(tests.getArCredentials());
 
-            tests.ProjectRestTest_01(client, vsoUri);
+            tests.ProjectRestTest_01(client, arUri);
 
-            tests.BuildRestTest_01(client, vsoUri);
+            // tests.BuildRestTest_01(client, vsoUri);
         } catch (URISyntaxException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -62,12 +72,31 @@ public class Main
         ProjectHttpClient projectClient = new ProjectHttpClient(client, uri);
 
         final List<TeamProjectReference> projects = projectClient.getProjects();
+        UUID projectId = null;
 
         for (final TeamProjectReference p : projects) {
             System.out.println(p.getId().toString() + '\t' + p.getName());
+            if (p.getName().equalsIgnoreCase("gitTest_05")) {//$NON-NLS-1$
+                projectId = p.getId();
+            }
         }
 
         System.out.println(projects.size());
+
+        final TeamProject project = projectClient.getProject(projectId.toString(), true);
+        // writeJson("C:\\0\\Project.txt", project); //$NON-NLS-1$
+
+        final TeamProject projectUpdate = new TeamProject();
+        projectUpdate.setId(project.getId());
+        projectUpdate.setDescription("brand new description"); //$NON-NLS-1$
+        //
+        // final String update = toJson(projectUpdate);
+        // projectClient.updateProject(projectId, update);
+
+        projectClient.updateProject(projectId, projectUpdate);
+
+        final TeamProject updatedProject = projectClient.getProject(projectId.toString());
+        System.out.println(updatedProject.getDescription());
     }
 
     private void BuildRestTest_01(final Client client, final URI uri) {
@@ -86,35 +115,140 @@ public class Main
         System.out.println(StringUtil.pad(build.getId(), 8) + '\t' + build.getBuildNumber());
     }
 
-    private Client getClient() {
-        CredentialsProvider credentialsProvider = getBasicCredentialsProvider();
+    private Client getClient(final Credentials credentials) {
+        CredentialsProvider credentialsProvider = getBasicCredentialsProvider(credentials);
 
         ClientConfig clientConfig = new ClientConfig().connectorProvider(new ApacheConnectorProvider());
         clientConfig.property(ApacheClientProperties.CREDENTIALS_PROVIDER, credentialsProvider);
         clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
+
+        /*
+         * !!!!!!!! Define Fiddler as a local HTTP proxy !!!!!!!!!!!!
+         */
+        clientConfig.property(ClientProperties.PROXY_URI, "http://127.0.0.1:8888"); //$NON-NLS-1$
+        clientConfig.property(ApacheClientProperties.SSL_CONFIG, getSslConfigurator());
+        /*
+         * !!!!!!!! Comment out two lines above if you do not use Fiddler
+         * !!!!!!!!!!!!
+         */
 
         final Client client = ClientBuilder.newClient(clientConfig);
 
         return client;
     }
 
-    private CredentialsProvider getBasicCredentialsProvider() {
+    private SslConfigurator getSslConfigurator() {
+        final SslConfigurator sslConfig = SslConfigurator.newInstance().trustStoreFile("c:\\FiddlerKeystore.jks") //$NON-NLS-1$
+        .trustStorePassword("ideafix") //$NON-NLS-1$
+        .trustStoreType("JKS") //$NON-NLS-1$
+        .trustManagerFactoryAlgorithm("PKIX") //$NON-NLS-1$
+        .securityProtocol("SSL"); //$NON-NLS-1$
+
+        return sslConfig;
+    }
+
+    private CredentialsProvider getBasicCredentialsProvider(final Credentials credentials) {
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, getBasicCredentials());
+        credentialsProvider.setCredentials(AuthScope.ANY, credentials);
 
         return credentialsProvider;
     }
 
-    private Credentials getBasicCredentials() {
-        final Credentials arCredentials = new UsernamePasswordCredentials("alexrukhlin", "LinLinLin1"); //$NON-NLS-1$ //$NON-NLS-2$
+    private Credentials getVsoCredentials() {
         final Credentials vsoCredentials = new UsernamePasswordCredentials("alexr", "LinLinLin1"); //$NON-NLS-1$ //$NON-NLS-2$
         return vsoCredentials;
+    }
+
+    private Credentials getArCredentials() {
+        final Credentials arCredentials = new UsernamePasswordCredentials("alexrukhlin", "LinLinLin1"); //$NON-NLS-1$ //$NON-NLS-2$
+        return arCredentials;
+    }
+
+    private void writeJson(final String path, final Object value) {
+        OutputStream stream = null;
+        try {
+            stream = new FileOutputStream(path);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if (stream == null) {
+            return;
+        }
+
+        final ObjectMapper objectMapper = JsonHelper.getObjectMapper();
+        JsonGenerator jsonGenerator = null;
+
+        try {
+            jsonGenerator = objectMapper.getFactory().createGenerator(stream);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if (jsonGenerator == null) {
+            return;
+        }
+
+        jsonGenerator.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
+        jsonGenerator.useDefaultPrettyPrinter();
+
+        try {
+            jsonGenerator.writeObject(value);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private String toJson(final Object value) {
+        OutputStream stream = new OutputStream() {
+            private StringBuilder sb = new StringBuilder();
+
+            @Override
+            public void write(int b)
+                throws IOException {
+                this.sb.append((char) b);
+            }
+
+            @Override
+            public String toString() {
+                return this.sb.toString();
+            }
+        };
+
+        final ObjectMapper objectMapper = JsonHelper.getObjectMapper();
+        JsonGenerator jsonGenerator = null;
+
+        try {
+            jsonGenerator = objectMapper.getFactory().createGenerator(stream);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        if (jsonGenerator == null) {
+            return StringUtil.EMPTY;
+        }
+
+        jsonGenerator.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
+        jsonGenerator.useDefaultPrettyPrinter();
+
+        try {
+            jsonGenerator.writeObject(value);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return stream.toString();
     }
 
     //   @formatter:off    
 ////////////////////////////////////////////////////////////////////////////////////////////////    
 ////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////                          ////////////////////////////////////////////
 //////////////////////////     Low level tests      ////////////////////////////////////////////
 //////////////////////////                          ////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////

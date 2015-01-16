@@ -35,8 +35,8 @@ public class ApiResourceEntityProvider
         throws IOException,
             WebApplicationException {
 
-        ObjectMapper objectMapper = JsonHelper.getObjectMapper();
-        JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(entityStream);
+        final ObjectMapper objectMapper = JsonHelper.getObjectMapper();
+        final JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(entityStream);
         jsonGenerator.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
         jsonGenerator.useDefaultPrettyPrinter();
 
@@ -54,8 +54,8 @@ public class ApiResourceEntityProvider
         throws IOException,
             WebApplicationException {
 
-        ObjectMapper objectMapper = JsonHelper.getObjectMapper();
-        JsonParser jsonParser = objectMapper.getFactory().createParser(entityStream);
+        final ObjectMapper objectMapper = JsonHelper.getObjectMapper();
+        final JsonParser jsonParser = objectMapper.getFactory().createParser(entityStream);
         jsonParser.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
         return objectMapper.readValue(jsonParser, objectMapper.constructType(genericType));

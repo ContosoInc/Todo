@@ -17,8 +17,7 @@ public class WrappedException {
     private int eventId;
     private StackTraceElement[] stackTrace;
 
-    public WrappedException() {
-    }
+    public WrappedException() {}
 
     public WrappedException(final Throwable exception, final boolean includeErrorDetail) {
         this.type = exception.getClass();
@@ -199,7 +198,7 @@ public class WrappedException {
             }
         }
 
-        if (exception != null && getStackTrace().length > 0) {
+        if (exception != null && getStackTrace() != null && getStackTrace().length > 0) {
             exception.setStackTrace(getStackTrace());
         }
 

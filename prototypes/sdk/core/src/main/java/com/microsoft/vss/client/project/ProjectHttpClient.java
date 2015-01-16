@@ -171,4 +171,11 @@ public class ProjectHttpClient
 
         return super.patch(projectUpdate, CoreConstants.ProjectsLocationId, routeValues, API_VERSION, TeamProject.class);
     }
+
+    public TeamProject updateProject(final UUID projectToUpdateId, final String jsonUpdate) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("projectId", projectToUpdateId); //$NON-NLS-1$
+
+        return super.patch(jsonUpdate, CoreConstants.ProjectsLocationId, routeValues, API_VERSION, TeamProject.class);
+    }
 }

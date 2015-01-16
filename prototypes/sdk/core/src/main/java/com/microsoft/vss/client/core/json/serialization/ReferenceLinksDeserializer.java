@@ -34,7 +34,7 @@ public class ReferenceLinksDeserializer
                 // Read the reference link key. We know this is a string
                 // because the JsonReader validates that the first token
                 // is a property name, and it has to be a string.
-                final String name = parser.getValueAsString();
+                final String name = parser.getCurrentName();
 
                 if (StringUtil.isNullOrEmpty(name)) {
                     throw new IOException(Messages.getString("ReferenceLinksDeserializer.InvalidReferenceLink")); //$NON-NLS-1$
@@ -49,8 +49,7 @@ public class ReferenceLinksDeserializer
                 }
                 // Start array means we have a list of reference links.
                 else if (parser.getCurrentToken().equals(JsonToken.START_ARRAY)) {
-                    final List<ReferenceLink> values = parser.readValueAs(new TypeReference<List<ReferenceLink>>() {
-                    });
+                    final List<ReferenceLink> values = parser.readValueAs(new TypeReference<List<ReferenceLink>>() {});
                     links.put(name, values);
                 } else {
                     throw new IOException(Messages.getString("ReferenceLinksDeserializer.InvalidReferenceLink")); //$NON-NLS-1$
