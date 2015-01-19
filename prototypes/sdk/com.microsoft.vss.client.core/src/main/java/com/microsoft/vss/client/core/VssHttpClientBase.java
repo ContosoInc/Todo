@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
@@ -56,6 +55,14 @@ public abstract class VssHttpClientBase {
         this.rsClient = rsClient;
         this.baseUrl = baseUrl;
         this.baseTarget = this.rsClient.target(baseUrl).register(ApiResourceEntityProvider.class);
+    }
+
+    public Client getClient() {
+        return rsClient;
+    }
+
+    public URI getBaseUrl() {
+        return baseUrl;
     }
 
     protected Map<String, Class<? extends Exception>> getTranslatedExceptions() {
@@ -247,7 +254,7 @@ public abstract class VssHttpClientBase {
             toRouteDictionary(routeValues, location.getArea(), location.getResourceName());
 
         final String routeTemplate = location.getRouteTemplate();
-        final String actualTemplate = removeUnusedOptionalParameters(routeTemplate, dictionary.keySet());
+        final String actualTemplate = removeUndefinedOptionalParameters(routeTemplate, dictionary);
         final WebTarget targetTemplate = baseTarget.path(actualTemplate);
 
         WebTarget target = targetTemplate.resolveTemplates(dictionary);
@@ -261,21 +268,23 @@ public abstract class VssHttpClientBase {
         return target;
     }
 
-    private String removeUnusedOptionalParameters(final String template, final Set<String> parameterNames) {
+    private String removeUndefinedOptionalParameters(final String template, final Map<String, Object> routeValues) {
         final String[] templateParameters = template.split(ROUTE_TEMPLATE_SEPARATOR);
         final List<String> actualParameters = new ArrayList<String>();
 
         for (int i = 0; i < templateParameters.length; i++) {
             final String parameter = templateParameters[i];
 
-            if (parameter.startsWith("{*")) { //$NON-NLS-1$
-                final String name = parameter.substring(2, parameter.length() - 1);
-                if (parameterNames.contains(name)) {
-                    actualParameters.add("{" + name + "}"); //$NON-NLS-1$ //$NON-NLS-2$
+            if (parameter.startsWith("{")) { //$NON-NLS-1$
+                final String name;
+
+                if (parameter.startsWith("{*")) { //$NON-NLS-1$
+                    name = parameter.substring(2, parameter.length() - 1);
+                } else {
+                    name = parameter.substring(1, parameter.length() - 1);
                 }
-            } else if (parameter.startsWith("{")) { //$NON-NLS-1$
-                final String name = parameter.substring(1, parameter.length() - 1);
-                if (parameterNames.contains(name)) {
+
+                if (routeValues.get(name) != null) {
                     actualParameters.add("{" + name + "}"); //$NON-NLS-1$ //$NON-NLS-2$
                 }
             } else {
@@ -289,8 +298,15 @@ public abstract class VssHttpClientBase {
     private Map<String, Object> toRouteDictionary(final Map<String, Object> routeValues, final String areaName,
         final String resourceName) {
 
-        final HashMap<String, Object> dictionary =
-            routeValues == null ? new HashMap<String, Object>() : new HashMap<String, Object>(routeValues);
+        final HashMap<String, Object> dictionary = new HashMap<String, Object>();
+        if (routeValues != null) {
+
+            for (final Entry<String, Object> e : routeValues.entrySet()) {
+                if (e.getValue() != null) {
+                    dictionary.put(e.getKey(), e.getValue());
+                }
+            }
+        }
 
         if (!dictionary.containsKey(AREA_PARAMETER_NAME)) {
             dictionary.put(AREA_PARAMETER_NAME, areaName);
@@ -316,7 +332,7 @@ public abstract class VssHttpClientBase {
     }
 
     private boolean isJsonResponse(final Response response) {
-        if (response != null) {
+        if (response != null && response.getMediaType() != null) {
             return response.getMediaType().getType().equalsIgnoreCase("application") && response.getMediaType().getSubtype().equalsIgnoreCase("json"); //$NON-NLS-1$ //$NON-NLS-2$
         } else {
             return false;

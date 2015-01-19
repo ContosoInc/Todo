@@ -26,7 +26,7 @@ public class Builds
         }
         System.out.println(builds.size());
 
-        final Build build = buildClient.getBuild(107853, null);
+        final Build build = buildClient.getBuild(110822, null);
         System.out.println(StringUtil.pad(build.getId(), 8) + '\t' + build.getBuildNumber());
     }
 
