@@ -7,7 +7,8 @@ import com.microsoft.vss.client.core.model.TeamProjectReference;
 /**
  * Created by yacao on 12/12/2014.
  */
-public class BuildDefinitionReference {
+public class BuildDefinitionReference
+    extends DefinitionReference {
     private DocumentQuality documentQuality;
     private IdentityRef authoredBy;
     private Integer parentDefinitionId;

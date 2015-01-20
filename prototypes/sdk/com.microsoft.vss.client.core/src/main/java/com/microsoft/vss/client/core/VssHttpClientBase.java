@@ -331,6 +331,17 @@ public abstract class VssHttpClientBase {
         return mediaType;
     }
 
+    private MediaType getMediaTypeWithQualityHeaderValue() {
+        final Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put(CHARSET_PARAMETER_NAME, UTF8_CHARSET);
+
+        final MediaType mediaType =
+            new MediaType(MediaType.APPLICATION_JSON_TYPE.getType(), MediaType.APPLICATION_JSON_TYPE.getSubtype(),
+                parameters);
+
+        return mediaType;
+    }
+
     private boolean isJsonResponse(final Response response) {
         if (response != null && response.getMediaType() != null) {
             return response.getMediaType().getType().equalsIgnoreCase("application") && response.getMediaType().getSubtype().equalsIgnoreCase("json"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -343,10 +354,8 @@ public abstract class VssHttpClientBase {
      * Negotiate the appropriate request version to use for the given api
      * resource location, based on the client and server capabilities
      * 
-     * @param location
-     *            - Location of the API resource
-     * @param version
-     *            - Client version to attempt to use (use the latest VSS API
+     * @param location - Location of the API resource
+     * @param version - Client version to attempt to use (use the latest VSS API
      *            version if unspecified)
      * @return - Max API version supported on the server that is less than or
      *         equal to the client version. Returns null if the server does not
@@ -401,8 +410,9 @@ public abstract class VssHttpClientBase {
 
         final WebTarget target = createTarget(locationId, routeValues, queryParameters);
         final MediaType acceptType = getMediaTypeWithQualityHeaderValue(NegotiateRequestVersion(locationId, version));
+        final MediaType contentType = getMediaTypeWithQualityHeaderValue();
 
-        return target.request(acceptType).build(method, Entity.json(value));
+        return target.request(acceptType).build(method, Entity.entity(value, contentType));
     }
 
     protected Response sendRequest(final Invocation request) {

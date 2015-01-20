@@ -1,7 +1,6 @@
 package com.microsoft.vss.client.build.model;
 
 import com.microsoft.vss.client.build.model.enumeration.QueueType;
-import com.microsoft.vss.client.core.model.ShallowReference;
 
 /**
  * Created by yacao on 12/12/2014.

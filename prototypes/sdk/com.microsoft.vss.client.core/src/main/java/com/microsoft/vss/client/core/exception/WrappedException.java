@@ -2,6 +2,8 @@ package com.microsoft.vss.client.core.exception;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.microsoft.vss.client.core.StringUtil;
@@ -15,7 +17,7 @@ public class WrappedException {
     private String typeKey;
     private int errorCode;
     private int eventId;
-    private StackTraceElement[] stackTrace;
+    private String stackTrace;
 
     public WrappedException() {}
 
@@ -29,7 +31,7 @@ public class WrappedException {
         this.message = exception.getMessage();
 
         if (includeErrorDetail) {
-            this.stackTrace = exception.getStackTrace();
+            this.stackTrace = exception.getStackTrace().toString();
         }
 
         if (exception instanceof VssException) {
@@ -117,11 +119,11 @@ public class WrappedException {
         this.eventId = eventId;
     }
 
-    public StackTraceElement[] getStackTrace() {
+    public String getStackTrace() {
         return stackTrace;
     }
 
-    public void setStackTrace(final StackTraceElement[] stackTrace) {
+    public void setStackTrace(final String stackTrace) {
         this.stackTrace = stackTrace;
     }
 
@@ -198,10 +200,77 @@ public class WrappedException {
             }
         }
 
-        if (exception != null && getStackTrace() != null && getStackTrace().length > 0) {
-            exception.setStackTrace(getStackTrace());
+        if (exception != null && getStackTrace() != null && getStackTrace().length() > 0) {
+
+            final String[] lines = getStackTrace().split("\r\n"); //$NON-NLS-1$
+            final List<StackTraceElement> list = new ArrayList<StackTraceElement>();
+
+            for (final String line : lines) {
+                list.add(parseTraceLine(line));
+            }
+
+            exception.setStackTrace(list.toArray(new StackTraceElement[list.size()]));
         }
 
         return exception;
     }
+
+    private StackTraceElement parseTraceLine(final String line) {
+        final String declaringClass;
+        final String methodName;
+        final String fileName;
+
+        int lineNumber;
+
+        String s = line.trim();
+        int i;
+
+        if (s.startsWith("at ")) { //$NON-NLS-1$
+            s = s.substring(3);
+
+            i = s.indexOf(":line "); //$NON-NLS-1$
+
+            if (i < 0) {
+                lineNumber = 0;
+            } else {
+                try {
+                    lineNumber = Integer.parseInt(s.substring(i + 6));
+                    s = s.substring(0, i);
+                } catch (final Exception e) {
+                    lineNumber = 0;
+                }
+            }
+
+            i = s.indexOf(" in "); //$NON-NLS-1$
+
+            if (i < 0) {
+                fileName = StringUtil.EMPTY;
+            } else {
+                fileName = s.substring(i + 4);
+                s = s.substring(0, i);
+            }
+
+            i = s.indexOf('(');
+
+            if (i < 0) {
+                declaringClass = s;
+                methodName = StringUtil.EMPTY;
+            } else {
+                i = s.lastIndexOf('.', i);
+
+                if (i < 0) {
+                    declaringClass = s;
+                    methodName = StringUtil.EMPTY;
+                } else {
+                    declaringClass = s.substring(0, i);
+                    methodName = s.substring(i + 1);
+                }
+            }
+
+            return new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
+        } else {
+            return new StackTraceElement(s, StringUtil.EMPTY, StringUtil.EMPTY, 0);
+        }
+    }
+
 }

@@ -16,11 +16,15 @@ import org.glassfish.jersey.apache.connector.ApacheClientProperties;
 import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
+import org.glassfish.jersey.client.RequestEntityProcessing;
 
 public abstract class JaxrsUtil {
 
     final static URI arUri = getBaseUri("https://arukhlin.visualstudio.com/DefaultCollection"); //$NON-NLS-1$
     final static URI vsoUri = getBaseUri("https://mseng.visualstudio.com/DefaultCollection"); //$NON-NLS-1$
+    final static URI dfUri = getBaseUri("http://ar01.me.tfsallin.net:81/DefaultCollection"); //$NON-NLS-1$
+
+    //    final static URI dfUri = getBaseUri("http://arukhlin-dev:8888/DefaultCollection"); //$NON-NLS-1$
 
     public static Client getClient(final Credentials credentials) {
         CredentialsProvider credentialsProvider = getBasicCredentialsProvider(credentials);
@@ -28,12 +32,14 @@ public abstract class JaxrsUtil {
         ClientConfig clientConfig = new ClientConfig().connectorProvider(new ApacheConnectorProvider());
         clientConfig.property(ApacheClientProperties.CREDENTIALS_PROVIDER, credentialsProvider);
         clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
+        clientConfig.property(ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.BUFFERED);
 
         /*
          * !!!!!!!! Define Fiddler as a local HTTP proxy !!!!!!!!!!!!
          */
-        clientConfig.property(ClientProperties.PROXY_URI, "http://127.0.0.1:8888"); //$NON-NLS-1$
-        clientConfig.property(ApacheClientProperties.SSL_CONFIG, getSslConfigurator());
+        //        clientConfig.property(ClientProperties.PROXY_URI, "http://127.0.0.1:8888"); //$NON-NLS-1$
+        // clientConfig.property(ApacheClientProperties.SSL_CONFIG,
+        // getSslConfigurator());
         /*
          * !!!!!!!! Comment out two lines above if you do not use Fiddler
          * !!!!!!!!!!!!
@@ -83,5 +89,9 @@ public abstract class JaxrsUtil {
 
     public static Credentials getArCredentials() {
         return getAlternativeCredentials("alexrukhlin", "LinLinLin1"); //$NON-NLS-1$ //$NON-NLS-2$
+    }
+
+    public static Credentials getDfCredentials() {
+        return getAlternativeCredentials("alexr", "LinLinLin1"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

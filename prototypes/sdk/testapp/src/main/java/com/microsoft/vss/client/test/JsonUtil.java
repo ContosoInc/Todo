@@ -47,6 +47,13 @@ public abstract class JsonUtil {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        try {
+            stream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public static String toJson(final Object value) {
@@ -89,6 +96,15 @@ public abstract class JsonUtil {
             e.printStackTrace();
         }
 
-        return stream.toString();
+        final String json = stream.toString();
+
+        try {
+            stream.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return json;
     }
 }
