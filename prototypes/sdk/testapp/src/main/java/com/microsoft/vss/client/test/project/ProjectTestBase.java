@@ -42,7 +42,7 @@ public class ProjectTestBase
         return projectId;
     }
 
-    public void printProject(final TeamProject project) {
+    public static void printProject(final TeamProject project) {
 
         printProject((TeamProjectReference) project);
         System.out.println();
@@ -54,7 +54,7 @@ public class ProjectTestBase
 
     }
 
-    public void printProject(final TeamProjectReference project) {
+    public static void printProject(final TeamProjectReference project) {
 
         System.out.println("Id              = " + project.getId()); //$NON-NLS-1$
         System.out.println("Name            = " + project.getName()); //$NON-NLS-1$

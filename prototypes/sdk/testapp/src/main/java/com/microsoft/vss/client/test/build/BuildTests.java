@@ -49,10 +49,10 @@ public class BuildTests
     }
 
     private void printBuild(final Build build) {
-        System.out.println(" Id = " + StringUtil.pad(build.getId(), 8)); //$NON-NLS-1$
+        System.out.println("          Id = " + StringUtil.pad(build.getId(), 8)); //$NON-NLS-1$
         System.out.println(" BuildNumber = " + build.getBuildNumber()); //$NON-NLS-1$
-        System.out.println("  Uri = " + build.getUri()); //$NON-NLS-1$
-        System.out.println(" Result = " + build.getResult()); //$NON-NLS-1$
-        System.out.println(" Status = " + build.getStatus()); //$NON-NLS-1$
+        System.out.println("         Uri = " + build.getUri()); //$NON-NLS-1$
+        System.out.println("      Result = " + build.getResult()); //$NON-NLS-1$
+        System.out.println("      Status = " + build.getStatus()); //$NON-NLS-1$
     }
 }

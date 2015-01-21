@@ -39,6 +39,25 @@ public class BuildDefinitionTests
 
     }
 
+    public void testGet_02(final String projectName, final String definitionName) {
+
+        System.out.println(MessageFormat.format(
+            "================================ {0} ==== {1} ================================", //$NON-NLS-1$
+            "testGet_02", this.getClass().getName())); //$NON-NLS-1$
+
+        final UUID projectId = getProjectIdByName(projectName);
+
+        final List<BuildDefinition> definitions = buildClient.getDefinitions(projectId, definitionName);
+
+        System.out.println(definitions.size() + " definition(s) read"); //$NON-NLS-1$
+        System.out.println();
+
+        for (final BuildDefinition definition : definitions) {
+            printDefinition(definition);
+        }
+
+    }
+
     private void printReference(final ShallowReference reference) {
         System.out.println("                 Id = " + reference.getId()); //$NON-NLS-1$
         System.out.println("               Name = " + reference.getName()); //$NON-NLS-1$
@@ -63,7 +82,7 @@ public class BuildDefinitionTests
     private void printBuildDefinitionReference(final BuildDefinitionReference buildDefinitionReference) {
         printDefinitionReference(buildDefinitionReference);
         System.out.println("    DocumentQuality = " + buildDefinitionReference.getDocumentQuality()); //$NON-NLS-1$
-        System.out.println("         AuthoredBy = " + buildDefinitionReference.getAuthoredBy()); //$NON-NLS-1$
+        System.out.println("         AuthoredBy = " + buildDefinitionReference.getAuthoredBy().getDisplayName()); //$NON-NLS-1$
         System.out.println(" ParentDefinitionId = " + buildDefinitionReference.getParentDefinitionId()); //$NON-NLS-1$
         System.out.println("            Project = " + buildDefinitionReference.getProject().getName()); //$NON-NLS-1$
     }

@@ -354,8 +354,10 @@ public abstract class VssHttpClientBase {
      * Negotiate the appropriate request version to use for the given api
      * resource location, based on the client and server capabilities
      * 
-     * @param location - Location of the API resource
-     * @param version - Client version to attempt to use (use the latest VSS API
+     * @param location
+     *            - Location of the API resource
+     * @param version
+     *            - Client version to attempt to use (use the latest VSS API
      *            version if unspecified)
      * @return - Max API version supported on the server that is less than or
      *         equal to the client version. Returns null if the server does not
@@ -363,6 +365,10 @@ public abstract class VssHttpClientBase {
      */
     protected ApiResourceVersion NegotiateRequestVersion(final ApiResourceLocation location,
         final ApiResourceVersion version) {
+
+        if (version == null) {
+            return DEFAULT_API_VERSION;
+        }
 
         if (location.getMinVersion().compareTo(version.getApiVersion()) > 0) {
             // Client is older than the server. The server no longer supports
@@ -420,7 +426,12 @@ public abstract class VssHttpClientBase {
 
         try {
             response = request.submit().get();
-        } catch (final InterruptedException | ExecutionException e) {
+        } catch (final ExecutionException e) {
+            // TODO log exception
+            // TODO process cancellation
+
+            throw new VssServiceException(e.getMessage(), e);
+        } catch (final InterruptedException e) {
             // TODO log exception
             // TODO process cancellation
 
