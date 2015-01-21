@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args)
         throws URISyntaxException {
 
-        final Client client = JaxrsUtil.getClient(JaxrsUtil.getArCredentials());
-        final URI baseUri = JaxrsUtil.arUri;
+        final Client client = JaxrsUtil.getClient(JaxrsUtil.getDfCredentials());
+        final URI baseUri = JaxrsUtil.dfUri;
 
         try (final ProjectTests tests = new ProjectTests(client, baseUri)) {
 
@@ -38,7 +38,7 @@ public class Main {
         try (final BuildTests tests = new BuildTests(client, baseUri)) {
 
             tests.testGet_01("gitTest_01"); //$NON-NLS-1$
-            tests.testGet_02(0);
+            tests.testGet_02(1);
 
         } catch (Exception e1) {
             // TODO Auto-generated catch block
@@ -47,8 +47,8 @@ public class Main {
 
         try (final BuildArtifactTests tests = new BuildArtifactTests(client, baseUri)) {
 
-            tests.testGet_01(0);
-            tests.testGet_02(0);
+            tests.testGet_01(1);
+            tests.testGet_02(1);
 
         } catch (Exception e1) {
             // TODO Auto-generated catch block
@@ -57,7 +57,7 @@ public class Main {
 
         try (final BuildDefinitionTests tests = new BuildDefinitionTests(client, baseUri)) {
 
-            tests.testGet_01(""); //$NON-NLS-1$
+            tests.testGet_01("gitTest_01"); //$NON-NLS-1$
 
         } catch (Exception e1) {
             // TODO Auto-generated catch block

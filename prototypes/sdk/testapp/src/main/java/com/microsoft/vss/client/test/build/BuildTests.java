@@ -34,7 +34,7 @@ public class BuildTests
         System.out.println();
 
         for (final Build build : builds) {
-            System.out.println(StringUtil.pad(build.getId(), 8) + '\t' + build.getBuildNumber());
+            printBuild(build);
         }
         System.out.println(builds.size());
     }
@@ -45,7 +45,14 @@ public class BuildTests
             "testGet_02", this.getClass().getName())); //$NON-NLS-1$
 
         final Build build = buildClient.getBuild(buildId, null);
-        System.out.println(StringUtil.pad(build.getId(), 8) + '\t' + build.getBuildNumber());
+        printBuild(build);
     }
 
+    private void printBuild(final Build build) {
+        System.out.println(" Id = " + StringUtil.pad(build.getId(), 8)); //$NON-NLS-1$
+        System.out.println(" BuildNumber = " + build.getBuildNumber()); //$NON-NLS-1$
+        System.out.println("  Uri = " + build.getUri()); //$NON-NLS-1$
+        System.out.println(" Result = " + build.getResult()); //$NON-NLS-1$
+        System.out.println(" Status = " + build.getStatus()); //$NON-NLS-1$
+    }
 }

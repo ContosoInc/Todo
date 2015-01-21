@@ -96,7 +96,12 @@ public class BuildHttpClient
      */
 
     public BuildDefinition AddDefinition(final BuildDefinition definition) {
-        return super.post(definition, BuildResourceIds.Definitions, API_VERSION, BuildDefinition.class);
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        if (definition != null && definition.getProject() != null) {
+            routeValues.put("project", definition.getProject().getId()); //$NON-NLS-1$
+        }
+
+        return super.post(definition, BuildResourceIds.Definitions, routeValues, API_VERSION, BuildDefinition.class);
     }
 
     public BuildDefinition getDefinition(final UUID projectId, final int definitionId) {
@@ -110,10 +115,10 @@ public class BuildHttpClient
     private BuildDefinition getDefinition(final UUID projectId, final Number definitionId, final Number revision) {
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", projectId); //$NON-NLS-1$
         routeValues.put("definitionId", definitionId.intValue()); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        queryParameters.addIfNotEmpty("project", projectId.toString()); //$NON-NLS-1$
         queryParameters.addIfNotNull("revision", revision); //$NON-NLS-1$
 
         return super.get(BuildResourceIds.Definitions, routeValues, API_VERSION, queryParameters, BuildDefinition.class);
@@ -125,31 +130,48 @@ public class BuildHttpClient
 
     public List<BuildDefinition> getDefinitions(final UUID projectId, final String name) {
 
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", projectId); //$NON-NLS-1$
+
         final NameValueCollection queryParameters = new NameValueCollection();
-        queryParameters.addIfNotEmpty("project", projectId.toString()); //$NON-NLS-1$
 
         if (!StringUtil.isNullOrEmpty(name) && name != "*") { //$NON-NLS-1$
             queryParameters.put("name", name); //$NON-NLS-1$
         }
+
         final BuildDefinitions result =
-            super.get(BuildResourceIds.Definitions, API_VERSION, queryParameters, BuildDefinitions.class);
+            super.get(BuildResourceIds.Definitions, routeValues, API_VERSION, queryParameters, BuildDefinitions.class);
 
         return result.getValue();
     }
 
     public BuildDefinition updateDefinition(final BuildDefinition definition) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("definitionId", definition); //$NON-NLS-1$
+        if (definition != null) {
+            if (definition.getProject() != null) {
+                routeValues.put("project", definition.getProject().getId()); //$NON-NLS-1$
+            }
+
+            routeValues.put("definitionId", definition.getId()); //$NON-NLS-1$
+        }
 
         return super.put(definition, BuildResourceIds.Definitions, routeValues, API_VERSION, BuildDefinition.class);
     }
 
-    public Build getBuild(final int buildId, final List<String> propertyFilters) {
-        final NameValueCollection queryParameters = new NameValueCollection();
-        queryParameters.addIfNotEmpty("propertyFilters", propertyFilters); //$NON-NLS-1$
+    public Build getBuild(final List<String> propertyFilters) {
+        return getBuild(null, propertyFilters);
+    }
 
+    public Build getBuild(final int buildId, final List<String> propertyFilters) {
+        return getBuild((Integer) buildId, propertyFilters);
+    }
+
+    private Build getBuild(final Number buildId, final List<String> propertyFilters) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("buildId", buildId); //$NON-NLS-1$
+
+        final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("propertyFilters", propertyFilters); //$NON-NLS-1$
 
         return super.get(BuildResourceIds.Builds, routeValues, API_VERSION, queryParameters, Build.class);
     }
@@ -159,8 +181,10 @@ public class BuildHttpClient
         final BuildReason reasonFilter, final BuildStatus statusFilter, final BuildResult resultFilter,
         final List<String> propertyFilters, final List<String> tagFilters, final Integer maxBuilds) {
 
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", projectId); //$NON-NLS-1$
+
         final NameValueCollection queryParameters = new NameValueCollection();
-        queryParameters.put("project", projectId.toString()); //$NON-NLS-1$
 
         queryParameters.addIfNotEmpty("definitions", definitionIds); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("queues", queueIds); //$NON-NLS-1$
@@ -175,7 +199,8 @@ public class BuildHttpClient
         queryParameters.addIfNotEmpty("tagFilters", tagFilters); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", maxBuilds); //$NON-NLS-1$
 
-        final Builds result = super.get(BuildResourceIds.Builds, API_VERSION, queryParameters, Builds.class);
+        final Builds result =
+            super.get(BuildResourceIds.Builds, routeValues, API_VERSION, queryParameters, Builds.class);
 
         return result.getValue();
     }
@@ -185,6 +210,12 @@ public class BuildHttpClient
     }
 
     public Build queueBuild(final Build build, final boolean ignoreWarnings) {
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+
+        if (build != null && build.getProject() != null) {
+            routeValues.put("project", build.getProject().getId()); //$NON-NLS-1$
+        }
 
         final NameValueCollection queryParameters = new NameValueCollection();
 
