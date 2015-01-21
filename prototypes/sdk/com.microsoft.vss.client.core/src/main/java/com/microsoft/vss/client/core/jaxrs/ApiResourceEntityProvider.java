@@ -38,7 +38,6 @@ public class ApiResourceEntityProvider
         final ObjectMapper objectMapper = JsonHelper.getObjectMapper();
         final JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(entityStream);
         jsonGenerator.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
-        jsonGenerator.useDefaultPrettyPrinter();
 
         jsonGenerator.writeObject(entity);
     }
