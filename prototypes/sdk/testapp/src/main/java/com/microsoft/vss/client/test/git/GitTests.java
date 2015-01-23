@@ -96,6 +96,21 @@ public class GitTests
         }
     }
 
+    public void testPatch_01(final String projectName, final String repoName, final String newRepoName) {
+        System.out.println(MessageFormat.format(
+            "================================ {0} ==== {1} ================================", //$NON-NLS-1$
+            "testPatch_01", this.getClass().getName())); //$NON-NLS-1$
+
+        final GitRepository oldRepo = gitClient.getRepository(projectName, repoName);
+        printRepository(oldRepo);
+
+        final GitRepository newRepo = gitClient.renameRepository(oldRepo, newRepoName);
+        printRepository(newRepo);
+
+        final GitRepository restoredRepo = gitClient.renameRepository(newRepo, repoName);
+        printRepository(restoredRepo);
+    }
+
     public void testPost_01(final String projectName, final String repoName) {
         System.out.println(MessageFormat.format(
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$

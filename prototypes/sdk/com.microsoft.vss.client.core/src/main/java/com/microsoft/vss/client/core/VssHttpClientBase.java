@@ -181,6 +181,11 @@ public abstract class VssHttpClientBase {
         return response;
     }
 
+    protected <TEntity> Response post(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version) {
+        return post(value, locationId, routeValues, version, (Map<String, String>) null);
+    }
+
     protected <TEntity, TResult> TResult post(final TEntity value, final UUID locationId,
         final Map<String, Object> routeValues, final ApiResourceVersion version,
         final Map<String, String> queryParameters, final Class<TResult> resultClazz) {

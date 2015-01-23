@@ -1,10 +1,20 @@
 package com.microsoft.vss.client.core.serialization;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VssJsonCollectionWrapper<T> {
     private int count;
     private List<T> value;
+
+    public VssJsonCollectionWrapper() {
+        this(new ArrayList<T>());
+    }
+
+    public VssJsonCollectionWrapper(final List<T> value) {
+        this.value = value;
+        this.count = value.size();
+    }
 
     public List<T> getValue() {
         return value;

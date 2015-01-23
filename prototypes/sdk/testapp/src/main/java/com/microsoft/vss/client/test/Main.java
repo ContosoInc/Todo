@@ -34,55 +34,51 @@ public class Main {
         BuildDefinitionTests definitionTests = null;
         GitTests gitTests = null;
 
-        if (false)
-            try {
-                projectTests = new ProjectTests(client, baseUri);
+        try {
+            projectTests = new ProjectTests(client, baseUri);
 
-                projectTests.testGet_01();
-                projectTests.testGet_02();
+            projectTests.testGet_01();
+            projectTests.testGet_02();
 
-                projectTests.testGet_03("gitTest_05"); //$NON-NLS-1$
-                projectTests.testGet_04("gitTest_01"); //$NON-NLS-1$
-                projectTests.testGet_04("tfsTest_01"); //$NON-NLS-1$
-                projectTests.testGet_05("gitTest_02"); //$NON-NLS-1$
+            projectTests.testGet_03("gitTest_05"); //$NON-NLS-1$
+            projectTests.testGet_04("gitTest_01"); //$NON-NLS-1$
+            projectTests.testGet_04("tfsTest_01"); //$NON-NLS-1$
+            projectTests.testGet_05("gitTest_02"); //$NON-NLS-1$
 
-                projectTests.testUpdate_01("gitTest_01", "mkn sdhsdhsdhsdhdf ashgagha"); //$NON-NLS-1$ //$NON-NLS-2$
+            projectTests.testUpdate_01("gitTest_01", "mkn sdhsdhsdhsdhdf ashgagha"); //$NON-NLS-1$ //$NON-NLS-2$
 
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
 
-        if (false)
-            try {
-                buildTests = new BuildTests(client, baseUri);
+        try {
+            buildTests = new BuildTests(client, baseUri);
 
-                buildTests.testGet_01("gitTest_01"); //$NON-NLS-1$
-                buildTests.testGet_02(1);
+            buildTests.testGet_01("gitTest_01"); //$NON-NLS-1$
+            buildTests.testGet_02(1);
 
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
 
-        if (false)
-            try {
-                artifactTests = new BuildArtifactTests(client, baseUri);
+        try {
+            artifactTests = new BuildArtifactTests(client, baseUri);
 
-                artifactTests.testGet_01(1);
-                artifactTests.testGet_02(1);
+            artifactTests.testGet_01(1);
+            artifactTests.testGet_02(1);
 
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
 
-        if (false)
-            try {
-                definitionTests = new BuildDefinitionTests(client, baseUri);
+        try {
+            definitionTests = new BuildDefinitionTests(client, baseUri);
 
-                definitionTests.testGet_01("gitTest_01"); //$NON-NLS-1$
+            definitionTests.testGet_01("gitTest_01"); //$NON-NLS-1$
 
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
 
         try {
             gitTests = new GitTests(client, baseUri);
@@ -93,10 +89,11 @@ public class Main {
             gitTests.testGet_04("gitTest_01", "gitTest_01"); //$NON-NLS-1$ //$NON-NLS-2$
             gitTests.testGet_05("gitTest_01", "gitTest_01"); //$NON-NLS-1$ //$NON-NLS-2$
 
+            gitTests.testPatch_01("gitTest_01", "gitTest_01", "newTest_01"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
             gitTests.testPost_01("gitTest_01", "gitTest_01"); //$NON-NLS-1$ //$NON-NLS-2$
             gitTests.testPost_02("gitTest_01", "gitTest_01", "/ConsoleApplication1"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             gitTests.testPost_02("gitTest_01", "gitTest_01", "/ConsoleApplication1/ConsoleApplication1.sln"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-
         } catch (Exception e1) {
             e1.printStackTrace();
         }
