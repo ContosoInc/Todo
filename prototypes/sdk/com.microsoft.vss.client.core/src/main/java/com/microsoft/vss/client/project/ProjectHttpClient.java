@@ -10,7 +10,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.core.Response;
 
 import com.microsoft.vss.client.core.CoreConstants;
-import com.microsoft.vss.client.core.QueryParamConstants;
 import com.microsoft.vss.client.core.VssHttpClientBase;
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;

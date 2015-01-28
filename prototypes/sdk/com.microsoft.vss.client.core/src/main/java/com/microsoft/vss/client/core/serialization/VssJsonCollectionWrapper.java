@@ -31,4 +31,10 @@ public class VssJsonCollectionWrapper<T> {
     public void setCount(final int count) {
         this.count = count;
     }
+
+    public static VssJsonCollectionWrapper<Object> newInstance(final List<?> value) {
+        final List<Object> newValue = new ArrayList<Object>();
+        newValue.addAll(value);
+        return new VssJsonCollectionWrapper<Object>(newValue);
+    }
 }

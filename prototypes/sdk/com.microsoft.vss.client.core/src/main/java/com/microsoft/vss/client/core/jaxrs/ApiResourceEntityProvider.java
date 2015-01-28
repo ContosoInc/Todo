@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
+import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -14,7 +17,9 @@ import javax.ws.rs.ext.MessageBodyWriter;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.microsoft.vss.client.core.serialization.VssJsonCollectionWrapper;
 
 public class ApiResourceEntityProvider
     implements MessageBodyReader<Object>, MessageBodyWriter<Object> {
@@ -39,7 +44,11 @@ public class ApiResourceEntityProvider
         final JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(entityStream);
         jsonGenerator.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
 
-        jsonGenerator.writeObject(entity);
+        if (List.class.isInstance(entity)) {
+            jsonGenerator.writeObject(VssJsonCollectionWrapper.newInstance((List<?>) entity));
+        } else {
+            jsonGenerator.writeObject(entity);
+        }
     }
 
     @Override
@@ -57,7 +66,27 @@ public class ApiResourceEntityProvider
         final JsonParser jsonParser = objectMapper.getFactory().createParser(entityStream);
         jsonParser.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
 
-        return objectMapper.readValue(jsonParser, objectMapper.constructType(genericType));
-    }
+        JavaType rootType = null;
 
+        if (genericType instanceof ParameterizedType && ((ParameterizedType) genericType).getRawType() == List.class) {
+            final Type itemType = ((ParameterizedType) genericType).getActualTypeArguments()[0];
+            try {
+                rootType =
+                    objectMapper.getTypeFactory().constructParametricType(VssJsonCollectionWrapper.class,
+                        Class.forName(((Class<?>) itemType).getName()));
+            } catch (final ClassNotFoundException e) {
+                // TODO Log exception
+                throw new ProcessingException(e);
+            }
+        }
+
+        if (rootType != null) {
+            VssJsonCollectionWrapper<?> result =
+                objectMapper.readValue(jsonParser, objectMapper.constructType(rootType));
+            return result.getValue();
+        } else {
+            return objectMapper.readValue(jsonParser, objectMapper.constructType(genericType));
+        }
+
+    }
 }

@@ -17,12 +17,15 @@ import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.RequestEntityProcessing;
+import org.glassfish.jersey.client.filter.EncodingFilter;
+import org.glassfish.jersey.message.GZipEncoder;
 
 public abstract class JaxrsUtil {
 
     final static URI arUri = getBaseUri("https://arukhlin.visualstudio.com/DefaultCollection"); //$NON-NLS-1$
     final static URI vsoUri = getBaseUri("https://mseng.visualstudio.com/DefaultCollection"); //$NON-NLS-1$
     final static URI dfUri = getBaseUri("http://ar01.me.tfsallin.net:81/DefaultCollection"); //$NON-NLS-1$
+    final static URI dfUriFiddler = getBaseUri("http://arukhlin-dev:8888/DefaultCollection"); //$NON-NLS-1$
 
     //    final static URI dfUri = getBaseUri("http://arukhlin-dev:8888/DefaultCollection"); //$NON-NLS-1$
 
@@ -33,6 +36,8 @@ public abstract class JaxrsUtil {
         clientConfig.property(ApacheClientProperties.CREDENTIALS_PROVIDER, credentialsProvider);
         clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
         clientConfig.property(ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.BUFFERED);
+        clientConfig.register(GZipEncoder.class);
+        clientConfig.register(EncodingFilter.class);
 
         /*
          * !!!!!!!! Define Fiddler as a local HTTP proxy !!!!!!!!!!!!

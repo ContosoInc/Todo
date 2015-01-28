@@ -91,7 +91,7 @@ public class DistributedTaskHttpClient
         routeValues.put("timelineId", timelineId); //$NON-NLS-1$
         routeValues.put("recordId", recordId); //$NON-NLS-1$
 
-        return super.post(new Strings(lines), TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION);
+        return super.post(lines, TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION);
     }
 
     public List<String> getLogLines(final UUID planId, final int logId) {
