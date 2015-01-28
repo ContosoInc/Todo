@@ -1,9 +1,10 @@
 package com.microsoft.vss.client.test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
@@ -18,18 +19,16 @@ import com.microsoft.vss.client.test.project.ProjectTests;
 public class Main {
 
     public static void main(String[] args)
-        throws URISyntaxException {
+        throws URISyntaxException,
+            FileNotFoundException {
 
         final Client client = JaxrsUtil.getClient(JaxrsUtil.getDfCredentials());
-        final URI baseUri = JaxrsUtil.dfUri;
+        final URI baseUri = JaxrsUtil.dfUriFiddler;
         DistributedTaskHttpClient taskClient = new DistributedTaskHttpClient(client, baseUri);
 
-        List<String> lines = new ArrayList<String>();
-        lines.add("11111"); //$NON-NLS-1$
-        lines.add("22222"); //$NON-NLS-1$
-        lines.add("33333"); //$NON-NLS-1$
-        lines.add("44444"); //$NON-NLS-1$
-        taskClient.appendTimelineRecordFeed(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), lines);
+        InputStream content = new FileInputStream("D:/0/WorkItemController.cs"); //$NON-NLS-1$
+
+        taskClient.appendLog(UUID.randomUUID(), 1, content);
 
         // arTests();
         dfTests();

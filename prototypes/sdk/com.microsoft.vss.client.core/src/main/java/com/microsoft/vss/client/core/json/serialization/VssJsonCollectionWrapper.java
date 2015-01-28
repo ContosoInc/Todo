@@ -1,4 +1,4 @@
-package com.microsoft.vss.client.core.serialization;
+package com.microsoft.vss.client.core.json.serialization;
 
 import java.util.ArrayList;
 import java.util.List;

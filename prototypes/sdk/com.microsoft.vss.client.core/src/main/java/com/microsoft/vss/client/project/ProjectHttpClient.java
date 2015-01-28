@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import com.microsoft.vss.client.core.CoreConstants;
@@ -16,7 +17,6 @@ import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.core.model.OperationReference;
 import com.microsoft.vss.client.core.model.TeamProject;
 import com.microsoft.vss.client.core.model.TeamProjectReference;
-import com.microsoft.vss.client.project.serialization.TeamProjectReferences;
 
 public class ProjectHttpClient
     extends VssHttpClientBase {
@@ -122,10 +122,8 @@ public class ProjectHttpClient
         queryParameters.addIfNotNull(QueryParamConstants.Top, top);
         queryParameters.addIfNotNull(QueryParamConstants.Skip, skip);
 
-        final TeamProjectReferences result =
-            super.get(CoreConstants.ProjectsLocationId, API_VERSION, queryParameters, TeamProjectReferences.class);
-
-        return result.getValue();
+        return super.get(CoreConstants.ProjectsLocationId, API_VERSION, queryParameters,
+            new GenericType<List<TeamProjectReference>>() {});
     }
 
     /**

@@ -47,7 +47,7 @@ public class GitTests
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_02", this.getClass().getName())); //$NON-NLS-1$
 
-        final List<GitRepository> repositories = gitClient.getProjectRepositories(projectName);
+        final List<GitRepository> repositories = gitClient.getRepositories(projectName);
 
         System.out.println(repositories.size() + " repository(ies) read"); //$NON-NLS-1$
         System.out.println();

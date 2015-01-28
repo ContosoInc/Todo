@@ -24,15 +24,11 @@ import com.microsoft.vss.client.sourcecontrol.model.GitRepository;
 import com.microsoft.vss.client.sourcecontrol.model.GitVersionDescriptor;
 import com.microsoft.vss.client.sourcecontrol.model.enumeration.GitRepositoryType;
 import com.microsoft.vss.client.sourcecontrol.model.enumeration.VersionControlRecursionType;
-import com.microsoft.vss.client.sourcecontrol.serialization.GitItems;
-import com.microsoft.vss.client.sourcecontrol.serialization.GitRefUpdateResults;
-import com.microsoft.vss.client.sourcecontrol.serialization.GitRefs;
-import com.microsoft.vss.client.sourcecontrol.serialization.GitRepositories;
 
 public class GitHttpClient
     extends VssHttpClientBase {
 
-    private final static ApiResourceVersion API_VERSION = null;
+    private final static ApiResourceVersion API_VERSION = new ApiResourceVersion(2, 0, 1);
     private final static Map<String, Class<? extends Exception>> TRANSLATED_EXCEPTIONS;
 
     static {
@@ -53,127 +49,81 @@ public class GitHttpClient
      */
 
     /**
-     * Get a repository by id
+     * Get a repository by id or name
      * 
-     * @param repositoryId
-     *            The id for the repository.
+     * @param repository
+     *            The id or name for the repository.
      */
-    public GitRepository getRepository(final UUID repositoryId) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-
-        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
+    public GitRepository getRepository(final UUID repository) {
+        return getRepository((Object) null, repository);
     }
 
     /**
-     * Get a repository by id
+     * Get a repository by id or name
      * 
-     * @param repositoryId
-     *            The id for the repository.
+     * @param repository
+     *            The id or name for the repository.
      */
-    public GitRepository getRepository(final String repositoryName) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("repositoryId", repositoryName); //$NON-NLS-1$
-
-        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
+    public GitRepository getRepository(final String repository) {
+        return getRepository((Object) null, repository);
     }
 
     /**
      * Get a repository by project ID or name and repository ID or name.
-     * 
-     * @param projectName
-     *            The ID or Name of the project containing the repository.
-     * @param repositoryName
-     *            The ID or Name of the repository.
      */
-    public GitRepository getRepository(final String projectName, final String repositoryName) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectName); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryName); //$NON-NLS-1$
-
-        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
+    public GitRepository getRepository(final String project, final String repository) {
+        return getRepository(project, repository);
     }
 
     /**
      * Get a repository by project ID or name and repository ID or name.
-     * 
-     * @param projectName
-     *            The ID or Name of the project containing the repository.
-     * @param repositoryId
-     *            The ID or Name of the repository.
      */
-    public GitRepository getRepository(final String projectName, final UUID repositoryId) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectName); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-
-        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
+    public GitRepository getRepository(final String project, final UUID repository) {
+        return getRepository(project, repository);
     }
 
     /**
      * Get a repository by project ID or name and repository ID or name.
-     * 
-     * @param projectName
-     *            The ID or Name of the project containing the repository.
-     * @param repositoryName
-     *            The ID or Name of the repository.
      */
-    public GitRepository getRepository(final UUID projectId, final String repositoryName) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectId); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryName); //$NON-NLS-1$
-
-        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
+    public GitRepository getRepository(final UUID project, final String repository) {
+        return getRepository(project, repository);
     }
 
     /**
      * Get a repository by project ID or name and repository ID or name.
-     * 
-     * @param projectName
-     *            The ID or Name of the project containing the repository.
-     * @param repositoryId
-     *            The ID or Name of the repository.
      */
-    public GitRepository getRepository(final UUID projectId, final UUID repositoryId) {
+    public GitRepository getRepository(final UUID project, final UUID repository) {
+        return getRepository(project, repository);
+    }
+
+    private GitRepository getRepository(final Object project, final Object repository) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectId); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repository); //$NON-NLS-1$
 
         return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepository.class);
     }
 
     /**
      * Get repositories for a specific project
-     * 
-     * @param projectName
-     *            Either the project id (guid) or the project name. Project id
-     *            is safer to use.
      */
-    public List<GitRepository> getProjectRepositories(final String projectName) {
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectName); //$NON-NLS-1$
-
-        final GitRepositories result =
-            super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepositories.class);
-
-        return result.getValue();
+    public List<GitRepository> getRepositories(final String project) {
+        return getRepositories((Object) project);
     }
 
     /**
      * Get repositories for a specific project
-     * 
-     * @param projectId
-     *            Either the project id (guid) or the project name. Project id
-     *            is safer to use.
      */
-    public List<GitRepository> getProjectRepositories(final UUID projectId) {
+    public List<GitRepository> getRepositories(final UUID project) {
+        return getRepositories((Object) project);
+    }
+
+    private List<GitRepository> getRepositories(final Object project) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", projectId); //$NON-NLS-1$
+        routeValues.put("project", project); //$NON-NLS-1$
 
-        final GitRepositories result =
-            super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION, GitRepositories.class);
-
-        return result.getValue();
+        return super.get(GitWebApiConstants.RepositoriesLocationId, routeValues, API_VERSION,
+            new GenericType<List<GitRepository>>() {});
     }
 
     /**
@@ -181,10 +131,8 @@ public class GitHttpClient
      * 
      */
     public List<GitRepository> getRepositories() {
-        final List<GitRepository> result =
-            super.get(GitWebApiConstants.RepositoriesLocationId, API_VERSION, new GenericType<List<GitRepository>>() {});
-
-        return result; // .getValue();
+        return super.get(GitWebApiConstants.RepositoriesLocationId, API_VERSION,
+            new GenericType<List<GitRepository>>() {});
     }
 
     /**
@@ -298,17 +246,118 @@ public class GitHttpClient
 
     /**
      * Get the refs for a specific git repository
-     * 
-     * @param repositoryId
-     *            Repository Id
      */
-    public List<GitRef> getRefs(final UUID repositoryId) {
+    public List<GitRef> getRefs(final UUID project, final String repository) {
+        return getRefs(project, repository, null, (Boolean) null);
+    }
+
+    /**
+     * Get the refs for a specific git repository
+     */
+    public List<GitRef> getRefs(final UUID project, final UUID repository) {
+        return getRefs(project, repository, null, (Boolean) null);
+    }
+
+    /**
+     * Get the refs for a specific git repository
+     */
+    public List<GitRef> getRefs(final String project, final String repository) {
+        return getRefs(project, repository, null, (Boolean) null);
+    }
+
+    /**
+     * Get the refs for a specific git repository
+     */
+    public List<GitRef> getRefs(final String project, final UUID repository) {
+        return getRefs(project, repository, null, (Boolean) null);
+    }
+
+    /**
+     * Get the refs for a specific git repository
+     */
+    public List<GitRef> getRefs(final String repository) {
+        return getRefs(null, repository, null, (Boolean) null);
+    }
+
+    public List<GitRef> getRefs(final UUID repository) {
+        return getRefs(null, repository, null, (Boolean) null);
+    }
+
+    public List<GitRef> getRefs(final String project, final String repository, final String refType,
+        final boolean includeLinks) {
+        return getRefs(project, repository, refType, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final String repository, final String refType,
+        final boolean includeLinks) {
+        return getRefs(project, repository, refType, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final String project, final UUID repository, final String refType,
+        final boolean includeLinks) {
+        return getRefs(project, repository, refType, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final UUID repository, final String refType,
+        final boolean includeLinks) {
+        return getRefs(project, repository, refType, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final String repository, final boolean includeLinks) {
+        return getRefs(null, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final UUID repository, final boolean includeLinks) {
+        return getRefs(null, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final String project, final String repository, final boolean includeLinks) {
+        return getRefs(project, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final String repository, final boolean includeLinks) {
+        return getRefs(project, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final String project, final UUID repository, final boolean includeLinks) {
+        return getRefs(project, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final UUID repository, final boolean includeLinks) {
+        return getRefs(project, repository, null, (Boolean) includeLinks);
+    }
+
+    public List<GitRef> getRefs(final String project, final String repository, final String refType) {
+        return getRefs(project, repository, refType, (Boolean) null);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final String repository, final String refType) {
+        return getRefs(project, repository, refType, (Boolean) null);
+    }
+
+    public List<GitRef> getRefs(final String project, final UUID repository, final String refType) {
+        return getRefs(project, repository, refType, (Boolean) null);
+    }
+
+    public List<GitRef> getRefs(final UUID project, final UUID repository, final String refType) {
+        return getRefs(project, repository, refType, (Boolean) null);
+    }
+
+    private List<GitRef> getRefs(final Object project, final Object repository, final String refType,
+        final Boolean includeLinks) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repository); //$NON-NLS-1$
+        routeValues.put("refType", refType); //$NON-NLS-1$
 
-        final GitRefs result = super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, GitRefs.class);
+        final Map<String, String> queryParameters = new HashMap<String, String>();
 
-        return result.getValue();
+        if (includeLinks != null) {
+            queryParameters.put("includeLinks", includeLinks.toString().toLowerCase()); //$NON-NLS-1$
+        }
+
+        return super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, queryParameters,
+            new GenericType<List<GitRef>>() {});
     }
 
     /**
@@ -322,9 +371,8 @@ public class GitHttpClient
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("refType", GitWebApiConstants.HeadsFilter); //$NON-NLS-1$
 
-        final GitRefs result = super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, GitRefs.class);
-
-        return result.getValue();
+        return super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION,
+            new GenericType<List<GitRef>>() {});
     }
 
     /**
@@ -338,9 +386,8 @@ public class GitHttpClient
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("refType", GitWebApiConstants.TagsFilter); //$NON-NLS-1$
 
-        final GitRefs result = super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, GitRefs.class);
-
-        return result.getValue();
+        return super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION,
+            new GenericType<List<GitRef>>() {});
     }
 
     /**
@@ -354,19 +401,16 @@ public class GitHttpClient
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("refType", filter); //$NON-NLS-1$
 
-        final GitRefs result = super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, GitRefs.class);
-
-        return result.getValue();
+        return super.get(GitWebApiConstants.RefsLocationId, routeValues, API_VERSION,
+            new GenericType<List<GitRef>>() {});
     }
 
     public List<GitRefUpdateResult> updateRefs(final UUID repositoryId, final List<GitRefUpdate> updates) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final GitRefUpdateResults result =
-            super.post(updates, GitWebApiConstants.RefsLocationId, routeValues, API_VERSION, GitRefUpdateResults.class);
-
-        return result.getValue();
+        return super.post(updates, GitWebApiConstants.RefsLocationId, routeValues, API_VERSION,
+            new GenericType<List<GitRefUpdateResult>>() {});
     }
 
     /*
@@ -381,8 +425,9 @@ public class GitHttpClient
 
         final Map<String, String> queryParameters = new HashMap<String, String>();
 
-        if (includeContentMetadata)
+        if (includeContentMetadata) {
             queryParameters.put("includeContentMetadata", "true"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
 
         if (includeLatestChange) {
             queryParameters.put("latestProcessedChange", "true"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -535,10 +580,8 @@ public class GitHttpClient
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final GitItems result =
-            super.post(requestData, GitWebApiConstants.ItemsBatchLocationId, routeValues, API_VERSION, GitItems.class);
-
-        return result.getValue();
+        return super.post(requestData, GitWebApiConstants.ItemsBatchLocationId, routeValues, API_VERSION,
+            new GenericType<List<List<GitItem>>>() {});
     }
 
     // public InputStream getBlob(final UUID locationId, final String sha1) {

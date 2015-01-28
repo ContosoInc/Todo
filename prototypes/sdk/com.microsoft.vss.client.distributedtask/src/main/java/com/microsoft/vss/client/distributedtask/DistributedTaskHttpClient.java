@@ -1,5 +1,6 @@
 package com.microsoft.vss.client.distributedtask;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -7,13 +8,14 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import com.microsoft.vss.client.core.VssHttpClientBase;
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
+import com.microsoft.vss.client.distributedtask.model.TaskLog;
 import com.microsoft.vss.client.distributedtask.model.Timeline;
-import com.microsoft.vss.client.distributedtask.serialization.Strings;
 
 public class DistributedTaskHttpClient
     extends VssHttpClientBase {
@@ -94,6 +96,20 @@ public class DistributedTaskHttpClient
         return super.post(lines, TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION);
     }
 
+    public TaskLog createLog(final UUID planId, final TaskLog log) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+
+        return super.post(log, TaskResourceIds.Logs, routeValues, API_VERSION, TaskLog.class);
+    }
+
+    public TaskLog appendLog(final UUID planId, final int logId, final InputStream content) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+
+        return super.post(content, TaskResourceIds.Logs, routeValues, API_VERSION, TaskLog.class);
+    }
+
     public List<String> getLogLines(final UUID planId, final int logId) {
         return getLogLines(planId, logId, (Number) null, null);
     }
@@ -121,8 +137,7 @@ public class DistributedTaskHttpClient
             routeValues.put("endLine", endLine.toString()); //$NON-NLS-1$ }
         }
 
-        final Strings result =
-            super.get(TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION, queryParameters, Strings.class);
-        return result.getValue();
+        return super.get(TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION, queryParameters,
+            new GenericType<List<String>>() {});
     }
 }

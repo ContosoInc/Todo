@@ -103,10 +103,22 @@ public abstract class VssHttpClientBase {
         return get(locationId, routeValues, version, null, resultClazz);
     }
 
+    protected <TResult> TResult get(final UUID locationId, final Map<String, Object> routeValues,
+        final ApiResourceVersion version, final GenericType<TResult> genericType) {
+
+        return get(locationId, routeValues, version, null, genericType);
+    }
+
     protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
         final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
 
         return get(locationId, null, version, queryParameters, resultClazz);
+    }
+
+    protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
+        final Map<String, String> queryParameters, final GenericType<TResult> genericType) {
+
+        return get(locationId, null, version, queryParameters, genericType);
     }
 
     protected <TResult> TResult get(final UUID locationId, final Map<String, Object> routeValues,
@@ -184,8 +196,19 @@ public abstract class VssHttpClientBase {
     }
 
     protected <TEntity, TResult> TResult post(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version, final GenericType<TResult> genericType) {
+        return post(value, locationId, routeValues, version, null, genericType);
+    }
+
+    protected <TEntity, TResult> TResult post(final TEntity value, final UUID locationId,
         final ApiResourceVersion version, final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
         return post(value, locationId, null, version, queryParameters, resultClazz);
+    }
+
+    protected <TEntity, TResult> TResult post(final TEntity value, final UUID locationId,
+        final ApiResourceVersion version, final Map<String, String> queryParameters,
+        final GenericType<TResult> genericType) {
+        return post(value, locationId, null, version, queryParameters, genericType);
     }
 
     protected <TEntity> Response post(final TEntity value, final UUID locationId,
@@ -215,6 +238,17 @@ public abstract class VssHttpClientBase {
         return result;
     }
 
+    protected <TEntity, TResult> TResult post(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version,
+        final Map<String, String> queryParameters, final GenericType<TResult> genericType) {
+
+        final Invocation request =
+            createRequest(HttpMethod.POST, locationId, routeValues, version, value, queryParameters);
+        final TResult result = sendRequest(request, genericType);
+
+        return result;
+    }
+
     protected <TEntity, TResult> TResult put(final TEntity value, final UUID locationId,
         final ApiResourceVersion version, final Class<TResult> resultClazz) {
         return put(value, locationId, null, version, null, resultClazz);
@@ -223,6 +257,11 @@ public abstract class VssHttpClientBase {
     protected <TEntity, TResult> TResult put(final TEntity value, final UUID locationId,
         final Map<String, Object> routeValues, final ApiResourceVersion version, final Class<TResult> resultClazz) {
         return put(value, locationId, routeValues, version, null, resultClazz);
+    }
+
+    protected <TEntity, TResult> TResult put(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version, final GenericType<TResult> genericType) {
+        return put(value, locationId, routeValues, version, null, genericType);
     }
 
     protected <TEntity> Response put(final TEntity value, final UUID locationId, final Map<String, Object> routeValues,
@@ -242,6 +281,17 @@ public abstract class VssHttpClientBase {
         final Invocation request =
             createRequest(HttpMethod.PUT, locationId, routeValues, version, value, queryParameters);
         final TResult result = sendRequest(request, resultClazz);
+
+        return result;
+    }
+
+    protected <TEntity, TResult> TResult put(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version,
+        final Map<String, String> queryParameters, final GenericType<TResult> genericType) {
+
+        final Invocation request =
+            createRequest(HttpMethod.PUT, locationId, routeValues, version, value, queryParameters);
+        final TResult result = sendRequest(request, genericType);
 
         return result;
     }
