@@ -175,12 +175,28 @@ public abstract class VssHttpClientBase {
     }
 
     protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version, final GenericType<TResult> genericType) {
+        return patch(value, locationId, routeValues, version, null, genericType);
+    }
+
+    protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
         final Map<String, Object> routeValues, final ApiResourceVersion version,
         final Map<String, String> queryParameters, final Class<TResult> resultClazz) {
 
         final Invocation request =
             createRequest(HttpMethod.PATCH, locationId, routeValues, version, value, queryParameters);
         final TResult result = sendRequest(request, resultClazz);
+
+        return result;
+    }
+
+    protected <TEntity, TResult> TResult patch(final TEntity value, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version,
+        final Map<String, String> queryParameters, final GenericType<TResult> genericType) {
+
+        final Invocation request =
+            createRequest(HttpMethod.PATCH, locationId, routeValues, version, value, queryParameters);
+        final TResult result = sendRequest(request, genericType);
 
         return result;
     }
@@ -402,6 +418,15 @@ public abstract class VssHttpClientBase {
         return mediaType;
     }
 
+    private MediaType getMediaTypeWithQualityHeaderValue(final MediaType baseMediaType) {
+        final Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put(CHARSET_PARAMETER_NAME, UTF8_CHARSET);
+
+        final MediaType mediaType = new MediaType(baseMediaType.getType(), baseMediaType.getSubtype(), parameters);
+
+        return mediaType;
+    }
+
     private MediaType getMediaTypeWithQualityHeaderValue(final ApiResourceVersion version) {
         final Map<String, String> parameters = new HashMap<String, String>();
         parameters.put(API_VERSION_PARAMETER_NAME, version.toString());
@@ -414,11 +439,7 @@ public abstract class VssHttpClientBase {
         final Map<String, String> parameters = new HashMap<String, String>();
         parameters.put(CHARSET_PARAMETER_NAME, UTF8_CHARSET);
 
-        final MediaType mediaType =
-            new MediaType(MediaType.APPLICATION_JSON_TYPE.getType(), MediaType.APPLICATION_JSON_TYPE.getSubtype(),
-                parameters);
-
-        return mediaType;
+        return getMediaTypeWithQualityHeaderValue(MediaType.APPLICATION_JSON_TYPE);
     }
 
     private boolean isJsonResponse(final Response response) {
@@ -498,6 +519,18 @@ public abstract class VssHttpClientBase {
             getMediaTypeWithQualityHeaderValue(mediaType, NegotiateRequestVersion(locationId, version));
 
         return target.request(acceptType).build(method);
+    }
+
+    protected <TEntity> Invocation createRequest(final String method, final UUID locationId,
+        final Map<String, Object> routeValues, final ApiResourceVersion version, final TEntity value,
+        final MediaType contentMediaType, final Map<String, String> queryParameters, final MediaType acceptMediaType) {
+
+        final WebTarget target = createTarget(locationId, routeValues, queryParameters);
+        final MediaType acceptType =
+            getMediaTypeWithQualityHeaderValue(acceptMediaType, NegotiateRequestVersion(locationId, version));
+        final MediaType contentType = getMediaTypeWithQualityHeaderValue(contentMediaType);
+
+        return target.request(acceptType).build(method, Entity.entity(value, contentType));
     }
 
     protected <TEntity> Invocation createRequest(final String method, final UUID locationId,

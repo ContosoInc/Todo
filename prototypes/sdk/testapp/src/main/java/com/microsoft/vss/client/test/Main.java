@@ -1,15 +1,11 @@
 package com.microsoft.vss.client.test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.distributedtask.DistributedTaskHttpClient;
 import com.microsoft.vss.client.test.build.BuildArtifactTests;
 import com.microsoft.vss.client.test.build.BuildDefinitionTests;
 import com.microsoft.vss.client.test.build.BuildTests;
@@ -20,18 +16,10 @@ public class Main {
 
     public static void main(String[] args)
         throws URISyntaxException,
-            FileNotFoundException {
-
-        final Client client = JaxrsUtil.getClient(JaxrsUtil.getDfCredentials());
-        final URI baseUri = JaxrsUtil.dfUriFiddler;
-        DistributedTaskHttpClient taskClient = new DistributedTaskHttpClient(client, baseUri);
-
-        InputStream content = new FileInputStream("D:/0/WorkItemController.cs"); //$NON-NLS-1$
-
-        taskClient.appendLog(UUID.randomUUID(), 1, content);
+            IOException {
 
         // arTests();
-        dfTests();
+        // dfTests();
         // vsoTests();
 
     }

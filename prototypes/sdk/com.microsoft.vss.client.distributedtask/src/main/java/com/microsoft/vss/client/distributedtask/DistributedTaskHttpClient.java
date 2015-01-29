@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.microsoft.vss.client.core.VssHttpClientBase;
@@ -106,8 +108,13 @@ public class DistributedTaskHttpClient
     public TaskLog appendLog(final UUID planId, final int logId, final InputStream content) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("planId", planId); //$NON-NLS-1$
+        routeValues.put("logId", logId); //$NON-NLS-1$
 
-        return super.post(content, TaskResourceIds.Logs, routeValues, API_VERSION, TaskLog.class);
+        final Invocation request =
+            createRequest(HttpMethod.POST, TaskResourceIds.Logs, routeValues, API_VERSION, content,
+                MediaType.APPLICATION_OCTET_STREAM_TYPE, null, MediaType.APPLICATION_JSON_TYPE);
+
+        return sendRequest(request, TaskLog.class);
     }
 
     public List<String> getLogLines(final UUID planId, final int logId) {
