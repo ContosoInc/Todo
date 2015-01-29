@@ -1,6 +1,7 @@
 package com.microsoft.vss.client.build.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.microsoft.vss.client.build.model.enumeration.BuildReason;
 import com.microsoft.vss.client.build.model.enumeration.BuildResult;
@@ -38,6 +39,8 @@ public class Build {
     private TaskOrchestrationPlanReference orchestrationPlan;
     private LogLocationReference log;
     private BuildRepository repository;
+    private List<String> demands;
+    private QueueOption queueOption;
 
     public int getId() {
         return id;
@@ -229,5 +232,21 @@ public class Build {
 
     public void setUri(String uri) {
         this.uri = uri;
+    }
+
+    public List<String> getDemands() {
+        return demands;
+    }
+
+    public void setDemands(List<String> demands) {
+        this.demands = demands;
+    }
+
+    public QueueOption getQueueOption() {
+        return queueOption;
+    }
+
+    public void setQueueOption(QueueOption queueOption) {
+        this.queueOption = queueOption;
     }
 }

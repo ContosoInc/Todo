@@ -212,7 +212,7 @@ public class BuildHttpClient
             queryParameters.put("ignoreWarnings", "true"); //$NON-NLS-1$ //$NON-NLS-2$
         }
 
-        final Response response = super.post(build, BuildResourceIds.Builds, null, API_VERSION, queryParameters);
+        final Response response = super.post(build, BuildResourceIds.Builds, routeValues, API_VERSION, queryParameters);
 
         if (response.getStatusInfo() == Response.Status.CONFLICT) {
             final BuildRequestValidationFailedException validationException =
@@ -229,8 +229,12 @@ public class BuildHttpClient
         build.setId(buildId);
         build.setBuildNumber(buildNumber);
 
+        return updateBuild(build);
+    }
+
+    public Build updateBuild(final Build build) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("buildId", buildId); //$NON-NLS-1$
+        routeValues.put("buildId", build.getId()); //$NON-NLS-1$
 
         return super.patch(build, BuildResourceIds.Builds, routeValues, API_VERSION, null, Build.class);
     }

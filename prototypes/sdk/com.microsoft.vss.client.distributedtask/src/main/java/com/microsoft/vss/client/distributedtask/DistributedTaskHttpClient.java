@@ -18,6 +18,7 @@ import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.distributedtask.model.TaskLog;
 import com.microsoft.vss.client.distributedtask.model.Timeline;
+import com.microsoft.vss.client.distributedtask.model.TimelineRecord;
 
 public class DistributedTaskHttpClient
     extends VssHttpClientBase {
@@ -88,6 +89,14 @@ public class DistributedTaskHttpClient
         super.delete(TaskResourceIds.Timelines, routeValues, API_VERSION);
     }
 
+    public List<Timeline> getTimelines(final UUID planId) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+
+        return super.get(TaskResourceIds.Timelines, routeValues, API_VERSION,
+                new GenericType<List<Timeline>>() {});
+    }
+
     public Response appendTimelineRecordFeed(final UUID planId, final UUID timelineId, final UUID recordId,
         final List<String> lines) {
         final Map<String, Object> routeValues = new HashMap<String, Object>();
@@ -145,6 +154,36 @@ public class DistributedTaskHttpClient
         }
 
         return super.get(TaskResourceIds.TimelineRecordFeeds, routeValues, API_VERSION, queryParameters,
-            new GenericType<List<String>>() {});
+                new GenericType<List<String>>() {});
+    }
+
+    public List<TaskLog> getLogs(final UUID planId) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+
+        return super.get(TaskResourceIds.Logs, routeValues, API_VERSION, new GenericType<List<TaskLog>>(){});
+    }
+
+    public List<TimelineRecord> getRecords(final UUID planId, final UUID timelineId) {
+        return this.getRecords(planId, timelineId, 0);
+    }
+
+    public List<TimelineRecord> getRecords(final UUID planId, final UUID timelineId, int changeId) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+        routeValues.put("timelineId", timelineId); //$NON-NLS-1$
+        routeValues.put("changeId", changeId); //$NON-NLS-1$
+
+        return super.get(TaskResourceIds.TimelineRecords, routeValues, API_VERSION, null,
+                new GenericType<List<TimelineRecord>>() {});
+    }
+
+    public List<TimelineRecord> updateRecords(final UUID planId, final UUID timelineId, final List<TimelineRecord> records) {
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("planId", planId); //$NON-NLS-1$
+        routeValues.put("timelineId", timelineId); //$NON-NLS-1$
+
+        return super.patch(records, TaskResourceIds.TimelineRecords, routeValues,
+                API_VERSION, null, new GenericType<List<TimelineRecord>>(){});
     }
 }

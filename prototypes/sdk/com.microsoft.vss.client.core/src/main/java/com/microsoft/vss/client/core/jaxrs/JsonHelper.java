@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 public class JsonHelper {
     private final static ObjectMapper objectMapper;
 
@@ -20,6 +23,9 @@ public class JsonHelper {
         objectMapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
 
         objectMapper.setSerializationInclusion(Include.NON_NULL);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        objectMapper.setDateFormat(format);
     }
 
     public static ObjectMapper getObjectMapper() {
