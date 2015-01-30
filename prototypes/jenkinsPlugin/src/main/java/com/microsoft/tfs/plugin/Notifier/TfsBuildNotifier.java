@@ -1,20 +1,20 @@
-package com.microsoft.tfs.plugin;
+package com.microsoft.tfs.plugin.Notifier;
 
-import com.microsoft.vss.client.build.model.Build;
-import com.microsoft.vss.client.build.model.BuildDefinition;
-import com.microsoft.vss.client.build.model.enumeration.BuildResult;
-import com.microsoft.vss.client.build.model.enumeration.BuildStatus;
-import com.microsoft.vss.client.core.model.TeamProjectReference;
-import com.microsoft.vss.client.distributedtask.model.TaskLog;
-import com.microsoft.vss.client.distributedtask.model.TaskResult;
-import com.microsoft.vss.client.distributedtask.model.TimelineRecord;
-import com.microsoft.vss.client.distributedtask.model.enumeration.TimelineRecordState;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinition;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProject;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.tfs.plugin.TfsBuildFacade;
+import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
+import com.microsoft.tfs.plugin.impl.TfsBuildFacadeFactoryImpl;
+import com.microsoft.tfs.plugin.TfsClient;
+import com.microsoft.tfs.plugin.TfsConfiguration;
 import hudson.Extension;
 import hudson.Launcher;
+import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.Result;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Notifier;
@@ -25,17 +25,14 @@ import hudson.util.Secret;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
-import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Logger;
 
-import static hudson.model.Result.*;
-
 /**
- * Created by yacao on 12/18/2014.
+ *  Send jenkins build outcome to the queued build container in Microsoft TFS
  */
 public class TfsBuildNotifier extends Notifier {
 
@@ -44,29 +41,19 @@ public class TfsBuildNotifier extends Notifier {
     public final String serverUrl;
     public final String username;
     public final Secret password;
-    public final String collection;
     public final String project;
     public final String buildDefinition;
 
-    /* TODO: replace with API client */
-    private PrintWriter pw;
-
-    private TfsClient client;
-
-    private TfsConfiguration config;
+    private transient TfsClient client;
+    private transient TfsBuildFacadeFactory tfsBuildFacadeFactory;
 
     @DataBoundConstructor
-    public TfsBuildNotifier(String serverUrl, String username, Secret password, String collection, String project, String buildDefinition) {
+    public TfsBuildNotifier(String serverUrl, String username, Secret password, String project, String buildDefinition) {
         this.serverUrl = serverUrl;
         this.username = username;
         this.password = password;
-        this.collection = collection;
         this.project = project;
         this.buildDefinition = buildDefinition;
-
-        this.config = new TfsConfiguration(this.serverUrl, this.username, this.password,
-                this.collection, this.project, this.buildDefinition);
-
     }
 
     @Override
@@ -86,40 +73,23 @@ public class TfsBuildNotifier extends Notifier {
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) {
 
         // Get VSO build environments
-        // TODO: Create build if we don't have plan id
         Map<String, String> env = build.getBuildVariables();
-        int vsoBuildId = Integer.valueOf(env.get("VssBuildId" + build.getId()));
-        UUID planId = UUID.fromString(env.get("VssPlanId" + build.getId()));
-        UUID timelineId = UUID.fromString(env.get("VssTimelineId" + build.getId()));
-        logger.info("notifier plan Id: "+ planId);
-        logger.info("notifier build Id: "+ vsoBuildId);
+        String tfsBuildIdStr = env.get("TfsBuildId" + build.getId());
 
+        // No build was queued on tfs, return
+        if (tfsBuildIdStr == null) {
+            return false;
+        }
+
+        int tfsBuildId = Integer.valueOf(tfsBuildIdStr);
         try {
             client = TfsClient.newClient(this.serverUrl, this.username, this.password);
-            client.updateBuild(vsoBuildId, build);
-            List<TimelineRecord> records = client.getRecords(planId, timelineId);
-            if (records != null) {
-                for (TimelineRecord record : records) {
-                    record.setState(TimelineRecordState.Completed);
-                    if (build.getResult() == Result.SUCCESS) {
-                        record.setResult(TaskResult.Succeeded);
-                    } else if (build.getResult() == Result.FAILURE) {
-                        record.setResult(TaskResult.Failed);
-                    } else if (build.getResult() == Result.ABORTED) {
-                        record.setResult(TaskResult.Canceled);
-                    } else {
-                        record.setResult(TaskResult.Abandoned);
-                    }
+            TfsBuildFacade tfsBuildFacade = getTfsBuildFacadeFactory().getBuildOnTfs(tfsBuildId, build, client);
 
-                    record.setFinishTime(new Date());
-                }
+            tfsBuildFacade.finishAllTaskRecords();
+            tfsBuildFacade.finishBuild(build.getEnvironment(listener));
 
-                client.updateRecords(planId, timelineId, records);
-            }
-
-
-
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.severe(e.getMessage());
 
@@ -129,12 +99,20 @@ public class TfsBuildNotifier extends Notifier {
         return true;
     }
 
-    public synchronized TfsConfiguration getConfig() {
-        if (this.config == null) {
-           this.config = new TfsConfiguration(serverUrl, username, password, collection, project, buildDefinition);
+    public TfsConfiguration getConfig() {
+        return new TfsConfiguration(serverUrl, username, password, project, buildDefinition);
+    }
+
+    public void setTfsBuildFacadeFactory(TfsBuildFacadeFactory facadeFactory) {
+        this.tfsBuildFacadeFactory = facadeFactory;
+    }
+
+    private TfsBuildFacadeFactory getTfsBuildFacadeFactory() {
+        if (this.tfsBuildFacadeFactory == null) {
+            this.tfsBuildFacadeFactory = new TfsBuildFacadeFactoryImpl();
         }
 
-        return this.config;
+        return this.tfsBuildFacadeFactory;
     }
 
     @Extension
@@ -147,13 +125,11 @@ public class TfsBuildNotifier extends Notifier {
         private transient TfsClient client;
 
         public String getDisplayName() {
-            /* TODO: localization */
             return "TFS Notifier";
         }
 
         public FormValidation doCheckServerUrl(@QueryParameter String serverUrl) {
             if (serverUrl == null || serverUrl.trim().isEmpty()) {
-                /* TODO: localization */
                 return FormValidation.error("Please enter the URL for Team Foundation Service host");
             }
 
@@ -164,6 +140,10 @@ public class TfsBuildNotifier extends Notifier {
             } catch (MalformedURLException e) {
                 return FormValidation.error(e.getLocalizedMessage());
             }
+        }
+
+        public FormValidation doCheckUsername(@QueryParameter String username) {
+            return FormValidation.validateRequired(username);
         }
 
         public FormValidation doCheckPassword(@QueryParameter String password) {
@@ -180,9 +160,9 @@ public class TfsBuildNotifier extends Notifier {
                 client = TfsClient.newClient(serverUrl, username, password);
 
                 //  project and buildDefinition are IDs
-                TeamProjectReference projectReference = client.getProjectClient().getProject(project);
+                TeamProject projectReference = client.getProjectClient().getProject(project);
                 if (projectReference != null) {
-                    BuildDefinition definition = client.getBuildClient().getDefinition(projectReference.getId(), Integer.valueOf(buildDefinition));
+                    BuildDefinition definition = client.getBuildClient().getDefinition(projectReference.getId(), Integer.valueOf(buildDefinition), null);
 
                     if (definition != null) {
                         return FormValidation.ok("Build definition exists");
@@ -222,9 +202,9 @@ public class TfsBuildNotifier extends Notifier {
 
             if (validInputs(serverUrl, username, password, project)) {
                 client = TfsClient.newClient(serverUrl, username, password);
-                List<BuildDefinition> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
+                List<BuildDefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
 
-                for (BuildDefinition definition : definitions) {
+                for (BuildDefinitionReference definition : definitions) {
                     items.add(definition.getName(), String.valueOf(definition.getId()));
                 }
             }
@@ -232,16 +212,13 @@ public class TfsBuildNotifier extends Notifier {
             return items;
         }
 
-        private boolean isNullOrEmpty(String s) {
-            return s == null || s.length() == 0;
-        }
-
         private boolean validInputs(Object... inputs) {
             for (Object input : inputs) {
                 if (input == null) {
                     return false;
                 }
-                if (input instanceof String && isNullOrEmpty((String)input)) {
+
+                if (input instanceof String && Util.fixEmptyAndTrim((String) input) == null) {
                     return false;
                 }
             }

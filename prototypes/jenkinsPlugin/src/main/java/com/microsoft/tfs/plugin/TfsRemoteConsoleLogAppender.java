@@ -1,6 +1,5 @@
 package com.microsoft.tfs.plugin;
 
-import com.microsoft.vss.client.distributedtask.model.TaskLog;
 import hudson.console.ConsoleNote;
 import hudson.console.LineTransformationOutputStream;
 
@@ -20,17 +19,18 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
 
     public final OutputStream delegate;
 
-    private final TfsClient client;
-    private final TfsBuildInstance buildInstance;
+    private final TfsBuildFacade tfsBuildFacade;
     private final ScheduledExecutorService executorService;
     private final BlockingQueue<String> logs;
 
-    public TfsRemoteConsoleLogAppender(OutputStream delegate, TfsClient client, TfsBuildInstance buildInstance) {
+    public TfsRemoteConsoleLogAppender(OutputStream delegate, TfsBuildFacade tfsBuildFacade) {
         this.delegate = delegate;
         this.logs = new LinkedBlockingQueue<String>();
+
+        // single thread for posting log to guarantee order
         this.executorService = Executors.newScheduledThreadPool(1);
-        this.client = client;
-        this.buildInstance = buildInstance;
+
+        this.tfsBuildFacade = tfsBuildFacade;
 
         this.logger.info("Initialized Tfs Remote Console log appender");
     }
@@ -49,7 +49,7 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
 
     public void close() throws IOException {
         delegate.close();
-        this.executorService.shutdown();
+        executorService.shutdown();
 
         try {
             if (this.executorService.awaitTermination(30, TimeUnit.SECONDS)) {
@@ -60,7 +60,7 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
 
                     List<String> lines = new ArrayList<String>(logs.size());
                     logs.drainTo(lines);
-                    client.postConsoleFeed(buildInstance.getPlanId(), buildInstance.getTimelineId(), buildInstance.getJobRecordId(), lines);
+                    tfsBuildFacade.appendJobLog(lines);
                 }
 
             } else {
@@ -70,9 +70,6 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
         } catch (InterruptedException e) {
             logger.warning("Console log appender interrupted, log maybe incomplete on remote console.");
         }
-
-        TaskLog log = client.createLog(buildInstance.getPlanId(), buildInstance.getTimelineId());
-        client.appendLog(buildInstance.getPlanId(), log.getId(), buildInstance.getJenkinsBuild());
     }
 
     public void start() {
@@ -87,14 +84,13 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
                     lines.add(line);
 
                     if (lines.size() >= 100) {
-                        //TFS Client must post this logs
-                        client.postConsoleFeed(buildInstance.getPlanId(), buildInstance.getTimelineId(), buildInstance.getJobRecordId(), lines);
+                        tfsBuildFacade.appendJobLog(lines);
                         lines.clear();
                     }
                 }
 
                 if (!lines.isEmpty()) {
-                    client.postConsoleFeed(buildInstance.getPlanId(), buildInstance.getTimelineId(), buildInstance.getJobRecordId(), lines);
+                    tfsBuildFacade.appendJobLog(lines);
                 }
             }
         };

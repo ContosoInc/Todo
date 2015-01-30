@@ -4,11 +4,11 @@
         <f:textbox />
     </f:entry>
 
-    <f:entry field="username" title="Login name">
-        <f:textbox clazz="required" checkMessage="${%Username is mandatory.}"/>
+    <f:entry field="username" title="Username">
+        <f:textbox />
     </f:entry>
 
-    <f:entry field="password" title="User password">
+    <f:entry field="password" title="Password">
         <f:password />
     </f:entry>
 

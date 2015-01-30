@@ -69,32 +69,33 @@
     <dependency>
       <groupId>com.microsoft.vss.sdk</groupId>
       <artifactId>com.microsoft.vss.client.core</artifactId>
-      <version>0.1.0</version>
+      <version>0.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.microsoft.vss.sdk</groupId>
-      <artifactId>com.microsoft.vss.client.build</artifactId>
-      <version>0.1.0</version>
+      <artifactId>com.microsoft.teamfoundation.client.core</artifactId>
+      <version>0.2.0</version>
     </dependency>
     <dependency>
       <groupId>com.microsoft.vss.sdk</groupId>
-      <artifactId>com.microsoft.vss.client.distributedtask</artifactId>
-      <version>0.1.0</version>
+      <artifactId>com.microsoft.teamfoundation.client.build2</artifactId>
+      <version>0.2.0</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.microsoft.vss.sdk</groupId>
+      <artifactId>com.microsoft.teamfoundation.client.distributedtask</artifactId>
+      <version>0.2.0</version>
+    </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
       <version>2.15</version>
     </dependency>
-
     <dependency>
       <groupId>org.glassfish.jersey.connectors</groupId>
       <artifactId>jersey-apache-connector</artifactId>
       <version>2.15</version>
     </dependency>
-
-
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
