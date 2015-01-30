@@ -1,12 +1,12 @@
 package com.microsoft.vss.client.build.model.enumeration;
 
-public enum QueueOption {
-    DoNotRun(1), Run(0);
+public enum QueueOptions {
+    DoNotRun(1), None(0);
 
     private final int value;
 
-    QueueOption(int option) {
-        this.value = option;
+    QueueOptions(int options) {
+        this.value = options;
     }
 
     @Override

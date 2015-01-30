@@ -7,6 +7,7 @@ import com.microsoft.vss.client.build.model.enumeration.BuildReason;
 import com.microsoft.vss.client.build.model.enumeration.BuildResult;
 import com.microsoft.vss.client.build.model.enumeration.BuildStatus;
 import com.microsoft.vss.client.build.model.enumeration.QueuePriority;
+import com.microsoft.vss.client.build.model.enumeration.QueueOptions;
 import com.microsoft.vss.client.core.model.IdentityRef;
 import com.microsoft.vss.client.core.model.TeamProjectReference;
 
@@ -40,7 +41,7 @@ public class Build {
     private LogLocationReference log;
     private BuildRepository repository;
     private List<String> demands;
-    private QueueOption queueOption;
+    private QueueOptions queueOptions;
 
     public int getId() {
         return id;
@@ -242,11 +243,11 @@ public class Build {
         this.demands = demands;
     }
 
-    public QueueOption getQueueOption() {
-        return queueOption;
+    public QueueOptions getQueueOptions() {
+        return queueOptions;
     }
 
-    public void setQueueOption(QueueOption queueOption) {
-        this.queueOption = queueOption;
+    public void setQueueOptions(QueueOptions queueOptions) {
+        this.queueOptions = queueOptions;
     }
 }
