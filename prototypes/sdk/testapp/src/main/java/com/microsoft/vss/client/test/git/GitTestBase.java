@@ -5,11 +5,11 @@ import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.sourcecontrol.GitHttpClient;
-import com.microsoft.vss.client.sourcecontrol.model.FileContentMetadata;
-import com.microsoft.vss.client.sourcecontrol.model.GitItem;
-import com.microsoft.vss.client.sourcecontrol.model.GitRef;
-import com.microsoft.vss.client.sourcecontrol.model.GitRepository;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.GitHttpClient;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.FileContentMetadata;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitItem;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRef;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepository;
 import com.microsoft.vss.client.test.TestBase;
 import com.microsoft.vss.client.test.project.ProjectTests;
 

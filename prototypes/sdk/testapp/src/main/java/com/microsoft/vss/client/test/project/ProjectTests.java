@@ -7,9 +7,9 @@ import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.core.model.TeamProject;
-import com.microsoft.vss.client.core.model.TeamProjectReference;
-import com.microsoft.vss.client.project.ProjectState;
+import com.microsoft.teamfoundation.common.model.ProjectState;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProject;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 
 public class ProjectTests
     extends ProjectTestBase {
@@ -23,7 +23,7 @@ public class ProjectTests
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_01", this.getClass().getName())); //$NON-NLS-1$
 
-        final List<TeamProjectReference> projects = projectClient.getProjects();
+        final List<TeamProjectReference> projects = coreClient.getProjects();
 
         System.out.println(projects.size() + " project(s) read"); //$NON-NLS-1$
         System.out.println();
@@ -40,7 +40,7 @@ public class ProjectTests
             "testGet_02", this.getClass().getName())); //$NON-NLS-1$
 
         for (final ProjectState state : ProjectState.values()) {
-            final List<TeamProjectReference> projects = projectClient.getProjects();
+            final List<TeamProjectReference> projects = coreClient.getProjects(state);
 
             System.out.println(projects.size() + " " + state.toString() + " project(s) read"); //$NON-NLS-1$ //$NON-NLS-2$
             System.out.println();
@@ -62,7 +62,7 @@ public class ProjectTests
             return;
         }
 
-        final TeamProject project = projectClient.getProject(projectId.toString());
+        final TeamProject project = coreClient.getProject(projectId.toString());
 
         printProject(project);
     }
@@ -78,7 +78,7 @@ public class ProjectTests
             return;
         }
 
-        final TeamProject project = projectClient.getProject(projectId.toString(), true);
+        final TeamProject project = coreClient.getProject(projectId.toString(), true);
 
         printProject(project);
     }
@@ -94,7 +94,7 @@ public class ProjectTests
             return;
         }
 
-        final TeamProject project = projectClient.getProject(projectId.toString(), true, true);
+        final TeamProject project = coreClient.getProject(projectId.toString(), true, true);
 
         printProject(project);
     }
@@ -110,7 +110,7 @@ public class ProjectTests
             return;
         }
 
-        final TeamProject project = projectClient.getProject(projectId.toString());
+        final TeamProject project = coreClient.getProject(projectId.toString());
         System.out.println("Old description = " + project.getDescription()); //$NON-NLS-1$
 
         final TeamProject projectUpdate = new TeamProject();
@@ -118,9 +118,9 @@ public class ProjectTests
         projectUpdate.setId(project.getId());
         projectUpdate.setDescription(newDescription);
 
-        projectClient.updateProject(projectId, projectUpdate);
+        coreClient.updateProject(projectUpdate, projectId);
 
-        final TeamProject updatedProject = projectClient.getProject(projectId.toString());
+        final TeamProject updatedProject = coreClient.getProject(projectId.toString());
         System.out.println("New description = " + updatedProject.getDescription()); //$NON-NLS-1$
     }
 }

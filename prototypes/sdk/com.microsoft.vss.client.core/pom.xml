@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.microsoft.vss.sdk</groupId>
         <artifactId>com.microsoft.vss.client</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </parent>
 
     <groupId>com.microsoft.vss.sdk</groupId>
@@ -59,6 +59,23 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <executions>
+                    <execution>
+                      <id>default-testCompile</id>
+                      <configuration>
+                        <skip>false</skip>
+                      </configuration>
+                      <phase>test-compile</phase>
+                      <goals>
+                        <goal>testCompile</goal>
+                      </goals>
+                    </execution>
+                  </executions>
+                </plugin>
+
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <configuration>
@@ -66,6 +83,16 @@
                             <addMavenDescriptor>false</addMavenDescriptor>
                         </archive>
                     </configuration>
+                   <executions>
+                     <execution>
+                       <configuration>
+                         <skip>false</skip>
+                       </configuration>
+                       <goals>
+                         <goal>test-jar</goal>
+                       </goals>
+                     </execution>
+                   </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

@@ -13,9 +13,9 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.vss.client.core.Messages;
-import com.microsoft.vss.client.core.StringUtil;
 import com.microsoft.vss.client.core.model.ReferenceLink;
 import com.microsoft.vss.client.core.model.ReferenceLinks;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class ReferenceLinksDeserializer
     extends JsonDeserializer<ReferenceLinks> {
@@ -56,7 +56,7 @@ public class ReferenceLinksDeserializer
                 }
             }
 
-            result.setReferenceLinks(links);
+            result.setLinks(links);
         } else {
             // consume this stream
             final ObjectMapper mapper = (ObjectMapper) parser.getCodec();

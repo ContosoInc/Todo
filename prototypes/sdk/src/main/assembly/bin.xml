@@ -10,30 +10,53 @@
             <includes>
                 <include>*.jar</include>
             </includes>
+            <excludes>
+                <exclude>*-tests.jar</exclude>
+            </excludes>
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
-            <directory>com.microsoft.vss.client.build/target</directory>
+            <directory>com.microsoft.teamfoundation.client.build2/target</directory>
             <outputDirectory></outputDirectory>
             <includes>
                 <include>*.jar</include>
             </includes>
+            <excludes>
+                <exclude>*-tests.jar</exclude>
+            </excludes>
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
-            <directory>com.microsoft.vss.client.distributedtask/target</directory>
+            <directory>com.microsoft.teamfoundation.client.core/target</directory>
             <outputDirectory></outputDirectory>
             <includes>
                 <include>*.jar</include>
             </includes>
+            <excludes>
+                <exclude>*-tests.jar</exclude>
+            </excludes>
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
-            <directory>com.microsoft.vss.client.sourcecontrol/target</directory>
+            <directory>com.microsoft.teamfoundation.client.distributedtask/target</directory>
             <outputDirectory></outputDirectory>
             <includes>
                 <include>*.jar</include>
             </includes>
+            <excludes>
+                <exclude>*-tests.jar</exclude>
+            </excludes>
+            <fileMode>0644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>com.microsoft.teamfoundation.client.sourcecontrol/target</directory>
+            <outputDirectory></outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+            <excludes>
+                <exclude>*-tests.jar</exclude>
+            </excludes>
             <fileMode>0644</fileMode>
         </fileSet>
     </fileSets>

@@ -2,13 +2,16 @@ package com.microsoft.vss.client.test.build;
 
 import java.net.URI;
 import java.text.MessageFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.build.model.Build;
-import com.microsoft.vss.client.core.StringUtil;
+import com.microsoft.teamfoundation.build.webapi.model.Build;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class BuildTests
     extends BuildTestBase {
@@ -27,8 +30,13 @@ public class BuildTests
             return;
         }
 
+        final Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.HOUR, -1);
+
         final List<Build> builds =
-            buildClient.getBuilds(projectId, null, null, null, null, null, null, null, null, null, null, null, 10);
+            buildClient.getBuilds(projectId, null, null, null, calendar.getTime(), null, null, null, null, null, null,
+                null, 10, null);
 
         System.out.println(builds.size() + " build(s) read"); //$NON-NLS-1$
         System.out.println();

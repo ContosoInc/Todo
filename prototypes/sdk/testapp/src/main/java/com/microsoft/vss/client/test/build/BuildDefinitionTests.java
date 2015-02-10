@@ -7,12 +7,12 @@ import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.build.model.BuildDefinition;
-import com.microsoft.vss.client.build.model.BuildDefinitionReference;
-import com.microsoft.vss.client.build.model.BuildRepository;
-import com.microsoft.vss.client.build.model.DefinitionReference;
-import com.microsoft.vss.client.build.model.QueueReference;
-import com.microsoft.vss.client.build.model.ShallowReference;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinition;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.QueueReference;
+import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
 
 public class BuildDefinitionTests
     extends BuildTestBase {
@@ -28,13 +28,13 @@ public class BuildDefinitionTests
 
         final UUID projectId = getProjectIdByName(projectName);
 
-        final List<BuildDefinition> definitions = buildClient.getDefinitions(projectId);
+        final List<BuildDefinitionReference> definitions = buildClient.getDefinitions(projectId);
 
         System.out.println(definitions.size() + " definition(s) read"); //$NON-NLS-1$
         System.out.println();
 
-        for (final BuildDefinition definition : definitions) {
-            printDefinition(definition);
+        for (final BuildDefinitionReference definition : definitions) {
+            printBuildDefinitionReference(definition);
         }
 
     }
@@ -47,13 +47,13 @@ public class BuildDefinitionTests
 
         final UUID projectId = getProjectIdByName(projectName);
 
-        final List<BuildDefinition> definitions = buildClient.getDefinitions(projectId, definitionName);
+        final List<BuildDefinitionReference> definitions = buildClient.getDefinitions(projectId, definitionName);
 
         System.out.println(definitions.size() + " definition(s) read"); //$NON-NLS-1$
         System.out.println();
 
-        for (final BuildDefinition definition : definitions) {
-            printDefinition(definition);
+        for (final BuildDefinitionReference definition : definitions) {
+            printBuildDefinitionReference(definition);
         }
 
     }

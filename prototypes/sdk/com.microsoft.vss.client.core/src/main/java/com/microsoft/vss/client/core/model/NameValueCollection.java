@@ -1,9 +1,11 @@
 package com.microsoft.vss.client.core.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import com.microsoft.vss.client.core.StringUtil;
+import com.microsoft.vss.client.core.utils.JsonHelper;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class NameValueCollection
     extends HashMap<String, String> {
@@ -22,7 +24,11 @@ public class NameValueCollection
 
     public <TValue> void addIfNotNull(String parameterName, TValue value) {
         if (value != null) {
-            put(parameterName, value.toString());
+            if (value instanceof Date) {
+                put(parameterName, JsonHelper.getDateFormat().format((Date) value));
+            } else {
+                put(parameterName, value.toString());
+            }
         }
     }
 }

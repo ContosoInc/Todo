@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.microsoft.vss.sdk</groupId>
         <artifactId>com.microsoft.vss.client</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
     </parent>
 
     <groupId>com.microsoft.vss.sdk</groupId>
@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <version.major>0</version.major>
-        <version.minor>1</version.minor>
+        <version.minor>2</version.minor>
         <version.service>0</version.service>
         <version.build>SNAPSHOT</version.build>
 
@@ -61,19 +61,25 @@
 
         <dependency>
             <groupId>com.microsoft.vss.sdk</groupId>
-            <artifactId>com.microsoft.vss.client.sourcecontrol</artifactId>
+            <artifactId>com.microsoft.teamfoundation.client.build2</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.microsoft.vss.sdk</groupId>
-            <artifactId>com.microsoft.vss.client.build</artifactId>
+            <artifactId>com.microsoft.teamfoundation.client.core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.microsoft.vss.sdk</groupId>
-            <artifactId>com.microsoft.vss.client.distributedtask</artifactId>
+            <artifactId>com.microsoft.teamfoundation.client.distributedtask</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.vss.sdk</groupId>
+            <artifactId>com.microsoft.teamfoundation.client.sourcecontrol</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -14,10 +14,15 @@ import java.util.zip.ZipInputStream;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.sourcecontrol.model.GitItem;
-import com.microsoft.vss.client.sourcecontrol.model.GitRef;
-import com.microsoft.vss.client.sourcecontrol.model.GitRepository;
-import com.microsoft.vss.client.sourcecontrol.model.enumeration.VersionControlRecursionType;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitItem;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitItemDescriptor;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitItemRequestData;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRef;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepository;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionDescriptor;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionOptions;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionType;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.VersionControlRecursionType;
 
 public class GitTests
     extends GitTestBase {
@@ -108,9 +113,7 @@ public class GitTests
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_06", this.getClass().getName())); //$NON-NLS-1$
 
-        final UUID repoId = getRepositoryId(projectName, repoName);
-
-        final GitItem item = gitClient.getItem(repoId, path, null, true, true);
+        final GitItem item = gitClient.getItem(projectName, repoName, path, true);
         printItem(item);
     }
 
@@ -119,31 +122,14 @@ public class GitTests
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_07", this.getClass().getName())); //$NON-NLS-1$
 
-        final UUID repoId = getRepositoryId(projectName, repoName);
+        final List<GitItem> items =
+            gitClient.getItems(projectName, repoName, path, VersionControlRecursionType.FULL, true, true, true, null);
 
-        final InputStream item = gitClient.getItemText(repoId, path, null);
+        System.out.println(items.size() + " item(s) read"); //$NON-NLS-1$
+        System.out.println();
 
-        try {
-            final InputStreamReader reader = new InputStreamReader(item, "UTF-8"); //$NON-NLS-1$
-            final OutputStreamWriter writer = new OutputStreamWriter(System.out);
-
-            int ch;
-
-            while ((ch = reader.read()) != -1) {
-                writer.write(ch);
-            }
-
-            writer.flush();
-
-            reader.close();
-            // writer.close();
-
-        } catch (UnsupportedEncodingException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        for (final GitItem item : items) {
+            printItem(item);
         }
     }
 
@@ -154,7 +140,12 @@ public class GitTests
 
         final UUID repoId = getRepositoryId(projectName, repoName);
 
-        final InputStream item = gitClient.getItemContent(repoId, path, null);
+        final GitVersionDescriptor versionDescriptor = new GitVersionDescriptor();
+        versionDescriptor.setVersionType(GitVersionType.BRANCH);
+        versionDescriptor.setVersionOptions(GitVersionOptions.NONE);
+        versionDescriptor.setVersion("refs/heads/master"); //$NON-NLS-1$
+
+        final InputStream item = gitClient.getItemContent(repoId, path, versionDescriptor);
 
         try {
             final InputStreamReader reader = new InputStreamReader(item, "UTF-8"); //$NON-NLS-1$
@@ -187,7 +178,7 @@ public class GitTests
 
         final UUID repoId = getRepositoryId(projectName, repoName);
 
-        final InputStream inputStream = gitClient.getItemsZip(repoId, path, VersionControlRecursionType.Full, null);
+        final InputStream inputStream = gitClient.getItemZip(projectName, repoName, path, null);
         final ZipInputStream unzippedInputStream = new ZipInputStream(inputStream);
 
         try {
@@ -239,46 +230,59 @@ public class GitTests
         final GitRepository oldRepo = gitClient.getRepository(projectName, repoName);
         printRepository(oldRepo);
 
-        final GitRepository newRepo = gitClient.renameRepository(oldRepo, newRepoName);
+        final GitRepository update = new GitRepository();
+        update.setName(newRepoName);
+
+        final GitRepository newRepo = gitClient.patchRepository(update, oldRepo.getId());
         printRepository(newRepo);
 
-        final GitRepository restoredRepo = gitClient.renameRepository(newRepo, repoName);
+        update.setName(oldRepo.getName());
+
+        final GitRepository restoredRepo = gitClient.patchRepository(update, oldRepo.getId());
         printRepository(restoredRepo);
     }
 
-    public void testPost_01(final String projectName, final String repoName) {
+    public void testPost_01(final String projectName, final String repoName, final String path) {
         System.out.println(MessageFormat.format(
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testPost_01", this.getClass().getName())); //$NON-NLS-1$
 
-        final UUID repoId = getRepositoryId(projectName, repoName);
+        final GitItemDescriptor itemDescriptor1 = new GitItemDescriptor();
+        itemDescriptor1.setPath(path);
+        itemDescriptor1.setRecursionLevel(VersionControlRecursionType.FULL);
+        itemDescriptor1.setVersion("refs/heads/master"); //$NON-NLS-1$
+        itemDescriptor1.setVersionOptions(GitVersionOptions.NONE);
+        itemDescriptor1.setVersionType(GitVersionType.BRANCH);
 
-        final List<GitItem> items =
-            gitClient.getItems(repoId, GitRepository.ROOT_PATH, null, VersionControlRecursionType.OneLevel, true, false);
+        final GitItemDescriptor itemDescriptor2 = new GitItemDescriptor();
+        itemDescriptor2.setPath("/"); //$NON-NLS-1$
+        itemDescriptor2.setRecursionLevel(VersionControlRecursionType.FULL);
+        itemDescriptor2.setVersion("refs/heads/br1"); //$NON-NLS-1$
+        itemDescriptor2.setVersionOptions(GitVersionOptions.NONE);
+        itemDescriptor2.setVersionType(GitVersionType.BRANCH);
 
-        System.out.println(items.size() + " item(s) read"); //$NON-NLS-1$
+        final GitItemRequestData requestData = new GitItemRequestData();
+        requestData.setIncludeContentMetadata(true);
+        requestData.setIncludeLinks(true);
+        requestData.setLatestProcessedChange(true);
+        requestData.setItemDescriptors(new GitItemDescriptor[] {
+            itemDescriptor1, itemDescriptor2
+        });
+
+        final List<List<GitItem>> items = gitClient.getItemsBatch(requestData, projectName, repoName);
+
+        System.out.println(items.size() + " item list(s) read"); //$NON-NLS-1$
         System.out.println();
 
-        for (GitItem item : items) {
-            printItem(item);
-        }
-    }
+        int i = 0;
 
-    public void testPost_02(final String projectName, final String repoName, final String path) {
-        System.out.println(MessageFormat.format(
-            "================================ {0} ==== {1} ================================", //$NON-NLS-1$
-            "testPost_02", this.getClass().getName())); //$NON-NLS-1$
+        for (List<GitItem> itemList : items) {
+            System.out.println(items.size() + " item(s) in the list " + ++i); //$NON-NLS-1$
+            System.out.println();
 
-        final UUID repoId = getRepositoryId(projectName, repoName);
-
-        final List<GitItem> items =
-            gitClient.getItems(repoId, path, null, VersionControlRecursionType.Full, true, true);
-
-        System.out.println(items.size() + " item(s) read"); //$NON-NLS-1$
-        System.out.println();
-
-        for (GitItem item : items) {
-            printItem(item);
+            for (GitItem item : itemList) {
+                printItem(item);
+            }
         }
     }
 }

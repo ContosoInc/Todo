@@ -7,24 +7,24 @@ import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.core.model.TeamProject;
-import com.microsoft.vss.client.core.model.TeamProjectReference;
-import com.microsoft.vss.client.project.ProjectHttpClient;
+import com.microsoft.teamfoundation.core.webapi.CoreHttpClient;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProject;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.vss.client.test.JsonUtil;
 import com.microsoft.vss.client.test.TestBase;
 
 public class ProjectTestBase
     extends TestBase {
 
-    protected final ProjectHttpClient projectClient;
+    protected final CoreHttpClient coreClient;
 
     public ProjectTestBase(final Client client, final URI baseUrl) {
-        projectClient = new ProjectHttpClient(client, baseUrl);
+        coreClient = new CoreHttpClient(client, baseUrl);
     }
 
     protected UUID getProjectIdByName(final String projectName) {
 
-        final List<TeamProjectReference> projects = projectClient.getProjects();
+        final List<TeamProjectReference> projects = coreClient.getProjects();
         UUID projectId = null;
 
         for (final TeamProjectReference p : projects) {
@@ -36,7 +36,7 @@ public class ProjectTestBase
 
         if (projectId == null) {
             System.out.println(MessageFormat.format(
-                "Project {0} not found at {1}", projectName, projectClient.getBaseUrl())); //$NON-NLS-1$
+                "Project {0} not found at {1}", projectName, coreClient.getBaseUrl())); //$NON-NLS-1$
         }
 
         return projectId;

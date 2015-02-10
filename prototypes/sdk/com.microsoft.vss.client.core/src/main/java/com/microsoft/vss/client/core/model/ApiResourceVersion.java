@@ -1,6 +1,6 @@
 package com.microsoft.vss.client.core.model;
 
-import com.microsoft.vss.client.core.StringUtil;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class ApiResourceVersion {
     private final static String PREVIEW_STAGE_NAME = "preview"; //$NON-NLS-1$
@@ -131,17 +131,18 @@ public class ApiResourceVersion {
     }
 
     private boolean tryParsePreview(final String previewVersion) {
-        final String[] previewParts = previewVersion.split("."); //$NON-NLS-1$
+        final String[] previewParts = previewVersion.split("\\."); //$NON-NLS-1$
 
         if (previewParts.length == 2) {
             try {
-                this.resourceVersion = Integer.parseInt(previewParts[0]);
+                this.resourceVersion = Integer.parseInt(previewParts[1]);
             } catch (final NumberFormatException e) {
                 return false;
             }
         }
 
         if (previewParts.length > 0 && PREVIEW_STAGE_NAME.equalsIgnoreCase(previewParts[0])) {
+            this.isPreview = true;
             return true;
         }
 

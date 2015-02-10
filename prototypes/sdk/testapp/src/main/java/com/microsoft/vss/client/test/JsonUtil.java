@@ -7,8 +7,8 @@ import java.io.OutputStream;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microsoft.vss.client.core.StringUtil;
-import com.microsoft.vss.client.core.jaxrs.JsonHelper;
+import com.microsoft.vss.client.core.utils.JsonHelper;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public abstract class JsonUtil {
     public static void writeJson(final String path, final Object value) {

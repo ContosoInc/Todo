@@ -6,9 +6,9 @@ import java.util.List;
 
 import javax.ws.rs.client.Client;
 
-import com.microsoft.vss.client.build.model.ArtifactResource;
-import com.microsoft.vss.client.build.model.BuildArtifact;
-import com.microsoft.vss.client.core.StringUtil;
+import com.microsoft.teamfoundation.build.webapi.model.ArtifactResource;
+import com.microsoft.teamfoundation.build.webapi.model.BuildArtifact;
+import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class BuildArtifactTests
     extends BuildTestBase {

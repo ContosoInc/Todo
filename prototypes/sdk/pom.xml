@@ -6,7 +6,7 @@
 
     <groupId>com.microsoft.vss.sdk</groupId>
     <artifactId>com.microsoft.vss.client</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <packaging>pom</packaging>
 
     <name>Microsoft VSO SDK</name>
@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <version.major>0</version.major>
-        <version.minor>1</version.minor>
+        <version.minor>2</version.minor>
         <version.service>0</version.service>
         <version.build>SNAPSHOT</version.build>
 
@@ -30,9 +30,10 @@
 
     <modules>
         <module>com.microsoft.vss.client.core</module>
-        <module>com.microsoft.vss.client.sourcecontrol</module>
-        <module>com.microsoft.vss.client.distributedtask</module>
-        <module>com.microsoft.vss.client.build</module>
+        <module>com.microsoft.teamfoundation.client.build2</module>
+        <module>com.microsoft.teamfoundation.client.core</module>
+        <module>com.microsoft.teamfoundation.client.distributedtask</module>
+        <module>com.microsoft.teamfoundation.client.sourcecontrol</module>
         <module>testapp</module>
     </modules>
     <build>
