@@ -35,7 +35,7 @@ public enum ProjectState {
             return "createPending"; //$NON-NLS-1$
         }
 
-        if (name.equals("All")) { //$NON-NLS-1$
+        if (name.equals("ALL")) { //$NON-NLS-1$
             return "all"; //$NON-NLS-1$
         }
 
