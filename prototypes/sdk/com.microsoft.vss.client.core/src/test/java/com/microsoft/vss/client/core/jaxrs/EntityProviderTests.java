@@ -19,7 +19,7 @@ import com.microsoft.vss.client.core.entitytypes.AttributedEntityClass;
 import com.microsoft.vss.client.core.entitytypes.EnumFieldClass;
 import com.microsoft.vss.client.core.entitytypes.EnumerationSample;
 import com.microsoft.vss.client.core.entitytypes.SimpleEntityClass;
-import com.microsoft.vss.client.core.json.serialization.VssJsonCollectionWrapper;
+import com.microsoft.vss.client.core.model.VssJsonCollectionWrapper;
 
 public class EntityProviderTests
     extends TestCase {

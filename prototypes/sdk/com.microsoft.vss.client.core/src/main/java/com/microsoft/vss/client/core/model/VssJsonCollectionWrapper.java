@@ -1,4 +1,4 @@
-package com.microsoft.vss.client.core.json.serialization;
+package com.microsoft.vss.client.core.model;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
