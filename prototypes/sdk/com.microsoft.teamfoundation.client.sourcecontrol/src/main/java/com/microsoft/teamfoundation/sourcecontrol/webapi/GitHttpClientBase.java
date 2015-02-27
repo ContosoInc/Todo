@@ -18,7 +18,6 @@ import javax.ws.rs.core.*;
 
 import com.microsoft.vss.client.core.*;
 import com.microsoft.vss.client.core.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 public abstract class GitHttpClientBase 
@@ -2618,9 +2617,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2670,9 +2669,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2722,9 +2721,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2774,9 +2773,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2823,9 +2822,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2872,9 +2871,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2924,9 +2923,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -2976,9 +2975,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3028,9 +3027,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3080,9 +3079,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3129,9 +3128,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3178,9 +3177,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3536,9 +3535,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3588,9 +3587,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3640,9 +3639,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3692,9 +3691,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3741,9 +3740,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3790,9 +3789,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3842,9 +3841,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3894,9 +3893,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3946,9 +3945,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -3998,9 +3997,9 @@ public abstract class GitHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -4047,9 +4046,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {
@@ -4096,9 +4095,9 @@ public abstract class GitHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
         if (recursionLevel != null)
         {

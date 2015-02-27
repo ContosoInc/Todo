@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TfvcItem
     extends ItemModel {
@@ -38,12 +37,10 @@ public class TfvcItem
         this.changeDate = changeDate;
     }
 
-    @JsonProperty("version")
     public int getChangesetVersion() {
         return changesetVersion;
     }
 
-    @JsonProperty("version")
     public void setChangesetVersion(final int changesetVersion) {
         this.changesetVersion = changesetVersion;
     }

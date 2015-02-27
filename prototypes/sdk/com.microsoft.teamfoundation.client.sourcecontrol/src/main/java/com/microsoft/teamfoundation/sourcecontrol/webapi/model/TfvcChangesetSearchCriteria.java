@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TfvcChangesetSearchCriteria {
 
@@ -70,12 +69,10 @@ public class TfvcChangesetSearchCriteria {
         this.includeLinks = includeLinks;
     }
 
-    @JsonProperty("path")
     public String getItemPath() {
         return itemPath;
     }
 
-    @JsonProperty("path")
     public void setItemPath(final String itemPath) {
         this.itemPath = itemPath;
     }

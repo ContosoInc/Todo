@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ItemModel {
 
@@ -43,22 +42,18 @@ public class ItemModel {
         this.isFolder = isFolder;
     }
 
-    @JsonProperty("isSymLink")
     public boolean getIsSymbolicLink() {
         return isSymbolicLink;
     }
 
-    @JsonProperty("isSymLink")
     public void setIsSymbolicLink(final boolean isSymbolicLink) {
         this.isSymbolicLink = isSymbolicLink;
     }
 
-    @JsonProperty("_links")
     public ReferenceLinks getLinks() {
         return links;
     }
 
-    @JsonProperty("_links")
     public void setLinks(final ReferenceLinks links) {
         this.links = links;
     }

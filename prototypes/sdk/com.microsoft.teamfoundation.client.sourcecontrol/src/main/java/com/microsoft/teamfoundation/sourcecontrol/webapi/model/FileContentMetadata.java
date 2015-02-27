@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FileContentMetadata {
 
@@ -76,12 +75,10 @@ public class FileContentMetadata {
         this.isImage = isImage;
     }
 
-    @JsonProperty("vsLink")
     public String getVisualStudioWebLink() {
         return visualStudioWebLink;
     }
 
-    @JsonProperty("vsLink")
     public void setVisualStudioWebLink(final String visualStudioWebLink) {
         this.visualStudioWebLink = visualStudioWebLink;
     }

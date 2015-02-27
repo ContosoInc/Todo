@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GitRepository {
 
@@ -45,12 +44,10 @@ public class GitRepository {
         this.id = id;
     }
 
-    @JsonProperty("_links")
     public ReferenceLinks getLinks() {
         return links;
     }
 
-    @JsonProperty("_links")
     public void setLinks(final ReferenceLinks links) {
         this.links = links;
     }
@@ -63,12 +60,10 @@ public class GitRepository {
         this.name = name;
     }
 
-    @JsonProperty("project")
     public TeamProjectReference getProjectReference() {
         return projectReference;
     }
 
-    @JsonProperty("project")
     public void setProjectReference(final TeamProjectReference projectReference) {
         this.projectReference = projectReference;
     }

@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GitQueryCommitsCriteria {
 
@@ -43,12 +42,10 @@ public class GitQueryCommitsCriteria {
         this.author = author;
     }
 
-    @JsonProperty("user")
     public String getCommitter() {
         return committer;
     }
 
-    @JsonProperty("user")
     public void setCommitter(final String committer) {
         this.committer = committer;
     }
@@ -117,12 +114,10 @@ public class GitQueryCommitsCriteria {
         this.itemVersion = itemVersion;
     }
 
-    @JsonProperty("$skip")
     public int getSkip() {
         return skip;
     }
 
-    @JsonProperty("$skip")
     public void setSkip(final int skip) {
         this.skip = skip;
     }
@@ -143,12 +138,10 @@ public class GitQueryCommitsCriteria {
         this.toDate = toDate;
     }
 
-    @JsonProperty("$top")
     public int getTop() {
         return top;
     }
 
-    @JsonProperty("$top")
     public void setTop(final int top) {
         this.top = top;
     }

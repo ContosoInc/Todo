@@ -16,7 +16,6 @@ import com.microsoft.vss.client.core.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.*;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TfvcBranchRef
     extends TfvcShallowBranchRef {
@@ -52,12 +51,10 @@ public class TfvcBranchRef
         this.isDeleted = isDeleted;
     }
 
-    @JsonProperty("_links")
     public ReferenceLinks getLinks() {
         return links;
     }
 
-    @JsonProperty("_links")
     public void setLinks(final ReferenceLinks links) {
         this.links = links;
     }

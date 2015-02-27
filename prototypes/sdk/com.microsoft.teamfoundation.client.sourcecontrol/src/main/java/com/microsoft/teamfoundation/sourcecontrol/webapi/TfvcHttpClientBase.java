@@ -18,7 +18,6 @@ import javax.ws.rs.core.*;
 
 import com.microsoft.vss.client.core.*;
 import com.microsoft.vss.client.core.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
 import com.microsoft.visualstudio.services.webapi.model.*;
 public abstract class TfvcHttpClientBase 
@@ -57,9 +56,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeParent", includeParent); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeChildren", includeChildren); //$NON-NLS-1$
 
@@ -88,9 +87,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeParent", includeParent); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeChildren", includeChildren); //$NON-NLS-1$
 
@@ -115,15 +114,13 @@ public abstract class TfvcHttpClientBase
         final UUID locationId = UUID.fromString("bc1f417e-239d-42e7-85e1-76e80cb2d6eb"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("path", path); //$NON-NLS-1$
-
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeParent", includeParent); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeChildren", includeChildren); //$NON-NLS-1$
 
         final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
+            super.createRequest(HttpMethod.GET, locationId, 
                                 apiVersion, queryParameters, APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TfvcBranch.class);
@@ -777,9 +774,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -823,9 +820,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -865,10 +862,8 @@ public abstract class TfvcHttpClientBase
         final UUID locationId = UUID.fromString("ba9fc436-9a38-4578-89d6-e4f3241f5040"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("path", path); //$NON-NLS-1$
-
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -882,7 +877,7 @@ public abstract class TfvcHttpClientBase
         }
 
         final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
+            super.createRequest(HttpMethod.GET, locationId, 
                                 apiVersion, queryParameters, APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TfvcItem.class);
@@ -912,9 +907,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -958,9 +953,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1000,10 +995,8 @@ public abstract class TfvcHttpClientBase
         final UUID locationId = UUID.fromString("ba9fc436-9a38-4578-89d6-e4f3241f5040"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("path", path); //$NON-NLS-1$
-
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1017,7 +1010,7 @@ public abstract class TfvcHttpClientBase
         }
 
         final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
+            super.createRequest(HttpMethod.GET, locationId, 
                                 apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
@@ -1162,9 +1155,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1208,9 +1201,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1250,10 +1243,8 @@ public abstract class TfvcHttpClientBase
         final UUID locationId = UUID.fromString("ba9fc436-9a38-4578-89d6-e4f3241f5040"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("path", path); //$NON-NLS-1$
-
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1267,7 +1258,7 @@ public abstract class TfvcHttpClientBase
         }
 
         final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
+            super.createRequest(HttpMethod.GET, locationId, 
                                 apiVersion, queryParameters, TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
@@ -1297,9 +1288,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1343,9 +1334,9 @@ public abstract class TfvcHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("path", path); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1385,10 +1376,8 @@ public abstract class TfvcHttpClientBase
         final UUID locationId = UUID.fromString("ba9fc436-9a38-4578-89d6-e4f3241f5040"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("path", path); //$NON-NLS-1$
-
         final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
@@ -1402,7 +1391,7 @@ public abstract class TfvcHttpClientBase
         }
 
         final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
+            super.createRequest(HttpMethod.GET, locationId, 
                                 apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
