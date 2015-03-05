@@ -59,10 +59,24 @@ public class BuildHttpClient
         return super.queueBuild(build, build.getProject().getId(), null);
     }
 
+    @Override
+    public Build queueBuild(final Build build, final Boolean ignoreWarnings) {
+        ArgumentUtility.checkForNull(build, "build"); //$NON-NLS-1$
+        ArgumentUtility.checkForNull(build.getProject(), "build.Project"); //$NON-NLS-1$
+        return super.queueBuild(build, build.getProject().getId(), ignoreWarnings);
+    }
+
     public Build queueBuild(final Build build, final boolean ignoreWarnings) {
         ArgumentUtility.checkForNull(build, "build"); //$NON-NLS-1$
         ArgumentUtility.checkForNull(build.getProject(), "build.Project"); //$NON-NLS-1$
         return super.queueBuild(build, build.getProject().getId(), ignoreWarnings);
+    }
+
+    @Override
+    public Build updateBuild(final Build build, final int buildId) {
+        ArgumentUtility.checkForNull(build, "build"); //$NON-NLS-1$
+        ArgumentUtility.checkForNull(build.getProject(), "build.Project"); //$NON-NLS-1$
+        return super.updateBuild(build, build.getProject().getId(), buildId);
     }
 
     @Override
