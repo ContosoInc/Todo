@@ -70,7 +70,7 @@ public class TfsBuildNotifierTest {
     public void testPerform() throws Exception {
         boolean result = underTest.perform(jenkinsBuildMock, null, listenerMock);
 
-        verify(buildFacadeMock).finishBuild(any(EnvVars.class));
+        verify(buildFacadeMock).finishBuild();
         verify(buildFacadeMock).finishAllTaskRecords();
 
         assertTrue(result);

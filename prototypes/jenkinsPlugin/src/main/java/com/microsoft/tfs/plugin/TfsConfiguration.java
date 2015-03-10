@@ -9,13 +9,15 @@ public class TfsConfiguration implements Serializable {
     private static final long serialVersionUID = 4466932169999247360L;
 
     private final String serverUrl;
+    private final String serviceProvider;
     private final String username;
     private final Secret password;
     private final String project;
     private final String buildDefinition;
 
-    public TfsConfiguration(String serverUrl, String username, Secret password, String project, String buildDefinition) {
+    public TfsConfiguration(String serverUrl, String serviceProvider, String username, Secret password, String project, String buildDefinition) {
         this.serverUrl = serverUrl;
+        this.serviceProvider = serviceProvider;
         this.username = username;
         this.password = password;
         this.project = project;
@@ -28,6 +30,10 @@ public class TfsConfiguration implements Serializable {
 
     public String getServerUrl() {
         return serverUrl;
+    }
+
+    public String getServerProvider() {
+        return serviceProvider;
     }
 
     public String getUsername() {

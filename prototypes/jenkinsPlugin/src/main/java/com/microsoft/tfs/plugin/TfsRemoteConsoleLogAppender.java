@@ -17,7 +17,7 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
 
     private static final Logger logger = Logger.getLogger(TfsRemoteConsoleLogAppender.class.getName());
 
-    public final OutputStream delegate;
+    private final OutputStream delegate;
 
     private final TfsBuildFacade tfsBuildFacade;
     private final ScheduledExecutorService executorService;

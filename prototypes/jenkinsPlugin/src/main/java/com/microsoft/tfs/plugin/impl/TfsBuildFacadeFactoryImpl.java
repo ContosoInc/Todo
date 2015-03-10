@@ -3,11 +3,21 @@ package com.microsoft.tfs.plugin.impl;
 import com.microsoft.teamfoundation.build.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.Demand;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentPoolReference;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
 import com.microsoft.tfs.plugin.TfsClient;
+import com.microsoft.vss.client.core.utils.StringUtil;
+import hudson.Util;
 import hudson.model.AbstractBuild;
+import hudson.model.AbstractProject;
+import hudson.plugins.git.BranchSpec;
+import hudson.plugins.git.GitSCM;
+import hudson.scm.SCM;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -16,15 +26,9 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
 
     private static final Logger logger = Logger.getLogger(TfsBuildFacadeFactoryImpl.class.getName());
 
-    @Override
     public TfsBuildFacade createBuildOnTfs(String projectId, int buildDefinition, AbstractBuild jenkinsBuild, TfsClient tfsClient) {
         if (jenkinsBuild == null || tfsClient == null) {
             throw new IllegalArgumentException("Arguments cannot be null");
-        }
-
-        List<AgentPoolQueue> queues = tfsClient.getBuildClient().getQueues(null);
-        if (queues == null || queues.isEmpty()) {
-            throw new RuntimeException("No queue defined on TFS, cannot create a build without a queue");
         }
 
         TeamProjectReference project = tfsClient.getProjectClient().getProject(projectId);
@@ -37,8 +41,14 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
             throw new RuntimeException(String.format("Could not find the buildDefinition: %d", buildDefinition));
         }
 
+        List<AgentPoolQueue> queues = tfsClient.getBuildClient().getQueues(null);
+        if (queues == null || queues.isEmpty()) {
+            logger.info("Creating JenkinsPluginQueue on TeamFoundationServer");
+            queues = createTfsBuildQueue(tfsClient);
+        }
+
         QueueReference anyQueue = queues.get(0);
-        Build buildContainer = createBuildContainer(project, definition, anyQueue);
+        Build buildContainer = createBuildContainer(project, definition, anyQueue, jenkinsBuild.getProject().getScm());
         Build queuedBuild = tfsClient.getBuildClient().queueBuild(buildContainer, true);
 
         logger.info(String.format("Queued build on TFS with plan Id %s", queuedBuild.getOrchestrationPlan().getPlanId()));
@@ -46,14 +56,22 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
         return new TfsBuildFacadeImpl(queuedBuild, jenkinsBuild, tfsClient);
     }
 
-    @Override
     public TfsBuildFacade getBuildOnTfs(int tfsBuildId, AbstractBuild jenkinsBuild, TfsClient tfsClient) {
         Build tfsBuild = tfsClient.getBuildClient().getBuild(tfsBuildId, null);
 
         return new TfsBuildFacadeImpl(tfsBuild, jenkinsBuild, tfsClient);
     }
 
-    private Build createBuildContainer(TeamProjectReference project, BuildDefinition definition, QueueReference queue) {
+    private List<AgentPoolQueue> createTfsBuildQueue(TfsClient tfsClient) {
+        AgentPoolQueue queue = new AgentPoolQueue();
+        queue.setName("JenkinsPluginQueue");
+
+        queue = tfsClient.getBuildClient().createQueue(queue);
+
+        return Arrays.asList(queue);
+    }
+
+    private Build createBuildContainer(TeamProjectReference project, BuildDefinition definition, QueueReference queue, SCM scm) {
         Build b = new Build();
         b.setQueue(queue);
         b.setDefinition(definition);
@@ -61,9 +79,66 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
 
         b.setParameters("{}");
         b.setDemands(Collections.<Demand>emptyList());
-
         b.setQueueOptions(QueueOptions.DO_NOT_RUN);
 
+        b.setSourceBranch(getBranch(scm));
+
         return b;
+    }
+
+    private String getBranch(SCM scm) {
+        if (scm instanceof GitSCM) {
+            GitSCM gitScm = (GitSCM) scm;
+            StringBuilder builder = new StringBuilder();
+            for (BranchSpec spec : gitScm.getBranches()) {
+                if (builder.length() > 0) {
+                    builder.append(", ");
+                }
+                builder.append(spec.getName());
+            }
+
+            return builder.toString();
+        }
+
+        // here we can try to get branch from other SCM
+        return "undetermined";
+    }
+
+    // If we decided not to depend on Git plugin, will need to use this method
+    private String getGitBranchViaReflection(SCM scm) {
+        // Use reflection to attempt to get build branch, this assumes Git plugin is used as the SCM
+        // If Git plugin isn't used, should just leave the source branch as "undetermined"
+        Object branch = "undetermined";
+        try {
+            if (scm != null) {
+                Class scmClazz = scm.getClass();
+                Method getBranches = null;
+                for (Method m : scmClazz.getMethods()) {
+                    if ("getBranches".equals(m.getName())) {
+                        getBranches = m;
+                        break;
+                    }
+                }
+
+                if (getBranches != null) {
+                    Object branchesList = getBranches.invoke(scm);
+                    if (branchesList != null) {
+                        if (branchesList instanceof List && !((List) branchesList).isEmpty()) {
+                            branch = ((List) branchesList).get(0);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            // suppress
+            logger.warning("Retreiving branch name through refecltion failed: "+e.getMessage());
+        }
+
+        String branchStr = Util.fixEmptyAndTrim(branch.toString());
+        if (branchStr != null && branchStr.equals("**")) {
+            return "any";
+        }
+
+        return branchStr;
     }
 }

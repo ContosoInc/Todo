@@ -45,6 +45,7 @@ public class TfsBuildWrapper extends BuildWrapper {
     public OutputStream decorateLogger(AbstractBuild build, OutputStream os) throws FileNotFoundException {
         DescribableList describableList = build.getProject().getPublishersList();
         if (describableList != null) {
+            @SuppressWarnings("unchecked")
             Describable notifier = describableList.get(Jenkins.getInstance().getDescriptor(TfsBuildNotifier.class));
 
             if (notifier != null && notifier instanceof TfsBuildNotifier) {
@@ -106,7 +107,7 @@ public class TfsBuildWrapper extends BuildWrapper {
     }
 
     private TfsClient getClient(TfsConfiguration config) throws URISyntaxException {
-        return TfsClient.newClient(config.getServerUrl(), config.getUsername(), config.getPassword());
+        return TfsClient.newClient(config.getServerUrl(), config.getServerProvider(), config.getUsername(), config.getPassword());
     }
 
     private void writeQuietly(OutputStream os, byte[] msg) {

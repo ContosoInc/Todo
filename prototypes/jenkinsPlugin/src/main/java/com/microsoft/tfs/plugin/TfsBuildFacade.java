@@ -11,7 +11,7 @@ public interface TfsBuildFacade {
 
     public void startBuild();
 
-    public void finishBuild(EnvVars environment);
+    public void finishBuild();
 
     public void startAllTaskRecords();
 

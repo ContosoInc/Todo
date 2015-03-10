@@ -3,8 +3,10 @@ package com.microsoft.tfs.plugin;
 import hudson.Util;
 import hudson.util.Secret;
 import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.AuthSchemes;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.apache.connector.ApacheClientProperties;
@@ -44,25 +46,39 @@ public class TfsClient {
     private CoreHttpClient projectClient;
     private DistributedTaskHttpClient distributedTaskHttpClient;
 
-    public static TfsClient newClient(String url, String username, Secret password) throws URISyntaxException {
-        return new TfsClient(url, username, password);
+    public static TfsClient newClient(String url, String serviceProvider, String username, Secret password) throws URISyntaxException {
+        return new TfsClient(url, serviceProvider, username, password);
     }
 
     /*
      * Creating a apache http client based JAX-RS client
      */
-    private Client getClient(String username, Secret password) {
+    private Client getClient(URI uri, String serviceProvider, String username, Secret password) {
         ClientConfig clientConfig = new ClientConfig();
 
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(
-                new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
-                new UsernamePasswordCredentials(username, Secret.toString(password)));
 
-        clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
+        if (serviceProvider.equals("tfs")) {
+            /* NTLM auth for on premise installation */
+            credentialsProvider.setCredentials(
+                    new AuthScope(uri.getHost(), uri.getPort(), AuthScope.ANY_REALM, AuthSchemes.NTLM),
+                    new NTCredentials(username, Secret.toString(password), uri.getHost(), ""));
+            logger.info("Using NTLM authentication for on premise TeamFoundationServer");
+
+        }  else if (serviceProvider.equals("vso")) {
+            // Basic Auth for VSO services
+            credentialsProvider.setCredentials(
+                    new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
+                    new UsernamePasswordCredentials(username, Secret.toString(password)));
+            logger.info("Using user/pass authentication for Visual Studio Online services");
+
+            // also need to preemptively send basic auth header, or we will be redirected for oauth login
+            clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
+        }
+
         clientConfig.property(ClientProperties.REQUEST_ENTITY_PROCESSING, RequestEntityProcessing.BUFFERED);
 
-        if( System.getProperty(PROXY_URL_PROPERTY) != null) {
+        if (System.getProperty(PROXY_URL_PROPERTY) != null) {
             clientConfig.property(ClientProperties.PROXY_URI, System.getProperty(PROXY_URL_PROPERTY));
             clientConfig.property(ApacheClientProperties.SSL_CONFIG, getSslConfigurator());
         }
@@ -107,10 +123,10 @@ public class TfsClient {
     /*
      * Creating a tfs client
      */
-    private TfsClient(String url, String username, Secret password) throws URISyntaxException {
+    private TfsClient(String url, String serviceProvider, String username, Secret password) throws URISyntaxException {
         URI uri = new URI(url);
 
-        Client client = getClient(username, password);
+        Client client = getClient(uri, serviceProvider, username, password);
 
         buildClient = new BuildHttpClient(client, uri);
         projectClient = new CoreHttpClient(client, uri);

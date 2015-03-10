@@ -49,9 +49,9 @@ public class VssJsonCollectionWrapper<T> {
         this.count = count;
     }
 
-    public static VssJsonCollectionWrapper<List<?>> newInstance(final List<?> value) {
-        final List<Object> newValue = new ArrayList<Object>();
+    public static <T extends Object> VssJsonCollectionWrapper<List<T>> newInstance(final List<T> value) {
+        final List<T> newValue = new ArrayList<T>();
         newValue.addAll(value);
-        return new VssJsonCollectionWrapper<List<?>>(newValue);
+        return new VssJsonCollectionWrapper<List<T>>(newValue);
     }
 }

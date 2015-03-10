@@ -9,12 +9,15 @@ import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
 import com.microsoft.tfs.plugin.impl.TfsBuildFacadeFactoryImpl;
 import com.microsoft.tfs.plugin.TfsClient;
 import com.microsoft.tfs.plugin.TfsConfiguration;
+import com.microsoft.vss.client.core.model.VssServiceException;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.Util;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
+import hudson.model.Action;
 import hudson.model.BuildListener;
+import hudson.plugins.git.util.BuildData;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Notifier;
@@ -39,6 +42,7 @@ public class TfsBuildNotifier extends Notifier {
     private static final Logger logger = Logger.getLogger(TfsBuildNotifier.class.getName());
 
     public final String serverUrl;
+    public final String serviceProvider;
     public final String username;
     public final Secret password;
     public final String project;
@@ -48,15 +52,15 @@ public class TfsBuildNotifier extends Notifier {
     private transient TfsBuildFacadeFactory tfsBuildFacadeFactory;
 
     @DataBoundConstructor
-    public TfsBuildNotifier(String serverUrl, String username, Secret password, String project, String buildDefinition) {
+    public TfsBuildNotifier(String serverUrl, String serviceProvider, String username, Secret password, String project, String buildDefinition) {
         this.serverUrl = serverUrl;
+        this.serviceProvider = serviceProvider;
         this.username = username;
         this.password = password;
         this.project = project;
         this.buildDefinition = buildDefinition;
     }
 
-    @Override
     public BuildStepMonitor getRequiredMonitorService() {
         return BuildStepMonitor.NONE;
     }
@@ -83,11 +87,11 @@ public class TfsBuildNotifier extends Notifier {
 
         int tfsBuildId = Integer.valueOf(tfsBuildIdStr);
         try {
-            client = TfsClient.newClient(this.serverUrl, this.username, this.password);
+            client = TfsClient.newClient(this.serverUrl, this.serviceProvider, this.username, this.password);
             TfsBuildFacade tfsBuildFacade = getTfsBuildFacadeFactory().getBuildOnTfs(tfsBuildId, build, client);
 
             tfsBuildFacade.finishAllTaskRecords();
-            tfsBuildFacade.finishBuild(build.getEnvironment(listener));
+            tfsBuildFacade.finishBuild();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +104,7 @@ public class TfsBuildNotifier extends Notifier {
     }
 
     public TfsConfiguration getConfig() {
-        return new TfsConfiguration(serverUrl, username, password, project, buildDefinition);
+        return new TfsConfiguration(serverUrl, serviceProvider, username, password, project, buildDefinition);
     }
 
     public void setTfsBuildFacadeFactory(TfsBuildFacadeFactory facadeFactory) {
@@ -150,62 +154,77 @@ public class TfsBuildNotifier extends Notifier {
             return FormValidation.validateRequired(password);
         }
 
-        public FormValidation doTestConnection(@QueryParameter String serverUrl, @QueryParameter String username,
-                                               @QueryParameter Secret password, @QueryParameter String project, @QueryParameter String buildDefinition) {
+        public FormValidation doTestConnection(@QueryParameter String serverUrl, @QueryParameter String serviceProvider,
+                                               @QueryParameter String username,  @QueryParameter Secret password) {
 
             try {
-                if (!validInputs(serverUrl, username, password, project, buildDefinition)) {
+                if (!validInputs(serverUrl, serviceProvider, username, password)) {
                     return FormValidation.error("Input fields are invalid");
                 }
-                client = TfsClient.newClient(serverUrl, username, password);
+                client = TfsClient.newClient(serverUrl, serviceProvider, username, password);
 
                 //  project and buildDefinition are IDs
-                TeamProject projectReference = client.getProjectClient().getProject(project);
-                if (projectReference != null) {
-                    BuildDefinition definition = client.getBuildClient().getDefinition(projectReference.getId(), Integer.valueOf(buildDefinition), null);
+                List<TeamProjectReference> projectReference = client.getProjectClient().getProjects();
 
-                    if (definition != null) {
-                        return FormValidation.ok("Build definition exists");
-                    }
-                }
+                return FormValidation.ok("Successfully connected to server "+serverUrl);
 
             } catch (URISyntaxException e) {
                 e.printStackTrace();
                 return FormValidation.error(e.getMessage());
+            } catch (VssServiceException e) {
+                e.printStackTrace();
+                return FormValidation.error("Could not connect to the server based on the input, please double check the username and password specified.");
             }
-
-            return FormValidation.error("Could not find the specified buildDefinition from " + serverUrl);
         }
 
-        public ListBoxModel doFillProjectItems(@QueryParameter String serverUrl, @QueryParameter String username,
-                @QueryParameter Secret password) throws URISyntaxException {
+        public ListBoxModel doFillServiceProviderItems() {
+            ListBoxModel items = new ListBoxModel();
+
+            items.add("Visual Studio Online (Cloud)", "vso");
+            items.add("Microsoft TeamFoundationServer", "tfs");
+
+            return items;
+        }
+
+        public ListBoxModel doFillProjectItems(@QueryParameter String serverUrl, @QueryParameter String serviceProvider,
+                                               @QueryParameter String username, @QueryParameter Secret password) throws URISyntaxException {
 
             ListBoxModel items = new ListBoxModel();
 
             if (validInputs(serverUrl, username, password)) {
-                client = TfsClient.newClient(serverUrl, username, password);
+                client = TfsClient.newClient(serverUrl, serviceProvider, username, password);
 
-                List<TeamProjectReference> references = client.getProjectClient().getProjects();
+                try {
+                    List<TeamProjectReference> references = client.getProjectClient().getProjects();
 
-                for (TeamProjectReference ref : references) {
-                    items.add(ref.getName(), String.valueOf(ref.getId()));
+                    for (TeamProjectReference ref : references) {
+                        items.add(ref.getName(), String.valueOf(ref.getId()));
+                    }
+                } catch (VssServiceException vse) {
+                    return items;
                 }
             }
 
             return items;
         }
 
-        public ListBoxModel doFillBuildDefinitionItems(@QueryParameter String serverUrl, @QueryParameter String username,
-                @QueryParameter Secret password, @QueryParameter String project) throws URISyntaxException {
+        public ListBoxModel doFillBuildDefinitionItems(@QueryParameter String serverUrl, @QueryParameter String serviceProvider,
+                                                       @QueryParameter String username, @QueryParameter Secret password,
+                                                       @QueryParameter String project) throws URISyntaxException {
 
             ListBoxModel items = new ListBoxModel();
 
             if (validInputs(serverUrl, username, password, project)) {
-                client = TfsClient.newClient(serverUrl, username, password);
-                List<BuildDefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
+                client = TfsClient.newClient(serverUrl, serviceProvider, username, password);
 
-                for (BuildDefinitionReference definition : definitions) {
-                    items.add(definition.getName(), String.valueOf(definition.getId()));
+                try {
+                    List<BuildDefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
+
+                    for (BuildDefinitionReference definition : definitions) {
+                        items.add(definition.getName(), String.valueOf(definition.getId()));
+                    }
+                } catch (VssServiceException vse) {
+                    return items;
                 }
             }
 
@@ -219,6 +238,10 @@ public class TfsBuildNotifier extends Notifier {
                 }
 
                 if (input instanceof String && Util.fixEmptyAndTrim((String) input) == null) {
+                    return false;
+                }
+
+                if (input instanceof Secret && Util.fixEmptyAndTrim(Secret.toString((Secret)input)) == null) {
                     return false;
                 }
             }
