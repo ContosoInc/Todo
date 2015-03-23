@@ -63,7 +63,7 @@ public class TfsBuildWrapperTest {
     @Test
     public void loggerShouldBeDecorated() throws Exception {
         FreeStyleProject project = j.createFreeStyleProject();
-        project.getPublishersList().add(new TfsBuildNotifier("http://testurl.com", "tester", Secret.fromString("testpass"), "testProj", "1"));
+        project.getPublishersList().add(new TfsBuildNotifier("http://testurl.com", "test", "tester", Secret.fromString("testpass"), "testProj", "1"));
         jenkinsBuild = project.scheduleBuild2(0).get();
 
         OutputStream os = new ByteArrayOutputStream(2048);

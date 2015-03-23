@@ -16,10 +16,10 @@
         <f:password />
     </f:entry>
 
+    <f:entry field="project" title="Project">
     <f:validateButton title="Test Server Connection" progress="Connecting to server..."
                       method="testConnection" with="serverUrl,serviceProvider,username,password"/>
 
-    <f:entry field="project" title="Project">
         <f:select />
     </f:entry>
 
