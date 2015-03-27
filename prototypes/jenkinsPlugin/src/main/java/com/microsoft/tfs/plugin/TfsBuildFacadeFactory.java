@@ -1,6 +1,6 @@
 package com.microsoft.tfs.plugin;
 
-import com.microsoft.tfs.plugin.impl.TfsBuildFacadeImpl;
+import com.microsoft.tfs.plugin.impl.TfsClient;
 import hudson.model.AbstractBuild;
 
 /**

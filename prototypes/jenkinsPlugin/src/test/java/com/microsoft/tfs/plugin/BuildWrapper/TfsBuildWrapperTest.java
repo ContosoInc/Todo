@@ -3,7 +3,8 @@ package com.microsoft.tfs.plugin.BuildWrapper;
 import com.microsoft.tfs.plugin.Notifier.TfsBuildNotifier;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
-import com.microsoft.tfs.plugin.TfsClient;
+import com.microsoft.tfs.plugin.TfsClientFactory;
+import com.microsoft.tfs.plugin.impl.TfsClient;
 import hudson.model.AbstractBuild;
 import hudson.model.FreeStyleProject;
 import hudson.util.Secret;
@@ -35,6 +36,12 @@ public class TfsBuildWrapperTest {
     @Mock
     TfsBuildFacade buildFacadeMock;
 
+    @Mock
+    TfsClientFactory clientFactoryMock;
+
+    @Mock
+    TfsClient tfsClientMock;
+
     @Rule
     public JenkinsRule j = new JenkinsRule();
 
@@ -46,11 +53,17 @@ public class TfsBuildWrapperTest {
 
         facadeFactoryMock = Mockito.mock(TfsBuildFacadeFactory.class);
         buildFacadeMock = Mockito.mock(TfsBuildFacade.class);
+        clientFactoryMock = Mockito.mock(TfsClientFactory.class);
+        tfsClientMock = Mockito.mock(TfsClient.class);
 
         underTest.setTfsBuildFacadeFactory(facadeFactoryMock);
+        underTest.setTfsClientFactory(clientFactoryMock);
 
         when(facadeFactoryMock.createBuildOnTfs(anyString(), anyInt(), any(AbstractBuild.class), any(TfsClient.class)))
                 .thenReturn(buildFacadeMock);
+
+        when(clientFactoryMock.getValidatedClient(anyString(), anyString(), any(Secret.class)))
+                .thenReturn(tfsClientMock);
 
         when(buildFacadeMock.getTfsBuildId()).thenReturn(1);
     }

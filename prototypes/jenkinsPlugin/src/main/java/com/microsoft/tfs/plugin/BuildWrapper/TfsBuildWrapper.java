@@ -3,6 +3,8 @@ package com.microsoft.tfs.plugin.BuildWrapper;
 import com.microsoft.tfs.plugin.*;
 import com.microsoft.tfs.plugin.Notifier.TfsBuildNotifier;
 import com.microsoft.tfs.plugin.impl.TfsBuildFacadeFactoryImpl;
+import com.microsoft.tfs.plugin.impl.TfsClient;
+import com.microsoft.tfs.plugin.impl.TfsClientFactoryImpl;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.*;
@@ -30,6 +32,7 @@ public class TfsBuildWrapper extends BuildWrapper {
     private static final Logger logger = Logger.getLogger(TfsBuildWrapper.class.getName());
 
     private transient TfsBuildFacadeFactory tfsBuildFacadeFactory;
+    private transient TfsClientFactory tfsClientFactory;
     private transient TfsBuildFacade tfsBuildFacade;
 
     @DataBoundConstructor
@@ -106,8 +109,20 @@ public class TfsBuildWrapper extends BuildWrapper {
         return this.tfsBuildFacadeFactory;
     }
 
+    public void setTfsClientFactory(TfsClientFactory clientFactory) {
+        this.tfsClientFactory = clientFactory;
+    }
+
+    public TfsClientFactory getTfsClientFactory() {
+        if (this.tfsClientFactory == null) {
+            this.tfsClientFactory = new TfsClientFactoryImpl();
+        }
+
+        return tfsClientFactory;
+    }
+
     private TfsClient getClient(TfsConfiguration config) throws URISyntaxException {
-        return TfsClient.newValidatedClient(config.getServerUrl(), config.getUsername(), config.getPassword());
+        return getTfsClientFactory().getValidatedClient(config.getServerUrl(), config.getUsername(), config.getPassword());
     }
 
     private void writeQuietly(OutputStream os, byte[] msg) {

@@ -1,7 +1,5 @@
 package com.microsoft.tfs.plugin.impl;
 
-import hudson.EnvVars;
-import hudson.Util;
 import hudson.model.AbstractBuild;
 
 import java.io.*;
@@ -12,9 +10,7 @@ import com.microsoft.teamfoundation.build.webapi.model.*;
 import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
-import com.microsoft.tfs.plugin.TfsClient;
 import com.microsoft.vss.client.core.model.VssJsonCollectionWrapper;
-import hudson.model.Action;
 import hudson.plugins.git.Revision;
 import hudson.plugins.git.util.BuildData;
 

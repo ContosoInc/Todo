@@ -4,9 +4,11 @@ import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
+import com.microsoft.tfs.plugin.TfsClientFactory;
 import com.microsoft.tfs.plugin.impl.TfsBuildFacadeFactoryImpl;
-import com.microsoft.tfs.plugin.TfsClient;
+import com.microsoft.tfs.plugin.impl.TfsClient;
 import com.microsoft.tfs.plugin.TfsConfiguration;
+import com.microsoft.tfs.plugin.impl.TfsClientFactoryImpl;
 import com.microsoft.vss.client.core.model.VssServiceException;
 import hudson.Extension;
 import hudson.Launcher;
@@ -43,7 +45,7 @@ public class TfsBuildNotifier extends Notifier {
     public final String project;
     public final String buildDefinition;
 
-    private transient TfsClient client;
+    private transient TfsClientFactory tfsClientFactory;
     private transient TfsBuildFacadeFactory tfsBuildFacadeFactory;
 
     @DataBoundConstructor
@@ -81,7 +83,7 @@ public class TfsBuildNotifier extends Notifier {
 
         int tfsBuildId = Integer.valueOf(tfsBuildIdStr);
         try {
-            client = TfsClient.newValidatedClient(this.serverUrl, this.username, this.password);
+            TfsClient client = getTfsClientFactory().getValidatedClient(this.serverUrl, this.username, this.password);
             TfsBuildFacade tfsBuildFacade = getTfsBuildFacadeFactory().getBuildOnTfs(tfsBuildId, build, client);
 
             tfsBuildFacade.finishAllTaskRecords();
@@ -113,6 +115,18 @@ public class TfsBuildNotifier extends Notifier {
         return this.tfsBuildFacadeFactory;
     }
 
+    public void setTfsClientFactory(TfsClientFactory clientFactory) {
+        this.tfsClientFactory = clientFactory;
+    }
+
+    public TfsClientFactory getTfsClientFactory() {
+        if (this.tfsClientFactory == null) {
+            this.tfsClientFactory = new TfsClientFactoryImpl();
+        }
+
+        return tfsClientFactory;
+    }
+
     @Extension
     public static class Descriptor extends BuildStepDescriptor<Publisher> {
 
@@ -120,7 +134,7 @@ public class TfsBuildNotifier extends Notifier {
             return true;
         }
 
-        private transient TfsClient client;
+        private transient TfsClientFactory tfsClientFactory;
 
         public String getDisplayName() {
             return "TFS Notifier";
@@ -155,7 +169,7 @@ public class TfsBuildNotifier extends Notifier {
                 if (!validInputs(serverUrl, username, password)) {
                     return FormValidation.error("Input fields are invalid");
                 }
-                client = TfsClient.newValidatedClient(serverUrl, username, password);
+                getTfsClientFactory().getValidatedClient(serverUrl, username, password);
 
                 return FormValidation.ok("Successfully connected to server "+serverUrl);
 
@@ -174,7 +188,7 @@ public class TfsBuildNotifier extends Notifier {
 
             if (validInputs(serverUrl, username, password)) {
                 try {
-                    client = TfsClient.newValidatedClient(serverUrl, username, password);
+                    TfsClient client = getTfsClientFactory().getValidatedClient(serverUrl, username, password);
                     List<TeamProjectReference> references = client.getProjectClient().getProjects();
 
                     for (TeamProjectReference ref : references) {
@@ -194,7 +208,7 @@ public class TfsBuildNotifier extends Notifier {
 
             if (validInputs(serverUrl, username, password, project)) {
                 try {
-                    client = TfsClient.newValidatedClient(serverUrl, username, password);
+                    TfsClient client = getTfsClientFactory().getValidatedClient(serverUrl, username, password);
                     List<BuildDefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
 
                     for (BuildDefinitionReference definition : definitions) {
@@ -224,6 +238,18 @@ public class TfsBuildNotifier extends Notifier {
             }
 
             return true;
+        }
+
+        public void setTfsClientFactory(TfsClientFactory clientFactory) {
+            this.tfsClientFactory = clientFactory;
+        }
+
+        public TfsClientFactory getTfsClientFactory() {
+            if (this.tfsClientFactory == null) {
+                this.tfsClientFactory = new TfsClientFactoryImpl();
+            }
+
+            return this.tfsClientFactory;
         }
     }
 }

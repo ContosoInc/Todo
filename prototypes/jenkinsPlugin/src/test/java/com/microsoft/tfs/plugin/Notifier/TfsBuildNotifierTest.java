@@ -2,7 +2,8 @@ package com.microsoft.tfs.plugin.Notifier;
 
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
-import com.microsoft.tfs.plugin.TfsClient;
+import com.microsoft.tfs.plugin.TfsClientFactory;
+import com.microsoft.tfs.plugin.impl.TfsClient;
 import hudson.EnvVars;
 import hudson.model.AbstractBuild;
 import hudson.model.BuildListener;
@@ -20,6 +21,7 @@ import java.util.Map;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +34,12 @@ public class TfsBuildNotifierTest {
 
     @Mock
     TfsBuildFacade buildFacadeMock;
+
+    @Mock
+    TfsClientFactory clientFactoryMock;
+
+    @Mock
+    TfsClient tfsClientMock;
 
     @Mock
     AbstractBuild jenkinsBuildMock;
@@ -51,11 +59,17 @@ public class TfsBuildNotifierTest {
         buildFacadeMock = Mockito.mock(TfsBuildFacade.class);
         jenkinsBuildMock = Mockito.mock(AbstractBuild.class);
         listenerMock = Mockito.mock(BuildListener.class);
+        clientFactoryMock = Mockito.mock(TfsClientFactory.class);
+        tfsClientMock = Mockito.mock(TfsClient.class);
 
         underTest.setTfsBuildFacadeFactory(facadeFactoryMock);
+        underTest.setTfsClientFactory(clientFactoryMock);
 
         when(facadeFactoryMock.getBuildOnTfs(anyInt(), any(AbstractBuild.class), any(TfsClient.class)))
                 .thenReturn(buildFacadeMock);
+
+        when(clientFactoryMock.getValidatedClient(anyString(), anyString(), any(Secret.class)))
+                .thenReturn(tfsClientMock);
 
         when(buildFacadeMock.getTfsBuildId()).thenReturn(1);
 
