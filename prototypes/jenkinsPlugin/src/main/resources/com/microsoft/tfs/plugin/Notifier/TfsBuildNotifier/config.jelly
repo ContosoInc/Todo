@@ -4,10 +4,6 @@
         <f:textbox />
     </f:entry>
 
-    <f:entry field="serviceProvider" title="Service Provider">
-        <f:select />
-    </f:entry>
-
     <f:entry field="username" title="Username">
         <f:textbox />
     </f:entry>
@@ -16,10 +12,10 @@
         <f:password />
     </f:entry>
 
-    <f:entry field="project" title="Project">
     <f:validateButton title="Test Server Connection" progress="Connecting to server..."
-                      method="testConnection" with="serverUrl,serviceProvider,username,password"/>
+                      method="testConnection" with="serverUrl,username,password"/>
 
+    <f:entry field="project" title="Project">
         <f:select />
     </f:entry>
 

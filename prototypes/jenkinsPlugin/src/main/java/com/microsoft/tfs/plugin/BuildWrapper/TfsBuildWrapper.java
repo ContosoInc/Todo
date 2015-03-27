@@ -107,7 +107,7 @@ public class TfsBuildWrapper extends BuildWrapper {
     }
 
     private TfsClient getClient(TfsConfiguration config) throws URISyntaxException {
-        return TfsClient.newClient(config.getServerUrl(), config.getServerProvider(), config.getUsername(), config.getPassword());
+        return TfsClient.newValidatedClient(config.getServerUrl(), config.getUsername(), config.getPassword());
     }
 
     private void writeQuietly(OutputStream os, byte[] msg) {

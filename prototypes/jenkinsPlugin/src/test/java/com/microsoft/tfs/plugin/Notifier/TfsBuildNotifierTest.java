@@ -45,7 +45,7 @@ public class TfsBuildNotifierTest {
 
     @Before
     public void setUp() throws Exception {
-        underTest = new TfsBuildNotifier("http://testurl.com", "test", "tester", Secret.fromString("testpass"), "testProj", "1");
+        underTest = new TfsBuildNotifier("http://testurl.com", "tester", Secret.fromString("testpass"), "testProj", "1");
 
         facadeFactoryMock = Mockito.mock(TfsBuildFacadeFactory.class);
         buildFacadeMock = Mockito.mock(TfsBuildFacade.class);

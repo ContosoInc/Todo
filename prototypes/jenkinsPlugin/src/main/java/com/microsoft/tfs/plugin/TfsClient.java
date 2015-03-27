@@ -1,5 +1,7 @@
 package com.microsoft.tfs.plugin;
 
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.vss.client.core.model.VssServiceException;
 import hudson.Util;
 import hudson.util.Secret;
 import org.apache.http.auth.AuthScope;
@@ -20,6 +22,7 @@ import javax.ws.rs.client.ClientBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.microsoft.teamfoundation.build.webapi.BuildHttpClient;
@@ -32,8 +35,12 @@ import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpCl
  * The http connection uses basic auth to authenticate.
  */
 public class TfsClient {
-
     private static final Logger logger = Logger.getLogger(TfsClient.class.getName());
+
+    public static enum ServiceProvider {
+        TFS,
+        VSO
+    }
 
     public static final String PROXY_URL_PROPERTY = "proxy_url";
     public static final String KEYSTORE_PATH_PROPERTY = "keystore_path";
@@ -46,26 +53,73 @@ public class TfsClient {
     private CoreHttpClient projectClient;
     private DistributedTaskHttpClient distributedTaskHttpClient;
 
-    public static TfsClient newClient(String url, String serviceProvider, String username, Secret password) throws URISyntaxException {
-        return new TfsClient(url, serviceProvider, username, password);
+    /**
+     * Create a new REST client for TFS and verify it works
+     *
+     * If a valid client can not be constructed, will throw exception
+     *
+     * @param url TFS collection level url
+     * @param username
+     * @param password
+     * @return new REST TFS client
+     * @throws URISyntaxException
+     */
+    public static TfsClient newValidatedClient(String url, String username, Secret password) throws URISyntaxException, VssServiceException {
+        URI uri = new URI(url);
+        ServiceProvider provider = guessIsOnPremInstallation(uri) ? ServiceProvider.TFS : ServiceProvider.VSO;
+
+        TfsClient client = null;
+        try {
+            client = new TfsClient(uri, provider, username, password);
+            // if this returns without throwing VssServiceException, client is working
+            client.getProjectClient().getProjects();
+        } catch (VssServiceException vse){
+            provider = (provider == ServiceProvider.TFS) ? ServiceProvider.VSO : ServiceProvider.TFS;
+
+            client = new TfsClient(uri, provider, username, password);
+            client.getProjectClient().getProjects();
+        }
+
+        return client;
+    }
+
+    /**
+     * get Build subarea client
+     */
+    public BuildHttpClient getBuildClient() {
+        return buildClient;
+    }
+
+    /**
+     * get Project subarea client
+     */
+    public CoreHttpClient getProjectClient() {
+        return projectClient;
+    }
+
+    /**
+     * get DistributedTask subarea client
+     */
+    public DistributedTaskHttpClient getDistributedTaskHttpClient() {
+        return distributedTaskHttpClient;
     }
 
     /*
      * Creating a apache http client based JAX-RS client
      */
-    private Client getClient(URI uri, String serviceProvider, String username, Secret password) {
+    private Client getClient(URI uri, ServiceProvider provider, String username, Secret password) {
         ClientConfig clientConfig = new ClientConfig();
 
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 
-        if (serviceProvider.equals("tfs")) {
+        if (ServiceProvider.TFS == provider) {
             /* NTLM auth for on premise installation */
             credentialsProvider.setCredentials(
                     new AuthScope(uri.getHost(), uri.getPort(), AuthScope.ANY_REALM, AuthSchemes.NTLM),
                     new NTCredentials(username, Secret.toString(password), uri.getHost(), ""));
             logger.info("Using NTLM authentication for on premise TeamFoundationServer");
 
-        }  else if (serviceProvider.equals("vso")) {
+        }  else if (ServiceProvider.VSO == provider) {
             // Basic Auth for VSO services
             credentialsProvider.setCredentials(
                     new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT),
@@ -123,34 +177,31 @@ public class TfsClient {
     /*
      * Creating a tfs client
      */
-    private TfsClient(String url, String serviceProvider, String username, Secret password) throws URISyntaxException {
-        URI uri = new URI(url);
+    private TfsClient(URI uri, ServiceProvider provider, String username, Secret password) {
+        Client client = getClient(uri, provider, username, password);
 
-        Client client = getClient(uri, serviceProvider, username, password);
-
-        buildClient = new BuildHttpClient(client, uri);
         projectClient = new CoreHttpClient(client, uri);
-        distributedTaskHttpClient =  new DistributedTaskHttpClient(client, uri);
+        buildClient = new BuildHttpClient(client, uri);
+        distributedTaskHttpClient = new DistributedTaskHttpClient(client, uri);
     }
 
-    /**
-     * get Build subarea client
-     */
-    public BuildHttpClient getBuildClient() {
-        return buildClient;
-    }
 
     /*
-     * get Project subarea client
+     * Best educated guess about whether this is an onPrem installation
+     *
+     * This is only an optimization about what method try first, should never rely on it solely
      */
-    public CoreHttpClient getProjectClient() {
-        return projectClient;
+    private static boolean guessIsOnPremInstallation(URI uri) {
+        if (uri == null) {
+            return false;
+        }
+
+        String host = uri.getHost().toLowerCase();
+        if (host.endsWith("visualstudio.com") || host.endsWith(".tfsallin.net")) {
+            return false;
+        }
+
+        return true;
     }
 
-    /*
-     * get DistributedTask subarea client
-     */
-    public DistributedTaskHttpClient getDistributedTaskHttpClient() {
-        return distributedTaskHttpClient;
-    }
 }
