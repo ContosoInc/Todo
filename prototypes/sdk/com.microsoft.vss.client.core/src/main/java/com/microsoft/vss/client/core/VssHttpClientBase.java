@@ -64,10 +64,18 @@ public abstract class VssHttpClientBase {
         this.baseTarget = this.rsClient.target(baseUrl).register(ApiResourceEntityProvider.class);
     }
 
+    /**
+     * Get Client
+     * @return Client
+     */
     public Client getClient() {
         return rsClient;
     }
 
+    /**
+     * Get BaseUrl
+     * @return URI
+     */
     public URI getBaseUrl() {
         return baseUrl;
     }
@@ -90,7 +98,7 @@ public abstract class VssHttpClientBase {
         return response;
     }
 
-    protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
+     protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
         final Class<TResult> resultClazz) {
 
         return get(locationId, null, version, null, resultClazz);

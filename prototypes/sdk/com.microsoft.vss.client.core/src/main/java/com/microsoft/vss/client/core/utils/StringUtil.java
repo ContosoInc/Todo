@@ -22,10 +22,21 @@ public abstract class StringUtil {
         PASSWORD_TOKEN, PWD_TOKEN, ACCOUNT_KEY_TOKEN
     };
 
+    /**
+     * Check if input string is null or empty
+     * @param s
+     * @return boolean
+     */
     public static boolean isNullOrEmpty(final String s) {
         return s == null || s.length() == 0;
     }
 
+    /**
+     * Join values to string
+     * @param delimiter
+     * @param values
+     * @return String
+     */
     public static String join(final String delimiter, List<?> values) {
         final StringBuilder sb = new StringBuilder();
 
@@ -40,10 +51,21 @@ public abstract class StringUtil {
         return sb.toString();
     }
 
+    /**
+     * Scrub password
+     * @param message
+     * @return String
+     */
     public static String ScrubPassword(final String message) {
         return ScrubPassword(message, true);
     }
 
+    /**
+     * Scrub Password
+     * @param message
+     * @param assertOnDetection
+     * @return String
+     */
     public static String ScrubPassword(final String message, final boolean assertOnDetection) {
         if (isNullOrEmpty(message)) {
             return message;
@@ -58,6 +80,14 @@ public abstract class StringUtil {
         return msg;
     }
 
+    /**
+     * Scrub secret
+     * @param message
+     * @param token
+     * @param mask
+     * @param assertOnDetection
+     * @return String
+     */
     private static String ScrubSecret(final String message, final String token, final String mask,
         final boolean assertOnDetection) {
 
@@ -159,6 +189,12 @@ public abstract class StringUtil {
         return msg;
     }
 
+    /**
+     * Create new string
+     * @param padChar
+     * @param width
+     * @return String
+     */
     public static String newString(final char padChar, final int width) {
         final char[] buf = new char[width];
 
@@ -169,6 +205,14 @@ public abstract class StringUtil {
         return new String(buf);
     }
 
+    /**
+     * Pad string
+     * @param s
+     * @param width
+     * @param leftJustified
+     * @param padChar
+     * @return String
+     */
     public static String pad(final String s, final int width, boolean leftJustified, final char padChar) {
         if (leftJustified) {
             return (s + newString(' ', width)).substring(0, width);
@@ -177,18 +221,44 @@ public abstract class StringUtil {
         }
     }
 
+    /**
+     * Pad string
+     * @param s
+     * @param width
+     * @param leftJustified
+     * @return String
+     */
     public static String pad(final String s, final int width, boolean leftJustified) {
         return pad(s, width, leftJustified, ' ');
     }
 
+    /**
+     * Pad string
+     * @param s
+     * @param width
+     * @return String
+     */
     public static String pad(final String s, final int width) {
         return pad(s, width, true, ' ');
     }
 
+    /**
+     * Pad string
+     * @param n
+     * @param width
+     * @param padChar
+     * @return String
+     */
     public static String pad(final Number n, final int width, final char padChar) {
         return pad(n.toString(), width, false, padChar);
     }
 
+    /**
+     * Pad string
+     * @param n
+     * @param width
+     * @return String
+     */
     public static String pad(final Number n, final int width) {
         return pad(n, width, ' ');
     }

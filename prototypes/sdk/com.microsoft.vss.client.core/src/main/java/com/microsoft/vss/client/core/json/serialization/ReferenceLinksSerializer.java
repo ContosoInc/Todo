@@ -11,6 +11,14 @@ import com.microsoft.vss.client.core.model.ReferenceLinks;
 public class ReferenceLinksSerializer
     extends JsonSerializer<ReferenceLinks> {
 
+    /**
+     * Serializes ReferenceLinks to JSON
+     * @param value
+     * @param writer
+     * @param serializer
+     * @throws IOException
+     * @throws JsonProcessingException
+     */
     @Override
     public void serialize(ReferenceLinks value, JsonGenerator writer, SerializerProvider serializer)
         throws IOException,

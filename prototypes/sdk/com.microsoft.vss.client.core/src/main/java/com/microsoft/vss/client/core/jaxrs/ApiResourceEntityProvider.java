@@ -24,18 +24,47 @@ import com.microsoft.vss.client.core.utils.JsonHelper;
 public class ApiResourceEntityProvider
     implements MessageBodyReader<Object>, MessageBodyWriter<Object> {
 
+    /**
+     * get size of entity
+     * @param entity
+     * @param type
+     * @param genericType
+     * @param annotations
+     * @param mediaType
+     * @return long
+     */
     @Override
     public long getSize(Object entity, Class<?> type, Type genericType,
                         Annotation[] annotations, MediaType mediaType) {
         return -1;
     }
 
+    /**
+     * Check if writeable
+     * @param type
+     * @param genericType
+     * @param annotations
+     * @param mediaType
+     * @return boolean
+     */
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[]
             annotations, MediaType mediaType) {
         return mediaType.isCompatible(MediaType.APPLICATION_JSON_TYPE);
     }
 
+    /**
+     * Write to entity
+     * @param entity
+     * @param type
+     * @param genericType
+     * @param annotations
+     * @param mediaType
+     * @param httpHeaders
+     * @param entityStream
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     @Override
     public void writeTo(Object entity, Class<?> type, Type genericType,
                         Annotation[] annotations, MediaType mediaType,
@@ -56,12 +85,32 @@ public class ApiResourceEntityProvider
         }
     }
 
+    /**
+     * Check if readable
+     * @param type
+     * @param genericType
+     * @param annotations
+     * @param mediaType
+     * @return boolean
+     */
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
         return mediaType.getType().equalsIgnoreCase("application") //$NON-NLS-1$
             && mediaType.getSubtype().equalsIgnoreCase("json");  //$NON-NLS-1$
     }
 
+    /**
+     * Read from entity
+     * @param type
+     * @param genericType
+     * @param annotations
+     * @param mediaType
+     * @param httpHeaders
+     * @param entityStream
+     * @return Object
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     @Override
     public Object readFrom(Class<Object> type, Type genericType, Annotation[] annotations, MediaType mediaType,
         MultivaluedMap<String, String> httpHeaders, InputStream entityStream)

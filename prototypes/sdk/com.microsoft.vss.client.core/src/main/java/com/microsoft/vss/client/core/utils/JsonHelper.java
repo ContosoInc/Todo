@@ -35,14 +35,27 @@ public class JsonHelper {
         objectMapper.setDateFormat(dateFormat);
     }
 
+    /**
+     * Get DateFormat
+     * @return DateFormat
+     */
     public static DateFormat getDateFormat() {
         return dateFormat;
     }
 
+    /**
+     * Get ObjectMapper
+     * @return ObjectMapper
+     */
     public static ObjectMapper getObjectMapper() {
         return objectMapper;
     }
 
+    /**
+     * Map to QueryParameters
+     * @param model
+     * @return Map<String, String>
+     */
     public static Map<String, String> toQueryParametersMap(final Object model) {
         final ObjectMapper objectMapper = getObjectMapper();
 

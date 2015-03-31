@@ -20,6 +20,14 @@ import com.microsoft.vss.client.core.utils.StringUtil;
 public class ReferenceLinksDeserializer
     extends JsonDeserializer<ReferenceLinks> {
 
+    /**
+     * Deserializes JSON to ReferenceLinks
+     * @param parser
+     * @param context
+     * @return ReferenceLinks
+     * @throws IOException
+     * @throws JsonProcessingException
+     */
     @Override
     public ReferenceLinks deserialize(final JsonParser parser, final DeserializationContext context)
         throws IOException,
