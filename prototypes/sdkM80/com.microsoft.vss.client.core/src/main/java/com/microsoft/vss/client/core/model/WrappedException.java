@@ -40,30 +40,58 @@ public class WrappedException {
         }
     }
 
+    /**
+     * Getter for inner exception
+     * @return WrappedException
+     */
     public WrappedException getInnerException() {
         return innerException;
     }
 
+    /**
+     * Setter for inner exception
+     * @param innerException
+     */
     public void setInnerException(final WrappedException innerException) {
         this.innerException = innerException;
     }
 
+    /**
+     * Getter for exception message
+     * @return String
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Setter for exception message
+     * @param message
+     */
     public void setMessage(final String message) {
         this.message = message;
     }
 
+    /**
+     * Getter for help link
+     * @return String
+     */
     public String getHelpLink() {
         return helpLink;
     }
 
+    /**
+     * Setter for help link
+     * @param helpLink
+     */
     public void setHelpLink(final String helpLink) {
         this.helpLink = helpLink;
     }
 
+    /**
+     * Getter for exception type
+     * @return
+     */
     public Class<?> getType() {
         if (type == null) {
             // try to create the type from the TypeName
@@ -78,6 +106,10 @@ public class WrappedException {
         return type;
     }
 
+    /**
+     * Setter for exception type
+     * @param type
+     */
     public void setType(final Class<?> type) {
         this.type = type;
 
@@ -87,46 +119,91 @@ public class WrappedException {
         }
     }
 
+    /**
+     * Getter for type name
+     * @return String
+     */
     public String getTypeName() {
         return typeName;
     }
 
+    /**
+     * Setter for type name
+     * @param typeName
+     */
     public void setTypeName(final String typeName) {
         this.typeName = typeName;
     }
 
+    /**
+     * Getter for type key
+     * @return String
+     */
     public String getTypeKey() {
         return typeKey;
     }
 
+    /**
+     * Setter for type key
+     * @param typeKey
+     */
     public void setTypeKey(final String typeKey) {
         this.typeKey = typeKey;
     }
 
+    /**
+     * Getter for error code
+     * @return int
+     */
     public int getErrorCode() {
         return errorCode;
     }
 
+    /**
+     * Setter for error code
+     * @param errorCode
+     */
     public void setErrorCode(final int errorCode) {
         this.errorCode = errorCode;
     }
 
+    /**
+     * Getter for event id
+     * @return int
+     */
     public int getEventId() {
         return eventId;
     }
 
+    /**
+     * Setter for event id
+     * @param eventId
+     */
     public void setEventId(final int eventId) {
         this.eventId = eventId;
     }
 
+    /**
+     * Getter for stack trace
+     * @return String
+     */
     public String getStackTrace() {
         return stackTrace;
     }
 
+    /**
+     * Setter for stack trace
+     * @param stackTrace
+     */
     public void setStackTrace(final String stackTrace) {
         this.stackTrace = stackTrace;
     }
 
+    /**
+     * Unwrap exception
+     * @param map
+     * @return Exceptions
+     */
     public Exception Unwrap(final Map<String, Class<? extends Exception>> map) {
         Exception innerException = null;
 

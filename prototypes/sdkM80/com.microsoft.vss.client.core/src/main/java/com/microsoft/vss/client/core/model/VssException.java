@@ -74,34 +74,66 @@ public abstract class VssException
         this(StringUtil.ScrubPassword(message), 0, logException, innerException);
     }
 
+    /**
+     * Getter for error code
+     * @return int
+     */
     public int getErrorCode() {
         return errorCode;
     }
 
+    /**
+     * Setter for error code
+     * @param errorCode
+     */
     public void setErrorCode(final int errorCode) {
         this.errorCode = errorCode;
     }
 
+    /**
+     * Getter to check if exception logging is enabled
+     * @return boolean
+     */
     public boolean getLogException() {
         return logException;
     }
 
+    /**
+     * Setter to indicate if exception logging is enabled
+     * @param logException
+     */
     public void setLogException(final boolean logException) {
         this.logException = logException;
     }
 
+    /**
+     * Getter for event id
+     * @return int
+     */
     public int getEventId() {
         return eventId;
     }
 
+    /**
+     * Setter for event id
+     * @param eventId
+     */
     public void setEventId(final int eventId) {
         this.eventId = eventId;
     }
 
+    /**
+     * Getter for help link
+     * @return String
+     */
     public String getHelpLink() {
         return helpLink;
     }
 
+    /**
+     * Setter for help link
+     * @param helpLink
+     */
     public void setHelpLink(final String helpLink) {
         this.helpLink = helpLink;
     }

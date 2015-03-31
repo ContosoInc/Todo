@@ -29,26 +29,47 @@ public class VssJsonCollectionWrapper<T> {
         }
     }
 
+    /**
+     * Getter for value
+     * @return T
+     */
     @JsonProperty("value")
     public T getValue() {
         return value;
     }
 
+    /**
+     * Setter for value
+     * @param value
+     */
     @JsonProperty("value")
     public void setValue(final T value) {
         this.value = value;
     }
 
+    /**
+     * Getter for count
+     * @return int
+     */
     @JsonProperty("count")
     public int getCount() {
         return count;
     }
 
+    /**
+     * Setter for count
+     * @param count
+     */
     @JsonProperty("count")
     public void setCount(final int count) {
         this.count = count;
     }
 
+    /**
+     * Create new static instance
+     * @param value
+     * @return
+     */
     public static VssJsonCollectionWrapper<List<?>> newInstance(final List<?> value) {
         final List<Object> newValue = new ArrayList<Object>();
         newValue.addAll(value);

@@ -11,6 +11,11 @@ public class Messages {
     private Messages() {
     }
 
+    /**
+     * Get localized message from key
+     * @param key
+     * @return String
+     */
     public static String getString(String key) {
         try {
             return RESOURCE_BUNDLE.getString(key);

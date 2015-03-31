@@ -21,22 +21,42 @@ public class InputValuesQuery {
         return currentValues;
     }
 
+    /**
+     * Setter for current values
+     * @param currentValues
+     */
     public void setCurrentValues(final HashMap<String, String> currentValues) {
         this.currentValues = currentValues;
     }
 
+    /**
+     * Getter for input values
+     * @return List
+     */
     public List<InputValues> getInputValues() {
         return inputValues;
     }
 
+    /**
+     * Setter for input values
+     * @param inputValues
+     */
     public void setInputValues(final List<InputValues> inputValues) {
         this.inputValues = inputValues;
     }
 
+    /**
+     * Getter for resource object
+     * @return Object
+     */
     public Object getResource() {
         return resource;
     }
 
+    /**
+     * Setter for resource object
+     * @param resource
+     */
     public void setResource(final Object resource) {
         this.resource = resource;
     }

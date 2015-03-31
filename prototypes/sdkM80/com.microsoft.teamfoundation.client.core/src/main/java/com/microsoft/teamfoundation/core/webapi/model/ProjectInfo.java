@@ -65,7 +65,7 @@ public class ProjectInfo {
 
     /**
      * Getter for KnownNames
-     * @return List<String>
+     * @return List&#60String&#62
      */
     public List<String> getKnownNames() {
         return knownNames;

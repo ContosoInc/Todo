@@ -54,7 +54,7 @@ public class JsonHelper {
     /**
      * Map to QueryParameters
      * @param model
-     * @return Map<String, String>
+     * @return Map&#60String, String&#62
      */
     public static Map<String, String> toQueryParametersMap(final Object model) {
         final ObjectMapper objectMapper = getObjectMapper();

@@ -15,6 +15,10 @@ public enum ProjectState {
         this.value = value;
     }
 
+    /**
+     * String representation of an object of type ProjectState
+     * @return String
+     */
     @Override
     public String toString() {
         final String name = super.toString();

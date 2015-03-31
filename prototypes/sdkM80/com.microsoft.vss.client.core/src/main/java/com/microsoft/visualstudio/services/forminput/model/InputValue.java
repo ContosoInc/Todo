@@ -20,22 +20,42 @@ public class InputValue {
         return data;
     }
 
+    /**
+     * Setter for data
+     * @param data
+     */
     public void setData(final HashMap<String, String> data) {
         this.data = data;
     }
 
+    /**
+     * Getter for display value
+     * @return String
+     */
     public String getDisplayValue() {
         return displayValue;
     }
 
+    /**
+     * Setter for display value
+     * @param displayValue
+     */
     public void setDisplayValue(final String displayValue) {
         this.displayValue = displayValue;
     }
 
+    /**
+     * Getter for value
+     * @return String
+     */
     public String getValue() {
         return value;
     }
 
+    /**
+     * Setter for value
+     * @param value
+     */
     public void setValue(final String value) {
         this.value = value;
     }

@@ -29,38 +29,74 @@ public class ApiResourceVersion {
         toVersion(apiResourceVersionString);
     }
 
+    /**
+     * Getter for major version
+     * @return int
+     */
     public int getMajor() {
         return major;
     }
 
+    /**
+     * Setter for major version
+     * @param major
+     */
     public void setMajor(final int major) {
         this.major = major;
     }
 
+    /**
+     * Getter for minor version
+     * @return int
+     */
     public int getMinor() {
         return minor;
     }
 
+    /**
+     * Setter for minor version
+     * @param minor
+     */
     public void setMinor(final int minor) {
         this.minor = minor;
     }
 
+    /**
+     * Getter for resource version
+     * @return int
+     */
     public int getResourceVersion() {
         return resourceVersion;
     }
 
+    /**
+     * Setter for resource version
+     * @param resourceVersion
+     */
     public void setResourceVersion(final int resourceVersion) {
         this.resourceVersion = resourceVersion;
     }
 
+    /**
+     * Getter to check if resource is in preview
+     * @return boolean
+     */
     public boolean isPreview() {
         return this.isPreview;
     }
 
+    /**
+     * Setter to indicate if resource is in preview
+     * @param isPreview
+     */
     public void setPreview(final boolean isPreview) {
         this.isPreview = isPreview;
     }
 
+    /**
+     * Getter for api version
+     * @return String
+     */
     public String getApiVersion() {
         StringBuilder sb = new StringBuilder();
 
@@ -71,6 +107,11 @@ public class ApiResourceVersion {
         return sb.toString();
     }
 
+    /**
+     * Convert String to api version
+     * @param apiVersionString
+     * @throw IllegalArgumentException
+     */
     public void toVersion(final String apiVersionString) {
         if (StringUtil.isNullOrEmpty(apiVersionString)) {
             throw new IllegalArgumentException("ApiVersion: is null or empty"); //$NON-NLS-1$
@@ -110,6 +151,10 @@ public class ApiResourceVersion {
         return true;
     }
 
+    /**
+     * String representation of object of type ApiResourceVersion
+     * @return String
+     */
     @Override
     public String toString() {
         StringBuilder sbVersion = new StringBuilder();

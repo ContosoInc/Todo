@@ -13,10 +13,18 @@ public class ReferenceLinks {
 
     private Map<String, Object> links;
 
+    /**
+     * Getter for links
+     * @return
+     */
     public Map<String, Object> getLinks() {
         return links;
     }
 
+    /**
+     * Setter for links
+     * @param links
+     */
     public void setLinks(final Map<String, Object> links) {
         this.links = links;
     }

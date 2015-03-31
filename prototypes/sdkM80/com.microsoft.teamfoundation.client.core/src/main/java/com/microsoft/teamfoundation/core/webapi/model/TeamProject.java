@@ -27,7 +27,7 @@ public class TeamProject
 
     /**
      * Getter for Capabilities
-     * @return HashMap<String,HashMap<String,String>>
+     * @return HashMap&#60String,HashMap&#60String,String&#62&#62
      */
     public HashMap<String,HashMap<String,String>> getCapabilities() {
         return capabilities;
