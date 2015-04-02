@@ -18,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -59,16 +60,16 @@ public class TfsBuildWrapper extends BuildWrapper {
                             Integer.parseInt(config.getBuildDefinition()), build, getClient(config));
 
                 } catch (Exception e) {
-                    String msg = String.format("Failed to queue a build on Microsoft TFS with exception: %s\n", e.getMessage());
+                    String msg = String.format("Failed to queue a build on Microsoft TFS with exception: %s%n", e.getMessage());
                     logger.info(msg);
                     e.printStackTrace();
-                    writeQuietly(os, msg.getBytes());
+                    writeQuietly(os, msg.getBytes(Charset.defaultCharset()));
                 }
 
                 if (tfsBuildFacade == null) {
                     String msg = "Build is not queue on Microsoft TFS, no log will be send to Microsoft TFS.\n";
                     logger.info(msg);
-                    writeQuietly(os, msg.getBytes());
+                    writeQuietly(os, msg.getBytes(Charset.defaultCharset()));
 
                     return os;
                 }
@@ -86,7 +87,7 @@ public class TfsBuildWrapper extends BuildWrapper {
 
         String msg = "TfsBuildNotifier is not configured, do not decorate the output logger.\n";
         logger.info(msg);
-        writeQuietly(os, msg.getBytes());
+        writeQuietly(os, msg.getBytes(Charset.defaultCharset()));
         return os;
     }
 

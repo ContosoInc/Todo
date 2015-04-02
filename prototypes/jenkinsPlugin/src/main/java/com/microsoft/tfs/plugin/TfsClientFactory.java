@@ -19,6 +19,6 @@ public interface TfsClientFactory {
      * @return new REST TFS client
      * @throws URISyntaxException
      */
-    public TfsClient getValidatedClient(String url, String username, Secret password) throws URISyntaxException, VssServiceException;
+    TfsClient getValidatedClient(String url, String username, Secret password) throws URISyntaxException, VssServiceException;
 
 }

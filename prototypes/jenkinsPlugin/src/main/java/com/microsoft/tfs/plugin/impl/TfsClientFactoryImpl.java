@@ -7,25 +7,24 @@ import hudson.util.Secret;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * Created by yacao on 3/27/2015.
- */
 public class TfsClientFactoryImpl implements TfsClientFactory {
 
-    public static enum ServiceProvider {
+    public enum ServiceProvider {
         TFS,
         VSO
     }
 
     public TfsClient getValidatedClient(String url, String username, Secret password) throws URISyntaxException, VssServiceException {
         URI uri = new URI(url);
-        ServiceProvider provider = guessIsOnPremInstallation(uri) ? ServiceProvider.TFS : ServiceProvider.VSO;
+        ServiceProvider provider = guessIsHostedInstallation(uri) ? ServiceProvider.VSO : ServiceProvider.TFS;
 
-        TfsClient client = null;
+        TfsClient client;
         try {
             client = new TfsClient(uri, provider, username, password);
+
             // if this returns without throwing VssServiceException, client is working
             client.getProjectClient().getProjects();
+
         } catch (VssServiceException vse){
             provider = (provider == ServiceProvider.TFS) ? ServiceProvider.VSO : ServiceProvider.TFS;
 
@@ -37,21 +36,17 @@ public class TfsClientFactoryImpl implements TfsClientFactory {
     }
 
     /*
-     * Best educated guess about whether this is an onPrem installation
+     * Best educated guess about whether this is a hosted VSO instance
      *
      * This is only an optimization about what method try first, should never rely on it solely
      */
-    private boolean guessIsOnPremInstallation(URI uri) {
+    private boolean guessIsHostedInstallation(URI uri) {
         if (uri == null) {
             return false;
         }
 
         String host = uri.getHost().toLowerCase();
-        if (host.endsWith("visualstudio.com") || host.endsWith(".tfsallin.net")) {
-            return false;
-        }
-
-        return true;
+        return host.endsWith("visualstudio.com") || host.endsWith(".tfsallin.net");
     }
 
 }

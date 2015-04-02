@@ -81,7 +81,7 @@ public class TfsBuildNotifier extends Notifier {
             return false;
         }
 
-        int tfsBuildId = Integer.valueOf(tfsBuildIdStr);
+        int tfsBuildId = Integer.parseInt(tfsBuildIdStr);
         try {
             TfsClient client = getTfsClientFactory().getValidatedClient(this.serverUrl, this.username, this.password);
             TfsBuildFacade tfsBuildFacade = getTfsBuildFacadeFactory().getBuildOnTfs(tfsBuildId, build, client);

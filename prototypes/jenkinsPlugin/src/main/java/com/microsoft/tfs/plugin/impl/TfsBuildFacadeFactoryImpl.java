@@ -12,7 +12,6 @@ import hudson.plugins.git.GitSCM;
 import hudson.scm.SCM;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
@@ -63,7 +62,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
 
         queue = tfsClient.getBuildClient().createQueue(queue);
 
-        return Arrays.asList(queue);
+        return Collections.singletonList(queue);
     }
 
     private Build createBuildContainer(TeamProjectReference project, BuildDefinition definition, QueueReference queue, SCM scm) {
@@ -126,7 +125,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
             }
         } catch (Exception e) {
             // suppress
-            logger.warning("Retreiving branch name through refecltion failed: "+e.getMessage());
+            logger.warning("Retrieving branch name through reflection failed: "+e.getMessage());
         }
 
         String branchStr = Util.fixEmptyAndTrim(branch.toString());

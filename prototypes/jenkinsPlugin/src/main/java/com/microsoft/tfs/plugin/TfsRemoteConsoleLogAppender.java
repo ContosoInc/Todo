@@ -5,6 +5,7 @@ import hudson.console.LineTransformationOutputStream;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -32,15 +33,17 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
 
         this.tfsBuildFacade = tfsBuildFacade;
 
-        this.logger.info("Initialized Tfs Remote Console log appender");
+        logger.info("Initialized Tfs Remote Console log appender");
     }
 
     @Override
     protected void eol(byte[] b, int len) throws IOException {
         delegate.write(b, 0, len);
 
-        String line = ConsoleNote.removeNotes(new String(b, 0, len)).trim();
-        logs.offer(line);
+        String line = ConsoleNote.removeNotes(new String(b, 0, len, Charset.defaultCharset())).trim();
+        if (!logs.offer(line)) {
+            logger.warning(String.format("Failed to add log line: %s to queue, is the logger rolling too fast?", line));
+        }
     }
 
     public void flush() throws IOException {
@@ -75,7 +78,6 @@ public class TfsRemoteConsoleLogAppender extends LineTransformationOutputStream 
     public void start() {
         final Runnable logAppender = new Runnable() {
 
-            @Override
             public void run() {
                 List<String> lines = new ArrayList<String>(100);
 

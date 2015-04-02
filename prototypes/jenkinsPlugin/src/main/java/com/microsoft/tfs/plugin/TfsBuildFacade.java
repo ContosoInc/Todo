@@ -1,23 +1,21 @@
 package com.microsoft.tfs.plugin;
 
-import hudson.EnvVars;
-
 import java.util.List;
 
 /**
- * This class is a facade to update TFS build from Jenkins
+ * This class is a facade to update TFS build from Jenkins.
  */
 public interface TfsBuildFacade {
 
-    public void startBuild();
+    void startBuild();
 
-    public void finishBuild();
+    void finishBuild();
 
-    public void startAllTaskRecords();
+    void startAllTaskRecords();
 
-    public void finishAllTaskRecords();
+    void finishAllTaskRecords();
 
-    public void appendJobLog(List<String> logLines);
+    void appendJobLog(List<String> logLines);
 
-    public int getTfsBuildId();
+    int getTfsBuildId();
 }

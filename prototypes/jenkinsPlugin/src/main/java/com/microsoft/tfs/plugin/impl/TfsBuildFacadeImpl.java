@@ -3,6 +3,7 @@ package com.microsoft.tfs.plugin.impl;
 import hudson.model.AbstractBuild;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ import static hudson.model.Result.FAILURE;
 import static hudson.model.Result.SUCCESS;
 
 /**
- * This class is a facade to update TFS build from Jenkins
+ * This class is a facade to update TFS build from Jenkins.
  *
  * All updates to TFS build should go through this class.  Also deliberately this
  * class only contains IDs and does not keep state.  All build update operation are PATCH
@@ -100,7 +101,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         }
 
         if (jobRecord == null) {
-            records.add(createTimelineJobRecord());
+            jobRecord = createTimelineJobRecord();
+            records.add(jobRecord);
         }
 
         if (jenkinsTaskRecord == null) {
@@ -184,7 +186,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     }
 
     /**
-     * Update all tasks' status to Jenkin's build status, this is because we only have one
+     * Update all tasks' status to Jenkins's build status, this is because we only have one
      * Jenkins task at the moment.
      */
     public void finishAllTaskRecords() {
@@ -244,9 +246,10 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     private InputStream getByteArrayInputStream(List<String> lines) throws IOException {
         // assuming each line is 256-bytes long to avoid grow constantly
         ByteArrayOutputStream os = new ByteArrayOutputStream(lines.size() * 256);
+        byte[] newLine = String.format("%n").getBytes(Charset.defaultCharset());
         for (String line : lines) {
-            os.write(line.getBytes());
-            os.write("\r\n".getBytes());
+            os.write(line.getBytes(Charset.defaultCharset()));
+            os.write(newLine);
         }
 
         return new ByteArrayInputStream(os.toByteArray());
@@ -267,7 +270,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      */
     private int createLogForJobRecord() {
         List<TaskLog> logs = getClient().getDistributedTaskHttpClient().getLogs(getPlanId());
-        TaskLog jobLog = null;
+        TaskLog jobLog;
         if (logs == null || logs.isEmpty()) {
             // if log is not created, create it now
             TaskLog log = new TaskLog();
@@ -279,9 +282,11 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             logs = getClient().getDistributedTaskHttpClient().getLogs(getPlanId());
         }
 
-        if (logs != null && logs.size() > 0) {
-            jobLog = logs.get(0);
+        if (logs == null || logs.size() < 1) {
+            throw new RuntimeException("Could not create a job log for this build.");
         }
+
+        jobLog = logs.get(0);
 
         // Should only patch log information for job record
         List<TimelineRecord> records = queryTfsTimelineRecords();
@@ -295,15 +300,13 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             }
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(createWrapper(Arrays.asList(jobRecord)), getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient().updateRecords(createWrapper(Collections.singletonList(jobRecord)), getPlanId(), getTimelineId());
 
         return jobLog.getId();
     }
 
     private TimelineRecord createTimelineJobRecord() {
-        TimelineRecord jobRecord;
-
-        jobRecord = new TimelineRecord();
+        TimelineRecord jobRecord = new TimelineRecord();
         jobRecord.setId(UUID.randomUUID());
         jobRecord.setRecordType(JOB_RECORD_TYPE);
         jobRecord.setName(JOB_RECORD_NAME);
@@ -333,7 +336,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             Timeline t = new Timeline();
             t.setId(UUID.randomUUID());
             t = tfsClient.getDistributedTaskHttpClient().createTimeline(t, planId);
-            timelines = Arrays.asList(t);
+            timelines = Collections.singletonList(t);
         }
 
         for (Timeline timeline : timelines) {

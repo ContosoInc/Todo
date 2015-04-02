@@ -30,6 +30,8 @@ public class TfsBuildWrapperTest {
 
     TfsBuildWrapper underTest;
 
+    AbstractBuild jenkinsBuild;
+
     @Mock
     TfsBuildFacadeFactory facadeFactoryMock;
 
@@ -44,8 +46,6 @@ public class TfsBuildWrapperTest {
 
     @Rule
     public JenkinsRule j = new JenkinsRule();
-
-    AbstractBuild jenkinsBuild;
 
     @Before
     public void setUp() throws Exception {

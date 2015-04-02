@@ -100,7 +100,7 @@ public class TfsClient {
 
             logger.info("Using user/pass authentication for Visual Studio Online services");
 
-            // also need to preemptively send basic auth header, or we will be redirected for oauth login
+            // Preemptive send basic auth header, or we will be redirected for oauth login
             clientConfig.property(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
         }
 
@@ -139,12 +139,11 @@ public class TfsClient {
             securityProtocol = "SSL";
         }
 
-        final SslConfigurator sslConfig = SslConfigurator.newInstance().trustStoreFile(keystorePath)
+        SslConfigurator sslConfigurator = SslConfigurator.newInstance();
+        return sslConfigurator.trustStoreFile(keystorePath)
                 .trustStorePassword(keystorePassword)
                 .trustStoreType(trustStoreType)
                 .trustManagerFactoryAlgorithm(trustManagerFactoryAlgorithm)
                 .securityProtocol(securityProtocol);
-
-        return sslConfig;
     }
 }

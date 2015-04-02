@@ -15,8 +15,8 @@ public interface TfsBuildFacadeFactory {
      * @param tfsClient
      * @return a TfsBuildInstance
      */
-    public TfsBuildFacade createBuildOnTfs(final String projectId, int buildDefinition,
-                                             final AbstractBuild jenkinsBuild, final TfsClient tfsClient);
+    TfsBuildFacade createBuildOnTfs(final String projectId, int buildDefinition,
+                                            final AbstractBuild jenkinsBuild, final TfsClient tfsClient);
 
 
     /**
@@ -26,5 +26,5 @@ public interface TfsBuildFacadeFactory {
      * @param jenkinsBuild
      * @param tfsClient
      */
-    public TfsBuildFacade getBuildOnTfs(final int tfsBuildId, final AbstractBuild jenkinsBuild, final TfsClient tfsClient);
+    TfsBuildFacade getBuildOnTfs(final int tfsBuildId, final AbstractBuild jenkinsBuild, final TfsClient tfsClient);
 }
