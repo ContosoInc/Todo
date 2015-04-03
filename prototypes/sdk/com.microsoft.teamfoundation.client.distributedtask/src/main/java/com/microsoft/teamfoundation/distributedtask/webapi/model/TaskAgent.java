@@ -6,22 +6,27 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentReference;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentStatus;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskAgent
     extends TaskAgentReference {
 
     private Date createdOn;
+    private boolean enabled;
     private int maxParallelism;
     private PropertiesCollection properties;
     private TaskAgentStatus status;
@@ -35,6 +40,14 @@ public class TaskAgent
 
     public void setCreatedOn(final Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(final boolean enabled) {
+        this.enabled = enabled;
     }
 
     public int getMaxParallelism() {

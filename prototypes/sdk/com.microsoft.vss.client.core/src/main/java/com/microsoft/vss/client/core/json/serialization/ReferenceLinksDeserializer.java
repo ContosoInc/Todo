@@ -12,9 +12,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLink;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import com.microsoft.vss.client.core.Messages;
-import com.microsoft.vss.client.core.model.ReferenceLink;
-import com.microsoft.vss.client.core.model.ReferenceLinks;
 import com.microsoft.vss.client.core.utils.StringUtil;
 
 public class ReferenceLinksDeserializer

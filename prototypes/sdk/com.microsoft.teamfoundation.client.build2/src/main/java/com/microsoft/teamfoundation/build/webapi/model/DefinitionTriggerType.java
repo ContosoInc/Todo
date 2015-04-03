@@ -6,21 +6,18 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public enum DefinitionTriggerType {
 
@@ -28,10 +25,9 @@ public enum DefinitionTriggerType {
     CONTINUOUS_INTEGRATION(2),
     BATCHED_CONTINUOUS_INTEGRATION(4),
     SCHEDULE(8),
-    SCHEDULE_FORCED(16),
-    GATED_CHECK_IN(32),
-    BATCHED_GATED_CHECK_IN(64),
-    ALL(127),
+    GATED_CHECK_IN(16),
+    BATCHED_GATED_CHECK_IN(32),
+    ALL(63),
     ;
     
     private int value;
@@ -58,10 +54,6 @@ public enum DefinitionTriggerType {
 
         if (name.equals("SCHEDULE")) { //$NON-NLS-1$
             return "schedule"; //$NON-NLS-1$
-        }
-
-        if (name.equals("SCHEDULE_FORCED")) { //$NON-NLS-1$
-            return "scheduleForced"; //$NON-NLS-1$
         }
 
         if (name.equals("GATED_CHECK_IN")) { //$NON-NLS-1$

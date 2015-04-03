@@ -7,9 +7,8 @@ import java.util.UUID;
 import javax.ws.rs.client.Client;
 
 import com.microsoft.teamfoundation.build.webapi.model.Build;
-import com.microsoft.teamfoundation.build.webapi.model.BuildArtifact;
 import com.microsoft.teamfoundation.build.webapi.model.BuildDefinition;
-import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
 import com.microsoft.vss.client.core.utils.ArgumentUtility;
 
 public class BuildHttpClient
@@ -58,34 +57,12 @@ public class BuildHttpClient
     }
 
     /**
-     * Get build artifacts
-     * @param buildId
-     * @return List<BuildArtifact>
-     */
-    public List<BuildArtifact> getArtifacts(final int buildId) {
-        return super.getArtifacts(buildId, null);
-    }
-
-    /**
-     * Get build artifacts
-     * @param buildId
-     *
-     * @param artifactName
-     * @return List<BuildArtifact>
-     */
-    @Override
-    public List<BuildArtifact> getArtifacts(final int buildId, final String artifactName) {
-        ArgumentUtility.checkStringForNullOrEmpty(artifactName, "artifactName", true); //$NON-NLS-1$
-        return super.getArtifacts(buildId, artifactName);
-    }
-
-    /**
      * Get build definitions in team project
      * @param project
      * @return List<BuildDefinitionReference>
      */
-    public List<BuildDefinitionReference> getDefinitions(final UUID project) {
-        return super.getDefinitions(project, null);
+    public List<DefinitionReference> getDefinitions(final UUID project) {
+        return super.getDefinitions(project, null, null);
     }
 
     /**
@@ -102,7 +79,6 @@ public class BuildHttpClient
     /**
      * Queue a build
      * @param build
-     *
      * @param ignoreWarnings
      * @return Build
      */
@@ -128,7 +104,6 @@ public class BuildHttpClient
     /**
      * Update a build
      * @param build
-     *
      * @param buildId
      * @return Build
      */
@@ -145,9 +120,9 @@ public class BuildHttpClient
      * @return BuildDefinition
      */
     @Override
-    public BuildDefinition updateDefinition(final BuildDefinition definition) {
+    public BuildDefinition updateDefinition(final BuildDefinition definition, final int definitionId) {
         ArgumentUtility.checkForNull(definition, "definition"); //$NON-NLS-1$
         ArgumentUtility.checkForNull(definition.getProject(), "definition.Project"); //$NON-NLS-1$
-        return super.updateDefinition(definition, definition.getProject().getId());
+        return super.updateDefinition(definition, definition.getProject().getId(), definitionId);
     }
 }

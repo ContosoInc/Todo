@@ -6,28 +6,28 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.ItemModel;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TfvcItem
     extends ItemModel {
 
     private Date changeDate;
-    private int changesetVersion;
     private int deletionId;
-    private int encoding;
-    private int fileId;
-    private int id;
     private boolean isBranch;
     private boolean isPendingChange;
+    private int version;
 
     public Date getChangeDate() {
         return changeDate;
@@ -37,44 +37,12 @@ public class TfvcItem
         this.changeDate = changeDate;
     }
 
-    public int getChangesetVersion() {
-        return changesetVersion;
-    }
-
-    public void setChangesetVersion(final int changesetVersion) {
-        this.changesetVersion = changesetVersion;
-    }
-
     public int getDeletionId() {
         return deletionId;
     }
 
     public void setDeletionId(final int deletionId) {
         this.deletionId = deletionId;
-    }
-
-    public int getEncoding() {
-        return encoding;
-    }
-
-    public void setEncoding(final int encoding) {
-        this.encoding = encoding;
-    }
-
-    public int getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(final int fileId) {
-        this.fileId = fileId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(final int id) {
-        this.id = id;
     }
 
     public boolean getIsBranch() {
@@ -91,5 +59,13 @@ public class TfvcItem
 
     public void setIsPendingChange(final boolean isPendingChange) {
         this.isPendingChange = isPendingChange;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(final int version) {
+        this.version = version;
     }
 }

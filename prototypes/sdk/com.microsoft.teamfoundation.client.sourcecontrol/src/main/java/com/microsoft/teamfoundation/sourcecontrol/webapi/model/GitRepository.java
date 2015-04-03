@@ -6,27 +6,40 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepositoryType;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GitRepository {
 
+    private ReferenceLinks _links;
     private String defaultBranch;
     private UUID id;
-    private ReferenceLinks links;
     private String name;
-    private TeamProjectReference projectReference;
+    private TeamProjectReference project;
     private String remoteUrl;
     private GitRepositoryType type;
     private String url;
+
+    public ReferenceLinks get_links() {
+        return _links;
+    }
+
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
+    }
 
     public String getDefaultBranch() {
         return defaultBranch;
@@ -44,14 +57,6 @@ public class GitRepository {
         this.id = id;
     }
 
-    public ReferenceLinks getLinks() {
-        return links;
-    }
-
-    public void setLinks(final ReferenceLinks links) {
-        this.links = links;
-    }
-
     public String getName() {
         return name;
     }
@@ -60,12 +65,12 @@ public class GitRepository {
         this.name = name;
     }
 
-    public TeamProjectReference getProjectReference() {
-        return projectReference;
+    public TeamProjectReference getProject() {
+        return project;
     }
 
-    public void setProjectReference(final TeamProjectReference projectReference) {
-        this.projectReference = projectReference;
+    public void setProject(final TeamProjectReference project) {
+        this.project = project;
     }
 
     public String getRemoteUrl() {

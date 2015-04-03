@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.vss.client.core.model.ReferenceLink;
-import com.microsoft.vss.client.core.model.ReferenceLinks;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLink;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class EntityWithReferenceLinks {
     private int fieldA;

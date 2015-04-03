@@ -6,16 +6,18 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TfvcChangesetSearchCriteria {
 
@@ -24,10 +26,9 @@ public class TfvcChangesetSearchCriteria {
     private String fromDate;
     private int fromId;
     private boolean includeLinks;
-    private String itemPath;
+    private String path;
     private String toDate;
     private int toId;
-    private TfvcVersionDescriptor versionDescriptor;
 
     public String getAuthor() {
         return author;
@@ -69,12 +70,12 @@ public class TfvcChangesetSearchCriteria {
         this.includeLinks = includeLinks;
     }
 
-    public String getItemPath() {
-        return itemPath;
+    public String getPath() {
+        return path;
     }
 
-    public void setItemPath(final String itemPath) {
-        this.itemPath = itemPath;
+    public void setPath(final String path) {
+        this.path = path;
     }
 
     public String getToDate() {
@@ -91,13 +92,5 @@ public class TfvcChangesetSearchCriteria {
 
     public void setToId(final int toId) {
         this.toId = toId;
-    }
-
-    public TfvcVersionDescriptor getVersionDescriptor() {
-        return versionDescriptor;
-    }
-
-    public void setVersionDescriptor(final TfvcVersionDescriptor versionDescriptor) {
-        this.versionDescriptor = versionDescriptor;
     }
 }

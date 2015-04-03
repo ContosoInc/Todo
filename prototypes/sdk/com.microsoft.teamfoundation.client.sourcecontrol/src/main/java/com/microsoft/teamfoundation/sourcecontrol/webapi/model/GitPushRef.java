@@ -6,25 +6,37 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GitPushRef {
 
+    private ReferenceLinks _links;
     private Date date;
-    private ReferenceLinks links;
     private UUID pushCorrelationId;
     private IdentityRef pushedBy;
     private int pushId;
     private String url;
+
+    public ReferenceLinks get_links() {
+        return _links;
+    }
+
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
+    }
 
     public Date getDate() {
         return date;
@@ -32,14 +44,6 @@ public class GitPushRef {
 
     public void setDate(final Date date) {
         this.date = date;
-    }
-
-    public ReferenceLinks getLinks() {
-        return links;
-    }
-
-    public void setLinks(final ReferenceLinks links) {
-        this.links = links;
     }
 
     public UUID getPushCorrelationId() {

@@ -6,27 +6,29 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.common.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.common.model.ProjectState;
+import com.microsoft.teamfoundation.core.webapi.model.ProjectProperty;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class ProjectInfo {
 
     private String abbreviation;
+    private String description;
     private UUID id;
-    private List<String> knownNames;
     private Date lastUpdateTime;
     private String name;
     private List<ProjectProperty> properties;
-    private long revision;
     private ProjectState state;
     private String uri;
     private long version;
@@ -39,20 +41,20 @@ public class ProjectInfo {
         this.abbreviation = abbreviation;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
     public UUID getId() {
         return id;
     }
 
     public void setId(final UUID id) {
         this.id = id;
-    }
-
-    public List<String> getKnownNames() {
-        return knownNames;
-    }
-
-    public void setKnownNames(final List<String> knownNames) {
-        this.knownNames = knownNames;
     }
 
     public Date getLastUpdateTime() {
@@ -77,14 +79,6 @@ public class ProjectInfo {
 
     public void setProperties(final List<ProjectProperty> properties) {
         this.properties = properties;
-    }
-
-    public long getRevision() {
-        return revision;
-    }
-
-    public void setRevision(final long revision) {
-        this.revision = revision;
     }
 
     public ProjectState getState() {

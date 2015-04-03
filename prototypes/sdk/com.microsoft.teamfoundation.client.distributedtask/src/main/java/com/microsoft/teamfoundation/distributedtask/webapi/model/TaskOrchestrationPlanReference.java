@@ -6,23 +6,28 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskOrchestrationPlanReference {
 
     private URI artifactLocation;
     private URI artifactUri;
     private UUID planId;
+    private String planType;
+    private UUID scopeIdentifier;
+    private int version;
 
     public URI getArtifactLocation() {
         return artifactLocation;
@@ -46,5 +51,29 @@ public class TaskOrchestrationPlanReference {
 
     public void setPlanId(final UUID planId) {
         this.planId = planId;
+    }
+
+    public String getPlanType() {
+        return planType;
+    }
+
+    public void setPlanType(final String planType) {
+        this.planType = planType;
+    }
+
+    public UUID getScopeIdentifier() {
+        return scopeIdentifier;
+    }
+
+    public void setScopeIdentifier(final UUID scopeIdentifier) {
+        this.scopeIdentifier = scopeIdentifier;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(final int version) {
+        this.version = version;
     }
 }

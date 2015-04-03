@@ -6,16 +6,18 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class FileContentMetadata {
 
@@ -25,7 +27,7 @@ public class FileContentMetadata {
     private String fileName;
     private boolean isBinary;
     private boolean isImage;
-    private String visualStudioWebLink;
+    private String vsLink;
 
     public String getContentType() {
         return contentType;
@@ -75,11 +77,11 @@ public class FileContentMetadata {
         this.isImage = isImage;
     }
 
-    public String getVisualStudioWebLink() {
-        return visualStudioWebLink;
+    public String getVsLink() {
+        return vsLink;
     }
 
-    public void setVisualStudioWebLink(final String visualStudioWebLink) {
-        this.visualStudioWebLink = visualStudioWebLink;
+    public void setVsLink(final String vsLink) {
+        this.vsLink = vsLink;
     }
 }

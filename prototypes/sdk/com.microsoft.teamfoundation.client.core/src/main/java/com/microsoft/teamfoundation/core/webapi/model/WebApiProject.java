@@ -6,17 +6,21 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.common.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.teamfoundation.core.webapi.model.WebApiProjectCollectionRef;
+import com.microsoft.teamfoundation.core.webapi.model.WebApiTeamRef;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class WebApiProject
     extends TeamProjectReference {
@@ -24,8 +28,6 @@ public class WebApiProject
     private HashMap<String,HashMap<String,String>> capabilities;
     private WebApiProjectCollectionRef collection;
     private WebApiTeamRef defaultTeam;
-    private String description;
-    private String tfsUri;
 
     public HashMap<String,HashMap<String,String>> getCapabilities() {
         return capabilities;
@@ -49,21 +51,5 @@ public class WebApiProject
 
     public void setDefaultTeam(final WebApiTeamRef defaultTeam) {
         this.defaultTeam = defaultTeam;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public String getTfsUri() {
-        return tfsUri;
-    }
-
-    public void setTfsUri(final String tfsUri) {
-        this.tfsUri = tfsUri;
     }
 }

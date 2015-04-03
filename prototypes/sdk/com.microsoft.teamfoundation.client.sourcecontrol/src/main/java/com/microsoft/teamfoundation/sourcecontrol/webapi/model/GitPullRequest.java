@@ -6,27 +6,38 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitCommitRef;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepository;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.IdentityRefWithVote;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.PullRequestAsyncStatus;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.PullRequestStatus;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import com.microsoft.vss.client.core.json.JObject;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GitPullRequest {
 
+    private ReferenceLinks _links;
     private Date closedDate;
+    private JObject codeReview;
     private IdentityRef createdBy;
     private Date creationDate;
     private String description;
     private GitCommitRef lastMergeCommit;
     private GitCommitRef lastMergeSourceCommit;
     private GitCommitRef lastMergeTargetCommit;
-    private ReferenceLinks links;
     private UUID mergeId;
     private PullRequestAsyncStatus mergeStatus;
     private int pullRequestId;
@@ -39,12 +50,28 @@ public class GitPullRequest {
     private String title;
     private String url;
 
+    public ReferenceLinks get_links() {
+        return _links;
+    }
+
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
+    }
+
     public Date getClosedDate() {
         return closedDate;
     }
 
     public void setClosedDate(final Date closedDate) {
         this.closedDate = closedDate;
+    }
+
+    public JObject getCodeReview() {
+        return codeReview;
+    }
+
+    public void setCodeReview(final JObject codeReview) {
+        this.codeReview = codeReview;
     }
 
     public IdentityRef getCreatedBy() {
@@ -93,14 +120,6 @@ public class GitPullRequest {
 
     public void setLastMergeTargetCommit(final GitCommitRef lastMergeTargetCommit) {
         this.lastMergeTargetCommit = lastMergeTargetCommit;
-    }
-
-    public ReferenceLinks getLinks() {
-        return links;
-    }
-
-    public void setLinks(final ReferenceLinks links) {
-        this.links = links;
     }
 
     public UUID getMergeId() {

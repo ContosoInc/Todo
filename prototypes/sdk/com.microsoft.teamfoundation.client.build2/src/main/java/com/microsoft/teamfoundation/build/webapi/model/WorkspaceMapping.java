@@ -6,28 +6,36 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.WorkspaceMappingType;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class WorkspaceMapping {
 
+    private String definitionUri;
     private int depth;
     private String localItem;
     private WorkspaceMappingType mappingType;
     private String serverItem;
+    private int workspaceId;
+
+    public String getDefinitionUri() {
+        return definitionUri;
+    }
+
+    public void setDefinitionUri(final String definitionUri) {
+        this.definitionUri = definitionUri;
+    }
 
     public int getDepth() {
         return depth;
@@ -59,5 +67,13 @@ public class WorkspaceMapping {
 
     public void setServerItem(final String serverItem) {
         this.serverItem = serverItem;
+    }
+
+    public int getWorkspaceId() {
+        return workspaceId;
+    }
+
+    public void setWorkspaceId(final int workspaceId) {
+        this.workspaceId = workspaceId;
     }
 }

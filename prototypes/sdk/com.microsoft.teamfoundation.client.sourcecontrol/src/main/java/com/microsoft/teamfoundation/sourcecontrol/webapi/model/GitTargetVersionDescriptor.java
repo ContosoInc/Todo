@@ -6,45 +6,50 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionDescriptor;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionOptions;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionType;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GitTargetVersionDescriptor
     extends GitVersionDescriptor {
 
-    private String version;
-    private GitVersionOptions versionOptions;
-    private GitVersionType versionType;
+    private String targetVersion;
+    private GitVersionOptions targetVersionOptions;
+    private GitVersionType targetVersionType;
 
-    public String getVersion() {
-        return version;
+    public String getTargetVersion() {
+        return targetVersion;
     }
 
-    public void setVersion(final String version) {
-        this.version = version;
+    public void setTargetVersion(final String targetVersion) {
+        this.targetVersion = targetVersion;
     }
 
-    public GitVersionOptions getVersionOptions() {
-        return versionOptions;
+    public GitVersionOptions getTargetVersionOptions() {
+        return targetVersionOptions;
     }
 
-    public void setVersionOptions(final GitVersionOptions versionOptions) {
-        this.versionOptions = versionOptions;
+    public void setTargetVersionOptions(final GitVersionOptions targetVersionOptions) {
+        this.targetVersionOptions = targetVersionOptions;
     }
 
-    public GitVersionType getVersionType() {
-        return versionType;
+    public GitVersionType getTargetVersionType() {
+        return targetVersionType;
     }
 
-    public void setVersionType(final GitVersionType versionType) {
-        this.versionType = versionType;
+    public void setTargetVersionType(final GitVersionType targetVersionType) {
+        this.targetVersionType = targetVersionType;
     }
 }

@@ -6,24 +6,44 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskReference;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskInstance
     extends TaskReference {
 
+    private boolean alwaysRun;
+    private boolean continueOnError;
     private String displayName;
     private boolean enabled;
     private UUID instanceId;
+
+    public boolean getAlwaysRun() {
+        return alwaysRun;
+    }
+
+    public void setAlwaysRun(final boolean alwaysRun) {
+        this.alwaysRun = alwaysRun;
+    }
+
+    public boolean getContinueOnError() {
+        return continueOnError;
+    }
+
+    public void setContinueOnError(final boolean continueOnError) {
+        this.continueOnError = continueOnError;
+    }
 
     public String getDisplayName() {
         return displayName;

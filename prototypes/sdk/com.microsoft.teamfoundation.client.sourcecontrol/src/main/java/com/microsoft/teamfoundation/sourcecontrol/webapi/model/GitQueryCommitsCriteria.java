@@ -6,21 +6,25 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionDescriptor;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class GitQueryCommitsCriteria {
 
+    private int $skip;
+    private int $top;
     private String author;
-    private String committer;
     private GitVersionDescriptor compareVersion;
     private boolean excludeDeletes;
     private String fromCommitId;
@@ -29,10 +33,25 @@ public class GitQueryCommitsCriteria {
     private boolean includeLinks;
     private String itemPath;
     private GitVersionDescriptor itemVersion;
-    private int skip;
     private String toCommitId;
     private String toDate;
-    private int top;
+    private String user;
+
+    public int get$skip() {
+        return $skip;
+    }
+
+    public void set$skip(final int $skip) {
+        this.$skip = $skip;
+    }
+
+    public int get$top() {
+        return $top;
+    }
+
+    public void set$top(final int $top) {
+        this.$top = $top;
+    }
 
     public String getAuthor() {
         return author;
@@ -40,14 +59,6 @@ public class GitQueryCommitsCriteria {
 
     public void setAuthor(final String author) {
         this.author = author;
-    }
-
-    public String getCommitter() {
-        return committer;
-    }
-
-    public void setCommitter(final String committer) {
-        this.committer = committer;
     }
 
     public GitVersionDescriptor getCompareVersion() {
@@ -114,14 +125,6 @@ public class GitQueryCommitsCriteria {
         this.itemVersion = itemVersion;
     }
 
-    public int getSkip() {
-        return skip;
-    }
-
-    public void setSkip(final int skip) {
-        this.skip = skip;
-    }
-
     public String getToCommitId() {
         return toCommitId;
     }
@@ -138,11 +141,11 @@ public class GitQueryCommitsCriteria {
         this.toDate = toDate;
     }
 
-    public int getTop() {
-        return top;
+    public String getUser() {
+        return user;
     }
 
-    public void setTop(final int top) {
-        this.top = top;
+    public void setUser(final String user) {
+        this.user = user;
     }
 }

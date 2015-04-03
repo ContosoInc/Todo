@@ -6,23 +6,30 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.Demand;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskExecution;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskGroupDefinition;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskInputDefinition;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskSourceDefinition;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskVersion;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskDefinition {
 
     private TaskExecution agentExecution;
     private String author;
-    private TaskCategory category;
+    private String category;
     private boolean contentsUploaded;
     private List<Demand> demands;
     private String description;
@@ -37,9 +44,10 @@ public class TaskDefinition {
     private String packageLocation;
     private String packageType;
     private boolean serverOwned;
+    private List<TaskSourceDefinition> sourceDefinitions;
     private String sourceLocation;
     private TaskVersion version;
-    private TaskAreaVisibility visibility;
+    private List<String> visibility;
 
     public TaskExecution getAgentExecution() {
         return agentExecution;
@@ -57,11 +65,11 @@ public class TaskDefinition {
         this.author = author;
     }
 
-    public TaskCategory getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(final TaskCategory category) {
+    public void setCategory(final String category) {
         this.category = category;
     }
 
@@ -177,6 +185,14 @@ public class TaskDefinition {
         this.serverOwned = serverOwned;
     }
 
+    public List<TaskSourceDefinition> getSourceDefinitions() {
+        return sourceDefinitions;
+    }
+
+    public void setSourceDefinitions(final List<TaskSourceDefinition> sourceDefinitions) {
+        this.sourceDefinitions = sourceDefinitions;
+    }
+
     public String getSourceLocation() {
         return sourceLocation;
     }
@@ -193,11 +209,11 @@ public class TaskDefinition {
         this.version = version;
     }
 
-    public TaskAreaVisibility getVisibility() {
+    public List<String> getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(final TaskAreaVisibility visibility) {
+    public void setVisibility(final List<String> visibility) {
         this.visibility = visibility;
     }
 }

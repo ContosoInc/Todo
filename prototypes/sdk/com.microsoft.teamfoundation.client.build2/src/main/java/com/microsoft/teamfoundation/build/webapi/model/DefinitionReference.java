@@ -6,45 +6,39 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionQueueStatus;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionType;
+import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class DefinitionReference
     extends ShallowReference {
 
-    private DefinitionType definitionType;
-    private QueueReference queue;
+    private TeamProjectReference project;
     private DefinitionQueueStatus queueStatus;
     private int revision;
-    private String uri;
+    private DefinitionType type;
+    private URI uri;
 
-    public DefinitionType getDefinitionType() {
-        return definitionType;
+    public TeamProjectReference getProject() {
+        return project;
     }
 
-    public void setDefinitionType(final DefinitionType definitionType) {
-        this.definitionType = definitionType;
-    }
-
-    public QueueReference getQueue() {
-        return queue;
-    }
-
-    public void setQueue(final QueueReference queue) {
-        this.queue = queue;
+    public void setProject(final TeamProjectReference project) {
+        this.project = project;
     }
 
     public DefinitionQueueStatus getQueueStatus() {
@@ -63,11 +57,19 @@ public class DefinitionReference
         this.revision = revision;
     }
 
-    public String getUri() {
+    public DefinitionType getType() {
+        return type;
+    }
+
+    public void setType(final DefinitionType type) {
+        this.type = type;
+    }
+
+    public URI getUri() {
         return uri;
     }
 
-    public void setUri(final String uri) {
+    public void setUri(final URI uri) {
         this.uri = uri;
     }
 }

@@ -6,25 +6,30 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.common.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.teamfoundation.core.webapi.model.WebApiConnectedServiceRef;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class WebApiConnectedService
     extends WebApiConnectedServiceRef {
 
     private IdentityRef authenticatedBy;
     private String description;
+    private String friendlyName;
+    private String id;
     private String kind;
-    private String name;
     private TeamProjectReference project;
     private String serviceUri;
 
@@ -44,22 +49,28 @@ public class WebApiConnectedService
         this.description = description;
     }
 
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    public void setFriendlyName(final String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
     public String getKind() {
         return kind;
     }
 
     public void setKind(final String kind) {
         this.kind = kind;
-    }
-
-    @JsonProperty("id")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("id")
-    public void setName(final String name) {
-        this.name = name;
     }
 
     public TeamProjectReference getProject() {

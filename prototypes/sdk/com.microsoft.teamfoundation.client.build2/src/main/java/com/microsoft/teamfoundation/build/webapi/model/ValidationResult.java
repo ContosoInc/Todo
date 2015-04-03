@@ -6,25 +6,22 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public enum ValidationResult {
 
-    OK(0),
+    O_K(0),
     WARNING(1),
     ERROR(2),
     ;
@@ -39,8 +36,8 @@ public enum ValidationResult {
     public String toString() {
         final String name = super.toString();
 
-        if (name.equals("OK")) { //$NON-NLS-1$
-            return "ok"; //$NON-NLS-1$
+        if (name.equals("O_K")) { //$NON-NLS-1$
+            return "oK"; //$NON-NLS-1$
         }
 
         if (name.equals("WARNING")) { //$NON-NLS-1$

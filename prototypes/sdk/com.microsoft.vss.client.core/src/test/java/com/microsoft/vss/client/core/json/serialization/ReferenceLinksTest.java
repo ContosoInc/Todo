@@ -10,10 +10,10 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLink;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import com.microsoft.vss.client.core.TestUtil;
 import com.microsoft.vss.client.core.entitytypes.EntityWithReferenceLinks;
-import com.microsoft.vss.client.core.model.ReferenceLink;
-import com.microsoft.vss.client.core.model.ReferenceLinks;
 
 public class ReferenceLinksTest
     extends TestCase {

@@ -6,28 +6,44 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.TaskDefinitionReference;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildDefinitionStep {
 
+    private boolean alwaysRun;
+    private boolean continueOnError;
     private String displayName;
     private boolean enabled;
     private HashMap<String,String> inputs;
-    private TaskDefinitionReference taskDefinition;
+    private TaskDefinitionReference task;
+
+    public boolean getAlwaysRun() {
+        return alwaysRun;
+    }
+
+    public void setAlwaysRun(final boolean alwaysRun) {
+        this.alwaysRun = alwaysRun;
+    }
+
+    public boolean getContinueOnError() {
+        return continueOnError;
+    }
+
+    public void setContinueOnError(final boolean continueOnError) {
+        this.continueOnError = continueOnError;
+    }
 
     public String getDisplayName() {
         return displayName;
@@ -53,13 +69,11 @@ public class BuildDefinitionStep {
         this.inputs = inputs;
     }
 
-    @JsonProperty("task")
-    public TaskDefinitionReference getTaskDefinition() {
-        return taskDefinition;
+    public TaskDefinitionReference getTask() {
+        return task;
     }
 
-    @JsonProperty("task")
-    public void setTaskDefinition(final TaskDefinitionReference taskDefinition) {
-        this.taskDefinition = taskDefinition;
+    public void setTask(final TaskDefinitionReference task) {
+        this.task = task;
     }
 }

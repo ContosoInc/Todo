@@ -6,21 +6,18 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public enum BuildReason {
 
@@ -29,12 +26,11 @@ public enum BuildReason {
     INDIVIDUAL_C_I(2),
     BATCHED_C_I(4),
     SCHEDULE(8),
-    SCHEDULE_FORCED(16),
     USER_CREATED(32),
     VALIDATE_SHELVESET(64),
     CHECK_IN_SHELVESET(128),
-    TRIGGERED(191),
-    ALL(255),
+    TRIGGERED(175),
+    ALL(239),
     ;
     
     private int value;
@@ -65,10 +61,6 @@ public enum BuildReason {
 
         if (name.equals("SCHEDULE")) { //$NON-NLS-1$
             return "schedule"; //$NON-NLS-1$
-        }
-
-        if (name.equals("SCHEDULE_FORCED")) { //$NON-NLS-1$
-            return "scheduleForced"; //$NON-NLS-1$
         }
 
         if (name.equals("USER_CREATED")) { //$NON-NLS-1$

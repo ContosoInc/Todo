@@ -6,23 +6,30 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentPoolReference;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskAgentPool
     extends TaskAgentPoolReference {
 
     private IdentityRef administratorsGroup;
+    private IdentityRef createdBy;
     private Date createdOn;
+    private UUID groupScopeId;
+    private boolean isHosted;
     private PropertiesCollection properties;
     private IdentityRef serviceAccountsGroup;
     private int size;
@@ -35,12 +42,36 @@ public class TaskAgentPool
         this.administratorsGroup = administratorsGroup;
     }
 
+    public IdentityRef getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(final IdentityRef createdBy) {
+        this.createdBy = createdBy;
+    }
+
     public Date getCreatedOn() {
         return createdOn;
     }
 
     public void setCreatedOn(final Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public UUID getGroupScopeId() {
+        return groupScopeId;
+    }
+
+    public void setGroupScopeId(final UUID groupScopeId) {
+        this.groupScopeId = groupScopeId;
+    }
+
+    public boolean getIsHosted() {
+        return isHosted;
+    }
+
+    public void setIsHosted(final boolean isHosted) {
+        this.isHosted = isHosted;
     }
 
     public PropertiesCollection getProperties() {

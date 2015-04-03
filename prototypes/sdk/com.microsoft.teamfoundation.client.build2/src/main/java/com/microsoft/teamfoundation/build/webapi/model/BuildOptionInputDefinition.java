@@ -6,32 +6,30 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.BuildOptionInputType;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildOptionInputDefinition {
 
     private String defaultValue;
     private String groupName;
-    private String helpMarkDown;
-    private BuildOptionInputType inputType;
+    private HashMap<String,String> help;
     private String label;
     private String name;
     private HashMap<String,String> options;
     private boolean required;
+    private BuildOptionInputType type;
     private String visibleRule;
 
     public String getDefaultValue() {
@@ -50,22 +48,12 @@ public class BuildOptionInputDefinition {
         this.groupName = groupName;
     }
 
-    public String getHelpMarkDown() {
-        return helpMarkDown;
+    public HashMap<String,String> getHelp() {
+        return help;
     }
 
-    public void setHelpMarkDown(final String helpMarkDown) {
-        this.helpMarkDown = helpMarkDown;
-    }
-
-    @JsonProperty("type")
-    public BuildOptionInputType getInputType() {
-        return inputType;
-    }
-
-    @JsonProperty("type")
-    public void setInputType(final BuildOptionInputType inputType) {
-        this.inputType = inputType;
+    public void setHelp(final HashMap<String,String> help) {
+        this.help = help;
     }
 
     public String getLabel() {
@@ -98,6 +86,14 @@ public class BuildOptionInputDefinition {
 
     public void setRequired(final boolean required) {
         this.required = required;
+    }
+
+    public BuildOptionInputType getType() {
+        return type;
+    }
+
+    public void setType(final BuildOptionInputType type) {
+        this.type = type;
     }
 
     public String getVisibleRule() {

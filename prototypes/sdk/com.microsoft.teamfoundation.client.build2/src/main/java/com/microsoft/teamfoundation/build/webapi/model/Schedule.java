@@ -6,27 +6,68 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.ScheduleDays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Schedule {
 
+    private List<String> branchFilters;
+    private ScheduleDays daysToBuild;
+    private UUID scheduleJobId;
+    private int startHours;
+    private int startMinutes;
     private String timeZoneId;
-    private ScheduleDays utcDaysToBuild;
-    private int utcStartTime;
+
+    public List<String> getBranchFilters() {
+        return branchFilters;
+    }
+
+    public void setBranchFilters(final List<String> branchFilters) {
+        this.branchFilters = branchFilters;
+    }
+
+    public ScheduleDays getDaysToBuild() {
+        return daysToBuild;
+    }
+
+    public void setDaysToBuild(final ScheduleDays daysToBuild) {
+        this.daysToBuild = daysToBuild;
+    }
+
+    public UUID getScheduleJobId() {
+        return scheduleJobId;
+    }
+
+    public void setScheduleJobId(final UUID scheduleJobId) {
+        this.scheduleJobId = scheduleJobId;
+    }
+
+    public int getStartHours() {
+        return startHours;
+    }
+
+    public void setStartHours(final int startHours) {
+        this.startHours = startHours;
+    }
+
+    public int getStartMinutes() {
+        return startMinutes;
+    }
+
+    public void setStartMinutes(final int startMinutes) {
+        this.startMinutes = startMinutes;
+    }
 
     public String getTimeZoneId() {
         return timeZoneId;
@@ -34,21 +75,5 @@ public class Schedule {
 
     public void setTimeZoneId(final String timeZoneId) {
         this.timeZoneId = timeZoneId;
-    }
-
-    public ScheduleDays getUtcDaysToBuild() {
-        return utcDaysToBuild;
-    }
-
-    public void setUtcDaysToBuild(final ScheduleDays utcDaysToBuild) {
-        this.utcDaysToBuild = utcDaysToBuild;
-    }
-
-    public int getUtcStartTime() {
-        return utcStartTime;
-    }
-
-    public void setUtcStartTime(final int utcStartTime) {
-        this.utcStartTime = utcStartTime;
     }
 }

@@ -6,49 +6,54 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.JobEndpoint;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.JobOption;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.MaskHint;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class JobEnvironment {
 
-    private HashMap<String,Object> data;
-    private List<JobEndpoint> endpoints;
-    private List<MaskHint> maskHints;
+    private PropertiesCollection data;
+    private JobEndpoint[] endpoints;
+    private List<MaskHint> mask;
     private HashMap<UUID,JobOption> options;
     private HashMap<String,Object> secrets;
     private HashMap<String,String> variables;
 
-    public HashMap<String,Object> getData() {
+    public PropertiesCollection getData() {
         return data;
     }
 
-    public void setData(final HashMap<String,Object> data) {
+    public void setData(final PropertiesCollection data) {
         this.data = data;
     }
 
-    public List<JobEndpoint> getEndpoints() {
+    public JobEndpoint[] getEndpoints() {
         return endpoints;
     }
 
-    public void setEndpoints(final List<JobEndpoint> endpoints) {
+    public void setEndpoints(final JobEndpoint[] endpoints) {
         this.endpoints = endpoints;
     }
 
-    public List<MaskHint> getMaskHints() {
-        return maskHints;
+    public List<MaskHint> getMask() {
+        return mask;
     }
 
-    public void setMaskHints(final List<MaskHint> maskHints) {
-        this.maskHints = maskHints;
+    public void setMask(final List<MaskHint> mask) {
+        this.mask = mask;
     }
 
     public HashMap<UUID,JobOption> getOptions() {

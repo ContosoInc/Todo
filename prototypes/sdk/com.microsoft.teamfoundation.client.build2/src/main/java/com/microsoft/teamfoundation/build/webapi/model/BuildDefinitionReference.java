@@ -6,29 +6,30 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.AgentPoolQueue;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionQuality;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildDefinitionReference
     extends DefinitionReference {
 
     private IdentityRef authoredBy;
-    private DocumentQuality documentQuality;
-    private int parentDefinitionId;
-    private TeamProjectReference project;
+    private DefinitionReference draftOf;
+    private DefinitionQuality quality;
+    private AgentPoolQueue queue;
 
     public IdentityRef getAuthoredBy() {
         return authoredBy;
@@ -38,27 +39,27 @@ public class BuildDefinitionReference
         this.authoredBy = authoredBy;
     }
 
-    public DocumentQuality getDocumentQuality() {
-        return documentQuality;
+    public DefinitionReference getDraftOf() {
+        return draftOf;
     }
 
-    public void setDocumentQuality(final DocumentQuality documentQuality) {
-        this.documentQuality = documentQuality;
+    public void setDraftOf(final DefinitionReference draftOf) {
+        this.draftOf = draftOf;
     }
 
-    public int getParentDefinitionId() {
-        return parentDefinitionId;
+    public DefinitionQuality getQuality() {
+        return quality;
     }
 
-    public void setParentDefinitionId(final int parentDefinitionId) {
-        this.parentDefinitionId = parentDefinitionId;
+    public void setQuality(final DefinitionQuality quality) {
+        this.quality = quality;
     }
 
-    public TeamProjectReference getProject() {
-        return project;
+    public AgentPoolQueue getQueue() {
+        return queue;
     }
 
-    public void setProject(final TeamProjectReference project) {
-        this.project = project;
+    public void setQueue(final AgentPoolQueue queue) {
+        this.queue = queue;
     }
 }

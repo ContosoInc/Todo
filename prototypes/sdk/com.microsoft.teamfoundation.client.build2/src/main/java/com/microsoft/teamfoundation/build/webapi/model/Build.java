@@ -6,39 +6,56 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.AgentPoolQueue;
+import com.microsoft.teamfoundation.build.webapi.model.BuildController;
+import com.microsoft.teamfoundation.build.webapi.model.BuildLogReference;
+import com.microsoft.teamfoundation.build.webapi.model.BuildReason;
+import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
+import com.microsoft.teamfoundation.build.webapi.model.BuildRequestValidationResult;
+import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
+import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.Demand;
+import com.microsoft.teamfoundation.build.webapi.model.QueueOptions;
+import com.microsoft.teamfoundation.build.webapi.model.QueuePriority;
+import com.microsoft.teamfoundation.build.webapi.model.TaskOrchestrationPlanReference;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Build {
 
+    private ReferenceLinks _links;
     private String buildNumber;
-    private BuildDefinitionReference definition;
+    private BuildController controller;
+    private DefinitionReference definition;
     private List<Demand> demands;
     private Date finishTime;
     private int id;
     private boolean keepForever;
     private IdentityRef lastChangedBy;
     private Date lastChangedDate;
-    private LogLocationReference log;
+    private BuildLogReference logs;
     private TaskOrchestrationPlanReference orchestrationPlan;
     private String parameters;
     private QueuePriority priority;
     private TeamProjectReference project;
     private PropertiesCollection properties;
-    private QueueReference queue;
+    private AgentPoolQueue queue;
     private QueueOptions queueOptions;
     private int queuePosition;
     private Date queueTime;
@@ -52,8 +69,17 @@ public class Build {
     private Date startTime;
     private BuildStatus status;
     private List<String> tags;
-    private String uri;
+    private URI uri;
+    private String url;
     private List<BuildRequestValidationResult> validationResults;
+
+    public ReferenceLinks get_links() {
+        return _links;
+    }
+
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
+    }
 
     public String getBuildNumber() {
         return buildNumber;
@@ -63,11 +89,19 @@ public class Build {
         this.buildNumber = buildNumber;
     }
 
-    public BuildDefinitionReference getDefinition() {
+    public BuildController getController() {
+        return controller;
+    }
+
+    public void setController(final BuildController controller) {
+        this.controller = controller;
+    }
+
+    public DefinitionReference getDefinition() {
         return definition;
     }
 
-    public void setDefinition(final BuildDefinitionReference definition) {
+    public void setDefinition(final DefinitionReference definition) {
         this.definition = definition;
     }
 
@@ -119,12 +153,12 @@ public class Build {
         this.lastChangedDate = lastChangedDate;
     }
 
-    public LogLocationReference getLog() {
-        return log;
+    public BuildLogReference getLogs() {
+        return logs;
     }
 
-    public void setLog(final LogLocationReference log) {
-        this.log = log;
+    public void setLogs(final BuildLogReference logs) {
+        this.logs = logs;
     }
 
     public TaskOrchestrationPlanReference getOrchestrationPlan() {
@@ -167,11 +201,11 @@ public class Build {
         this.properties = properties;
     }
 
-    public QueueReference getQueue() {
+    public AgentPoolQueue getQueue() {
         return queue;
     }
 
-    public void setQueue(final QueueReference queue) {
+    public void setQueue(final AgentPoolQueue queue) {
         this.queue = queue;
     }
 
@@ -279,12 +313,20 @@ public class Build {
         this.tags = tags;
     }
 
-    public String getUri() {
+    public URI getUri() {
         return uri;
     }
 
-    public void setUri(final String uri) {
+    public void setUri(final URI uri) {
         this.uri = uri;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
     }
 
     public List<BuildRequestValidationResult> getValidationResults() {

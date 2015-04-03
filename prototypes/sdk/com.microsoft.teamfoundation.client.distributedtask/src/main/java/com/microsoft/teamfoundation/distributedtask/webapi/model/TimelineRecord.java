@@ -6,17 +6,24 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.Issue;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLogReference;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskResult;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecordState;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineReference;
+import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TimelineRecord {
 
@@ -34,11 +41,11 @@ public class TimelineRecord {
     private int order;
     private UUID parentId;
     private int percentComplete;
-    private String recordType;
     private TaskResult result;
     private String resultCode;
     private Date startTime;
     private TimelineRecordState state;
+    private String type;
     private int warningCount;
     private String workerName;
 
@@ -154,16 +161,6 @@ public class TimelineRecord {
         this.percentComplete = percentComplete;
     }
 
-    @JsonProperty("type")
-    public String getRecordType() {
-        return recordType;
-    }
-
-    @JsonProperty("type")
-    public void setRecordType(final String recordType) {
-        this.recordType = recordType;
-    }
-
     public TaskResult getResult() {
         return result;
     }
@@ -194,6 +191,14 @@ public class TimelineRecord {
 
     public void setState(final TimelineRecordState state) {
         this.state = state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(final String type) {
+        this.type = type;
     }
 
     public int getWarningCount() {

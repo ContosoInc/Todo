@@ -3,16 +3,19 @@ package com.microsoft.vss.client.test.build;
 import java.net.URI;
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import javax.ws.rs.client.Client;
 
+import com.microsoft.teamfoundation.build.webapi.model.AgentPoolQueue;
 import com.microsoft.teamfoundation.build.webapi.model.BuildDefinition;
 import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
 import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
 import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
-import com.microsoft.teamfoundation.build.webapi.model.QueueReference;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionType;
 import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class BuildDefinitionTests
     extends BuildTestBase {
@@ -28,13 +31,13 @@ public class BuildDefinitionTests
 
         final UUID projectId = getProjectIdByName(projectName);
 
-        final List<BuildDefinitionReference> definitions = buildClient.getDefinitions(projectId);
+        final List<DefinitionReference> definitions = buildClient.getDefinitions(projectId);
 
         System.out.println(definitions.size() + " definition(s) read"); //$NON-NLS-1$
         System.out.println();
 
-        for (final BuildDefinitionReference definition : definitions) {
-            printBuildDefinitionReference(definition);
+        for (final DefinitionReference definition : definitions) {
+            printBuildDefinitionReference((BuildDefinitionReference) definition);
         }
 
     }
@@ -47,13 +50,14 @@ public class BuildDefinitionTests
 
         final UUID projectId = getProjectIdByName(projectName);
 
-        final List<BuildDefinitionReference> definitions = buildClient.getDefinitions(projectId, definitionName);
+        final List<DefinitionReference> definitions =
+            buildClient.getDefinitions(projectId, definitionName, DefinitionType.BUILD);
 
         System.out.println(definitions.size() + " definition(s) read"); //$NON-NLS-1$
         System.out.println();
 
-        for (final BuildDefinitionReference definition : definitions) {
-            printBuildDefinitionReference(definition);
+        for (final DefinitionReference definition : definitions) {
+            printBuildDefinitionReference((BuildDefinitionReference) definition);
         }
 
     }
@@ -64,27 +68,37 @@ public class BuildDefinitionTests
         System.out.println("                Url = " + reference.getUrl()); //$NON-NLS-1$
     }
 
-    private void printQueueReference(final QueueReference queue) {
-        printReference(queue);
-        System.out.println("          QueueType = " + queue.getQueueType()); //$NON-NLS-1$
-    }
-
     private void printDefinitionReference(final DefinitionReference definitionReference) {
         printReference(definitionReference);
         System.out.println("                Uri = " + definitionReference.getUri()); //$NON-NLS-1$
-        System.out.println("     DefinitionType = " + definitionReference.getDefinitionType()); //$NON-NLS-1$
-        System.out.println("               Queue: "); //$NON-NLS-1$
-        printQueueReference(definitionReference.getQueue());
+        System.out.println("     DefinitionType = " + definitionReference.getType()); //$NON-NLS-1$
         System.out.println("        QueueStatus = " + definitionReference.getQueueStatus()); //$NON-NLS-1$
         System.out.println("           Revision = " + definitionReference.getRevision()); //$NON-NLS-1$
     }
 
     private void printBuildDefinitionReference(final BuildDefinitionReference buildDefinitionReference) {
         printDefinitionReference(buildDefinitionReference);
-        System.out.println("    DocumentQuality = " + buildDefinitionReference.getDocumentQuality()); //$NON-NLS-1$
+        System.out.println("    DocumentQuality = " + buildDefinitionReference.getQuality()); //$NON-NLS-1$
         System.out.println("         AuthoredBy = " + buildDefinitionReference.getAuthoredBy().getDisplayName()); //$NON-NLS-1$
-        System.out.println(" ParentDefinitionId = " + buildDefinitionReference.getParentDefinitionId()); //$NON-NLS-1$
+        System.out.println("            DraftOf : "); //$NON-NLS-1$
+        printDefinitionReference(buildDefinitionReference.getDraftOf());
         System.out.println("            Project = " + buildDefinitionReference.getProject().getName()); //$NON-NLS-1$
+        System.out.println("              Queue : "); //$NON-NLS-1$
+        printAgentPoolQueue(buildDefinitionReference.getQueue());
+    }
+
+    private void printAgentPoolQueue(final AgentPoolQueue queue) {
+        System.out.println("                 Id = " + queue.getId()); //$NON-NLS-1$
+        System.out.println("               Name = " + queue.getName()); //$NON-NLS-1$
+        System.out.println("                Uri = " + queue.getUrl()); //$NON-NLS-1$
+        System.out.println("             _links : "); //$NON-NLS-1$
+        printReferenceLinks(queue.get_links());
+    }
+
+    private void printReferenceLinks(final ReferenceLinks links) {
+        for (final Entry<String, Object> link : links.getLinks().entrySet()) {
+            System.out.println("[" + link.getKey() + ", " + link.getValue() + "]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        }
     }
 
     private void printBuildRepository(final BuildRepository repository) {

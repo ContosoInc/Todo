@@ -6,21 +6,20 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.AuditAction;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildDefinitionRevision {
 
@@ -28,6 +27,7 @@ public class BuildDefinitionRevision {
     private Date changedDate;
     private AuditAction changeType;
     private String comment;
+    private String definitionUrl;
     private String name;
     private int revision;
 
@@ -61,6 +61,14 @@ public class BuildDefinitionRevision {
 
     public void setComment(final String comment) {
         this.comment = comment;
+    }
+
+    public String getDefinitionUrl() {
+        return definitionUrl;
+    }
+
+    public void setDefinitionUrl(final String definitionUrl) {
+        this.definitionUrl = definitionUrl;
     }
 
     public String getName() {

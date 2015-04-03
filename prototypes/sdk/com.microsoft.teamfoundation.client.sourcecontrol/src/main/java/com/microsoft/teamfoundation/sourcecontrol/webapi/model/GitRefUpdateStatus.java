@@ -6,16 +6,18 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public enum GitRefUpdateStatus {
 
@@ -33,6 +35,8 @@ public enum GitRefUpdateStatus {
     LOCKED(11),
     REF_NAME_CONFLICT(12),
     REJECTED_BY_POLICY(13),
+    SUCCEEDED_NON_EXISTENT_REF(14),
+    SUCCEEDED_CORRUPT_REF(15),
     ;
     
     private int value;
@@ -99,6 +103,14 @@ public enum GitRefUpdateStatus {
 
         if (name.equals("REJECTED_BY_POLICY")) { //$NON-NLS-1$
             return "rejectedByPolicy"; //$NON-NLS-1$
+        }
+
+        if (name.equals("SUCCEEDED_NON_EXISTENT_REF")) { //$NON-NLS-1$
+            return "succeededNonExistentRef"; //$NON-NLS-1$
+        }
+
+        if (name.equals("SUCCEEDED_CORRUPT_REF")) { //$NON-NLS-1$
+            return "succeededCorruptRef"; //$NON-NLS-1$
         }
 
         return null;

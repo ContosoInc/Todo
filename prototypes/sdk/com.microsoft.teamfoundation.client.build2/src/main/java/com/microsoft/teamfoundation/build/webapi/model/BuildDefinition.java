@@ -6,37 +6,72 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionStep;
+import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionVariable;
+import com.microsoft.teamfoundation.build.webapi.model.BuildOption;
+import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
+import com.microsoft.teamfoundation.build.webapi.model.BuildTrigger;
+import com.microsoft.teamfoundation.build.webapi.model.Demand;
+import com.microsoft.teamfoundation.build.webapi.model.RetentionPolicy;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildDefinition
     extends BuildDefinitionReference {
 
+    private ReferenceLinks _links;
+    private boolean badgeEnabled;
+    private List<BuildDefinitionStep> build;
     private String buildNumberFormat;
     private String comment;
-    private Date createdOn;
+    private Date createdDate;
     private List<Demand> demands;
     private String description;
     private String dropLocation;
+    private int jobTimeoutInMinutes;
     private List<BuildOption> options;
+    private PropertiesCollection properties;
     private BuildRepository repository;
     private List<RetentionPolicy> retentionRules;
-    private List<BuildDefinitionStep> steps;
     private List<BuildTrigger> triggers;
     private HashMap<String,BuildDefinitionVariable> variables;
+
+    public ReferenceLinks get_links() {
+        return _links;
+    }
+
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
+    }
+
+    public boolean getBadgeEnabled() {
+        return badgeEnabled;
+    }
+
+    public void setBadgeEnabled(final boolean badgeEnabled) {
+        this.badgeEnabled = badgeEnabled;
+    }
+
+    public List<BuildDefinitionStep> getBuild() {
+        return build;
+    }
+
+    public void setBuild(final List<BuildDefinitionStep> build) {
+        this.build = build;
+    }
 
     public String getBuildNumberFormat() {
         return buildNumberFormat;
@@ -54,12 +89,12 @@ public class BuildDefinition
         this.comment = comment;
     }
 
-    public Date getCreatedOn() {
-        return createdOn;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreatedOn(final Date createdOn) {
-        this.createdOn = createdOn;
+    public void setCreatedDate(final Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public List<Demand> getDemands() {
@@ -86,12 +121,28 @@ public class BuildDefinition
         this.dropLocation = dropLocation;
     }
 
+    public int getJobTimeoutInMinutes() {
+        return jobTimeoutInMinutes;
+    }
+
+    public void setJobTimeoutInMinutes(final int jobTimeoutInMinutes) {
+        this.jobTimeoutInMinutes = jobTimeoutInMinutes;
+    }
+
     public List<BuildOption> getOptions() {
         return options;
     }
 
     public void setOptions(final List<BuildOption> options) {
         this.options = options;
+    }
+
+    public PropertiesCollection getProperties() {
+        return properties;
+    }
+
+    public void setProperties(final PropertiesCollection properties) {
+        this.properties = properties;
     }
 
     public BuildRepository getRepository() {
@@ -108,14 +159,6 @@ public class BuildDefinition
 
     public void setRetentionRules(final List<RetentionPolicy> retentionRules) {
         this.retentionRules = retentionRules;
-    }
-
-    public List<BuildDefinitionStep> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(final List<BuildDefinitionStep> steps) {
-        this.steps = steps;
     }
 
     public List<BuildTrigger> getTriggers() {

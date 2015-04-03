@@ -6,45 +6,40 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.visualstudio.services.forminput.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.build.webapi.events.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.build.webapi.model.ControllerStatus;
+import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
+import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BuildController
-    extends QueueReference {
+    extends ShallowReference {
 
-    private List<ShallowReference> agents;
+    private ReferenceLinks _links;
     private Date createdDate;
-    private String customAssemblyPath;
     private String description;
     private boolean enabled;
-    private int maxConcurrentBuilds;
-    private String messageQueueUrl;
-    private int queueCount;
-    private ShallowReference server;
     private ControllerStatus status;
-    private String statusMessage;
     private Date updatedDate;
-    private String uri;
+    private URI uri;
 
-    public List<ShallowReference> getAgents() {
-        return agents;
+    public ReferenceLinks get_links() {
+        return _links;
     }
 
-    public void setAgents(final List<ShallowReference> agents) {
-        this.agents = agents;
+    public void set_links(final ReferenceLinks _links) {
+        this._links = _links;
     }
 
     public Date getCreatedDate() {
@@ -53,14 +48,6 @@ public class BuildController
 
     public void setCreatedDate(final Date createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public String getCustomAssemblyPath() {
-        return customAssemblyPath;
-    }
-
-    public void setCustomAssemblyPath(final String customAssemblyPath) {
-        this.customAssemblyPath = customAssemblyPath;
     }
 
     public String getDescription() {
@@ -79,52 +66,12 @@ public class BuildController
         this.enabled = enabled;
     }
 
-    public int getMaxConcurrentBuilds() {
-        return maxConcurrentBuilds;
-    }
-
-    public void setMaxConcurrentBuilds(final int maxConcurrentBuilds) {
-        this.maxConcurrentBuilds = maxConcurrentBuilds;
-    }
-
-    public String getMessageQueueUrl() {
-        return messageQueueUrl;
-    }
-
-    public void setMessageQueueUrl(final String messageQueueUrl) {
-        this.messageQueueUrl = messageQueueUrl;
-    }
-
-    public int getQueueCount() {
-        return queueCount;
-    }
-
-    public void setQueueCount(final int queueCount) {
-        this.queueCount = queueCount;
-    }
-
-    public ShallowReference getServer() {
-        return server;
-    }
-
-    public void setServer(final ShallowReference server) {
-        this.server = server;
-    }
-
     public ControllerStatus getStatus() {
         return status;
     }
 
     public void setStatus(final ControllerStatus status) {
         this.status = status;
-    }
-
-    public String getStatusMessage() {
-        return statusMessage;
-    }
-
-    public void setStatusMessage(final String statusMessage) {
-        this.statusMessage = statusMessage;
     }
 
     public Date getUpdatedDate() {
@@ -135,11 +82,11 @@ public class BuildController
         this.updatedDate = updatedDate;
     }
 
-    public String getUri() {
+    public URI getUri() {
         return uri;
     }
 
-    public void setUri(final String uri) {
+    public void setUri(final URI uri) {
         this.uri = uri;
     }
 }

@@ -6,22 +6,27 @@
 * ---------------------------------------------------------
 * Generated file, DO NOT EDIT
 * ---------------------------------------------------------
+*
+* See following wiki page for instructions on how to regenerate:
+*   https://vsowiki.com/index.php?title=Rest_Client_Generation
 */
+
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.net.*;
-import java.util.*;
-
-import com.microsoft.vss.client.core.model.*;
-import com.microsoft.visualstudio.services.webapi.model.*;
-import com.microsoft.teamfoundation.core.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.Demand;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskInstance;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskOrchestrationItem;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class TaskOrchestrationJob
     extends TaskOrchestrationItem {
 
     private List<Demand> demands;
+    private String executionTimeout;
     private UUID instanceId;
     private String name;
     private List<TaskInstance> tasks;
@@ -33,6 +38,14 @@ public class TaskOrchestrationJob
 
     public void setDemands(final List<Demand> demands) {
         this.demands = demands;
+    }
+
+    public String getExecutionTimeout() {
+        return executionTimeout;
+    }
+
+    public void setExecutionTimeout(final String executionTimeout) {
+        this.executionTimeout = executionTimeout;
     }
 
     public UUID getInstanceId() {
