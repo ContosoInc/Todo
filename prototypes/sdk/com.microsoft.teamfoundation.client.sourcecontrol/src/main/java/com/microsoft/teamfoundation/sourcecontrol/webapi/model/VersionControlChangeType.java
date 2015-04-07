@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum VersionControlChangeType {
 
@@ -38,6 +33,7 @@ public enum VersionControlChangeType {
     ALL(8191),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private VersionControlChangeType(final int value) {

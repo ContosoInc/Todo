@@ -13,19 +13,12 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitCommitRef;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepository;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.IdentityRefWithVote;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.PullRequestAsyncStatus;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.PullRequestStatus;
+import java.util.Date;
+import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
 import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import com.microsoft.vss.client.core.json.JObject;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class GitPullRequest {
 
@@ -50,11 +43,13 @@ public class GitPullRequest {
     private String title;
     private String url;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

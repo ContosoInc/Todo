@@ -13,12 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.ArtifactResource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class BuildArtifact {
 

@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum TaskOrchestrationPlanState {
 
@@ -26,6 +21,7 @@ public enum TaskOrchestrationPlanState {
     COMPLETED(4),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private TaskOrchestrationPlanState(final int value) {

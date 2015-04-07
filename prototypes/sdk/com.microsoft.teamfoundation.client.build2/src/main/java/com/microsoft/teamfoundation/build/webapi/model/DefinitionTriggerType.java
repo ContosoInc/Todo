@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum DefinitionTriggerType {
 
@@ -30,6 +25,7 @@ public enum DefinitionTriggerType {
     ALL(63),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private DefinitionTriggerType(final int value) {

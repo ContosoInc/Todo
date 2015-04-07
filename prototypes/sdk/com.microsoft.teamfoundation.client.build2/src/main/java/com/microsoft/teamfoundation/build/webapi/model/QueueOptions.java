@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum QueueOptions {
 
@@ -25,6 +20,7 @@ public enum QueueOptions {
     DO_NOT_RUN(1),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private QueueOptions(final int value) {

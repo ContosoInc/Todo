@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum DeleteOptions {
 
@@ -30,6 +25,7 @@ public enum DeleteOptions {
     ALL(31),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private DeleteOptions(final int value) {

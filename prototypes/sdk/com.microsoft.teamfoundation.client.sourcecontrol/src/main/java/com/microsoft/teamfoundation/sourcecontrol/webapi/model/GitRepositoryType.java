@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum GitRepositoryType {
 
@@ -25,6 +20,7 @@ public enum GitRepositoryType {
     SUPER((byte) 1),
     ;
     
+    @SuppressWarnings("unused")
     private byte value;
 
     private GitRepositoryType(final byte value) {

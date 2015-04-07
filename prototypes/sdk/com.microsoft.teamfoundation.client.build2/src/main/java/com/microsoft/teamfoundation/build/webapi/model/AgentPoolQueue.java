@@ -13,14 +13,8 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
-import com.microsoft.teamfoundation.build.webapi.model.TaskAgentPoolReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class AgentPoolQueue
     extends ShallowReference {
@@ -28,11 +22,13 @@ public class AgentPoolQueue
     private ReferenceLinks _links;
     private TaskAgentPoolReference pool;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

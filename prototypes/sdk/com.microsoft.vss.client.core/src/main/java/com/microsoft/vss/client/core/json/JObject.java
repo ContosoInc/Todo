@@ -1,12 +1,22 @@
 package com.microsoft.vss.client.core.json;
 
-import java.util.HashMap;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.microsoft.vss.client.core.json.serialization.JObjectDeserializer;
+import com.microsoft.vss.client.core.json.serialization.JObjectSerializer;
 
-public class JObject
-    extends HashMap<String, Object> {
+@JsonDeserialize(using = JObjectDeserializer.class)
+@JsonSerialize(using = JObjectSerializer.class)
+public class JObject {
 
-    public JObject() {
-        super();
+    JsonNode root;
+
+    public JsonNode getRoot() {
+        return root;
     }
 
+    public void setRoot(final JsonNode root) {
+        this.root = root;
+    }
 }

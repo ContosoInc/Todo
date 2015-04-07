@@ -36,7 +36,7 @@ public class BuildTests
 
         final List<Build> builds =
             buildClient.getBuilds(projectId, null, null, null, calendar.getTime(), null, null, null, null, null, null,
-                null, 10, null);
+                null, null, 10, null);
 
         System.out.println(builds.size() + " build(s) read"); //$NON-NLS-1$
         System.out.println();

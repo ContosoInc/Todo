@@ -13,13 +13,10 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
 import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class TfvcChangesetRef {
 
@@ -32,11 +29,13 @@ public class TfvcChangesetRef {
     private Date createdDate;
     private String url;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

@@ -13,13 +13,10 @@
 
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import com.microsoft.teamfoundation.common.model.ProjectState;
-import com.microsoft.teamfoundation.core.webapi.model.ProjectProperty;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+import com.microsoft.teamfoundation.common.model.ProjectState;
 
 public class ProjectInfo {
 

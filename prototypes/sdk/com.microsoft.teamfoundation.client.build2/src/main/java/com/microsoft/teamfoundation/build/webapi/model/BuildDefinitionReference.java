@@ -13,15 +13,7 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.AgentPoolQueue;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionQuality;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class BuildDefinitionReference
     extends DefinitionReference {

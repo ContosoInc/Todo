@@ -13,16 +13,7 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import com.microsoft.teamfoundation.distributedtask.webapi.model.Demand;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskExecution;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskGroupDefinition;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskInputDefinition;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskSourceDefinition;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskVersion;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class TaskDefinition {

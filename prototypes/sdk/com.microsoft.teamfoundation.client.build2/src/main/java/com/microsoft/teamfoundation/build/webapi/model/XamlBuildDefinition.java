@@ -13,17 +13,9 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.BuildController;
-import com.microsoft.teamfoundation.build.webapi.model.BuildReason;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionTriggerType;
-import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
-import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class XamlBuildDefinition
     extends DefinitionReference {
@@ -40,11 +32,13 @@ public class XamlBuildDefinition
     private BuildReason supportedReasons;
     private DefinitionTriggerType triggerType;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

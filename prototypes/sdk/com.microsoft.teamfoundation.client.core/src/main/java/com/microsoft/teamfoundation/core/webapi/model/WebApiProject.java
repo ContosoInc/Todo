@@ -13,14 +13,7 @@
 
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
-import com.microsoft.teamfoundation.core.webapi.model.WebApiProjectCollectionRef;
-import com.microsoft.teamfoundation.core.webapi.model.WebApiTeamRef;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class WebApiProject
     extends TeamProjectReference {

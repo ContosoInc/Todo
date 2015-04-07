@@ -13,29 +13,14 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.AgentPoolQueue;
-import com.microsoft.teamfoundation.build.webapi.model.BuildController;
-import com.microsoft.teamfoundation.build.webapi.model.BuildLogReference;
-import com.microsoft.teamfoundation.build.webapi.model.BuildReason;
-import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
-import com.microsoft.teamfoundation.build.webapi.model.BuildRequestValidationResult;
-import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
-import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
-import com.microsoft.teamfoundation.build.webapi.model.Demand;
-import com.microsoft.teamfoundation.build.webapi.model.QueueOptions;
-import com.microsoft.teamfoundation.build.webapi.model.QueuePriority;
-import com.microsoft.teamfoundation.build.webapi.model.TaskOrchestrationPlanReference;
+import java.net.URI;
+import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
 import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
 import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
-import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class Build {
 
@@ -73,11 +58,13 @@ public class Build {
     private String url;
     private List<BuildRequestValidationResult> validationResults;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

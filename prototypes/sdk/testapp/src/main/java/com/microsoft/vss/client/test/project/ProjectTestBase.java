@@ -47,7 +47,7 @@ public class ProjectTestBase
         printProject((TeamProjectReference) project);
         System.out.println();
         System.out.println("Description     = " + project.getDescription()); //$NON-NLS-1$
-        System.out.println("TfsUri          = " + project.getTfsUri()); //$NON-NLS-1$
+        System.out.println("Url             = " + project.getUrl()); //$NON-NLS-1$
         System.out.println("Capabilities    = " + JsonUtil.toJson(project.getCapabilities())); //$NON-NLS-1$
         System.out.println("DefaultTeam     = " + JsonUtil.toJson(project.getDefaultTeam())); //$NON-NLS-1$
         System.out.println("Links           = " + JsonUtil.toJson(project.getLinks())); //$NON-NLS-1$

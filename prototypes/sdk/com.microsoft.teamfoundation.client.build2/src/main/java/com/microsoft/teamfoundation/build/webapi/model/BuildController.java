@@ -13,15 +13,10 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.ControllerStatus;
-import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
-import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import java.net.URI;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class BuildController
     extends ShallowReference {
@@ -34,11 +29,13 @@ public class BuildController
     private Date updatedDate;
     private URI uri;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

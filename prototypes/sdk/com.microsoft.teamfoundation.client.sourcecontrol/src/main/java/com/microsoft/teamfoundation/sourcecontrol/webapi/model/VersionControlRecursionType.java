@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum VersionControlRecursionType {
 
@@ -26,6 +21,7 @@ public enum VersionControlRecursionType {
     FULL(120),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private VersionControlRecursionType(final int value) {

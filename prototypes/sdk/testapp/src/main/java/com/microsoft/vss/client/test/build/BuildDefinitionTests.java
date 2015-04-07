@@ -92,7 +92,7 @@ public class BuildDefinitionTests
         System.out.println("               Name = " + queue.getName()); //$NON-NLS-1$
         System.out.println("                Uri = " + queue.getUrl()); //$NON-NLS-1$
         System.out.println("             _links : "); //$NON-NLS-1$
-        printReferenceLinks(queue.get_links());
+        printReferenceLinks(queue.getLinks());
     }
 
     private void printReferenceLinks(final ReferenceLinks links) {
@@ -118,11 +118,11 @@ public class BuildDefinitionTests
 
     private void printDefinition(final BuildDefinition buildDefinition) {
         printBuildDefinitionReference(buildDefinition);
-        System.out.println("          CreatedOn = " + buildDefinition.getCreatedOn()); //$NON-NLS-1$
+        System.out.println("  BuildNumberFormat = " + buildDefinition.getBuildNumberFormat()); //$NON-NLS-1$
         System.out.println("            Comment = " + buildDefinition.getComment()); //$NON-NLS-1$
         System.out.println("        Description = " + buildDefinition.getDescription()); //$NON-NLS-1$
         System.out.println("       DropLocation = " + buildDefinition.getDropLocation()); //$NON-NLS-1$
-        System.out.println("              Steps = [ count " + buildDefinition.getSteps().size() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println("         BuildSteps = [ count " + buildDefinition.getBuild().size() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
         System.out.println("            Options = [ count " + buildDefinition.getOptions().size() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
         printBuildRepository(buildDefinition.getRepository());
         System.out.println("           Triggers = [ count " + buildDefinition.getTriggers().size() + "]"); //$NON-NLS-1$ //$NON-NLS-2$

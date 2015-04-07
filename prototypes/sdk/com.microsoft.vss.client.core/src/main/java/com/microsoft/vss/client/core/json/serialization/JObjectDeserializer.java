@@ -6,17 +6,24 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.vss.client.core.json.JObject;
 
 public class JObjectDeserializer
     extends JsonDeserializer<JObject> {
 
     @Override
-    public JObject deserialize(JsonParser arg0, DeserializationContext arg1)
+    public JObject deserialize(JsonParser parser, DeserializationContext context)
         throws IOException,
             JsonProcessingException {
-        // TODO Auto-generated method stub
-        return null;
+
+        final JObject result = new JObject();
+
+        final ObjectMapper mapper = (ObjectMapper) parser.getCodec();
+        result.setRoot((JsonNode) mapper.readTree(parser));
+
+        return result;
     }
 
 }

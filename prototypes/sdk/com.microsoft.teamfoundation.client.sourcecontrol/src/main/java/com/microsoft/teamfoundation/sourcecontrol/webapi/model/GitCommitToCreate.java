@@ -13,13 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitPathAction;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRef;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class GitCommitToCreate {
 

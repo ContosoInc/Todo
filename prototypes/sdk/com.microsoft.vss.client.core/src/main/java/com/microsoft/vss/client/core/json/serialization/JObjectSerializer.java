@@ -12,11 +12,10 @@ public class JObjectSerializer
     extends JsonSerializer<JObject> {
 
     @Override
-    public void serialize(JObject arg0, JsonGenerator arg1, SerializerProvider arg2)
+    public void serialize(JObject value, JsonGenerator writer, SerializerProvider serializer)
         throws IOException,
             JsonProcessingException {
-        // TODO Auto-generated method stub
-
+        writer.writeTree(value.getRoot());
     }
 
 }

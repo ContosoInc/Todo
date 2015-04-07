@@ -13,13 +13,8 @@
 
 package com.microsoft.teamfoundation.core.webapi.model;
 
-import com.microsoft.teamfoundation.core.webapi.model.TeamProjectCollectionReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class TeamProjectCollection
     extends TeamProjectCollectionReference {
@@ -28,11 +23,13 @@ public class TeamProjectCollection
     private String description;
     private String state;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

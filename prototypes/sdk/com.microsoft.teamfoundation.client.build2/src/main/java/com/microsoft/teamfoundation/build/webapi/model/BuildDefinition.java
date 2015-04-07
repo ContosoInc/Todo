@@ -13,21 +13,12 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
-import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionStep;
-import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionVariable;
-import com.microsoft.teamfoundation.build.webapi.model.BuildOption;
-import com.microsoft.teamfoundation.build.webapi.model.BuildRepository;
-import com.microsoft.teamfoundation.build.webapi.model.BuildTrigger;
-import com.microsoft.teamfoundation.build.webapi.model.Demand;
-import com.microsoft.teamfoundation.build.webapi.model.RetentionPolicy;
-import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
-import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class BuildDefinition
     extends BuildDefinitionReference {
@@ -49,11 +40,13 @@ public class BuildDefinition
     private List<BuildTrigger> triggers;
     private HashMap<String,BuildDefinitionVariable> variables;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

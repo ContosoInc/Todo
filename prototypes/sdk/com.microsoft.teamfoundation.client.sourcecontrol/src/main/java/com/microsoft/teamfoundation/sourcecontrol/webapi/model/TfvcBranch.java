@@ -13,15 +13,7 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcBranch;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcBranchMapping;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcBranchRef;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcShallowBranchRef;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class TfvcBranch
     extends TfvcBranchRef {

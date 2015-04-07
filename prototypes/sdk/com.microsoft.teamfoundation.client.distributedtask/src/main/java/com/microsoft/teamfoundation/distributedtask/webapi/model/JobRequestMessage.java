@@ -13,15 +13,8 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import com.microsoft.teamfoundation.distributedtask.webapi.model.JobAuthorization;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.JobEnvironment;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskInstance;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskOrchestrationPlanReference;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineReference;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class JobRequestMessage {

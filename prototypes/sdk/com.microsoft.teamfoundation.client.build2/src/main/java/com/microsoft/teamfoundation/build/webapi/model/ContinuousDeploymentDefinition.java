@@ -13,14 +13,8 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.teamfoundation.core.webapi.model.WebApiConnectedServiceRef;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class ContinuousDeploymentDefinition {
 

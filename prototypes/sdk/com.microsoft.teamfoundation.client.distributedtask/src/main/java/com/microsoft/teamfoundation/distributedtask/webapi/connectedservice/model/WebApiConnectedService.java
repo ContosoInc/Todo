@@ -13,14 +13,7 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.connectedservice.model;
 
-import com.microsoft.teamfoundation.distributedtask.webapi.connectedservice.model.TeamProjectReference;
-import com.microsoft.teamfoundation.distributedtask.webapi.connectedservice.model.WebApiConnectedServiceRef;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class WebApiConnectedService
     extends WebApiConnectedServiceRef {

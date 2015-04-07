@@ -13,15 +13,7 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.AssociatedWorkItem;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.CheckinNote;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcChange;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcChangesetRef;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.TfvcPolicyOverrideInfo;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class TfvcChangeset

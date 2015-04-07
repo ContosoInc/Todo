@@ -13,18 +13,12 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.BuildLogReference;
-import com.microsoft.teamfoundation.build.webapi.model.Issue;
-import com.microsoft.teamfoundation.build.webapi.model.TaskResult;
-import com.microsoft.teamfoundation.build.webapi.model.TimelineRecordState;
-import com.microsoft.teamfoundation.build.webapi.model.TimelineReference;
-import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 import java.net.URI;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.visualstudio.services.webapi.model.ReferenceLinks;
 
 public class TimelineRecord {
 
@@ -51,11 +45,13 @@ public class TimelineRecord {
     private int warningCount;
     private String workerName;
 
-    public ReferenceLinks get_links() {
+    @JsonProperty("_links")
+    public ReferenceLinks getLinks() {
         return _links;
     }
 
-    public void set_links(final ReferenceLinks _links) {
+    @JsonProperty("_links")
+    public void setLinks(final ReferenceLinks _links) {
         this._links = _links;
     }
 

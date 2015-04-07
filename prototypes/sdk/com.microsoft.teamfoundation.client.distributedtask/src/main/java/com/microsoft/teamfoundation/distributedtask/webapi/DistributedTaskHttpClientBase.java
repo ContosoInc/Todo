@@ -13,14 +13,15 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi;
 
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-
-import com.microsoft.vss.client.core.VssHttpClientBase;
-import com.microsoft.vss.client.core.model.ApiResourceVersion;
-import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgent;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentJobRequest;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentMessage;
@@ -28,12 +29,10 @@ import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentPool;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentSession;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskDefinition;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskDefinitionEndpoint;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.net.URI;
+import com.microsoft.vss.client.core.model.ApiResourceVersion;
+import com.microsoft.vss.client.core.model.NameValueCollection;
+import com.microsoft.vss.client.core.VssHttpClientBase;
+
 public abstract class DistributedTaskHttpClientBase 
     extends VssHttpClientBase {
 
@@ -67,16 +66,23 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgent
      */
-    public TaskAgent addAgent(final TaskAgent agent, final int poolId) {
+    public TaskAgent addAgent(
+        final TaskAgent agent, 
+        final int poolId) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, agent, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           agent,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgent.class);
     }
@@ -87,7 +93,10 @@ public abstract class DistributedTaskHttpClientBase
      * @param agentId 
      *            
      */
-    public void deleteAgent(final int poolId, final int agentId) {
+    public void deleteAgent(
+        final int poolId, 
+        final int agentId) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -95,9 +104,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("agentId", agentId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -113,7 +124,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getAgent(final int poolId, final int agentId, final Boolean includeCapabilities, final String propertyFilters) {
+    public Response getAgent(
+        final int poolId,     final int agentId,     final Boolean includeCapabilities, 
+        final String propertyFilters) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -125,9 +139,12 @@ public abstract class DistributedTaskHttpClientBase
         queryParameters.addIfNotNull("includeCapabilities", includeCapabilities); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("propertyFilters", propertyFilters); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -145,7 +162,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return List<TaskAgent>
      */
-    public List<TaskAgent> getAgents(final int poolId, final String agentName, final Boolean includeCapabilities, final String propertyFilters, final String demands) {
+    public List<TaskAgent> getAgents(
+        final int poolId,     final String agentName,     final Boolean includeCapabilities,     final String propertyFilters, 
+        final String demands) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -158,9 +178,12 @@ public abstract class DistributedTaskHttpClientBase
         queryParameters.addIfNotEmpty("propertyFilters", propertyFilters); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("demands", demands); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<TaskAgent>>() {});
     }
@@ -174,7 +197,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgent
      */
-    public TaskAgent patchAgent(final TaskAgent agent, final int poolId, final int agentId) {
+    public TaskAgent patchAgent(
+        final TaskAgent agent,     final int poolId, 
+        final int agentId) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -182,9 +208,13 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("agentId", agentId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, agent, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           agent,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgent.class);
     }
@@ -198,7 +228,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgent
      */
-    public TaskAgent putAgent(final TaskAgent agent, final int poolId, final int agentId) {
+    public TaskAgent putAgent(
+        final TaskAgent agent,     final int poolId, 
+        final int agentId) {
+
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -206,9 +239,13 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("agentId", agentId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, agent, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           agent,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgent.class);
     }
@@ -220,7 +257,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getTaskHelp(final UUID taskId, final String versionString) {
+    public Response getTaskHelp(
+        final UUID taskId, 
+        final String versionString) {
+
         final UUID locationId = UUID.fromString("c7701e23-91ea-48d6-9520-8050efc046c2"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -228,9 +268,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("taskId", taskId); //$NON-NLS-1$
         routeValues.put("versionString", versionString); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -242,13 +284,19 @@ public abstract class DistributedTaskHttpClientBase
      *            Describes the URL to fetch.
      * @return List<String>
      */
-    public List<String> queryEndpoint(final TaskDefinitionEndpoint endpoint) {
+    public List<String> queryEndpoint(
+    
+        final TaskDefinitionEndpoint endpoint) {
+
         final UUID locationId = UUID.fromString("f223b809-8c33-4b7d-b53f-07232569b5d6"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, 
-                                apiVersion, endpoint, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           apiVersion,
+                                                           endpoint,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<String>>() {});
     }
@@ -260,7 +308,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getTaskIcon(final UUID taskId, final String versionString) {
+    public Response getTaskIcon(
+        final UUID taskId, 
+        final String versionString) {
+
         final UUID locationId = UUID.fromString("63463108-174d-49d4-b8cb-235eea42a5e1"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -268,9 +319,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("taskId", taskId); //$NON-NLS-1$
         routeValues.put("versionString", versionString); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -283,7 +336,10 @@ public abstract class DistributedTaskHttpClientBase
      * @param lockToken 
      *            
      */
-    public void deleteRequest(final int poolId, final long requestId, final UUID lockToken) {
+    public void deleteRequest(
+        final int poolId,     final long requestId, 
+        final UUID lockToken) {
+
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -292,13 +348,14 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("requestId", requestId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (lockToken != null) {
             queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -310,7 +367,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgentJobRequest
      */
-    public TaskAgentJobRequest getRequest(final int poolId, final long requestId) {
+    public TaskAgentJobRequest getRequest(
+        final int poolId, 
+        final long requestId) {
+
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -318,9 +378,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("requestId", requestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgentJobRequest.class);
     }
@@ -332,16 +394,23 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgentJobRequest
      */
-    public TaskAgentJobRequest queueRequest(final TaskAgentJobRequest request, final int poolId) {
+    public TaskAgentJobRequest queueRequest(
+        final TaskAgentJobRequest request, 
+        final int poolId) {
+
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, request, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           request,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgentJobRequest.class);
     }
@@ -357,7 +426,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgentJobRequest
      */
-    public TaskAgentJobRequest updateRequest(final TaskAgentJobRequest request, final int poolId, final long requestId, final UUID lockToken) {
+    public TaskAgentJobRequest updateRequest(
+        final TaskAgentJobRequest request,     final int poolId,     final long requestId, 
+        final UUID lockToken) {
+
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -366,13 +438,16 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("requestId", requestId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (lockToken != null) {
             queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, request, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           request,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgentJobRequest.class);
     }
@@ -386,7 +461,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response deleteMessageAsync(final int poolId, final long messageId, final UUID sessionId) {
+    public Response deleteMessage(
+        final int poolId,     final long messageId, 
+        final UUID sessionId) {
+
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -395,13 +473,14 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("messageId", messageId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (sessionId != null) {
             queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -415,7 +494,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getMessageAsync(final int poolId, final UUID sessionId, final Integer lastMessageId) {
+    public Response getMessage(
+        final int poolId,     final UUID sessionId, 
+        final Integer lastMessageId) {
+
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -423,14 +505,15 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (sessionId != null) {
             queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("lastMessageId", lastMessageId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<Response>() {});
     }
@@ -443,7 +526,10 @@ public abstract class DistributedTaskHttpClientBase
      * @param requestId 
      *            
      */
-    public void sendMessage(final TaskAgentMessage message, final int poolId, final int requestId) {
+    public void sendMessage(
+        final TaskAgentMessage message,     final int poolId, 
+        final int requestId) {
+
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -453,9 +539,14 @@ public abstract class DistributedTaskHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.put("requestId", String.valueOf(requestId)); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, message, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           message,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -467,16 +558,21 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getPackage(final String packageType) {
+    public Response getPackage(
+    
+        final String packageType) {
+
         final UUID locationId = UUID.fromString("8ffcd551-079c-493a-9c02-54346299d144"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("packageType", packageType); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -486,13 +582,19 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgentPool
      */
-    public TaskAgentPool addPool(final TaskAgentPool pool) {
+    public TaskAgentPool addPool(
+    
+        final TaskAgentPool pool) {
+
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, 
-                                apiVersion, pool, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           apiVersion,
+                                                           pool,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgentPool.class);
     }
@@ -501,16 +603,21 @@ public abstract class DistributedTaskHttpClientBase
      * @param poolId 
      *            
      */
-    public void deletePool(final int poolId) {
+    public void deletePool(
+    
+        final int poolId) {
+
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -522,7 +629,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getPool(final int poolId, final String properties) {
+    public Response getPool(
+        final int poolId, 
+        final String properties) {
+
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -532,9 +642,12 @@ public abstract class DistributedTaskHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("properties", properties); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -546,7 +659,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return List<TaskAgentPool>
      */
-    public List<TaskAgentPool> getPools(final String poolName, final String properties) {
+    public List<TaskAgentPool> getPools(
+        final String poolName, 
+        final String properties) {
+
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -554,9 +670,11 @@ public abstract class DistributedTaskHttpClientBase
         queryParameters.addIfNotEmpty("poolName", poolName); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("properties", properties); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<TaskAgentPool>>() {});
     }
@@ -568,16 +686,23 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return TaskAgentSession
      */
-    public TaskAgentSession createSession(final TaskAgentSession session, final int poolId) {
+    public TaskAgentSession createSession(
+        final TaskAgentSession session, 
+        final int poolId) {
+
         final UUID locationId = UUID.fromString("134e239e-2df3-4794-a6f6-24f1f19ec8dc"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, session, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           session,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskAgentSession.class);
     }
@@ -588,7 +713,10 @@ public abstract class DistributedTaskHttpClientBase
      * @param sessionId 
      *            
      */
-    public void deleteSession(final int poolId, final UUID sessionId) {
+    public void deleteSession(
+        final int poolId, 
+        final UUID sessionId) {
+
         final UUID locationId = UUID.fromString("134e239e-2df3-4794-a6f6-24f1f19ec8dc"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -596,9 +724,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("sessionId", sessionId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -610,29 +740,40 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response createTaskDefinition(final TaskDefinition definition, final Boolean overwrite) {
+    public Response createTaskDefinition(
+        final TaskDefinition definition, 
+        final Boolean overwrite) {
+
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("overwrite", overwrite); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, 
-                                apiVersion, definition, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           apiVersion,
+                                                           definition,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
 
     /** 
      */
-    public void deleteTaskDefinitions() {
+    public void deleteTaskDefinitions(
+    
+    ) {
+
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -644,7 +785,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response getTaskContent(final UUID taskId, final String versionString) {
+    public Response getTaskContent(
+        final UUID taskId, 
+        final String versionString) {
+
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -652,9 +796,11 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("taskId", taskId); //$NON-NLS-1$
         routeValues.put("versionString", versionString); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -664,18 +810,21 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return List<TaskDefinition>
      */
-    public List<TaskDefinition> getTaskDefinitions(final List<String> visibility) {
+    public List<TaskDefinition> getTaskDefinitions(
+    
+        final List<String> visibility) {
+
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (visibility != null) {
             queryParameters.addIfNotNull("visibility", visibility); //$NON-NLS-1$
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<TaskDefinition>>() {});
     }
@@ -689,7 +838,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadTaskContent(final UUID taskId, final String versionString, final Boolean overwrite) {
+    public Response uploadTaskContent(
+        final UUID taskId,     final String versionString, 
+        final Boolean overwrite) {
+
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -700,9 +852,12 @@ public abstract class DistributedTaskHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("overwrite", overwrite); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<Response>() {});
     }
@@ -716,7 +871,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return Response
      */
-    public Response updateUserCapabilities(final HashMap<String,String> userCapabilities, final int poolId, final int agentId) {
+    public Response updateUserCapabilities(
+        final HashMap<String,String> userCapabilities,     final int poolId, 
+        final int agentId) {
+
         final UUID locationId = UUID.fromString("30ba3ada-fedf-4da8-bbb5-dacf2f82e176"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -724,9 +882,13 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
         routeValues.put("agentId", agentId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, userCapabilities, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           userCapabilities,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }

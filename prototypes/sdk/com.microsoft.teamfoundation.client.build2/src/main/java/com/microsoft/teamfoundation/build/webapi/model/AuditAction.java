@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum AuditAction {
 
@@ -26,6 +21,7 @@ public enum AuditAction {
     DELETE(3),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private AuditAction(final int value) {

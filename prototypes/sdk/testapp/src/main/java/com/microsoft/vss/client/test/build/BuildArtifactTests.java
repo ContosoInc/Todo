@@ -32,12 +32,12 @@ public class BuildArtifactTests
 
     }
 
-    public void testGet_02(final int buildId) {
+    public void testGet_02(final String projectName, final int buildId) {
         System.out.println(MessageFormat.format(
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_02", this.getClass().getName())); //$NON-NLS-1$
 
-        final List<BuildArtifact> artifacts = buildClient.getArtifacts(buildId, "drop"); //$NON-NLS-1$
+        final List<BuildArtifact> artifacts = buildClient.getArtifacts(projectName, buildId);
 
         System.out.println(artifacts.size() + " artifact(s) read"); //$NON-NLS-1$
         System.out.println();

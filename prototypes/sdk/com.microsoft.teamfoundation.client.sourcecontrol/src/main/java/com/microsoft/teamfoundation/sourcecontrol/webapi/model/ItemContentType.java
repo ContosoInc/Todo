@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum ItemContentType {
 
@@ -25,6 +20,7 @@ public enum ItemContentType {
     BASE64_ENCODED(1),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private ItemContentType(final int value) {

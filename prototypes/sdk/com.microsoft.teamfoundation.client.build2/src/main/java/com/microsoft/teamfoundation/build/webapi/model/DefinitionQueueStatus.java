@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum DefinitionQueueStatus {
 
@@ -26,6 +21,7 @@ public enum DefinitionQueueStatus {
     DISABLED(2),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private DefinitionQueueStatus(final int value) {

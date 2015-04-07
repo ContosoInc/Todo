@@ -13,13 +13,8 @@
 
 package com.microsoft.teamfoundation.build.webapi.events.model;
 
-import com.microsoft.teamfoundation.build.webapi.events.model.RealtimeBuildEvent;
-import com.microsoft.teamfoundation.build.webapi.model.TimelineRecord;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.microsoft.teamfoundation.build.webapi.model.TimelineRecord;
 
 public class TimelineRecordsUpdatedEvent
     extends RealtimeBuildEvent {

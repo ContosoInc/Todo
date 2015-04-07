@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum BuildResult {
 
@@ -28,6 +23,7 @@ public enum BuildResult {
     CANCELED(32),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private BuildResult(final int value) {

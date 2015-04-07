@@ -13,13 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitCommit;
-import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitRepository;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class GitPushEventData {
 

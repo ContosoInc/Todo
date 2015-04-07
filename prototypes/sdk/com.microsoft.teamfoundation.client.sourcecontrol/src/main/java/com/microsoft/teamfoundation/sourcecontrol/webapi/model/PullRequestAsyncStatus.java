@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum PullRequestAsyncStatus {
 
@@ -29,6 +24,7 @@ public enum PullRequestAsyncStatus {
     FAILURE((byte) 5),
     ;
     
+    @SuppressWarnings("unused")
     private byte value;
 
     private PullRequestAsyncStatus(final byte value) {

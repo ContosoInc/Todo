@@ -4,6 +4,7 @@ public enum EnumerationSample {
 
     BAD(0), COMMIT(1), TREE(2), BLOB(3), TAG(4), EXT2(5), OFS_DELTA(6), REF_DELTA(7), ;
 
+    @SuppressWarnings("unused")
     private int value;
 
     private EnumerationSample(final int value) {

@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum GitPathActions {
 
@@ -28,6 +23,7 @@ public enum GitPathActions {
     RENAME((byte) 4),
     ;
     
+    @SuppressWarnings("unused")
     private byte value;
 
     private GitPathActions(final byte value) {

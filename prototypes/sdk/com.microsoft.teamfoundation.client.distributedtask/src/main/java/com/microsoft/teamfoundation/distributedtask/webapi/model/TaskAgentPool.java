@@ -13,14 +13,10 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskAgentPoolReference;
+import java.util.Date;
+import java.util.UUID;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
 import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class TaskAgentPool
     extends TaskAgentPoolReference {

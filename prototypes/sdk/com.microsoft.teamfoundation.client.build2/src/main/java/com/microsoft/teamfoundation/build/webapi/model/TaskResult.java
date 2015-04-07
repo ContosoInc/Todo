@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum TaskResult {
 
@@ -29,6 +24,7 @@ public enum TaskResult {
     ABANDONED(5),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private TaskResult(final int value) {

@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum WorkspaceMappingType {
 
@@ -25,6 +20,7 @@ public enum WorkspaceMappingType {
     CLOAK(1),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private WorkspaceMappingType(final int value) {

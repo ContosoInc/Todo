@@ -9,6 +9,7 @@ public enum ProjectState {
     // Used for the project history.
     DELETED(4);
 
+    @SuppressWarnings("unused")
     private final int value;
 
     private ProjectState(final int value) {

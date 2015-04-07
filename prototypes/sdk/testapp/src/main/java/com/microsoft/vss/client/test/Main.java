@@ -67,7 +67,7 @@ public class Main {
             artifactTests = new BuildArtifactTests(client, baseUri);
 
             artifactTests.testGet_01(1);
-            artifactTests.testGet_02(1);
+            artifactTests.testGet_02("gitTest_01", 1); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -150,7 +150,7 @@ public class Main {
             artifactTests = new BuildArtifactTests(client, baseUri);
 
             artifactTests.testGet_01(1);
-            artifactTests.testGet_02(1);
+            artifactTests.testGet_02("gitTest_01", 1); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -207,7 +207,7 @@ public class Main {
             artifactTests = new BuildArtifactTests(client, baseUri);
 
             artifactTests.testGet_01(112484);
-            artifactTests.testGet_02(112484);
+            artifactTests.testGet_02("VSOnline", 112484); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();

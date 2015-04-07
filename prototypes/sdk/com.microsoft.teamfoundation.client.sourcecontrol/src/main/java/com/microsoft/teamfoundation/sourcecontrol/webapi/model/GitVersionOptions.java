@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum GitVersionOptions {
 
@@ -26,6 +21,7 @@ public enum GitVersionOptions {
     FIRST_PARENT(2),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private GitVersionOptions(final int value) {

@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum TfvcVersionType {
 
@@ -31,6 +26,7 @@ public enum TfvcVersionType {
     MERGE_SOURCE(7),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private TfvcVersionType(final int value) {

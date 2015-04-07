@@ -13,13 +13,7 @@
 
 package com.microsoft.teamfoundation.build.webapi.events.model;
 
-import com.microsoft.teamfoundation.build.webapi.events.model.RealtimeBuildEvent;
 import com.microsoft.teamfoundation.build.webapi.model.Build;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class BuildUpdatedEvent
     extends RealtimeBuildEvent {

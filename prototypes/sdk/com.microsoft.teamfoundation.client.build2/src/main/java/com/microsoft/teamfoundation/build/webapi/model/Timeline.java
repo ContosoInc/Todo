@@ -13,12 +13,8 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.TimelineRecord;
-import com.microsoft.teamfoundation.build.webapi.model.TimelineReference;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class Timeline

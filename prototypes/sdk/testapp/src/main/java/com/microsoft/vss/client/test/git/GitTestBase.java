@@ -36,7 +36,7 @@ public class GitTestBase
         System.out.println("     RemoteUrl = " + repo.getRemoteUrl()); //$NON-NLS-1$
         System.out.println(" DefaultBranch = " + repo.getDefaultBranch()); //$NON-NLS-1$
         System.out.println("       Project : "); //$NON-NLS-1$
-        ProjectTests.printProject(repo.getProjectReference());
+        ProjectTests.printProject(repo.getProject());
     }
 
     void printRef(final GitRef ref) {
@@ -62,6 +62,6 @@ public class GitTestBase
         System.out.println("       Encoding = " + data.getEncoding()); //$NON-NLS-1$
         System.out.println("      Extension = " + data.getExtension()); //$NON-NLS-1$
         System.out.println("           Name = " + data.getFileName()); //$NON-NLS-1$
-        System.out.println("     VS WebLink = " + data.getVisualStudioWebLink()); //$NON-NLS-1$
+        System.out.println("     VS WebLink = " + data.getVsLink()); //$NON-NLS-1$
     }
 }

@@ -13,16 +13,8 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionQueueStatus;
-import com.microsoft.teamfoundation.build.webapi.model.DefinitionType;
-import com.microsoft.teamfoundation.build.webapi.model.ShallowReference;
-import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 
 public class DefinitionReference
     extends ShallowReference {

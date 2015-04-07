@@ -13,14 +13,16 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi;
 
+import java.io.InputStream;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
-
-import com.microsoft.vss.client.core.VssHttpClientBase;
-import com.microsoft.vss.client.core.model.ApiResourceVersion;
-import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.AssociatedWorkItem;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitBaseVersionDescriptor;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitBlobRef;
@@ -46,13 +48,10 @@ import com.microsoft.teamfoundation.sourcecontrol.webapi.model.GitVersionDescrip
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.IdentityRefWithVote;
 import com.microsoft.teamfoundation.sourcecontrol.webapi.model.VersionControlRecursionType;
 import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.io.InputStream;
-import java.net.URI;
+import com.microsoft.vss.client.core.model.ApiResourceVersion;
+import com.microsoft.vss.client.core.model.NameValueCollection;
+import com.microsoft.vss.client.core.VssHttpClientBase;
+
 public abstract class GitHttpClientBase 
     extends VssHttpClientBase {
 
@@ -94,7 +93,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final String project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -107,9 +109,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -129,7 +134,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final String project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -142,9 +150,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -164,7 +175,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final UUID project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -177,9 +191,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -199,7 +216,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final UUID project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -212,9 +232,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -232,7 +255,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -244,9 +270,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -264,7 +293,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBlobRef
      */
-    public GitBlobRef getBlob(final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public GitBlobRef getBlob(
+        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -276,9 +308,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBlobRef.class);
     }
@@ -298,7 +333,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final String project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -311,9 +349,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -333,7 +374,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final String project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -346,9 +390,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -368,7 +415,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final UUID project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -381,9 +431,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -403,7 +456,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final UUID project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -416,9 +472,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -436,7 +495,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -448,9 +510,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -468,7 +533,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobContent(final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobContent(
+        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -480,9 +548,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -496,7 +567,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final String repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final String repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -506,9 +580,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -522,7 +601,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final UUID repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final UUID repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -532,9 +614,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -550,7 +637,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final String project, final String repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final String project,     final String repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -561,9 +651,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -579,7 +674,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final String project, final UUID repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final String project,     final UUID repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -590,9 +688,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -608,7 +711,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final UUID project, final String repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final UUID project,     final String repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -619,9 +725,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -637,7 +748,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobsZip(final List<String> blobIds, final UUID project, final UUID repositoryId, final String filename) {
+    public InputStream getBlobsZip(
+        final List<String> blobIds,     final UUID project,     final UUID repositoryId, 
+        final String filename) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -648,9 +762,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("filename", filename); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, blobIds, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           blobIds,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -670,7 +789,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final String project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -683,9 +805,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -705,7 +830,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final String project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -718,9 +846,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -740,7 +871,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final UUID project, final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -753,9 +887,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -775,7 +912,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final UUID project, final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -788,9 +928,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -808,7 +951,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final String repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -820,9 +966,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -840,7 +989,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getBlobZip(final UUID repositoryId, final String sha1, final Boolean download, final String fileName) {
+    public InputStream getBlobZip(
+        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -852,9 +1004,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -872,7 +1027,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final String project, final String repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final String project,     final String repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -882,13 +1040,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -906,7 +1065,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final String project, final UUID repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final String project,     final UUID repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -916,13 +1078,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -940,7 +1103,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final UUID project, final String repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final UUID project,     final String repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -950,13 +1116,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -974,7 +1141,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final UUID project, final UUID repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final UUID project,     final UUID repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -984,13 +1154,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -1006,7 +1177,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final String repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final String repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1015,13 +1189,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -1037,7 +1212,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitBranchStats
      */
-    public GitBranchStats getBranch(final UUID repositoryId, final String name, final GitVersionDescriptor baseVersionDescriptor) {
+    public GitBranchStats getBranch(
+        final UUID repositoryId,     final String name, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1046,13 +1224,14 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("name", name); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitBranchStats.class);
     }
@@ -1068,7 +1247,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final String project, final String repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final String project,     final String repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1077,13 +1259,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1099,7 +1282,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final String project, final UUID repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final String project,     final UUID repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1108,13 +1294,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1130,7 +1317,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final UUID project, final String repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final UUID project,     final String repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1139,13 +1329,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1161,7 +1352,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final UUID project, final UUID repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final UUID project,     final UUID repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1170,13 +1364,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1190,7 +1385,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final String repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final String repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1198,13 +1396,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1218,7 +1417,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitBranchStats>
      */
-    public List<GitBranchStats> getBranches(final UUID repositoryId, final GitVersionDescriptor baseVersionDescriptor) {
+    public List<GitBranchStats> getBranches(
+        final UUID repositoryId, 
+        final GitVersionDescriptor baseVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1226,13 +1428,14 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitBranchStats>>() {});
     }
@@ -1252,7 +1455,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final String project, final String commitId, final String repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final String project,     final String commitId,     final String repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1265,9 +1471,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1287,7 +1496,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final String project, final String commitId, final UUID repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final String project,     final String commitId,     final UUID repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1300,9 +1512,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1322,7 +1537,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final UUID project, final String commitId, final String repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final UUID project,     final String commitId,     final String repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1335,9 +1553,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1357,7 +1578,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final UUID project, final String commitId, final UUID repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final UUID project,     final String commitId,     final UUID repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1370,9 +1594,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1390,7 +1617,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final String commitId, final String repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final String commitId,     final String repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1402,9 +1632,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1422,7 +1655,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to skip.
      * @return GitCommitChanges
      */
-    public GitCommitChanges getChanges(final String commitId, final UUID repositoryId, final Integer top, final Integer skip) {
+    public GitCommitChanges getChanges(
+        final String commitId,     final UUID repositoryId,     final Integer top, 
+        final Integer skip) {
+
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1434,9 +1670,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitChanges.class);
     }
@@ -1458,7 +1697,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final String project, final String repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final String project,     final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1470,16 +1712,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1501,7 +1742,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final String project, final UUID repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final String project,     final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1513,16 +1757,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1544,7 +1787,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final UUID project, final String repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final UUID project,     final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1556,16 +1802,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1587,7 +1832,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final UUID project, final UUID repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final UUID project,     final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1599,16 +1847,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1628,7 +1875,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final String repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1639,16 +1889,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1668,7 +1917,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitCommitDiffs
      */
-    public GitCommitDiffs getCommitDiffs(final UUID repositoryId, final Boolean diffCommonCommit, final Integer top, final Integer skip, final GitBaseVersionDescriptor baseVersionDescriptor, final GitTargetVersionDescriptor targetVersionDescriptor) {
+    public GitCommitDiffs getCommitDiffs(
+        final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final GitTargetVersionDescriptor targetVersionDescriptor) {
+
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1679,16 +1931,15 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("diffCommonCommit", diffCommonCommit); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
-        if (baseVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, baseVersionDescriptor);
-        }
-        if (targetVersionDescriptor != null) {
             addModelAsQueryParams(queryParameters, targetVersionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommitDiffs.class);
     }
@@ -1700,16 +1951,21 @@ public abstract class GitHttpClientBase
      *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
      * @return GitCommit
      */
-    public GitCommit createCommit(final String repositoryId) {
+    public GitCommit createCommit(
+    
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1721,40 +1977,21 @@ public abstract class GitHttpClientBase
      *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
      * @return GitCommit
      */
-    public GitCommit createCommit(final UUID repositoryId) {
+    public GitCommit createCommit(
+    
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, GitCommit.class);
-    }
-
-    /** 
-     * Create a git commit for a project
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
-     * @return GitCommit
-     */
-    public GitCommit createCommit(final String project, final String repositoryId) {
-        final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1768,7 +2005,10 @@ public abstract class GitHttpClientBase
      *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
      * @return GitCommit
      */
-    public GitCommit createCommit(final String project, final UUID repositoryId) {
+    public GitCommit createCommit(
+        final String project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1776,9 +2016,40 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, GitCommit.class);
+    }
+
+    /** 
+     * Create a git commit for a project
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
+     * @return GitCommit
+     */
+    public GitCommit createCommit(
+        final String project, 
+        final UUID repositoryId) {
+
+        final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1792,7 +2063,10 @@ public abstract class GitHttpClientBase
      *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
      * @return GitCommit
      */
-    public GitCommit createCommit(final UUID project, final String repositoryId) {
+    public GitCommit createCommit(
+        final UUID project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1800,9 +2074,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1816,7 +2092,10 @@ public abstract class GitHttpClientBase
      *            The id or friendly name of the repository. To use the friendly name, projectId must also be specified.
      * @return GitCommit
      */
-    public GitCommit createCommit(final UUID project, final UUID repositoryId) {
+    public GitCommit createCommit(
+        final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1824,9 +2103,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1844,7 +2125,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final String project, final String commitId, final String repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final String project,     final String commitId,     final String repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1856,9 +2140,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1876,7 +2163,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final String project, final String commitId, final UUID repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final String project,     final String commitId,     final UUID repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1888,9 +2178,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1908,7 +2201,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final UUID project, final String commitId, final String repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final UUID project,     final String commitId,     final String repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1920,9 +2216,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1940,7 +2239,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final UUID project, final String commitId, final UUID repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final UUID project,     final String commitId,     final UUID repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1952,9 +2254,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1970,7 +2275,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final String commitId, final String repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final String commitId,     final String repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -1981,9 +2289,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -1999,7 +2310,10 @@ public abstract class GitHttpClientBase
      *            The number of changes to include in the result.
      * @return GitCommit
      */
-    public GitCommit getCommit(final String commitId, final UUID repositoryId, final Integer changeCount) {
+    public GitCommit getCommit(
+        final String commitId,     final UUID repositoryId, 
+        final Integer changeCount) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2010,9 +2324,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("changeCount", changeCount); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitCommit.class);
     }
@@ -2030,7 +2347,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final String project, final String repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final String project,     final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2039,15 +2359,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2065,7 +2386,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final String project, final UUID repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final String project,     final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2074,15 +2398,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2100,7 +2425,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final UUID project, final String repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final UUID project,     final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2109,15 +2437,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2135,7 +2464,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final UUID project, final UUID repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final UUID project,     final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2144,15 +2476,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2168,7 +2501,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final String repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2176,15 +2512,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2200,7 +2537,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommits(final UUID repositoryId, final GitQueryCommitsCriteria searchCriteria, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommits(
+        final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2208,15 +2548,16 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2238,7 +2579,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final String project, final String repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final String project,     final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2252,9 +2596,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2276,7 +2623,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final String project, final UUID repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final String project,     final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2290,9 +2640,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2314,7 +2667,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final UUID project, final String repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final UUID project,     final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2328,9 +2684,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2352,7 +2711,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final UUID project, final UUID repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final UUID project,     final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2366,9 +2728,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2388,7 +2753,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final String repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2401,9 +2769,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2423,7 +2794,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getPushCommits(final UUID repositoryId, final int pushId, final Integer top, final Integer skip, final Boolean includeLinks) {
+    public List<GitCommitRef> getPushCommits(
+        final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2436,9 +2810,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2454,7 +2831,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final String repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final String repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2465,9 +2845,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2483,7 +2868,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final UUID repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final UUID repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2494,9 +2882,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2514,7 +2907,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final String project, final String repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final String project,     final String repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2526,9 +2922,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2546,7 +2947,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final String project, final UUID repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final String project,     final UUID repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2558,9 +2962,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2578,7 +2987,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final UUID project, final String repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final UUID project,     final String repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2590,9 +3002,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2610,7 +3027,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitCommitRef>
      */
-    public List<GitCommitRef> getCommitsBatch(final GitQueryCommitsCriteria searchCriteria, final UUID project, final UUID repositoryId, final Integer skip, final Integer top) {
+    public List<GitCommitRef> getCommitsBatch(
+        final GitQueryCommitsCriteria searchCriteria,     final UUID project,     final UUID repositoryId,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2622,9 +3042,14 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, searchCriteria, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           searchCriteria,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitCommitRef>>() {});
     }
@@ -2652,7 +3077,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final String project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2663,19 +3091,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2703,7 +3130,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final String project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2714,19 +3144,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2754,7 +3183,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final UUID project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2765,19 +3197,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2805,7 +3236,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final UUID project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2816,19 +3250,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2854,7 +3287,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2864,19 +3300,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2902,7 +3337,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitItem
      */
-    public GitItem getItem(final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public GitItem getItem(
+        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2912,19 +3350,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitItem.class);
     }
@@ -2952,7 +3389,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final String project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -2963,19 +3403,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3003,7 +3442,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final String project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3014,19 +3456,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3054,7 +3495,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final UUID project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3065,19 +3509,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3105,7 +3548,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final UUID project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3116,19 +3562,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3154,7 +3599,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3164,19 +3612,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3202,7 +3649,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemContent(final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemContent(
+        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3212,19 +3662,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_OCTET_STREAM_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_OCTET_STREAM_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3252,7 +3701,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final String project, final String repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final String project,     final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3262,20 +3714,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3303,7 +3754,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final String project, final UUID repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final String project,     final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3313,20 +3767,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3354,7 +3807,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final UUID project, final String repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final UUID project,     final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3364,20 +3820,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3405,7 +3860,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final UUID project, final UUID repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final UUID project,     final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3415,20 +3873,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3454,7 +3911,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final String repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3463,20 +3923,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3502,7 +3961,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitItem>
      */
-    public List<GitItem> getItems(final UUID repositoryId, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final Boolean includeLinks, final GitVersionDescriptor versionDescriptor) {
+    public List<GitItem> getItems(
+        final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3511,20 +3973,19 @@ public abstract class GitHttpClientBase
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitItem>>() {});
     }
@@ -3552,7 +4013,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final String project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3563,19 +4027,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3603,7 +4066,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final String project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3614,19 +4080,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3654,7 +4119,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final UUID project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3665,19 +4133,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3705,7 +4172,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final UUID project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3716,19 +4186,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3754,7 +4223,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3764,19 +4236,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3802,7 +4273,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemText(final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemText(
+        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3812,19 +4286,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, TEXT_PLAIN_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           TEXT_PLAIN_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3852,7 +4325,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final String project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3863,19 +4339,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3903,7 +4378,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final String project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3914,19 +4392,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -3954,7 +4431,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final UUID project, final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -3965,19 +4445,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -4005,7 +4484,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final UUID project, final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4016,19 +4498,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -4054,7 +4535,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final String repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4064,19 +4548,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -4102,7 +4585,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getItemZip(final UUID repositoryId, final String path, final String scopePath, final VersionControlRecursionType recursionLevel, final Boolean includeContentMetadata, final Boolean latestProcessedChange, final Boolean download, final GitVersionDescriptor versionDescriptor) {
+    public InputStream getItemZip(
+        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final GitVersionDescriptor versionDescriptor) {
+
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4112,19 +4598,18 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("path", path); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("scopePath", scopePath); //$NON-NLS-1$
-        if (recursionLevel != null) {
             queryParameters.addIfNotNull("recursionLevel", recursionLevel); //$NON-NLS-1$
-        }
         queryParameters.addIfNotNull("includeContentMetadata", includeContentMetadata); //$NON-NLS-1$
         queryParameters.addIfNotNull("latestProcessedChange", latestProcessedChange); //$NON-NLS-1$
         queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        if (versionDescriptor != null) {
             addModelAsQueryParams(queryParameters, versionDescriptor);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -4138,16 +4623,23 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final String repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4161,16 +4653,23 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final UUID repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4186,7 +4685,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final String project, final String repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData,     final String project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4194,9 +4696,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4212,7 +4718,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final String project, final UUID repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData,     final String project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4220,9 +4729,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4238,7 +4751,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final UUID project, final String repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData,     final UUID project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4246,9 +4762,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4264,7 +4784,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<List<GitItem>>
      */
-    public List<List<GitItem>> getItemsBatch(final GitItemRequestData requestData, final UUID project, final UUID repositoryId) {
+    public List<List<GitItem>> getItemsBatch(
+        final GitItemRequestData requestData,     final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4272,9 +4795,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, requestData, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           requestData,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<List<GitItem>>>() {});
     }
@@ -4290,7 +4817,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response getMediaObjectOrReference(final String repositoryId, final String mediaObjectId, final Boolean includeLinks) {
+    public Response getMediaObjectOrReference(
+        final String repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4299,9 +4829,11 @@ public abstract class GitHttpClientBase
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
         routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4317,7 +4849,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response getMediaObjectOrReference(final UUID repositoryId, final String mediaObjectId, final Boolean includeLinks) {
+    public Response getMediaObjectOrReference(
+        final UUID repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4326,39 +4861,11 @@ public abstract class GitHttpClientBase
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
         routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, Response.class);
-    }
-
-    /** 
-     * Gets the Git media object contents or metadata by the specified identifier.
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param mediaObjectId 
-     *            
-     * @param includeLinks 
-     *            
-     * @return Response
-     */
-    public Response getMediaObjectOrReference(final String project, final String repositoryId, final String mediaObjectId, final Boolean includeLinks) {
-        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
-        routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4376,7 +4883,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response getMediaObjectOrReference(final String project, final UUID repositoryId, final String mediaObjectId, final Boolean includeLinks) {
+    public Response getMediaObjectOrReference(
+        final String project,     final String repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4386,9 +4896,46 @@ public abstract class GitHttpClientBase
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
         routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, Response.class);
+    }
+
+    /** 
+     * Gets the Git media object contents or metadata by the specified identifier.
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param mediaObjectId 
+     *            
+     * @param includeLinks 
+     *            
+     * @return Response
+     */
+    public Response getMediaObjectOrReference(
+        final String project,     final UUID repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
+        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
+        routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4406,7 +4953,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response getMediaObjectOrReference(final UUID project, final String repositoryId, final String mediaObjectId, final Boolean includeLinks) {
+    public Response getMediaObjectOrReference(
+        final UUID project,     final String repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4416,9 +4966,11 @@ public abstract class GitHttpClientBase
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
         routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4436,7 +4988,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response getMediaObjectOrReference(final UUID project, final UUID repositoryId, final String mediaObjectId, final Boolean includeLinks) {
+    public Response getMediaObjectOrReference(
+        final UUID project,     final UUID repositoryId,     final String mediaObjectId, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4446,9 +5001,11 @@ public abstract class GitHttpClientBase
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
         routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4462,7 +5019,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response hasMediaObjectWritePermission(final String repositoryId, final String mediaObjectId) {
+    public Response hasMediaObjectWritePermission(
+        final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4470,9 +5030,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4486,7 +5048,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response hasMediaObjectWritePermission(final UUID repositoryId, final String mediaObjectId) {
+    public Response hasMediaObjectWritePermission(
+        final UUID repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4494,36 +5059,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, Response.class);
-    }
-
-    /** 
-     * Gets whether the current user has permission to write a Git media object by the specified identifier.
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param mediaObjectId 
-     *            
-     * @return Response
-     */
-    public Response hasMediaObjectWritePermission(final String project, final String repositoryId, final String mediaObjectId) {
-        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4539,7 +5079,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response hasMediaObjectWritePermission(final String project, final UUID repositoryId, final String mediaObjectId) {
+    public Response hasMediaObjectWritePermission(
+        final String project,     final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4548,9 +5091,43 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, Response.class);
+    }
+
+    /** 
+     * Gets whether the current user has permission to write a Git media object by the specified identifier.
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param mediaObjectId 
+     *            
+     * @return Response
+     */
+    public Response hasMediaObjectWritePermission(
+        final String project,     final UUID repositoryId, 
+        final String mediaObjectId) {
+
+        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4566,7 +5143,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response hasMediaObjectWritePermission(final UUID project, final String repositoryId, final String mediaObjectId) {
+    public Response hasMediaObjectWritePermission(
+        final UUID project,     final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4575,9 +5155,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4593,7 +5175,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response hasMediaObjectWritePermission(final UUID project, final UUID repositoryId, final String mediaObjectId) {
+    public Response hasMediaObjectWritePermission(
+        final UUID project,     final UUID repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4602,9 +5187,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.OPTIONS, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.OPTIONS,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4618,7 +5205,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final String repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4626,9 +5216,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4642,7 +5234,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final UUID repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final UUID repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4650,9 +5245,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4668,7 +5265,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final String project, final String repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final String project,     final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4677,9 +5277,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4695,7 +5297,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final String project, final UUID repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final String project,     final UUID repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4704,9 +5309,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4722,7 +5329,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final UUID project, final String repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final UUID project,     final String repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4731,9 +5341,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4749,7 +5361,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response uploadMediaObject(final UUID project, final UUID repositoryId, final String mediaObjectId) {
+    public Response uploadMediaObject(
+        final UUID project,     final UUID repositoryId, 
+        final String mediaObjectId) {
+
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4758,9 +5373,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -4778,7 +5395,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4787,9 +5407,13 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -4807,7 +5431,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4816,41 +5443,13 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
-    }
-
-    /** 
-     * Adds a reviewer to a git pull request
-     * 
-     * @param reviewer 
-     *            
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @param reviewerId 
-     *            
-     * @return IdentityRefWithVote
-     */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final String project, final String repositoryId, final int pullRequestId, final String reviewerId) {
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -4870,7 +5469,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final String project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final String project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4880,9 +5482,52 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
+    }
+
+    /** 
+     * Adds a reviewer to a git pull request
+     * 
+     * @param reviewer 
+     *            
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @param reviewerId 
+     *            
+     * @return IdentityRefWithVote
+     */
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final String project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -4902,7 +5547,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final UUID project, final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4912,9 +5560,13 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -4934,7 +5586,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote createPullRequestReviewer(final IdentityRefWithVote reviewer, final UUID project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer,     final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4944,9 +5599,13 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PUT, locationId, routeValues, 
-                                apiVersion, reviewer, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -4962,7 +5621,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final String repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4970,9 +5632,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -4988,7 +5654,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -4996,38 +5665,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
-    }
-
-    /** 
-     * Adds reviewers to a git pull request
-     * 
-     * @param reviewers 
-     *            
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @return List<IdentityRefWithVote>
-     */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final String project, final String repositoryId, final int pullRequestId) {
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5045,7 +5689,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final String project, final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final String project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5054,9 +5701,49 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
+    }
+
+    /** 
+     * Adds reviewers to a git pull request
+     * 
+     * @param reviewers 
+     *            
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @return List<IdentityRefWithVote>
+     */
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final String project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5074,7 +5761,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final UUID project, final String repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final UUID project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5083,9 +5773,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5103,7 +5797,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> createPullRequestReviewers(final IdentityRef[] reviewers, final UUID project, final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> createPullRequestReviewers(
+        final IdentityRef[] reviewers,     final UUID project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5112,9 +5809,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, reviewers, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewers,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5130,7 +5831,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response deletePullRequestReviewer(final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public Response deletePullRequestReviewer(
+        final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5139,9 +5843,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -5157,7 +5863,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response deletePullRequestReviewer(final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public Response deletePullRequestReviewer(
+        final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5166,39 +5875,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, Response.class);
-    }
-
-    /** 
-     * Adds reviewers to a git pull request
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @param reviewerId 
-     *            
-     * @return Response
-     */
-    public Response deletePullRequestReviewer(final String project, final String repositoryId, final int pullRequestId, final String reviewerId) {
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -5216,7 +5897,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response deletePullRequestReviewer(final String project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public Response deletePullRequestReviewer(
+        final String project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5226,9 +5910,46 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, Response.class);
+    }
+
+    /** 
+     * Adds reviewers to a git pull request
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @param reviewerId 
+     *            
+     * @return Response
+     */
+    public Response deletePullRequestReviewer(
+        final String project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -5246,7 +5967,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response deletePullRequestReviewer(final UUID project, final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public Response deletePullRequestReviewer(
+        final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5256,9 +5980,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -5276,7 +6002,10 @@ public abstract class GitHttpClientBase
      *            
      * @return Response
      */
-    public Response deletePullRequestReviewer(final UUID project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public Response deletePullRequestReviewer(
+        final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5286,9 +6015,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, Response.class);
     }
@@ -5304,7 +6035,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote getPullRequestReviewer(final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote getPullRequestReviewer(
+        final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5313,9 +6047,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -5331,7 +6067,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote getPullRequestReviewer(final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote getPullRequestReviewer(
+        final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5340,39 +6079,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
-    }
-
-    /** 
-     * Retrieve a reviewer from a pull request
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @param reviewerId 
-     *            
-     * @return IdentityRefWithVote
-     */
-    public IdentityRefWithVote getPullRequestReviewer(final String project, final String repositoryId, final int pullRequestId, final String reviewerId) {
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -5390,7 +6101,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote getPullRequestReviewer(final String project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote getPullRequestReviewer(
+        final String project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5400,9 +6114,46 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
+    }
+
+    /** 
+     * Retrieve a reviewer from a pull request
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @param reviewerId 
+     *            
+     * @return IdentityRefWithVote
+     */
+    public IdentityRefWithVote getPullRequestReviewer(
+        final String project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -5420,7 +6171,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote getPullRequestReviewer(final UUID project, final String repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote getPullRequestReviewer(
+        final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5430,9 +6184,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -5450,7 +6206,10 @@ public abstract class GitHttpClientBase
      *            
      * @return IdentityRefWithVote
      */
-    public IdentityRefWithVote getPullRequestReviewer(final UUID project, final UUID repositoryId, final int pullRequestId, final String reviewerId) {
+    public IdentityRefWithVote getPullRequestReviewer(
+        final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final String reviewerId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5460,9 +6219,11 @@ public abstract class GitHttpClientBase
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
         routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, IdentityRefWithVote.class);
     }
@@ -5476,7 +6237,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final String repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5484,9 +6248,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5500,7 +6266,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5508,36 +6277,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
-    }
-
-    /** 
-     * Retrieve a pull request reviewers
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @return List<IdentityRefWithVote>
-     */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final String project, final String repositoryId, final int pullRequestId) {
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5553,7 +6297,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final String project, final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final String project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5562,9 +6309,43 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
+    }
+
+    /** 
+     * Retrieve a pull request reviewers
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @return List<IdentityRefWithVote>
+     */
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final String project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5580,7 +6361,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final UUID project, final String repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final UUID project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5589,9 +6373,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5607,7 +6393,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<IdentityRefWithVote>
      */
-    public List<IdentityRefWithVote> getPullRequestReviewers(final UUID project, final UUID repositoryId, final int pullRequestId) {
+    public List<IdentityRefWithVote> getPullRequestReviewers(
+        final UUID project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5616,9 +6405,11 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<IdentityRefWithVote>>() {});
     }
@@ -5632,16 +6423,23 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final String repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5655,16 +6453,23 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final UUID repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5680,7 +6485,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final String project, final String repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate,     final String project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5688,9 +6496,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5706,7 +6518,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final String project, final UUID repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate,     final String project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5714,9 +6529,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5732,7 +6551,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final UUID project, final String repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate,     final UUID project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5740,9 +6562,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5758,7 +6584,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest createPullRequest(final GitPullRequest gitPullRequestToCreate, final UUID project, final UUID repositoryId) {
+    public GitPullRequest createPullRequest(
+        final GitPullRequest gitPullRequestToCreate,     final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5766,9 +6595,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitPullRequestToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5788,7 +6621,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final String project, final String repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final String project,     final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5802,9 +6638,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5824,7 +6663,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final String project, final UUID repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final String project,     final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5838,9 +6680,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5860,7 +6705,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final UUID project, final String repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final UUID project,     final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5874,9 +6722,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5896,7 +6747,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final UUID project, final UUID repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final UUID project,     final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5910,9 +6764,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5930,7 +6787,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final String repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5943,9 +6803,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5963,7 +6826,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest getPullRequest(final UUID repositoryId, final int pullRequestId, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public GitPullRequest getPullRequest(
+        final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -5976,9 +6842,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -5998,7 +6867,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final String project, final String repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final String project,     final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6007,16 +6879,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6036,7 +6909,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final String project, final UUID repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final String project,     final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6045,16 +6921,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6074,7 +6951,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final UUID project, final String repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final UUID project,     final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6083,16 +6963,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6112,7 +6993,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final UUID project, final UUID repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final UUID project,     final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6121,16 +7005,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6148,7 +7033,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final String repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6156,16 +7044,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6183,7 +7072,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPullRequest>
      */
-    public List<GitPullRequest> getPullRequests(final UUID repositoryId, final GitPullRequestSearchCriteria searchCriteria, final Integer maxCommentLength, final Integer skip, final Integer top) {
+    public List<GitPullRequest> getPullRequests(
+        final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final Integer top) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6191,16 +7083,17 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
         queryParameters.addIfNotNull("maxCommentLength", maxCommentLength); //$NON-NLS-1$
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPullRequest>>() {});
     }
@@ -6216,7 +7109,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final String repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6224,9 +7120,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6242,7 +7142,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final UUID repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6250,9 +7153,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6270,7 +7177,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final String project, final String repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final String project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6279,9 +7189,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6299,7 +7213,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final String project, final UUID repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final String project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6308,9 +7225,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6328,7 +7249,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final UUID project, final String repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final UUID project,     final String repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6337,9 +7261,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6357,7 +7285,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPullRequest
      */
-    public GitPullRequest updatePullRequest(final GitPullRequest gitPullRequestToUpdate, final UUID project, final UUID repositoryId, final int pullRequestId) {
+    public GitPullRequest updatePullRequest(
+        final GitPullRequest gitPullRequestToUpdate,     final UUID project,     final UUID repositoryId, 
+        final int pullRequestId) {
+
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6366,9 +7297,13 @@ public abstract class GitHttpClientBase
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
         routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, gitPullRequestToUpdate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitPullRequestToUpdate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPullRequest.class);
     }
@@ -6386,7 +7321,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final String project, final String repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final String project,     final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6399,9 +7337,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6419,7 +7360,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final String project, final UUID repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final String project,     final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6432,9 +7376,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6452,7 +7399,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final UUID project, final String repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final UUID project,     final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6465,9 +7415,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6485,7 +7438,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final UUID project, final UUID repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final UUID project,     final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6498,9 +7454,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6516,7 +7475,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final String repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6528,9 +7490,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6546,7 +7511,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<AssociatedWorkItem>
      */
-    public List<AssociatedWorkItem> getPullRequestWorkItems(final UUID repositoryId, final int pullRequestId, final Integer commitsTop, final Integer commitsSkip) {
+    public List<AssociatedWorkItem> getPullRequestWorkItems(
+        final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final Integer commitsSkip) {
+
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6558,9 +7526,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("commitsTop", commitsTop); //$NON-NLS-1$
         queryParameters.addIfNotNull("commitsSkip", commitsSkip); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<AssociatedWorkItem>>() {});
     }
@@ -6580,7 +7551,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final String project, final String repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final String project,     final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6593,9 +7567,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6615,7 +7592,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final String project, final UUID repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final String project,     final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6628,9 +7608,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6650,7 +7633,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final UUID project, final String repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final UUID project,     final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6663,9 +7649,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6685,7 +7674,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final UUID project, final UUID repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final UUID project,     final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6698,9 +7690,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6718,7 +7713,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final String repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6730,9 +7728,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6750,7 +7751,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitPush
      */
-    public GitPush getPush(final UUID repositoryId, final int pushId, final Integer includeCommits, final Boolean includeRefUpdates) {
+    public GitPush getPush(
+        final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final Boolean includeRefUpdates) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6762,9 +7766,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("includeCommits", includeCommits); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeRefUpdates", includeRefUpdates); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitPush.class);
     }
@@ -6782,7 +7789,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final String project, final String repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final String project,     final String repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6793,13 +7803,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6817,7 +7828,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final String project, final UUID repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final String project,     final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6828,13 +7842,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6852,7 +7867,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final UUID project, final String repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final UUID project,     final String repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6863,13 +7881,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6887,7 +7906,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final UUID project, final UUID repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final UUID project,     final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6898,13 +7920,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6920,7 +7943,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final String repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final String repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6930,13 +7956,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6952,7 +7979,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitPush>
      */
-    public List<GitPush> getPushes(final UUID repositoryId, final Integer skip, final Integer top, final GitPushSearchCriteria searchCriteria) {
+    public List<GitPush> getPushes(
+        final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final GitPushSearchCriteria searchCriteria) {
+
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
 
@@ -6962,13 +7992,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("$skip", skip); //$NON-NLS-1$
         queryParameters.addIfNotNull("$top", top); //$NON-NLS-1$
-        if (searchCriteria != null) {
             addModelAsQueryParams(queryParameters, searchCriteria);
-        }
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitPush>>() {});
     }
@@ -6986,7 +8017,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final String project, final String repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final String project,     final String repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -6998,9 +8032,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7018,7 +8055,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final String project, final UUID repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final String project,     final UUID repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7030,9 +8070,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7050,7 +8093,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final UUID project, final String repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final UUID project,     final String repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7062,9 +8108,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7082,7 +8131,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final UUID project, final UUID repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final UUID project,     final UUID repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7094,9 +8146,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7112,7 +8167,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final String repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final String repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7123,9 +8181,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7141,7 +8202,10 @@ public abstract class GitHttpClientBase
      *            [optional] Specifies if referenceLinks should be included in the result. default is false.
      * @return List<GitRef>
      */
-    public List<GitRef> getRefs(final UUID repositoryId, final String filter, final Boolean includeLinks) {
+    public List<GitRef> getRefs(
+        final UUID repositoryId,     final String filter, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7152,9 +8216,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotEmpty("filter", filter); //$NON-NLS-1$
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRef>>() {});
     }
@@ -7168,7 +8235,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final String repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final String repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7178,9 +8248,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7194,7 +8269,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final UUID repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final UUID repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7204,9 +8282,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7222,7 +8305,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final String project, final String repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final String project,     final String repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7233,9 +8319,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7251,7 +8342,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final String project, final UUID repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final String project,     final UUID repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7262,9 +8356,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7280,7 +8379,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final UUID project, final String repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final UUID project,     final String repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7291,9 +8393,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7309,7 +8416,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRefUpdateResult>
      */
-    public List<GitRefUpdateResult> updateRefs(final List<GitRefUpdate> refUpdates, final UUID project, final UUID repositoryId, final String projectId) {
+    public List<GitRefUpdateResult> updateRefs(
+        final List<GitRefUpdate> refUpdates,     final UUID project,     final UUID repositoryId, 
+        final String projectId) {
+
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7320,9 +8430,14 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotEmpty("projectId", projectId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, refUpdates, APPLICATION_JSON_TYPE, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           refUpdates,
+                                                           APPLICATION_JSON_TYPE,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRefUpdateResult>>() {});
     }
@@ -7334,13 +8449,19 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository createRepository(final GitRepository gitRepositoryToCreate) {
+    public GitRepository createRepository(
+    
+        final GitRepository gitRepositoryToCreate) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, 
-                                apiVersion, gitRepositoryToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           apiVersion,
+                                                           gitRepositoryToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7354,16 +8475,23 @@ public abstract class GitHttpClientBase
      *            Project ID or project name
      * @return GitRepository
      */
-    public GitRepository createRepository(final GitRepository gitRepositoryToCreate, final String project) {
+    public GitRepository createRepository(
+        final GitRepository gitRepositoryToCreate, 
+        final String project) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitRepositoryToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitRepositoryToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7377,16 +8505,23 @@ public abstract class GitHttpClientBase
      *            Project ID
      * @return GitRepository
      */
-    public GitRepository createRepository(final GitRepository gitRepositoryToCreate, final UUID project) {
+    public GitRepository createRepository(
+        final GitRepository gitRepositoryToCreate, 
+        final UUID project) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("project", project); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.POST, locationId, routeValues, 
-                                apiVersion, gitRepositoryToCreate, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.POST,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           gitRepositoryToCreate,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7397,16 +8532,21 @@ public abstract class GitHttpClientBase
      * @param repositoryId 
      *            
      */
-    public void deleteRepository(final UUID repositoryId) {
+    public void deleteRepository(
+    
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -7419,7 +8559,10 @@ public abstract class GitHttpClientBase
      * @param repositoryId 
      *            
      */
-    public void deleteRepository(final String project, final UUID repositoryId) {
+    public void deleteRepository(
+        final String project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7427,9 +8570,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -7442,7 +8587,10 @@ public abstract class GitHttpClientBase
      * @param repositoryId 
      *            
      */
-    public void deleteRepository(final UUID project, final UUID repositoryId) {
+    public void deleteRepository(
+        final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7450,9 +8598,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.DELETE, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
     }
@@ -7466,7 +8616,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRepository>
      */
-    public List<GitRepository> getRepositories(final String project, final Boolean includeLinks) {
+    public List<GitRepository> getRepositories(
+        final String project, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7476,9 +8629,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRepository>>() {});
     }
@@ -7492,7 +8648,10 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRepository>
      */
-    public List<GitRepository> getRepositories(final UUID project, final Boolean includeLinks) {
+    public List<GitRepository> getRepositories(
+        final UUID project, 
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7502,9 +8661,12 @@ public abstract class GitHttpClientBase
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRepository>>() {});
     }
@@ -7516,16 +8678,21 @@ public abstract class GitHttpClientBase
      *            
      * @return List<GitRepository>
      */
-    public List<GitRepository> getRepositories(final Boolean includeLinks) {
+    public List<GitRepository> getRepositories(
+    
+        final Boolean includeLinks) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("includeLinks", includeLinks); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, new GenericType<List<GitRepository>>() {});
     }
@@ -7535,16 +8702,21 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository getRepository(final String repositoryId) {
+    public GitRepository getRepository(
+    
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7554,38 +8726,21 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository getRepository(final UUID repositoryId) {
+    public GitRepository getRepository(
+    
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, GitRepository.class);
-    }
-
-    /** 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @return GitRepository
-     */
-    public GitRepository getRepository(final String project, final String repositoryId) {
-        final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7597,7 +8752,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository getRepository(final String project, final UUID repositoryId) {
+    public GitRepository getRepository(
+        final String project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7605,9 +8763,38 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, GitRepository.class);
+    }
+
+    /** 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @return GitRepository
+     */
+    public GitRepository getRepository(
+        final String project, 
+        final UUID repositoryId) {
+
+        final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7619,7 +8806,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository getRepository(final UUID project, final String repositoryId) {
+    public GitRepository getRepository(
+        final UUID project, 
+        final String repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7627,9 +8817,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7641,7 +8833,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository getRepository(final UUID project, final UUID repositoryId) {
+    public GitRepository getRepository(
+        final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7649,9 +8844,11 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7665,16 +8862,23 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository patchRepository(final GitRepository newRepositoryInfo, final UUID repositoryId) {
+    public GitRepository patchRepository(
+        final GitRepository newRepositoryInfo, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, newRepositoryInfo, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           newRepositoryInfo,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7690,7 +8894,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository patchRepository(final GitRepository newRepositoryInfo, final String project, final UUID repositoryId) {
+    public GitRepository patchRepository(
+        final GitRepository newRepositoryInfo,     final String project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7698,9 +8905,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, newRepositoryInfo, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           newRepositoryInfo,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7716,7 +8927,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitRepository
      */
-    public GitRepository patchRepository(final GitRepository newRepositoryInfo, final UUID project, final UUID repositoryId) {
+    public GitRepository patchRepository(
+        final GitRepository newRepositoryInfo,     final UUID project, 
+        final UUID repositoryId) {
+
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7724,9 +8938,13 @@ public abstract class GitHttpClientBase
         routeValues.put("project", project); //$NON-NLS-1$
         routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.PATCH, locationId, routeValues, 
-                                apiVersion, newRepositoryInfo, APPLICATION_JSON_TYPE, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           newRepositoryInfo,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitRepository.class);
     }
@@ -7746,7 +8964,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final String project, final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final String project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7760,9 +8981,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7782,7 +9006,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final String project, final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final String project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7796,9 +9023,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7818,7 +9048,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final UUID project, final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final UUID project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7832,9 +9065,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7854,7 +9090,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final UUID project, final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final UUID project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7868,9 +9107,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7888,7 +9130,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7901,9 +9146,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7921,7 +9169,10 @@ public abstract class GitHttpClientBase
      *            
      * @return GitTreeRef
      */
-    public GitTreeRef getTree(final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public GitTreeRef getTree(
+        final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7934,9 +9185,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_JSON_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, GitTreeRef.class);
     }
@@ -7956,7 +9210,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final String project, final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final String project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -7970,9 +9227,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -7992,7 +9252,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final String project, final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final String project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -8006,9 +9269,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -8028,7 +9294,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final UUID project, final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final UUID project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -8042,9 +9311,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -8064,7 +9336,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final UUID project, final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final UUID project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -8078,9 +9353,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -8098,7 +9376,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final String repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -8111,9 +9392,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }
@@ -8131,7 +9415,10 @@ public abstract class GitHttpClientBase
      *            
      * @return InputStream
      */
-    public InputStream getTreeZip(final UUID repositoryId, final String sha1, final String projectId, final Boolean recursive, final String fileName) {
+    public InputStream getTreeZip(
+        final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String fileName) {
+
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
@@ -8144,9 +9431,12 @@ public abstract class GitHttpClientBase
         queryParameters.addIfNotNull("recursive", recursive); //$NON-NLS-1$
         queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
 
-        final Invocation httpRequest =
-            super.createRequest(HttpMethod.GET, locationId, routeValues, 
-                                apiVersion, queryParameters, APPLICATION_ZIP_TYPE);
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
 
         return super.sendRequest(httpRequest, InputStream.class);
     }

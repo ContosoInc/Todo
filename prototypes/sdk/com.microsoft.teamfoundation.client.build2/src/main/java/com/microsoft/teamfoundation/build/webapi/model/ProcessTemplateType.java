@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum ProcessTemplateType {
 
@@ -26,6 +21,7 @@ public enum ProcessTemplateType {
     UPGRADE(2),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private ProcessTemplateType(final int value) {

@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.build.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum DefinitionQuality {
 
@@ -25,6 +20,7 @@ public enum DefinitionQuality {
     DRAFT(2),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private DefinitionQuality(final int value) {

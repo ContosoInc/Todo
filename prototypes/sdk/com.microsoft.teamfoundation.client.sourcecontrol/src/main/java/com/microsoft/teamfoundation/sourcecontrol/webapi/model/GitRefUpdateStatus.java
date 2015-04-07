@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum GitRefUpdateStatus {
 
@@ -39,6 +34,7 @@ public enum GitRefUpdateStatus {
     SUCCEEDED_CORRUPT_REF(15),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private GitRefUpdateStatus(final int value) {

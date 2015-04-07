@@ -13,15 +13,10 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi.model;
 
-import com.microsoft.teamfoundation.distributedtask.webapi.model.JobEndpoint;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.JobOption;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.MaskHint;
-import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
 
 public class JobEnvironment {
 

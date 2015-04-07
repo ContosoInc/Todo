@@ -13,11 +13,6 @@
 
 package com.microsoft.teamfoundation.sourcecontrol.webapi.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public enum GitObjectType {
 
@@ -31,6 +26,7 @@ public enum GitObjectType {
     REF_DELTA(7),
     ;
     
+    @SuppressWarnings("unused")
     private int value;
 
     private GitObjectType(final int value) {
