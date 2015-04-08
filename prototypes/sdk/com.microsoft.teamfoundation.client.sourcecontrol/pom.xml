@@ -7,10 +7,9 @@
     <parent>
         <groupId>com.microsoft.vss.sdk</groupId>
         <artifactId>com.microsoft.vss.client</artifactId>
-        <version>0.2.0</version>
+        <version>0.3.0</version>
     </parent>
 
-    <groupId>com.microsoft.vss.sdk</groupId>
     <artifactId>com.microsoft.teamfoundation.client.sourcecontrol</artifactId>
 
     <name>Microsoft VSO SDK source control API</name>
@@ -20,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <version.major>0</version.major>
-        <version.minor>2</version.minor>
+        <version.minor>3</version.minor>
         <version.service>0</version.service>
         <version.build>SNAPSHOT</version.build>
 

@@ -68,9 +68,9 @@ public abstract class Demand {
             return null;
         }
 
-        final String name = match.group(1); //$NON-NLS-1$
-        final String opcode = match.group(3); //$NON-NLS-1$
-        final String value = match.group(4); //$NON-NLS-1$
+        final String name = match.group(1); 
+        final String opcode = match.group(3); 
+        final String value = match.group(4); 
 
         if (StringUtil.isNullOrEmpty(opcode)) {
             demand = new DemandExists(name);
