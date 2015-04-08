@@ -17,6 +17,6 @@ public class DemandEquals
 
     @Override
     protected String getExpression() {
-        return this.getName() + "-equals" + this.getValue(); //$NON-NLS-1$
+        return this.getName() + " -equals " + this.getValue(); //$NON-NLS-1$
     }
 }
