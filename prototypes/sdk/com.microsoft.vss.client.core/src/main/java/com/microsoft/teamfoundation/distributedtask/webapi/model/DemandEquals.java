@@ -23,7 +23,7 @@ public class DemandEquals
 
     @Override
     public boolean IsSatisfied(final Map<String, String> capabilities) {
-        final String value = capabilities.getOrDefault(this.getName(), (String) null);
+        final String value = capabilities.get(this.getName());
         return value != null && this.getValue().equalsIgnoreCase(value);
     }
 }
