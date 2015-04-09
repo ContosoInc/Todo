@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class TodoServices
  */
-@WebServlet("/TodoServices")
+@WebServlet("/TodoServices/todos")
 public class TodoServices extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
