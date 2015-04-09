@@ -29,7 +29,7 @@ public class DistributedTaskDemandTest
 
         final String s = TestUtil.toJsonString(e1);
 
-        Object e2 = TestUtil.fromJsonString(s, EntityWithDistributedTaskDemands.class);
+        final Object e2 = TestUtil.fromJsonString(s, EntityWithDistributedTaskDemands.class);
 
         assertTrue("Returned type is EntityWithDistributedTaskDemands", e2 instanceof EntityWithDistributedTaskDemands); //$NON-NLS-1$
         assertEquals("Submitted and returned values", e1, e2); //$NON-NLS-1$

@@ -29,7 +29,7 @@ public class BuildDemandTest
 
         final String s = TestUtil.toJsonString(e1);
 
-        Object e2 = TestUtil.fromJsonString(s, EntityWithBuildDemands.class);
+        final Object e2 = TestUtil.fromJsonString(s, EntityWithBuildDemands.class);
 
         assertTrue("Returned type is EntityWithBuildDemands", e2 instanceof EntityWithBuildDemands); //$NON-NLS-1$
         assertEquals("Submitted and returned values", e1, e2); //$NON-NLS-1$

@@ -31,7 +31,7 @@ public class EntityWithReferenceLinks {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (!(obj instanceof EntityWithReferenceLinks)) {
             return false;
         }
@@ -46,20 +46,20 @@ public class EntityWithReferenceLinks {
     }
 
     private boolean equals(final ReferenceLinks r1, final ReferenceLinks r2) {
-        Map<String, Object> l1 = r1.getLinks();
-        Map<String, Object> l2 = r2.getLinks();
+        final Map<String, Object> l1 = r1.getLinks();
+        final Map<String, Object> l2 = r2.getLinks();
 
         if (l1 == null || l2 == null || l1.size() != l2.size()) {
             return false;
         }
 
-        for (Entry<String, Object> e : l1.entrySet()) {
+        for (final Entry<String, Object> e : l1.entrySet()) {
             if (!l2.containsKey(e.getKey())) {
                 return false;
             }
 
-            Object v1 = e.getValue();
-            Object v2 = l1.get(e.getKey());
+            final Object v1 = e.getValue();
+            final Object v2 = l1.get(e.getKey());
 
             if (v1.getClass() != v2.getClass()) {
                 return false;
