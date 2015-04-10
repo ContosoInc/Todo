@@ -47,12 +47,12 @@ public class BuildTests
         System.out.println(builds.size());
     }
 
-    public void testGet_02(final int buildId) {
+    public void testGet_02(final String projectName, final int buildId) {
         System.out.println(MessageFormat.format(
             "================================ {0} ==== {1} ================================", //$NON-NLS-1$
             "testGet_02", this.getClass().getName())); //$NON-NLS-1$
 
-        final Build build = buildClient.getBuild(buildId, null);
+        final Build build = buildClient.getBuild(projectName, buildId, null);
         printBuild(build);
     }
 

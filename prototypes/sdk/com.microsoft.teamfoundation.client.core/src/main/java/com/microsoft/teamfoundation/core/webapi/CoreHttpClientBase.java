@@ -171,7 +171,7 @@ public abstract class CoreHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -180,7 +180,6 @@ public abstract class CoreHttpClientBase
      * @return List<IdentityRef>
      */
     public List<IdentityRef> getIdentityMru(
-    
         final String mruName) {
 
         final UUID locationId = UUID.fromString("5ead0b70-2572-4697-97e9-f341069a783a"); //$NON-NLS-1$
@@ -223,7 +222,7 @@ public abstract class CoreHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -251,7 +250,7 @@ public abstract class CoreHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -266,7 +265,9 @@ public abstract class CoreHttpClientBase
      * @return List<IdentityRef>
      */
     public List<IdentityRef> getTeamMembers(
-        final String projectId,     final String teamId,     final Integer top, 
+        final String projectId, 
+        final String teamId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("294c494c-2600-4d7e-b76c-3dd50c3c95be"); //$NON-NLS-1$
@@ -298,7 +299,6 @@ public abstract class CoreHttpClientBase
      * @return TeamProjectCollection
      */
     public TeamProjectCollection getProjectCollection(
-    
         final String collectionId) {
 
         final UUID locationId = UUID.fromString("8031090f-ef1d-4af6-85fc-698cd75d42bf"); //$NON-NLS-1$
@@ -353,7 +353,8 @@ public abstract class CoreHttpClientBase
      * @return TeamProject
      */
     public TeamProject getProject(
-        final String projectId,     final Boolean includeCapabilities, 
+        final String projectId, 
+        final Boolean includeCapabilities, 
         final Boolean includeHistory) {
 
         final UUID locationId = UUID.fromString("603fe2ac-9723-48b9-88ad-09305aa6c6e1"); //$NON-NLS-1$
@@ -386,7 +387,8 @@ public abstract class CoreHttpClientBase
      * @return List<TeamProjectReference>
      */
     public List<TeamProjectReference> getProjects(
-        final ProjectState stateFilter,     final Integer top, 
+        final ProjectState stateFilter, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("603fe2ac-9723-48b9-88ad-09305aa6c6e1"); //$NON-NLS-1$
@@ -414,7 +416,6 @@ public abstract class CoreHttpClientBase
      * @return Response
      */
     public Response queueCreateProject(
-    
         final TeamProject projectToCreate) {
 
         final UUID locationId = UUID.fromString("603fe2ac-9723-48b9-88ad-09305aa6c6e1"); //$NON-NLS-1$
@@ -427,7 +428,7 @@ public abstract class CoreHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -438,7 +439,6 @@ public abstract class CoreHttpClientBase
      * @return Response
      */
     public Response queueDeleteProject(
-    
         final UUID projectId) {
 
         final UUID locationId = UUID.fromString("603fe2ac-9723-48b9-88ad-09305aa6c6e1"); //$NON-NLS-1$
@@ -453,7 +453,7 @@ public abstract class CoreHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -483,7 +483,7 @@ public abstract class CoreHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -492,7 +492,6 @@ public abstract class CoreHttpClientBase
      * @return List<Proxy>
      */
     public List<Proxy> getProxies(
-    
         final String proxyUrl) {
 
         final UUID locationId = UUID.fromString("ec1f4311-f2b4-4c15-b2b8-8990b80d2908"); //$NON-NLS-1$
@@ -522,7 +521,9 @@ public abstract class CoreHttpClientBase
      * @return Response
      */
     public Response getTeams(
-        final String projectId,     final String teamId,     final Integer top, 
+        final String projectId, 
+        final String teamId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("d30a3dd1-f8ba-442a-b86a-bd0c0c383e59"); //$NON-NLS-1$
@@ -543,6 +544,6 @@ public abstract class CoreHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 }

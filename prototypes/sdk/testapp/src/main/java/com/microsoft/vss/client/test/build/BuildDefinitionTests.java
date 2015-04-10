@@ -37,7 +37,7 @@ public class BuildDefinitionTests
         System.out.println();
 
         for (final DefinitionReference definition : definitions) {
-            printBuildDefinitionReference((BuildDefinitionReference) definition);
+            printDefinitionReference(definition);
         }
 
     }
@@ -57,7 +57,7 @@ public class BuildDefinitionTests
         System.out.println();
 
         for (final DefinitionReference definition : definitions) {
-            printBuildDefinitionReference((BuildDefinitionReference) definition);
+            printDefinitionReference(definition);
         }
 
     }

@@ -98,7 +98,7 @@ public abstract class VssHttpClientBase {
         return response;
     }
 
-     protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
+    protected <TResult> TResult get(final UUID locationId, final ApiResourceVersion version,
         final Class<TResult> resultClazz) {
 
         return get(locationId, null, version, null, resultClazz);

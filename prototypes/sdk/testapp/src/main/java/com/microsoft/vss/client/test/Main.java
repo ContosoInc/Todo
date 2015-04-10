@@ -3,6 +3,7 @@ package com.microsoft.vss.client.test;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
 
 import javax.ws.rs.client.Client;
 
@@ -57,7 +58,7 @@ public class Main {
             buildTests = new BuildTests(client, baseUri);
 
             buildTests.testGet_01("gitTest_01"); //$NON-NLS-1$
-            buildTests.testGet_02(1);
+            buildTests.testGet_02("gitTest_01", 1); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -105,6 +106,7 @@ public class Main {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
+
         client.close();
     }
 
@@ -115,9 +117,6 @@ public class Main {
         final URI baseUri = JaxrsUtil.arUri;
 
         ProjectTests projectTests = null;
-        BuildTests buildTests = null;
-        BuildArtifactTests artifactTests = null;
-        BuildDefinitionTests definitionTests = null;
 
         try {
             projectTests = new ProjectTests(client, baseUri);
@@ -130,36 +129,7 @@ public class Main {
             projectTests.testGet_04("tfsTest_01"); //$NON-NLS-1$
             projectTests.testGet_05("gitTest_02"); //$NON-NLS-1$
 
-            projectTests.testUpdate_01("gitTest_01", "mkn sdhsdhsdhsdhdf ashgagha"); //$NON-NLS-1$ //$NON-NLS-2$
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-
-        try {
-            buildTests = new BuildTests(client, baseUri);
-
-            buildTests.testGet_01("gitTest_01"); //$NON-NLS-1$
-            buildTests.testGet_02(1);
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-
-        try {
-            artifactTests = new BuildArtifactTests(client, baseUri);
-
-            artifactTests.testGet_01(1);
-            artifactTests.testGet_02("gitTest_01", 1); //$NON-NLS-1$
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-
-        try {
-            definitionTests = new BuildDefinitionTests(client, baseUri);
-
-            definitionTests.testGet_01("gitTest_01"); //$NON-NLS-1$
+            projectTests.testUpdate_01("gitTest_01", "description " + Calendar.getInstance().getTime()); //$NON-NLS-1$ //$NON-NLS-2$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -182,13 +152,7 @@ public class Main {
         try {
             projectTests = new ProjectTests(client, baseUri);
 
-            projectTests.testGet_01();
-            projectTests.testGet_02();
-
-            projectTests.testGet_03("Personal"); //$NON-NLS-1$
-            projectTests.testGet_04("Personal"); //$NON-NLS-1$
-            projectTests.testGet_05("Personal"); //$NON-NLS-1$
-
+            projectTests.testConnectedServices_01("VSOnline"); //$NON-NLS-1$
         } catch (Exception e1) {
             e1.printStackTrace();
         }
@@ -197,7 +161,7 @@ public class Main {
             buildTests = new BuildTests(client, baseUri);
 
             buildTests.testGet_01("VSOnline"); //$NON-NLS-1$
-            buildTests.testGet_02(112484);
+            buildTests.testGet_02("VSOnline", 2475); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -206,8 +170,8 @@ public class Main {
         try {
             artifactTests = new BuildArtifactTests(client, baseUri);
 
-            artifactTests.testGet_01(112484);
-            artifactTests.testGet_02("VSOnline", 112484); //$NON-NLS-1$
+            // artifactTests.testGet_01(2442168);
+            artifactTests.testGet_02("VSOnline", 2475); //$NON-NLS-1$
 
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -216,8 +180,8 @@ public class Main {
         try {
             definitionTests = new BuildDefinitionTests(client, baseUri);
 
-            definitionTests.testGet_01("Personal"); //$NON-NLS-1$
-            definitionTests.testGet_02("Personal", "VSO.CI"); //$NON-NLS-1$ //$NON-NLS-2$
+            definitionTests.testGet_01("VSOnline"); //$NON-NLS-1$
+            definitionTests.testGet_02("VSOnline", "VSO.PR"); //$NON-NLS-1$ //$NON-NLS-2$
 
         } catch (Exception e1) {
             e1.printStackTrace();

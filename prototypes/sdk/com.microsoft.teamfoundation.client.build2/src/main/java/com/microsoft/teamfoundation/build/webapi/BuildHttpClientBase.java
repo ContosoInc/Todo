@@ -113,7 +113,8 @@ public abstract class BuildHttpClientBase
      * @return BuildArtifact
      */
     public BuildArtifact createArtifact(
-        final BuildArtifact artifact,     final String project, 
+        final BuildArtifact artifact, 
+        final String project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("1db06c96-014e-44e1-ac91-90b2d4b3e984"); //$NON-NLS-1$
@@ -146,7 +147,8 @@ public abstract class BuildHttpClientBase
      * @return BuildArtifact
      */
     public BuildArtifact createArtifact(
-        final BuildArtifact artifact,     final UUID project, 
+        final BuildArtifact artifact, 
+        final UUID project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("1db06c96-014e-44e1-ac91-90b2d4b3e984"); //$NON-NLS-1$
@@ -208,7 +210,8 @@ public abstract class BuildHttpClientBase
      * @return BuildArtifact
      */
     public BuildArtifact getArtifact(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final String artifactName) {
 
         final UUID locationId = UUID.fromString("1db06c96-014e-44e1-ac91-90b2d4b3e984"); //$NON-NLS-1$
@@ -240,7 +243,8 @@ public abstract class BuildHttpClientBase
      * @return BuildArtifact
      */
     public BuildArtifact getArtifact(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final String artifactName) {
 
         final UUID locationId = UUID.fromString("1db06c96-014e-44e1-ac91-90b2d4b3e984"); //$NON-NLS-1$
@@ -268,7 +272,6 @@ public abstract class BuildHttpClientBase
      * @return List<BuildArtifact>
      */
     public List<BuildArtifact> getArtifacts(
-    
         final int buildId) {
 
         final UUID locationId = UUID.fromString("1db06c96-014e-44e1-ac91-90b2d4b3e984"); //$NON-NLS-1$
@@ -354,7 +357,8 @@ public abstract class BuildHttpClientBase
      * @return Response
      */
     public Response getBadge(
-        final UUID project,     final int definitionId, 
+        final UUID project, 
+        final int definitionId, 
         final String branchName) {
 
         final UUID locationId = UUID.fromString("de6a4df8-22cd-44ee-af2d-39f6aa7a4261"); //$NON-NLS-1$
@@ -374,7 +378,7 @@ public abstract class BuildHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -384,7 +388,6 @@ public abstract class BuildHttpClientBase
      *            
      */
     public void deleteBuild(
-    
         final int buildId) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -470,7 +473,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build getBuild(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final String propertyFilters) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -505,7 +509,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build getBuild(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final String propertyFilters) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -594,7 +599,20 @@ public abstract class BuildHttpClientBase
      * @return List<Build>
      */
     public List<Build> getBuilds(
-        final String project,     final List<Integer> definitions,     final List<Integer> queues,     final String buildNumber,     final java.util.Date minFinishTime,     final java.util.Date maxFinishTime,     final String requestedFor,     final BuildReason reasonFilter,     final BuildStatus statusFilter,     final BuildResult resultFilter,     final List<String> tagFilters,     final List<String> properties,     final DefinitionType type,     final Integer top, 
+        final String project, 
+        final List<Integer> definitions, 
+        final List<Integer> queues, 
+        final String buildNumber, 
+        final java.util.Date minFinishTime, 
+        final java.util.Date maxFinishTime, 
+        final String requestedFor, 
+        final BuildReason reasonFilter, 
+        final BuildStatus statusFilter, 
+        final BuildResult resultFilter, 
+        final List<String> tagFilters, 
+        final List<String> properties, 
+        final DefinitionType type, 
+        final Integer top, 
         final String continuationToken) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -663,7 +681,20 @@ public abstract class BuildHttpClientBase
      * @return List<Build>
      */
     public List<Build> getBuilds(
-        final UUID project,     final List<Integer> definitions,     final List<Integer> queues,     final String buildNumber,     final java.util.Date minFinishTime,     final java.util.Date maxFinishTime,     final String requestedFor,     final BuildReason reasonFilter,     final BuildStatus statusFilter,     final BuildResult resultFilter,     final List<String> tagFilters,     final List<String> properties,     final DefinitionType type,     final Integer top, 
+        final UUID project, 
+        final List<Integer> definitions, 
+        final List<Integer> queues, 
+        final String buildNumber, 
+        final java.util.Date minFinishTime, 
+        final java.util.Date maxFinishTime, 
+        final String requestedFor, 
+        final BuildReason reasonFilter, 
+        final BuildStatus statusFilter, 
+        final BuildResult resultFilter, 
+        final List<String> tagFilters, 
+        final List<String> properties, 
+        final DefinitionType type, 
+        final Integer top, 
         final String continuationToken) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -730,7 +761,19 @@ public abstract class BuildHttpClientBase
      * @return List<Build>
      */
     public List<Build> getBuilds(
-        final List<Integer> definitions,     final List<Integer> queues,     final String buildNumber,     final java.util.Date minFinishTime,     final java.util.Date maxFinishTime,     final String requestedFor,     final BuildReason reasonFilter,     final BuildStatus statusFilter,     final BuildResult resultFilter,     final List<String> tagFilters,     final List<String> properties,     final DefinitionType type,     final Integer top, 
+        final List<Integer> definitions, 
+        final List<Integer> queues, 
+        final String buildNumber, 
+        final java.util.Date minFinishTime, 
+        final java.util.Date maxFinishTime, 
+        final String requestedFor, 
+        final BuildReason reasonFilter, 
+        final BuildStatus statusFilter, 
+        final BuildResult resultFilter, 
+        final List<String> tagFilters, 
+        final List<String> properties, 
+        final DefinitionType type, 
+        final Integer top, 
         final String continuationToken) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -803,7 +846,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build queueBuild(
-        final Build build,     final String project, 
+        final Build build, 
+        final String project, 
         final Boolean ignoreWarnings) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -839,7 +883,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build queueBuild(
-        final Build build,     final UUID project, 
+        final Build build, 
+        final UUID project, 
         final Boolean ignoreWarnings) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -905,7 +950,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build updateBuild(
-        final Build build,     final String project, 
+        final Build build, 
+        final String project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -938,7 +984,8 @@ public abstract class BuildHttpClientBase
      * @return Build
      */
     public Build updateBuild(
-        final Build build,     final UUID project, 
+        final Build build, 
+        final UUID project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("0cd358e1-9217-4d94-8269-1c1ee6f93dcf"); //$NON-NLS-1$
@@ -971,7 +1018,8 @@ public abstract class BuildHttpClientBase
      * @return List<Change>
      */
     public List<Change> getBuildCommits(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("54572c7b-bbd3-45d4-80dc-28be08941620"); //$NON-NLS-1$
@@ -1006,7 +1054,8 @@ public abstract class BuildHttpClientBase
      * @return List<Change>
      */
     public List<Change> getBuildCommits(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("54572c7b-bbd3-45d4-80dc-28be08941620"); //$NON-NLS-1$
@@ -1037,7 +1086,6 @@ public abstract class BuildHttpClientBase
      * @return BuildController
      */
     public BuildController getBuildController(
-    
         final int controllerId) {
 
         final UUID locationId = UUID.fromString("fcac1932-2ee1-437f-9b6f-7f696be858f6"); //$NON-NLS-1$
@@ -1063,7 +1111,6 @@ public abstract class BuildHttpClientBase
      * @return List<BuildController>
      */
     public List<BuildController> getBuildControllers(
-    
         final String name) {
 
         final UUID locationId = UUID.fromString("fcac1932-2ee1-437f-9b6f-7f696be858f6"); //$NON-NLS-1$
@@ -1091,7 +1138,8 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinition
      */
     public BuildDefinition addDefinition(
-        final BuildDefinition definition,     final Integer definitionToCloneId, 
+        final BuildDefinition definition, 
+        final Integer definitionToCloneId, 
         final Integer definitionToCloneRevision) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1124,7 +1172,9 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinition
      */
     public BuildDefinition addDefinition(
-        final BuildDefinition definition,     final String project,     final Integer definitionToCloneId, 
+        final BuildDefinition definition, 
+        final String project, 
+        final Integer definitionToCloneId, 
         final Integer definitionToCloneRevision) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1161,7 +1211,9 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinition
      */
     public BuildDefinition addDefinition(
-        final BuildDefinition definition,     final UUID project,     final Integer definitionToCloneId, 
+        final BuildDefinition definition, 
+        final UUID project, 
+        final Integer definitionToCloneId, 
         final Integer definitionToCloneRevision) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1193,7 +1245,6 @@ public abstract class BuildHttpClientBase
      *            
      */
     public void deleteDefinition(
-    
         final int definitionId) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1279,7 +1330,9 @@ public abstract class BuildHttpClientBase
      * @return DefinitionReference
      */
     public DefinitionReference getDefinition(
-        final String project,     final int definitionId,     final Integer revision, 
+        final String project, 
+        final int definitionId, 
+        final Integer revision, 
         final List<String> propertyFilters) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1315,7 +1368,9 @@ public abstract class BuildHttpClientBase
      * @return DefinitionReference
      */
     public DefinitionReference getDefinition(
-        final UUID project,     final int definitionId,     final Integer revision, 
+        final UUID project, 
+        final int definitionId, 
+        final Integer revision, 
         final List<String> propertyFilters) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1349,7 +1404,8 @@ public abstract class BuildHttpClientBase
      * @return DefinitionReference
      */
     public DefinitionReference getDefinition(
-        final int definitionId,     final Integer revision, 
+        final int definitionId, 
+        final Integer revision, 
         final List<String> propertyFilters) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1382,7 +1438,8 @@ public abstract class BuildHttpClientBase
      * @return List<DefinitionReference>
      */
     public List<DefinitionReference> getDefinitions(
-        final String project,     final String name, 
+        final String project, 
+        final String name, 
         final DefinitionType type) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1415,7 +1472,8 @@ public abstract class BuildHttpClientBase
      * @return List<DefinitionReference>
      */
     public List<DefinitionReference> getDefinitions(
-        final UUID project,     final String name, 
+        final UUID project, 
+        final String name, 
         final DefinitionType type) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1507,7 +1565,8 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinition
      */
     public BuildDefinition updateDefinition(
-        final BuildDefinition definition,     final String project, 
+        final BuildDefinition definition, 
+        final String project, 
         final int definitionId) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1540,7 +1599,8 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinition
      */
     public BuildDefinition updateDefinition(
-        final BuildDefinition definition,     final UUID project, 
+        final BuildDefinition definition, 
+        final UUID project, 
         final int definitionId) {
 
         final UUID locationId = UUID.fromString("dbeaf647-6167-421a-bda9-c9327b25e2e6"); //$NON-NLS-1$
@@ -1586,7 +1646,7 @@ public abstract class BuildHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -1614,7 +1674,7 @@ public abstract class BuildHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -1689,7 +1749,10 @@ public abstract class BuildHttpClientBase
      * @return Response
      */
     public Response getBuildLogs(
-        final String project,     final int buildId,     final int logId,     final Integer startLine, 
+        final String project, 
+        final int buildId, 
+        final int logId, 
+        final Integer startLine, 
         final Integer endLine) {
 
         final UUID locationId = UUID.fromString("35a80daf-7f30-45fc-86e8-6b813d9c90df"); //$NON-NLS-1$
@@ -1711,7 +1774,7 @@ public abstract class BuildHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -1728,7 +1791,10 @@ public abstract class BuildHttpClientBase
      * @return Response
      */
     public Response getBuildLogs(
-        final UUID project,     final int buildId,     final int logId,     final Integer startLine, 
+        final UUID project, 
+        final int buildId, 
+        final int logId, 
+        final Integer startLine, 
         final Integer endLine) {
 
         final UUID locationId = UUID.fromString("35a80daf-7f30-45fc-86e8-6b813d9c90df"); //$NON-NLS-1$
@@ -1750,7 +1816,7 @@ public abstract class BuildHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -1814,9 +1880,7 @@ public abstract class BuildHttpClientBase
     /** 
      * @return List<BuildOptionDefinition>
      */
-    public List<BuildOptionDefinition> getBuildOptionDefinitions(
-    
-    ) {
+    public List<BuildOptionDefinition> getBuildOptionDefinitions() {
 
         final UUID locationId = UUID.fromString("591cb5a4-2d46-4f3a-a697-5cd42b6bd332"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.2"); //$NON-NLS-1$
@@ -1837,7 +1901,6 @@ public abstract class BuildHttpClientBase
      * @return AgentPoolQueue
      */
     public AgentPoolQueue createQueue(
-    
         final AgentPoolQueue queue) {
 
         final UUID locationId = UUID.fromString("09f2a4b8-08c9-4991-85c3-d698937568be"); //$NON-NLS-1$
@@ -1860,7 +1923,6 @@ public abstract class BuildHttpClientBase
      *            
      */
     public void deleteQueue(
-    
         final int id) {
 
         final UUID locationId = UUID.fromString("09f2a4b8-08c9-4991-85c3-d698937568be"); //$NON-NLS-1$
@@ -1886,7 +1948,6 @@ public abstract class BuildHttpClientBase
      * @return AgentPoolQueue
      */
     public AgentPoolQueue getAgentPoolQueue(
-    
         final int controllerId) {
 
         final UUID locationId = UUID.fromString("09f2a4b8-08c9-4991-85c3-d698937568be"); //$NON-NLS-1$
@@ -1912,7 +1973,6 @@ public abstract class BuildHttpClientBase
      * @return List<AgentPoolQueue>
      */
     public List<AgentPoolQueue> getQueues(
-    
         final String name) {
 
         final UUID locationId = UUID.fromString("09f2a4b8-08c9-4991-85c3-d698937568be"); //$NON-NLS-1$
@@ -1991,9 +2051,7 @@ public abstract class BuildHttpClientBase
     /** 
      * @return BuildSettings
      */
-    public BuildSettings getBuildSettings(
-    
-    ) {
+    public BuildSettings getBuildSettings() {
 
         final UUID locationId = UUID.fromString("aa8c1c9c-ef8b-474a-b8c4-785c7b191d0d"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
@@ -2014,7 +2072,6 @@ public abstract class BuildHttpClientBase
      * @return BuildSettings
      */
     public BuildSettings updateBuildSettings(
-    
         final BuildSettings settings) {
 
         final UUID locationId = UUID.fromString("aa8c1c9c-ef8b-474a-b8c4-785c7b191d0d"); //$NON-NLS-1$
@@ -2042,7 +2099,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> addBuildTag(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final String tag) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2074,7 +2132,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> addBuildTag(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final String tag) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2104,7 +2163,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> addBuildTags(
-        final List<String> tags,     final String project, 
+        final List<String> tags, 
+        final String project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2135,7 +2195,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> addBuildTags(
-        final List<String> tags,     final UUID project, 
+        final List<String> tags, 
+        final UUID project, 
         final int buildId) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2168,7 +2229,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> deleteBuildTag(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final String tag) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2200,7 +2262,8 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> deleteBuildTag(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final String tag) {
 
         final UUID locationId = UUID.fromString("6e6114b2-8161-44c8-8f6c-c5505782427f"); //$NON-NLS-1$
@@ -2284,7 +2347,6 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> getTags(
-    
         final String project) {
 
         final UUID locationId = UUID.fromString("d84ac5c6-edc7-43d5-adc9-1b34be5dea09"); //$NON-NLS-1$
@@ -2308,7 +2370,6 @@ public abstract class BuildHttpClientBase
      * @return List<String>
      */
     public List<String> getTags(
-    
         final UUID project) {
 
         final UUID locationId = UUID.fromString("d84ac5c6-edc7-43d5-adc9-1b34be5dea09"); //$NON-NLS-1$
@@ -2446,7 +2507,6 @@ public abstract class BuildHttpClientBase
      * @return List<BuildDefinitionTemplate>
      */
     public List<BuildDefinitionTemplate> getTemplates(
-    
         final String project) {
 
         final UUID locationId = UUID.fromString("e884571e-7f92-4d6a-9274-3f5649900835"); //$NON-NLS-1$
@@ -2470,7 +2530,6 @@ public abstract class BuildHttpClientBase
      * @return List<BuildDefinitionTemplate>
      */
     public List<BuildDefinitionTemplate> getTemplates(
-    
         final UUID project) {
 
         final UUID locationId = UUID.fromString("e884571e-7f92-4d6a-9274-3f5649900835"); //$NON-NLS-1$
@@ -2500,7 +2559,8 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinitionTemplate
      */
     public BuildDefinitionTemplate saveTemplate(
-        final BuildDefinitionTemplate template,     final String project, 
+        final BuildDefinitionTemplate template, 
+        final String project, 
         final String templateId) {
 
         final UUID locationId = UUID.fromString("e884571e-7f92-4d6a-9274-3f5649900835"); //$NON-NLS-1$
@@ -2533,7 +2593,8 @@ public abstract class BuildHttpClientBase
      * @return BuildDefinitionTemplate
      */
     public BuildDefinitionTemplate saveTemplate(
-        final BuildDefinitionTemplate template,     final UUID project, 
+        final BuildDefinitionTemplate template, 
+        final UUID project, 
         final String templateId) {
 
         final UUID locationId = UUID.fromString("e884571e-7f92-4d6a-9274-3f5649900835"); //$NON-NLS-1$
@@ -2564,7 +2625,8 @@ public abstract class BuildHttpClientBase
      * @return Timeline
      */
     public Timeline getBuildTimeline(
-        final String project,     final int buildId, 
+        final String project, 
+        final int buildId, 
         final UUID timelineId) {
 
         final UUID locationId = UUID.fromString("8baac422-4c6e-4de5-8532-db96d92acffa"); //$NON-NLS-1$
@@ -2594,7 +2656,8 @@ public abstract class BuildHttpClientBase
      * @return Timeline
      */
     public Timeline getBuildTimeline(
-        final UUID project,     final int buildId, 
+        final UUID project, 
+        final int buildId, 
         final UUID timelineId) {
 
         final UUID locationId = UUID.fromString("8baac422-4c6e-4de5-8532-db96d92acffa"); //$NON-NLS-1$

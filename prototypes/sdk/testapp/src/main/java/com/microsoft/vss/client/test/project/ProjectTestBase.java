@@ -10,6 +10,8 @@ import javax.ws.rs.client.Client;
 import com.microsoft.teamfoundation.core.webapi.CoreHttpClient;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProject;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.teamfoundation.core.webapi.model.WebApiConnectedService;
+import com.microsoft.visualstudio.services.webapi.model.IdentityRef;
 import com.microsoft.vss.client.test.JsonUtil;
 import com.microsoft.vss.client.test.TestBase;
 
@@ -62,4 +64,30 @@ public class ProjectTestBase
         System.out.println("Url             = " + project.getUrl()); //$NON-NLS-1$
 
     }
+
+    public static void printConnectedService(final WebApiConnectedService service) {
+
+        System.out.println("Id               = " + service.getId()); //$NON-NLS-1$
+        System.out.println("Name             = " + service.getFriendlyName()); //$NON-NLS-1$
+        System.out.println("Description      = " + service.getDescription()); //$NON-NLS-1$
+        System.out.println("Kind             = " + service.getKind()); //$NON-NLS-1$
+        System.out.println("Service URI      = " + service.getServiceUri()); //$NON-NLS-1$
+        System.out.println("URI              = " + service.getUrl()); //$NON-NLS-1$
+        System.out.println("Authenticated by : "); //$NON-NLS-1$
+        printIdentity(service.getAuthenticatedBy());
+        System.out.println("Project          : "); //$NON-NLS-1$
+        printProject(service.getProject());
+    }
+
+    public static void printIdentity(final IdentityRef identity) {
+        System.out.println("Id               = " + identity.getId()); //$NON-NLS-1$
+        System.out.println("Name             = " + identity.getDisplayName()); //$NON-NLS-1$
+        System.out.println("Image            = " + identity.getImageUrl()); //$NON-NLS-1$
+        System.out.println("Profile          = " + identity.getProfileUrl()); //$NON-NLS-1$
+        System.out.println("Unique name      = " + identity.getUniqueName()); //$NON-NLS-1$
+        System.out.println("URL              = " + identity.getUrl()); //$NON-NLS-1$
+        System.out.println("IsAadIdentity    = " + identity.getIsAadIdentity()); //$NON-NLS-1$
+        System.out.println("IsContainer      = " + identity.getIsContainer()); //$NON-NLS-1$
+    }
+
 }

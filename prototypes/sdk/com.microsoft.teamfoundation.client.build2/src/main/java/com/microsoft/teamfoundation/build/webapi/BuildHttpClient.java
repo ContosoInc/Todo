@@ -66,6 +66,32 @@ public class BuildHttpClient
     }
 
     /**
+     * Gets a build
+     * 
+     * @param project
+     *            Project ID or project name
+     * @param buildId
+     *            A comma-delimited list of properties to include in the results
+     * @return Build
+     */
+    public Build getBuild(final String project, final int buildId) {
+        return super.getBuild(project, buildId, null);
+    }
+
+    /**
+     * Gets a build
+     * 
+     * @param project
+     *            Project ID or project name
+     * @param buildId
+     *            A comma-delimited list of properties to include in the results
+     * @return Build
+     */
+    public Build getBuild(final UUID project, final int buildId) {
+        return super.getBuild(project, buildId, null);
+    }
+
+    /**
      * Queue a build
      * @param build
      * @return Build

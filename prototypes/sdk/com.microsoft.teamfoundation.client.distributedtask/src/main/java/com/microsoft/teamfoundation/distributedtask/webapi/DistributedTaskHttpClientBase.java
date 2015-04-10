@@ -125,7 +125,9 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response getAgent(
-        final int poolId,     final int agentId,     final Boolean includeCapabilities, 
+        final int poolId, 
+        final int agentId, 
+        final Boolean includeCapabilities, 
         final String propertyFilters) {
 
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
@@ -146,7 +148,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -163,7 +165,10 @@ public abstract class DistributedTaskHttpClientBase
      * @return List<TaskAgent>
      */
     public List<TaskAgent> getAgents(
-        final int poolId,     final String agentName,     final Boolean includeCapabilities,     final String propertyFilters, 
+        final int poolId, 
+        final String agentName, 
+        final Boolean includeCapabilities, 
+        final String propertyFilters, 
         final String demands) {
 
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
@@ -198,7 +203,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return TaskAgent
      */
     public TaskAgent patchAgent(
-        final TaskAgent agent,     final int poolId, 
+        final TaskAgent agent, 
+        final int poolId, 
         final int agentId) {
 
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
@@ -229,7 +235,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return TaskAgent
      */
     public TaskAgent putAgent(
-        final TaskAgent agent,     final int poolId, 
+        final TaskAgent agent, 
+        final int poolId, 
         final int agentId) {
 
         final UUID locationId = UUID.fromString("e298ef32-5878-4cab-993c-043836571f42"); //$NON-NLS-1$
@@ -274,7 +281,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -285,7 +292,6 @@ public abstract class DistributedTaskHttpClientBase
      * @return List<String>
      */
     public List<String> queryEndpoint(
-    
         final TaskDefinitionEndpoint endpoint) {
 
         final UUID locationId = UUID.fromString("f223b809-8c33-4b7d-b53f-07232569b5d6"); //$NON-NLS-1$
@@ -325,7 +331,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -337,7 +343,8 @@ public abstract class DistributedTaskHttpClientBase
      *            
      */
     public void deleteRequest(
-        final int poolId,     final long requestId, 
+        final int poolId, 
+        final long requestId, 
         final UUID lockToken) {
 
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
@@ -427,7 +434,9 @@ public abstract class DistributedTaskHttpClientBase
      * @return TaskAgentJobRequest
      */
     public TaskAgentJobRequest updateRequest(
-        final TaskAgentJobRequest request,     final int poolId,     final long requestId, 
+        final TaskAgentJobRequest request, 
+        final int poolId, 
+        final long requestId, 
         final UUID lockToken) {
 
         final UUID locationId = UUID.fromString("fc825784-c92a-4299-9221-998a02d1b54f"); //$NON-NLS-1$
@@ -462,7 +471,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response deleteMessage(
-        final int poolId,     final long messageId, 
+        final int poolId, 
+        final long messageId, 
         final UUID sessionId) {
 
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
@@ -495,7 +505,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response getMessage(
-        final int poolId,     final UUID sessionId, 
+        final int poolId, 
+        final UUID sessionId, 
         final Integer lastMessageId) {
 
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
@@ -527,7 +538,8 @@ public abstract class DistributedTaskHttpClientBase
      *            
      */
     public void sendMessage(
-        final TaskAgentMessage message,     final int poolId, 
+        final TaskAgentMessage message, 
+        final int poolId, 
         final int requestId) {
 
         final UUID locationId = UUID.fromString("c3a054f6-7a8a-49c0-944e-3a8e5d7adfd7"); //$NON-NLS-1$
@@ -559,7 +571,6 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response getPackage(
-    
         final String packageType) {
 
         final UUID locationId = UUID.fromString("8ffcd551-079c-493a-9c02-54346299d144"); //$NON-NLS-1$
@@ -574,7 +585,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -583,7 +594,6 @@ public abstract class DistributedTaskHttpClientBase
      * @return TaskAgentPool
      */
     public TaskAgentPool addPool(
-    
         final TaskAgentPool pool) {
 
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
@@ -604,7 +614,6 @@ public abstract class DistributedTaskHttpClientBase
      *            
      */
     public void deletePool(
-    
         final int poolId) {
 
         final UUID locationId = UUID.fromString("a8c47e17-4d56-4a56-92bb-de7ea7dc65be"); //$NON-NLS-1$
@@ -649,7 +658,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -758,14 +767,12 @@ public abstract class DistributedTaskHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
      */
-    public void deleteTaskDefinitions(
-    
-    ) {
+    public void deleteTaskDefinitions() {
 
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
@@ -802,7 +809,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -811,7 +818,6 @@ public abstract class DistributedTaskHttpClientBase
      * @return List<TaskDefinition>
      */
     public List<TaskDefinition> getTaskDefinitions(
-    
         final List<String> visibility) {
 
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
@@ -839,7 +845,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response uploadTaskContent(
-        final UUID taskId,     final String versionString, 
+        final UUID taskId, 
+        final String versionString, 
         final Boolean overwrite) {
 
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
@@ -872,7 +879,8 @@ public abstract class DistributedTaskHttpClientBase
      * @return Response
      */
     public Response updateUserCapabilities(
-        final HashMap<String,String> userCapabilities,     final int poolId, 
+        final HashMap<String,String> userCapabilities, 
+        final int poolId, 
         final int agentId) {
 
         final UUID locationId = UUID.fromString("30ba3ada-fedf-4da8-bbb5-dacf2f82e176"); //$NON-NLS-1$
@@ -890,6 +898,6 @@ public abstract class DistributedTaskHttpClientBase
                                                            APPLICATION_JSON_TYPE,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 }
