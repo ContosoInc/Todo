@@ -2,7 +2,7 @@ package com.microsoft.tfs.plugin.impl;
 
 import com.microsoft.teamfoundation.build.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.Demand;
+import com.microsoft.teamfoundation.build.webapi.model.Demand;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
 import hudson.Util;
@@ -30,7 +30,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
             throw new RuntimeException(String.format("Could not find the project: %s", projectId));
         }
 
-        BuildDefinition definition = tfsClient.getBuildClient().getDefinition(project.getId(), buildDefinition, null);
+        DefinitionReference definition = tfsClient.getBuildClient().getDefinition(project.getId(), buildDefinition, null, null);
         if (definition == null) {
             throw new RuntimeException(String.format("Could not find the buildDefinition: %d", buildDefinition));
         }
@@ -41,7 +41,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
             queues = createTfsBuildQueue(tfsClient);
         }
 
-        QueueReference anyQueue = queues.get(0);
+        AgentPoolQueue anyQueue = queues.get(0);
         Build buildContainer = createBuildContainer(project, definition, anyQueue, jenkinsBuild.getProject().getScm());
         Build queuedBuild = tfsClient.getBuildClient().queueBuild(buildContainer, true);
 
@@ -65,7 +65,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
         return Collections.singletonList(queue);
     }
 
-    private Build createBuildContainer(TeamProjectReference project, BuildDefinition definition, QueueReference queue, SCM scm) {
+    private Build createBuildContainer(TeamProjectReference project, DefinitionReference definition, AgentPoolQueue queue, SCM scm) {
         Build b = new Build();
         b.setQueue(queue);
         b.setDefinition(definition);

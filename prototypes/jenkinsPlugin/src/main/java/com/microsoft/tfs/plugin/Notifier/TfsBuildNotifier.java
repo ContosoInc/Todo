@@ -1,6 +1,7 @@
 package com.microsoft.tfs.plugin.Notifier;
 
 import com.microsoft.teamfoundation.build.webapi.model.BuildDefinitionReference;
+import com.microsoft.teamfoundation.build.webapi.model.DefinitionReference;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
@@ -209,9 +210,9 @@ public class TfsBuildNotifier extends Notifier {
             if (validInputs(serverUrl, username, password, project)) {
                 try {
                     TfsClient client = getTfsClientFactory().getValidatedClient(serverUrl, username, password);
-                    List<BuildDefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
+                    List<DefinitionReference> definitions = client.getBuildClient().getDefinitions(UUID.fromString(project));
 
-                    for (BuildDefinitionReference definition : definitions) {
+                    for (DefinitionReference definition : definitions) {
                         items.add(definition.getName(), String.valueOf(definition.getId()));
                     }
                 } catch (VssServiceException vse) {
