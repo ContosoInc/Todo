@@ -42,8 +42,9 @@ public abstract class JaxrsUtil {
         /*
          * !!!!!!!! Define Fiddler as a local HTTP proxy !!!!!!!!!!!!
          */
-        clientConfig.property(ClientProperties.PROXY_URI, "http://127.0.0.1:8888"); //$NON-NLS-1$
-        clientConfig.property(ApacheClientProperties.SSL_CONFIG, getSslConfigurator());
+        // clientConfig.property(ClientProperties.PROXY_URI, "http://127.0.0.1:8888"); //$NON-NLS-1$
+        // clientConfig.property(ApacheClientProperties.SSL_CONFIG,
+        // getSslConfigurator());
         /*
          * !!!!!!!! Comment out two lines above if you do not use Fiddler
          * !!!!!!!!!!!!

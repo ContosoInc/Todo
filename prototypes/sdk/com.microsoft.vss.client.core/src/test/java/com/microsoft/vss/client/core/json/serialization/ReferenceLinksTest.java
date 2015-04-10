@@ -36,7 +36,7 @@ public class ReferenceLinksTest
 
         final String s = TestUtil.toJsonString(e1);
 
-        Object e2 = TestUtil.fromJsonString(s, EntityWithReferenceLinks.class);
+        final Object e2 = TestUtil.fromJsonString(s, EntityWithReferenceLinks.class);
 
         assertTrue("Returned type is EntityWithReferenceLinks", e2 instanceof EntityWithReferenceLinks); //$NON-NLS-1$
         assertEquals("Submitted and returned values", e1, e2); //$NON-NLS-1$
@@ -68,7 +68,7 @@ public class ReferenceLinksTest
 
         final String s = TestUtil.toJsonString(e1);
 
-        Object e2 = TestUtil.fromJsonString(s, EntityWithReferenceLinks.class);
+        final Object e2 = TestUtil.fromJsonString(s, EntityWithReferenceLinks.class);
 
         assertTrue("Returned type is EntityWithReferenceLinks", e2 instanceof EntityWithReferenceLinks); //$NON-NLS-1$
         assertEquals("Submitted and returned values", e1, e2); //$NON-NLS-1$

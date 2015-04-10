@@ -13,7 +13,7 @@ public class EntityWithBuildDemands {
         return fieldA;
     }
 
-    public void setFieldA(String fieldA) {
+    public void setFieldA(final String fieldA) {
         this.fieldA = fieldA;
     }
 
@@ -21,7 +21,7 @@ public class EntityWithBuildDemands {
         return demand1;
     }
 
-    public void setDemand1(Demand demand1) {
+    public void setDemand1(final Demand demand1) {
         this.demand1 = demand1;
     }
 
@@ -29,7 +29,7 @@ public class EntityWithBuildDemands {
         return fieldB;
     }
 
-    public void setFieldB(boolean fieldB) {
+    public void setFieldB(final boolean fieldB) {
         this.fieldB = fieldB;
     }
 
@@ -37,7 +37,7 @@ public class EntityWithBuildDemands {
         return demand2;
     }
 
-    public void setDemand2(Demand demand2) {
+    public void setDemand2(final Demand demand2) {
         this.demand2 = demand2;
     }
 
@@ -45,12 +45,12 @@ public class EntityWithBuildDemands {
         return fieldC;
     }
 
-    public void setFieldC(int fieldC) {
+    public void setFieldC(final int fieldC) {
         this.fieldC = fieldC;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (!(obj instanceof EntityWithBuildDemands)) {
             return false;
         }

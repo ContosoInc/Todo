@@ -10,6 +10,7 @@ import javax.ws.rs.client.Client;
 import com.microsoft.teamfoundation.common.model.ProjectState;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProject;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
+import com.microsoft.teamfoundation.core.webapi.model.WebApiConnectedService;
 
 public class ProjectTests
     extends ProjectTestBase {
@@ -31,7 +32,6 @@ public class ProjectTests
         for (final TeamProjectReference p : projects) {
             printProject(p);
         }
-
     }
 
     public void testGet_02() {
@@ -122,5 +122,25 @@ public class ProjectTests
 
         final TeamProject updatedProject = coreClient.getProject(projectId.toString());
         System.out.println("New description = " + updatedProject.getDescription()); //$NON-NLS-1$
+    }
+
+    public void testConnectedServices_01(final String projectName) {
+        System.out.println(MessageFormat.format(
+            "================================ {0} ==== {1} ================================", //$NON-NLS-1$
+            "testConnectedServices_01", this.getClass().getName())); //$NON-NLS-1$
+
+        UUID projectId = getProjectIdByName(projectName);
+
+        if (projectId == null) {
+            return;
+        }
+        List<WebApiConnectedService> services = coreClient.getConnectedServices(projectId.toString(), null);
+
+        System.out.println(services.size() + " services(s) read"); //$NON-NLS-1$
+        System.out.println();
+
+        for (final WebApiConnectedService s : services) {
+            printConnectedService(s);
+        }
     }
 }

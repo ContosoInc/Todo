@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.util.Random;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.vss.client.core.utils.JsonHelper;
@@ -14,6 +15,7 @@ import com.microsoft.vss.client.core.utils.StringUtil;
 public class TestUtil {
 
     private static final String TEST_CASES_LOCATION = "VssHttpClientTestCases"; //$NON-NLS-1$
+    private static final Random generator = new Random();
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -25,6 +27,25 @@ public class TestUtil {
     }
 
     private TestUtil() {}
+
+    public static int getRandomInt() {
+        return getRandomInt(0, 9);
+    }
+
+    public static int getRandomInt(final int a, final int b) {
+        return generator.nextInt(b - a + 1) + a;
+    }
+
+    public static String getRandomString() {
+        final int n = getRandomInt();
+        final StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+            sb.append((char) ('a' + getRandomInt()));
+        }
+
+        return sb.toString();
+    }
 
     public static File getTempFolder() {
         return new File(System.getProperty("java.io.tmpdir"), TEST_CASES_LOCATION); //$NON-NLS-1$

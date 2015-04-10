@@ -94,7 +94,10 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -135,7 +138,10 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -176,7 +182,10 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -217,7 +226,10 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -256,7 +268,9 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -294,7 +308,9 @@ public abstract class GitHttpClientBase
      * @return GitBlobRef
      */
     public GitBlobRef getBlob(
-        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -334,7 +350,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -375,7 +394,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -416,7 +438,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -457,7 +482,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -496,7 +524,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -534,7 +564,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobContent(
-        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -568,7 +600,8 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final String repositoryId, 
+        final List<String> blobIds, 
+        final String repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -602,7 +635,8 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final UUID repositoryId, 
+        final List<String> blobIds, 
+        final UUID repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -638,7 +672,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final String project,     final String repositoryId, 
+        final List<String> blobIds, 
+        final String project, 
+        final String repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -675,7 +711,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final String project,     final UUID repositoryId, 
+        final List<String> blobIds, 
+        final String project, 
+        final UUID repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -712,7 +750,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final UUID project,     final String repositoryId, 
+        final List<String> blobIds, 
+        final UUID project, 
+        final String repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -749,7 +789,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobsZip(
-        final List<String> blobIds,     final UUID project,     final UUID repositoryId, 
+        final List<String> blobIds, 
+        final UUID project, 
+        final UUID repositoryId, 
         final String filename) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -790,7 +832,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobZip(
-        final String project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -831,48 +876,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobZip(
-        final String project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
-        final String fileName) {
-
-        final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("sha1", sha1); //$NON-NLS-1$
-
-        final NameValueCollection queryParameters = new NameValueCollection();
-        queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
-        queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
-
-        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
-                                                           locationId,
-                                                           routeValues,
-                                                           apiVersion,
-                                                           queryParameters,
-                                                           APPLICATION_ZIP_TYPE);
-
-        return super.sendRequest(httpRequest, InputStream.class);
-    }
-
-    /** 
-     * Gets a single blob.
-     * 
-     * @param project 
-     *            Project ID
-     * @param repositoryId 
-     *            
-     * @param sha1 
-     *            
-     * @param download 
-     *            
-     * @param fileName 
-     *            
-     * @return InputStream
-     */
-    public InputStream getBlobZip(
-        final UUID project,     final String repositoryId,     final String sha1,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -913,7 +920,54 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobZip(
-        final UUID project,     final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
+        final String fileName) {
+
+        final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("sha1", sha1); //$NON-NLS-1$
+
+        final NameValueCollection queryParameters = new NameValueCollection();
+        queryParameters.addIfNotNull("download", download); //$NON-NLS-1$
+        queryParameters.addIfNotEmpty("fileName", fileName); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           queryParameters,
+                                                           APPLICATION_ZIP_TYPE);
+
+        return super.sendRequest(httpRequest, InputStream.class);
+    }
+
+    /** 
+     * Gets a single blob.
+     * 
+     * @param project 
+     *            Project ID
+     * @param repositoryId 
+     *            
+     * @param sha1 
+     *            
+     * @param download 
+     *            
+     * @param fileName 
+     *            
+     * @return InputStream
+     */
+    public InputStream getBlobZip(
+        final UUID project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -952,7 +1006,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobZip(
-        final String repositoryId,     final String sha1,     final Boolean download, 
+        final String repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -990,7 +1046,9 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getBlobZip(
-        final UUID repositoryId,     final String sha1,     final Boolean download, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final Boolean download, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("7b28e929-2c99-405d-9c5c-6167a06e6816"); //$NON-NLS-1$
@@ -1028,7 +1086,9 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final String project,     final String repositoryId,     final String name, 
+        final String project, 
+        final String repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1066,7 +1126,9 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final String project,     final UUID repositoryId,     final String name, 
+        final String project, 
+        final UUID repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1104,7 +1166,9 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final UUID project,     final String repositoryId,     final String name, 
+        final UUID project, 
+        final String repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1142,7 +1206,9 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final UUID project,     final UUID repositoryId,     final String name, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1178,7 +1244,8 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final String repositoryId,     final String name, 
+        final String repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1213,7 +1280,8 @@ public abstract class GitHttpClientBase
      * @return GitBranchStats
      */
     public GitBranchStats getBranch(
-        final UUID repositoryId,     final String name, 
+        final UUID repositoryId, 
+        final String name, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1248,7 +1316,8 @@ public abstract class GitHttpClientBase
      * @return List<GitBranchStats>
      */
     public List<GitBranchStats> getBranches(
-        final String project,     final String repositoryId, 
+        final String project, 
+        final String repositoryId, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1283,7 +1352,8 @@ public abstract class GitHttpClientBase
      * @return List<GitBranchStats>
      */
     public List<GitBranchStats> getBranches(
-        final String project,     final UUID repositoryId, 
+        final String project, 
+        final UUID repositoryId, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1318,7 +1388,8 @@ public abstract class GitHttpClientBase
      * @return List<GitBranchStats>
      */
     public List<GitBranchStats> getBranches(
-        final UUID project,     final String repositoryId, 
+        final UUID project, 
+        final String repositoryId, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1353,7 +1424,8 @@ public abstract class GitHttpClientBase
      * @return List<GitBranchStats>
      */
     public List<GitBranchStats> getBranches(
-        final UUID project,     final UUID repositoryId, 
+        final UUID project, 
+        final UUID repositoryId, 
         final GitVersionDescriptor baseVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("d5b216de-d8d5-4d32-ae76-51df755b16d3"); //$NON-NLS-1$
@@ -1456,7 +1528,10 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final String project,     final String commitId,     final String repositoryId,     final Integer top, 
+        final String project, 
+        final String commitId, 
+        final String repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1497,7 +1572,10 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final String project,     final String commitId,     final UUID repositoryId,     final Integer top, 
+        final String project, 
+        final String commitId, 
+        final UUID repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1538,7 +1616,10 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final UUID project,     final String commitId,     final String repositoryId,     final Integer top, 
+        final UUID project, 
+        final String commitId, 
+        final String repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1579,7 +1660,10 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final UUID project,     final String commitId,     final UUID repositoryId,     final Integer top, 
+        final UUID project, 
+        final String commitId, 
+        final UUID repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1618,7 +1702,9 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final String commitId,     final String repositoryId,     final Integer top, 
+        final String commitId, 
+        final String repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1656,7 +1742,9 @@ public abstract class GitHttpClientBase
      * @return GitCommitChanges
      */
     public GitCommitChanges getChanges(
-        final String commitId,     final UUID repositoryId,     final Integer top, 
+        final String commitId, 
+        final UUID repositoryId, 
+        final Integer top, 
         final Integer skip) {
 
         final UUID locationId = UUID.fromString("5bf884f5-3e07-42e9-afb8-1b872267bf16"); //$NON-NLS-1$
@@ -1698,7 +1786,12 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final String project,     final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final String project, 
+        final String repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1743,7 +1836,12 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final String project,     final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final String project, 
+        final UUID repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1788,7 +1886,12 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final UUID project,     final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final UUID project, 
+        final String repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1833,7 +1936,12 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final UUID project,     final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1876,7 +1984,11 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final String repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final String repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1918,7 +2030,11 @@ public abstract class GitHttpClientBase
      * @return GitCommitDiffs
      */
     public GitCommitDiffs getCommitDiffs(
-        final UUID repositoryId,     final Boolean diffCommonCommit,     final Integer top,     final Integer skip,     final GitBaseVersionDescriptor baseVersionDescriptor, 
+        final UUID repositoryId, 
+        final Boolean diffCommonCommit, 
+        final Integer top, 
+        final Integer skip, 
+        final GitBaseVersionDescriptor baseVersionDescriptor, 
         final GitTargetVersionDescriptor targetVersionDescriptor) {
 
         final UUID locationId = UUID.fromString("615588d5-c0c7-4b88-88f8-e625306446e8"); //$NON-NLS-1$
@@ -1952,7 +2068,6 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit createCommit(
-    
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -1978,7 +2093,6 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit createCommit(
-    
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2126,7 +2240,9 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final String project,     final String commitId,     final String repositoryId, 
+        final String project, 
+        final String commitId, 
+        final String repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2164,7 +2280,9 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final String project,     final String commitId,     final UUID repositoryId, 
+        final String project, 
+        final String commitId, 
+        final UUID repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2202,7 +2320,9 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final UUID project,     final String commitId,     final String repositoryId, 
+        final UUID project, 
+        final String commitId, 
+        final String repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2240,7 +2360,9 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final UUID project,     final String commitId,     final UUID repositoryId, 
+        final UUID project, 
+        final String commitId, 
+        final UUID repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2276,7 +2398,8 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final String commitId,     final String repositoryId, 
+        final String commitId, 
+        final String repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2311,7 +2434,8 @@ public abstract class GitHttpClientBase
      * @return GitCommit
      */
     public GitCommit getCommit(
-        final String commitId,     final UUID repositoryId, 
+        final String commitId, 
+        final UUID repositoryId, 
         final Integer changeCount) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2348,7 +2472,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final String project,     final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final String project, 
+        final String repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2387,7 +2514,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final String project,     final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final String project, 
+        final UUID repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2426,7 +2556,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final UUID project,     final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final UUID project, 
+        final String repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2465,7 +2598,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final UUID project,     final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2502,7 +2638,9 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final String repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final String repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2538,7 +2676,9 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommits(
-        final UUID repositoryId,     final GitQueryCommitsCriteria searchCriteria,     final Integer skip, 
+        final UUID repositoryId, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2580,7 +2720,11 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final String project,     final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final String project, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2624,7 +2768,11 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final String project,     final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2668,7 +2816,11 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final UUID project,     final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2712,7 +2864,11 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final UUID project,     final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2754,7 +2910,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final String repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2795,7 +2954,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getPushCommits(
-        final UUID repositoryId,     final int pushId,     final Integer top,     final Integer skip, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer top, 
+        final Integer skip, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("c2570c3b-5b3f-41b8-98bf-5407bfde8d58"); //$NON-NLS-1$
@@ -2832,7 +2994,9 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final String repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final String repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -2869,7 +3033,9 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final UUID repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final UUID repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -2908,7 +3074,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final String project,     final String repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final String project, 
+        final String repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -2948,7 +3117,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final String project,     final UUID repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final String project, 
+        final UUID repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -2988,7 +3160,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final UUID project,     final String repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final UUID project, 
+        final String repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -3028,7 +3203,10 @@ public abstract class GitHttpClientBase
      * @return List<GitCommitRef>
      */
     public List<GitCommitRef> getCommitsBatch(
-        final GitQueryCommitsCriteria searchCriteria,     final UUID project,     final UUID repositoryId,     final Integer skip, 
+        final GitQueryCommitsCriteria searchCriteria, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("6400dfb2-0bcb-462b-b992-5a57f8f1416c"); //$NON-NLS-1$
@@ -3078,7 +3256,14 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3131,7 +3316,14 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3184,7 +3376,14 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3237,7 +3436,14 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3288,7 +3494,13 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3338,7 +3550,13 @@ public abstract class GitHttpClientBase
      * @return GitItem
      */
     public GitItem getItem(
-        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3390,7 +3608,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3443,7 +3668,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3496,7 +3728,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3549,7 +3788,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3600,7 +3846,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3650,7 +3902,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemContent(
-        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3702,7 +3960,14 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final String project,     final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final String project, 
+        final String repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3755,7 +4020,14 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final String project,     final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final String project, 
+        final UUID repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3808,7 +4080,14 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final UUID project,     final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final UUID project, 
+        final String repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3861,7 +4140,14 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final UUID project,     final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3912,7 +4198,13 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final String repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final String repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -3962,7 +4254,13 @@ public abstract class GitHttpClientBase
      * @return List<GitItem>
      */
     public List<GitItem> getItems(
-        final UUID repositoryId,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download,     final Boolean includeLinks, 
+        final UUID repositoryId, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
+        final Boolean includeLinks, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4014,7 +4312,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4067,7 +4372,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4120,7 +4432,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4173,7 +4492,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4224,7 +4550,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4274,7 +4606,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemText(
-        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4326,7 +4664,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final String project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4379,7 +4724,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final String project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4432,7 +4784,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final UUID project,     final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4485,7 +4844,14 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final UUID project,     final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4536,7 +4902,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final String repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final String repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4586,7 +4958,13 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getItemZip(
-        final UUID repositoryId,     final String path,     final String scopePath,     final VersionControlRecursionType recursionLevel,     final Boolean includeContentMetadata,     final Boolean latestProcessedChange,     final Boolean download, 
+        final UUID repositoryId, 
+        final String path, 
+        final String scopePath, 
+        final VersionControlRecursionType recursionLevel, 
+        final Boolean includeContentMetadata, 
+        final Boolean latestProcessedChange, 
+        final Boolean download, 
         final GitVersionDescriptor versionDescriptor) {
 
         final UUID locationId = UUID.fromString("fb93c0db-47ed-4a31-8c20-47552878fb44"); //$NON-NLS-1$
@@ -4686,7 +5064,8 @@ public abstract class GitHttpClientBase
      * @return List<List<GitItem>>
      */
     public List<List<GitItem>> getItemsBatch(
-        final GitItemRequestData requestData,     final String project, 
+        final GitItemRequestData requestData, 
+        final String project, 
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
@@ -4719,7 +5098,8 @@ public abstract class GitHttpClientBase
      * @return List<List<GitItem>>
      */
     public List<List<GitItem>> getItemsBatch(
-        final GitItemRequestData requestData,     final String project, 
+        final GitItemRequestData requestData, 
+        final String project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
@@ -4752,7 +5132,8 @@ public abstract class GitHttpClientBase
      * @return List<List<GitItem>>
      */
     public List<List<GitItem>> getItemsBatch(
-        final GitItemRequestData requestData,     final UUID project, 
+        final GitItemRequestData requestData, 
+        final UUID project, 
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
@@ -4785,7 +5166,8 @@ public abstract class GitHttpClientBase
      * @return List<List<GitItem>>
      */
     public List<List<GitItem>> getItemsBatch(
-        final GitItemRequestData requestData,     final UUID project, 
+        final GitItemRequestData requestData, 
+        final UUID project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("630fd2e4-fb88-4f85-ad21-13f3fd1fbca9"); //$NON-NLS-1$
@@ -4818,7 +5200,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response getMediaObjectOrReference(
-        final String repositoryId,     final String mediaObjectId, 
+        final String repositoryId, 
+        final String mediaObjectId, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -4835,7 +5218,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -4850,7 +5233,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response getMediaObjectOrReference(
-        final UUID repositoryId,     final String mediaObjectId, 
+        final UUID repositoryId, 
+        final String mediaObjectId, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -4867,42 +5251,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
-    }
-
-    /** 
-     * Gets the Git media object contents or metadata by the specified identifier.
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param mediaObjectId 
-     *            
-     * @param includeLinks 
-     *            
-     * @return Response
-     */
-    public Response getMediaObjectOrReference(
-        final String project,     final String repositoryId,     final String mediaObjectId, 
-        final Boolean includeLinks) {
-
-        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
-        routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
-
-        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
-                                                           locationId,
-                                                           routeValues,
-                                                           apiVersion,
-                                                           APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -4919,7 +5268,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response getMediaObjectOrReference(
-        final String project,     final UUID repositoryId,     final String mediaObjectId, 
+        final String project, 
+        final String repositoryId, 
+        final String mediaObjectId, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -4937,7 +5288,44 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
+    }
+
+    /** 
+     * Gets the Git media object contents or metadata by the specified identifier.
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param mediaObjectId 
+     *            
+     * @param includeLinks 
+     *            
+     * @return Response
+     */
+    public Response getMediaObjectOrReference(
+        final String project, 
+        final UUID repositoryId, 
+        final String mediaObjectId, 
+        final Boolean includeLinks) {
+
+        final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("mediaObjectId", mediaObjectId); //$NON-NLS-1$
+        routeValues.put("includeLinks", includeLinks); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.GET,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -4954,7 +5342,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response getMediaObjectOrReference(
-        final UUID project,     final String repositoryId,     final String mediaObjectId, 
+        final UUID project, 
+        final String repositoryId, 
+        final String mediaObjectId, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -4972,7 +5362,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -4989,7 +5379,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response getMediaObjectOrReference(
-        final UUID project,     final UUID repositoryId,     final String mediaObjectId, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String mediaObjectId, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5007,7 +5399,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5036,7 +5428,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5065,7 +5457,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5080,7 +5472,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response hasMediaObjectWritePermission(
-        final String project,     final String repositoryId, 
+        final String project, 
+        final String repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5097,7 +5490,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5112,7 +5505,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response hasMediaObjectWritePermission(
-        final String project,     final UUID repositoryId, 
+        final String project, 
+        final UUID repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5129,7 +5523,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5144,7 +5538,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response hasMediaObjectWritePermission(
-        final UUID project,     final String repositoryId, 
+        final UUID project, 
+        final String repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5161,7 +5556,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5176,7 +5571,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response hasMediaObjectWritePermission(
-        final UUID project,     final UUID repositoryId, 
+        final UUID project, 
+        final UUID repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5193,7 +5589,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5222,7 +5618,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5251,7 +5647,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5266,7 +5662,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response uploadMediaObject(
-        final String project,     final String repositoryId, 
+        final String project, 
+        final String repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5283,7 +5680,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5298,7 +5695,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response uploadMediaObject(
-        final String project,     final UUID repositoryId, 
+        final String project, 
+        final UUID repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5315,7 +5713,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5330,7 +5728,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response uploadMediaObject(
-        final UUID project,     final String repositoryId, 
+        final UUID project, 
+        final String repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5347,7 +5746,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5362,7 +5761,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response uploadMediaObject(
-        final UUID project,     final UUID repositoryId, 
+        final UUID project, 
+        final UUID repositoryId, 
         final String mediaObjectId) {
 
         final UUID locationId = UUID.fromString("33645b30-4853-4236-ab87-ffed6ea1b5d5"); //$NON-NLS-1$
@@ -5379,7 +5779,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5396,7 +5796,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final String repositoryId,     final int pullRequestId, 
+        final IdentityRefWithVote reviewer, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5432,7 +5834,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final UUID repositoryId,     final int pullRequestId, 
+        final IdentityRefWithVote reviewer, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5470,7 +5874,10 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final String project,     final String repositoryId,     final int pullRequestId, 
+        final IdentityRefWithVote reviewer, 
+        final String project, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5509,46 +5916,10 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final String project,     final UUID repositoryId,     final int pullRequestId, 
-        final String reviewerId) {
-
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
-
-        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
-                                                           locationId,
-                                                           routeValues,
-                                                           apiVersion,
-                                                           reviewer,
-                                                           APPLICATION_JSON_TYPE,
-                                                           APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
-    }
-
-    /** 
-     * Adds a reviewer to a git pull request
-     * 
-     * @param reviewer 
-     *            
-     * @param project 
-     *            Project ID
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @param reviewerId 
-     *            
-     * @return IdentityRefWithVote
-     */
-    public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final IdentityRefWithVote reviewer, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5587,7 +5958,52 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote createPullRequestReviewer(
-        final IdentityRefWithVote reviewer,     final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final IdentityRefWithVote reviewer, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final String reviewerId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.PUT,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           reviewer,
+                                                           APPLICATION_JSON_TYPE,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest, IdentityRefWithVote.class);
+    }
+
+    /** 
+     * Adds a reviewer to a git pull request
+     * 
+     * @param reviewer 
+     *            
+     * @param project 
+     *            Project ID
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @param reviewerId 
+     *            
+     * @return IdentityRefWithVote
+     */
+    public IdentityRefWithVote createPullRequestReviewer(
+        final IdentityRefWithVote reviewer, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5622,7 +6038,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final String repositoryId, 
+        final IdentityRef[] reviewers, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5655,7 +6072,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final UUID repositoryId, 
+        final IdentityRef[] reviewers, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5690,7 +6108,9 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final String project,     final String repositoryId, 
+        final IdentityRef[] reviewers, 
+        final String project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5726,7 +6146,9 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final String project,     final UUID repositoryId, 
+        final IdentityRef[] reviewers, 
+        final String project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5762,7 +6184,9 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final UUID project,     final String repositoryId, 
+        final IdentityRef[] reviewers, 
+        final UUID project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5798,7 +6222,9 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> createPullRequestReviewers(
-        final IdentityRef[] reviewers,     final UUID project,     final UUID repositoryId, 
+        final IdentityRef[] reviewers, 
+        final UUID project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5832,7 +6258,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response deletePullRequestReviewer(
-        final String repositoryId,     final int pullRequestId, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5849,7 +6276,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5864,7 +6291,8 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response deletePullRequestReviewer(
-        final UUID repositoryId,     final int pullRequestId, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5881,42 +6309,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
-    }
-
-    /** 
-     * Adds reviewers to a git pull request
-     * 
-     * @param project 
-     *            Project ID or project name
-     * @param repositoryId 
-     *            
-     * @param pullRequestId 
-     *            
-     * @param reviewerId 
-     *            
-     * @return Response
-     */
-    public Response deletePullRequestReviewer(
-        final String project,     final String repositoryId,     final int pullRequestId, 
-        final String reviewerId) {
-
-        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
-        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
-
-        final Map<String, Object> routeValues = new HashMap<String, Object>();
-        routeValues.put("project", project); //$NON-NLS-1$
-        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
-        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
-        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
-
-        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
-                                                           locationId,
-                                                           routeValues,
-                                                           apiVersion,
-                                                           APPLICATION_JSON_TYPE);
-
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5933,7 +6326,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response deletePullRequestReviewer(
-        final String project,     final UUID repositoryId,     final int pullRequestId, 
+        final String project, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5951,7 +6346,44 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
+    }
+
+    /** 
+     * Adds reviewers to a git pull request
+     * 
+     * @param project 
+     *            Project ID or project name
+     * @param repositoryId 
+     *            
+     * @param pullRequestId 
+     *            
+     * @param reviewerId 
+     *            
+     * @return Response
+     */
+    public Response deletePullRequestReviewer(
+        final String project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final String reviewerId) {
+
+        final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
+        final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
+
+        final Map<String, Object> routeValues = new HashMap<String, Object>();
+        routeValues.put("project", project); //$NON-NLS-1$
+        routeValues.put("repositoryId", repositoryId); //$NON-NLS-1$
+        routeValues.put("pullRequestId", pullRequestId); //$NON-NLS-1$
+        routeValues.put("reviewerId", reviewerId); //$NON-NLS-1$
+
+        final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           APPLICATION_JSON_TYPE);
+
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -5968,7 +6400,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response deletePullRequestReviewer(
-        final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -5986,7 +6420,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -6003,7 +6437,9 @@ public abstract class GitHttpClientBase
      * @return Response
      */
     public Response deletePullRequestReviewer(
-        final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6021,7 +6457,7 @@ public abstract class GitHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest, Response.class);
+        return super.sendRequest(httpRequest);
     }
 
     /** 
@@ -6036,7 +6472,8 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final String repositoryId,     final int pullRequestId, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6068,7 +6505,8 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final UUID repositoryId,     final int pullRequestId, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6102,7 +6540,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final String project,     final String repositoryId,     final int pullRequestId, 
+        final String project, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6137,7 +6577,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final String project,     final UUID repositoryId,     final int pullRequestId, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6172,7 +6614,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final UUID project,     final String repositoryId,     final int pullRequestId, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6207,7 +6651,9 @@ public abstract class GitHttpClientBase
      * @return IdentityRefWithVote
      */
     public IdentityRefWithVote getPullRequestReviewer(
-        final UUID project,     final UUID repositoryId,     final int pullRequestId, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
         final String reviewerId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6298,7 +6744,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> getPullRequestReviewers(
-        final String project,     final String repositoryId, 
+        final String project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6330,7 +6777,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> getPullRequestReviewers(
-        final String project,     final UUID repositoryId, 
+        final String project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6362,7 +6810,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> getPullRequestReviewers(
-        final UUID project,     final String repositoryId, 
+        final UUID project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6394,7 +6843,8 @@ public abstract class GitHttpClientBase
      * @return List<IdentityRefWithVote>
      */
     public List<IdentityRefWithVote> getPullRequestReviewers(
-        final UUID project,     final UUID repositoryId, 
+        final UUID project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("4b6702c7-aa35-4b89-9c96-b9abf6d3e540"); //$NON-NLS-1$
@@ -6486,7 +6936,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest createPullRequest(
-        final GitPullRequest gitPullRequestToCreate,     final String project, 
+        final GitPullRequest gitPullRequestToCreate, 
+        final String project, 
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6519,7 +6970,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest createPullRequest(
-        final GitPullRequest gitPullRequestToCreate,     final String project, 
+        final GitPullRequest gitPullRequestToCreate, 
+        final String project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6552,7 +7004,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest createPullRequest(
-        final GitPullRequest gitPullRequestToCreate,     final UUID project, 
+        final GitPullRequest gitPullRequestToCreate, 
+        final UUID project, 
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6585,7 +7038,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest createPullRequest(
-        final GitPullRequest gitPullRequestToCreate,     final UUID project, 
+        final GitPullRequest gitPullRequestToCreate, 
+        final UUID project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6622,7 +7076,11 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final String project,     final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final String project, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6664,7 +7122,11 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final String project,     final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6706,7 +7168,11 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final UUID project,     final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6748,7 +7214,11 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final UUID project,     final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6788,7 +7258,10 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final String repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6827,7 +7300,10 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest getPullRequest(
-        final UUID repositoryId,     final int pullRequestId,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6868,7 +7344,11 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final String project,     final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final String project, 
+        final String repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6910,7 +7390,11 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final String project,     final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final String project, 
+        final UUID repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6952,7 +7436,11 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final UUID project,     final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID project, 
+        final String repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -6994,7 +7482,11 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final UUID project,     final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7034,7 +7526,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final String repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final String repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7073,7 +7568,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPullRequest>
      */
     public List<GitPullRequest> getPullRequests(
-        final UUID repositoryId,     final GitPullRequestSearchCriteria searchCriteria,     final Integer maxCommentLength,     final Integer skip, 
+        final UUID repositoryId, 
+        final GitPullRequestSearchCriteria searchCriteria, 
+        final Integer maxCommentLength, 
+        final Integer skip, 
         final Integer top) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7110,7 +7608,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final String repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7143,7 +7642,8 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final UUID repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7178,7 +7678,9 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final String project,     final String repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final String project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7214,7 +7716,9 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final String project,     final UUID repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final String project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7250,7 +7754,9 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final UUID project,     final String repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final UUID project, 
+        final String repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7286,7 +7792,9 @@ public abstract class GitHttpClientBase
      * @return GitPullRequest
      */
     public GitPullRequest updatePullRequest(
-        final GitPullRequest gitPullRequestToUpdate,     final UUID project,     final UUID repositoryId, 
+        final GitPullRequest gitPullRequestToUpdate, 
+        final UUID project, 
+        final UUID repositoryId, 
         final int pullRequestId) {
 
         final UUID locationId = UUID.fromString("9946fd70-0d40-406e-b686-b4744cbbcc37"); //$NON-NLS-1$
@@ -7322,7 +7830,10 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final String project,     final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final String project, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7361,7 +7872,10 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final String project,     final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7400,7 +7914,10 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final UUID project,     final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7439,7 +7956,10 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final UUID project,     final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7476,7 +7996,9 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final String repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final String repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7512,7 +8034,9 @@ public abstract class GitHttpClientBase
      * @return List<AssociatedWorkItem>
      */
     public List<AssociatedWorkItem> getPullRequestWorkItems(
-        final UUID repositoryId,     final int pullRequestId,     final Integer commitsTop, 
+        final UUID repositoryId, 
+        final int pullRequestId, 
+        final Integer commitsTop, 
         final Integer commitsSkip) {
 
         final UUID locationId = UUID.fromString("0a637fcc-5370-4ce8-b0e8-98091f5f9482"); //$NON-NLS-1$
@@ -7552,7 +8076,10 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final String project,     final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final String project, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7593,7 +8120,10 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final String project,     final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final String project, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7634,7 +8164,10 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final UUID project,     final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final UUID project, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7675,7 +8208,10 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final UUID project,     final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7714,7 +8250,9 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final String repositoryId,     final int pushId,     final Integer includeCommits, 
+        final String repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7752,7 +8290,9 @@ public abstract class GitHttpClientBase
      * @return GitPush
      */
     public GitPush getPush(
-        final UUID repositoryId,     final int pushId,     final Integer includeCommits, 
+        final UUID repositoryId, 
+        final int pushId, 
+        final Integer includeCommits, 
         final Boolean includeRefUpdates) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7790,7 +8330,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final String project,     final String repositoryId,     final Integer skip,     final Integer top, 
+        final String project, 
+        final String repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7829,7 +8372,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final String project,     final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final String project, 
+        final UUID repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7868,7 +8414,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final UUID project,     final String repositoryId,     final Integer skip,     final Integer top, 
+        final UUID project, 
+        final String repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7907,7 +8456,10 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final UUID project,     final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7944,7 +8496,9 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final String repositoryId,     final Integer skip,     final Integer top, 
+        final String repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -7980,7 +8534,9 @@ public abstract class GitHttpClientBase
      * @return List<GitPush>
      */
     public List<GitPush> getPushes(
-        final UUID repositoryId,     final Integer skip,     final Integer top, 
+        final UUID repositoryId, 
+        final Integer skip, 
+        final Integer top, 
         final GitPushSearchCriteria searchCriteria) {
 
         final UUID locationId = UUID.fromString("ea98d07b-3c87-4971-8ede-a613694ffb55"); //$NON-NLS-1$
@@ -8018,7 +8574,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final String project,     final String repositoryId,     final String filter, 
+        final String project, 
+        final String repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8056,7 +8614,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final String project,     final UUID repositoryId,     final String filter, 
+        final String project, 
+        final UUID repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8094,7 +8654,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final UUID project,     final String repositoryId,     final String filter, 
+        final UUID project, 
+        final String repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8132,7 +8694,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final UUID project,     final UUID repositoryId,     final String filter, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8168,7 +8732,8 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final String repositoryId,     final String filter, 
+        final String repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8203,7 +8768,8 @@ public abstract class GitHttpClientBase
      * @return List<GitRef>
      */
     public List<GitRef> getRefs(
-        final UUID repositoryId,     final String filter, 
+        final UUID repositoryId, 
+        final String filter, 
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8236,7 +8802,8 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final String repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final String repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8270,7 +8837,8 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final UUID repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final UUID repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8306,7 +8874,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final String project,     final String repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final String project, 
+        final String repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8343,7 +8913,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final String project,     final UUID repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final String project, 
+        final UUID repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8380,7 +8952,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final UUID project,     final String repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final UUID project, 
+        final String repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8417,7 +8991,9 @@ public abstract class GitHttpClientBase
      * @return List<GitRefUpdateResult>
      */
     public List<GitRefUpdateResult> updateRefs(
-        final List<GitRefUpdate> refUpdates,     final UUID project,     final UUID repositoryId, 
+        final List<GitRefUpdate> refUpdates, 
+        final UUID project, 
+        final UUID repositoryId, 
         final String projectId) {
 
         final UUID locationId = UUID.fromString("2d874a60-a811-4f62-9c9f-963a6ea0a55b"); //$NON-NLS-1$
@@ -8450,7 +9026,6 @@ public abstract class GitHttpClientBase
      * @return GitRepository
      */
     public GitRepository createRepository(
-    
         final GitRepository gitRepositoryToCreate) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8533,7 +9108,6 @@ public abstract class GitHttpClientBase
      *            
      */
     public void deleteRepository(
-    
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8679,7 +9253,6 @@ public abstract class GitHttpClientBase
      * @return List<GitRepository>
      */
     public List<GitRepository> getRepositories(
-    
         final Boolean includeLinks) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8703,7 +9276,6 @@ public abstract class GitHttpClientBase
      * @return GitRepository
      */
     public GitRepository getRepository(
-    
         final String repositoryId) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8727,7 +9299,6 @@ public abstract class GitHttpClientBase
      * @return GitRepository
      */
     public GitRepository getRepository(
-    
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8895,7 +9466,8 @@ public abstract class GitHttpClientBase
      * @return GitRepository
      */
     public GitRepository patchRepository(
-        final GitRepository newRepositoryInfo,     final String project, 
+        final GitRepository newRepositoryInfo, 
+        final String project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8928,7 +9500,8 @@ public abstract class GitHttpClientBase
      * @return GitRepository
      */
     public GitRepository patchRepository(
-        final GitRepository newRepositoryInfo,     final UUID project, 
+        final GitRepository newRepositoryInfo, 
+        final UUID project, 
         final UUID repositoryId) {
 
         final UUID locationId = UUID.fromString("225f7195-f9c7-4d14-ab28-a83f7ff77e1f"); //$NON-NLS-1$
@@ -8965,7 +9538,11 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final String project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String project, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9007,7 +9584,11 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final String project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9049,7 +9630,11 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final UUID project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID project, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9091,7 +9676,11 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final UUID project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9131,7 +9720,10 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9170,7 +9762,10 @@ public abstract class GitHttpClientBase
      * @return GitTreeRef
      */
     public GitTreeRef getTree(
-        final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9211,7 +9806,11 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final String project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String project, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9253,7 +9852,11 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final String project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9295,7 +9898,11 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final UUID project,     final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID project, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9337,7 +9944,11 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final UUID project,     final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID project, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9377,7 +9988,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final String repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final String repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$
@@ -9416,7 +10030,10 @@ public abstract class GitHttpClientBase
      * @return InputStream
      */
     public InputStream getTreeZip(
-        final UUID repositoryId,     final String sha1,     final String projectId,     final Boolean recursive, 
+        final UUID repositoryId, 
+        final String sha1, 
+        final String projectId, 
+        final Boolean recursive, 
         final String fileName) {
 
         final UUID locationId = UUID.fromString("729f6437-6f92-44ec-8bee-273a7111063c"); //$NON-NLS-1$

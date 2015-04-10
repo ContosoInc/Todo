@@ -19,6 +19,7 @@ public class TaskDefinitionEndpoint {
     private String connectionId;
     private String scope;
     private String selector;
+    private String taskId;
     private String url;
 
     public String getConnectionId() {
@@ -43,6 +44,14 @@ public class TaskDefinitionEndpoint {
 
     public void setSelector(final String selector) {
         this.selector = selector;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(final String taskId) {
+        this.taskId = taskId;
     }
 
     public String getUrl() {
