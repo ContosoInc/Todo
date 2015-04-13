@@ -2,7 +2,6 @@ package com.microsoft.tfs.plugin.impl;
 
 import com.microsoft.teamfoundation.build.webapi.model.*;
 import com.microsoft.teamfoundation.core.webapi.model.TeamProjectReference;
-import com.microsoft.teamfoundation.build.webapi.model.Demand;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import com.microsoft.tfs.plugin.TfsBuildFacadeFactory;
 import hudson.Util;
