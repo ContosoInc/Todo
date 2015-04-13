@@ -1,4 +1,4 @@
-package com.microsoft.vss.client.core.model;
+package com.microsoft.visualstudio.services.webapi.model;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

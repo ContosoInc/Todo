@@ -1,5 +1,8 @@
 package com.microsoft.tfs.plugin.impl;
 
+import com.microsoft.teamfoundation.build.webapi.BuildHttpClient;
+import com.microsoft.teamfoundation.core.webapi.CoreHttpClient;
+import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
 import hudson.Util;
 import hudson.util.Secret;
 import org.apache.http.auth.AuthScope;
@@ -17,13 +20,8 @@ import org.glassfish.jersey.client.RequestEntityProcessing;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-
 import java.net.URI;
 import java.util.logging.Logger;
-
-import com.microsoft.teamfoundation.build.webapi.BuildHttpClient;
-import com.microsoft.teamfoundation.core.webapi.CoreHttpClient;
-import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
 
 /**
  * This class encapsulates all REST calls to TFS.

@@ -26,6 +26,7 @@ import com.microsoft.teamfoundation.distributedtask.webapi.model.JobEvent;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLog;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.Timeline;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
+import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper;
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.core.VssHttpClientBase;
@@ -105,7 +106,7 @@ public abstract class DistributedTaskHttpClientBase
      *            
      */
     public void postLines(
-        final List<String> lines, 
+        final VssJsonCollectionWrapper<List<String>> lines, 
         final UUID planId, 
         final UUID timelineId, 
         final UUID recordId) {
@@ -311,8 +312,8 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @return List<TimelineRecord>
      */
-	public List<TimelineRecord> updateRecords(
-        final List<TimelineRecord> records, 
+    public List<TimelineRecord> updateRecords(
+        final VssJsonCollectionWrapper<List<TimelineRecord>> records, 
         final UUID planId, 
         final UUID timelineId) {
 

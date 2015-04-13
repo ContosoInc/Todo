@@ -1,23 +1,29 @@
 package com.microsoft.tfs.plugin.impl;
 
+import com.microsoft.teamfoundation.build.webapi.model.Build;
+import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
+import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
+import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLog;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskResult;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.Timeline;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
+import com.microsoft.tfs.plugin.TfsBuildFacade;
+import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper;
 import hudson.model.AbstractBuild;
+import hudson.plugins.git.Revision;
+import hudson.plugins.git.util.BuildData;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Logger;
 
-import com.microsoft.teamfoundation.build.webapi.model.*;
-import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.tfs.plugin.TfsBuildFacade;
-import com.microsoft.vss.client.core.model.VssJsonCollectionWrapper;
-import hudson.plugins.git.Revision;
-import hudson.plugins.git.util.BuildData;
-
-import static hudson.model.Result.ABORTED;
-import static hudson.model.Result.FAILURE;
-import static hudson.model.Result.SUCCESS;
+import static com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecordState.*;
+import static hudson.model.Result.*;
 
 /**
  * This class is a facade to update TFS build from Jenkins.
@@ -93,9 +99,9 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         TimelineRecord jenkinsTaskRecord = null;
 
         for (TimelineRecord record : records) {
-            if (record.getRecordType().equalsIgnoreCase(JOB_RECORD_TYPE)) {
+            if (record.getType().equalsIgnoreCase(JOB_RECORD_TYPE)) {
                 jobRecord = record;
-            } else if (record.getRecordType().equalsIgnoreCase(JENKINS_RECORD_TYPE)) {
+            } else if (record.getType().equalsIgnoreCase(JENKINS_RECORD_TYPE)) {
                 jenkinsTaskRecord = record;
             }
         }
@@ -177,7 +183,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     public void startAllTaskRecords() {
         List<TimelineRecord> records = queryTfsTimelineRecords();
         for (TimelineRecord record : records) {
-            record.setState(TimelineRecordState.IN_PROGRESS);
+            record.setState(IN_PROGRESS);
             record.setStartTime(new Date());
             record.setWorkerName(JENKINS_WORKER_NAME);
         }
@@ -204,7 +210,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         }
 
         for (TimelineRecord record : records) {
-            record.setState(TimelineRecordState.COMPLETED);
+            record.setState(COMPLETED);
             record.setFinishTime(new Date());
             record.setResult(result);
         }
@@ -292,7 +298,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         List<TimelineRecord> records = queryTfsTimelineRecords();
         TimelineRecord jobRecord = null;
         for (TimelineRecord record : records) {
-            if (record.getRecordType().equalsIgnoreCase(JOB_RECORD_TYPE)) {
+            if (record.getType().equalsIgnoreCase(JOB_RECORD_TYPE)) {
                 jobRecord = record;
                 jobRecord.setId(getJobRecordId());
                 jobRecord.setLog(jobLog);
@@ -308,9 +314,9 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     private TimelineRecord createTimelineJobRecord() {
         TimelineRecord jobRecord = new TimelineRecord();
         jobRecord.setId(UUID.randomUUID());
-        jobRecord.setRecordType(JOB_RECORD_TYPE);
+        jobRecord.setType(JOB_RECORD_TYPE);
         jobRecord.setName(JOB_RECORD_NAME);
-        jobRecord.setState(TimelineRecordState.PENDING);
+        jobRecord.setState(PENDING);
 
         return jobRecord;
     }
@@ -320,10 +326,10 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
         jenkinsTaskRecord = new TimelineRecord();
         jenkinsTaskRecord.setId(UUID.randomUUID());
-        jenkinsTaskRecord.setRecordType(JENKINS_RECORD_TYPE);
+        jenkinsTaskRecord.setType(JENKINS_RECORD_TYPE);
         jenkinsTaskRecord.setName(JENKINS_RECORD_NAME);
         jenkinsTaskRecord.setParentId(jobRecord.getId());
-        jenkinsTaskRecord.setState(TimelineRecordState.PENDING);
+        jenkinsTaskRecord.setState(PENDING);
 
         return jenkinsTaskRecord;
     }
@@ -396,9 +402,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         return jenkinsBuild;
     }
 
-    private TfsClient getClient() {
-        return client;
-    }
+    private TfsClient getClient() { return client; }
 
     private <T> VssJsonCollectionWrapper<List<T>> createWrapper(List<T> list) {
         return VssJsonCollectionWrapper.newInstance(list);
