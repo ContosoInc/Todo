@@ -9,7 +9,6 @@ import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskResult;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.Timeline;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
-import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper;
 import hudson.model.AbstractBuild;
 import hudson.plugins.git.Revision;
 import hudson.plugins.git.util.BuildData;
@@ -115,7 +114,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             records.add(getTimelineJenkinsTaskRecord(jobRecord));
         }
 
-        tfsClient.getDistributedTaskHttpClient().updateRecords(createWrapper(records), planId, timeline.getId());
+        tfsClient.getDistributedTaskHttpClient().updateRecords(records, planId, timeline.getId());
 
         // populate fields
         this.tfsBuildId = tfsBuild.getId();
@@ -188,7 +187,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             record.setWorkerName(JENKINS_WORKER_NAME);
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(createWrapper(records), getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient().updateRecords(records, getPlanId(), getTimelineId());
     }
 
     /**
@@ -215,7 +214,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             record.setResult(result);
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(createWrapper(records), getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient().updateRecords(records, getPlanId(), getTimelineId());
     }
 
     /**
@@ -237,7 +236,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         DistributedTaskHttpClient distributedTaskHttpClient = getClient().getDistributedTaskHttpClient();
 
         // post console feed
-        distributedTaskHttpClient.postLines(createWrapper(lines), getPlanId(), getTimelineId(), getJobRecordId());
+        distributedTaskHttpClient.postLines(lines, getPlanId(), getTimelineId(), getJobRecordId());
 
         // append the feed to its log
         /* TODO: Need client fix
@@ -306,7 +305,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             }
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(createWrapper(Collections.singletonList(jobRecord)), getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient().updateRecords(Collections.singletonList(jobRecord), getPlanId(), getTimelineId());
 
         return jobLog.getId();
     }
@@ -403,8 +402,4 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     }
 
     private TfsClient getClient() { return client; }
-
-    private <T> VssJsonCollectionWrapper<List<T>> createWrapper(List<T> list) {
-        return VssJsonCollectionWrapper.newInstance(list);
-    }
 }
