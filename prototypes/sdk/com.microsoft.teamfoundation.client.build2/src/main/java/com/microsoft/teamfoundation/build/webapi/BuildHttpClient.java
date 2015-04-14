@@ -108,12 +108,6 @@ public class BuildHttpClient
      * @param ignoreWarnings
      * @return Build
      */
-    @Override
-    public Build queueBuild(final Build build, final Boolean ignoreWarnings) {
-        ArgumentUtility.checkForNull(build, "build"); //$NON-NLS-1$
-        ArgumentUtility.checkForNull(build.getProject(), "build.Project"); //$NON-NLS-1$
-        return super.queueBuild(build, build.getProject().getId(), ignoreWarnings);
-    }
 
     /**
      * Queue a build
@@ -124,7 +118,7 @@ public class BuildHttpClient
     public Build queueBuild(final Build build, final boolean ignoreWarnings) {
         ArgumentUtility.checkForNull(build, "build"); //$NON-NLS-1$
         ArgumentUtility.checkForNull(build.getProject(), "build.Project"); //$NON-NLS-1$
-        return super.queueBuild(build, build.getProject().getId(), ignoreWarnings);
+        return super.queueBuild(build, build.getProject().getId(), (Boolean) ignoreWarnings);
     }
 
     /**

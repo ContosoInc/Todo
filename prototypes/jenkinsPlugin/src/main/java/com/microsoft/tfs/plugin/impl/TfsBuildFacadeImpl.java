@@ -4,10 +4,7 @@ import com.microsoft.teamfoundation.build.webapi.model.Build;
 import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
 import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
 import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLog;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskResult;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.Timeline;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
 import com.microsoft.tfs.plugin.TfsBuildFacade;
 import hudson.model.AbstractBuild;
 import hudson.plugins.git.Revision;
@@ -61,6 +58,11 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     private UUID planId;
 
     /*
+     * The ID of the Team Project for this jenkins build on TFS
+     */
+    private UUID projectId;
+
+    /*
      * The ID of the timeline for this jenkins build on TFS
      */
     private UUID timelineId;
@@ -84,12 +86,17 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     /* default */
     TfsBuildFacadeImpl(final Build tfsBuild, final AbstractBuild jenkinsBuild, final TfsClient tfsClient) {
 
+        DistributedTaskHttpClient taskClient = tfsClient.getDistributedTaskHttpClient();
+
         // populate timeline
         UUID planId = tfsBuild.getOrchestrationPlan().getPlanId();
-        Timeline timeline = getTimeline(tfsClient, planId);
+        UUID projectId = tfsBuild.getProject().getId();
+        TaskOrchestrationPlan plan = taskClient.getPlan(projectId, "build", planId);
+        UUID timelineId = plan.getTimeline().getId();
+        Timeline timeline = taskClient.getTimeline(projectId, "build", planId, timelineId, true);
 
         // populate timeline record
-        List<TimelineRecord> records = tfsClient.getDistributedTaskHttpClient().getRecords(planId, timeline.getId(), null);
+        List<TimelineRecord> records = timeline.getRecords();
         if (records == null || records.isEmpty()) {
             records = new ArrayList<TimelineRecord>();
         }
@@ -114,12 +121,13 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             records.add(getTimelineJenkinsTaskRecord(jobRecord));
         }
 
-        tfsClient.getDistributedTaskHttpClient().updateRecords(records, planId, timeline.getId());
+        taskClient.updateRecords(projectId, "build", records, planId, timelineId);
 
         // populate fields
         this.tfsBuildId = tfsBuild.getId();
         this.jenkinsBuild = jenkinsBuild;
-        this.planId = tfsBuild.getOrchestrationPlan().getPlanId();
+        this.planId = planId;
+        this.projectId = projectId;
         this.jobLogId = -1;
         this.client = tfsClient;
         this.timelineId = timeline.getId();
@@ -187,7 +195,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             record.setWorkerName(JENKINS_WORKER_NAME);
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(records, getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient()
+                .updateRecords(getProjectId(), "build", records, getPlanId(), getTimelineId());
     }
 
     /**
@@ -214,7 +223,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             record.setResult(result);
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(records, getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient()
+                .updateRecords(getProjectId(), "build", records, getPlanId(), getTimelineId());
     }
 
     /**
@@ -233,15 +243,15 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             this.jobLogId = createLogForJobRecord();
         }
 
-        DistributedTaskHttpClient distributedTaskHttpClient = getClient().getDistributedTaskHttpClient();
+        DistributedTaskHttpClient taskClient = getClient().getDistributedTaskHttpClient();
 
         // post console feed
-        distributedTaskHttpClient.postLines(lines, getPlanId(), getTimelineId(), getJobRecordId());
+        taskClient.postLines(getProjectId(), "build", lines, getPlanId(), getTimelineId(), getJobRecordId());
 
         // append the feed to its log
         /* TODO: Need client fix
         try {
-            distributedTaskHttpClient.appendLog(getPlanId(), getJobLogId(), getByteArrayInputStream(lines));
+            distributedTaskHttpClient.appendLog("build", getPlanId(), getJobLogId(), getByteArrayInputStream(lines));
         } catch (IOException e) {
             logger.severe("Failed to send log to Microsoft TFS: "+e.getMessage());
         }
@@ -265,7 +275,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     }
 
     private List<TimelineRecord> queryTfsTimelineRecords() {
-        return getClient().getDistributedTaskHttpClient().getRecords(getPlanId(), getTimelineId(), null);
+        return getClient().getDistributedTaskHttpClient()
+                .getRecords(getProjectId(), "build", getPlanId(), getTimelineId());
     }
 
     /**
@@ -274,7 +285,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      * @return jobId
      */
     private int createLogForJobRecord() {
-        List<TaskLog> logs = getClient().getDistributedTaskHttpClient().getLogs(getPlanId());
+        List<TaskLog> logs = getClient().getDistributedTaskHttpClient().getLogs(getProjectId(), "build", getPlanId());
         TaskLog jobLog;
         if (logs == null || logs.isEmpty()) {
             // if log is not created, create it now
@@ -282,9 +293,9 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             log.setId(0);
             log.setPath("logs\\\\" + UUID.randomUUID());
             logger.info("There is no log defined. Creating log for plan: " + getPlanId());
-            getClient().getDistributedTaskHttpClient().createLog(log, getPlanId());
+            getClient().getDistributedTaskHttpClient().createLog(getProjectId(), "build", log, getPlanId());
 
-            logs = getClient().getDistributedTaskHttpClient().getLogs(getPlanId());
+            logs = getClient().getDistributedTaskHttpClient().getLogs(getProjectId(), "build", getPlanId());
         }
 
         if (logs == null || logs.size() < 1) {
@@ -305,7 +316,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             }
         }
 
-        getClient().getDistributedTaskHttpClient().updateRecords(Collections.singletonList(jobRecord), getPlanId(), getTimelineId());
+        getClient().getDistributedTaskHttpClient()
+                .updateRecords(getProjectId(), "build", Collections.singletonList(jobRecord), getPlanId(), getTimelineId());
 
         return jobLog.getId();
     }
@@ -334,13 +346,14 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     }
 
     private Timeline getTimeline(TfsClient tfsClient, UUID planId) {
-        List<Timeline> timelines = tfsClient.getDistributedTaskHttpClient().getTimelines(planId);
+        List<Timeline> timelines = tfsClient.getDistributedTaskHttpClient()
+                .getTimelines(getProjectId(), "build", planId);
 
         if (timelines == null || timelines.isEmpty()) {
             // create a new timeline if there is none
             Timeline t = new Timeline();
             t.setId(UUID.randomUUID());
-            t = tfsClient.getDistributedTaskHttpClient().createTimeline(t, planId);
+            t = tfsClient.getDistributedTaskHttpClient().createTimeline(getProjectId(), "build", t, planId);
             timelines = Collections.singletonList(t);
         }
 
@@ -383,6 +396,10 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
     private UUID getPlanId() {
         return planId;
+    }
+
+    private UUID getProjectId() {
+        return projectId;
     }
 
     private UUID getTimelineId() {

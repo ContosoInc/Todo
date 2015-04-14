@@ -24,6 +24,7 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.JobEvent;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLog;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskOrchestrationPlan;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.Timeline;
 import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
 import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper;
@@ -62,16 +63,10 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @param planId 
      *            
-     * @param jobId 
-     *            
-     * @param eventName 
-     *            
      */
     public void postEvent(
         final JobEvent eventData, 
-        final UUID planId, 
-        final UUID jobId, 
-        final String eventName) {
+        final UUID planId) {
 
         final UUID locationId = UUID.fromString("557624af-b29e-4c20-8ab0-0399d2204f3f"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
@@ -79,17 +74,12 @@ public abstract class DistributedTaskHttpClientBase
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("planId", planId); //$NON-NLS-1$
 
-        final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("jobId", jobId); //$NON-NLS-1$
-        queryParameters.addIfNotEmpty("eventName", eventName); //$NON-NLS-1$
-
         final Invocation httpRequest = super.createRequest(HttpMethod.POST,
                                                            locationId,
                                                            routeValues,
                                                            apiVersion,
                                                            eventData,
                                                            APPLICATION_JSON_TYPE,
-                                                           queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
         super.sendRequest(httpRequest);
@@ -130,16 +120,16 @@ public abstract class DistributedTaskHttpClientBase
         super.sendRequest(httpRequest);
     }
 
-    /** 
-     * @param planId 
-     *            
-     * @param logId 
-     *            
-     * @return Response
+    /**
+     * @param planId
+     *
+     * @param logId
+     *
+     * @return TaskLog
      */
-    public Response appendLog(
-        final UUID planId, 
-        final int logId) {
+    public TaskLog appendLog(
+            final UUID planId,
+            final int logId) {
 
         final UUID locationId = UUID.fromString("46f5667d-263a-4684-91b1-dff7fdcf64e2"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
@@ -149,12 +139,12 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("logId", logId); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.POST,
-                                                           locationId,
-                                                           routeValues,
-                                                           apiVersion,
-                                                           APPLICATION_JSON_TYPE);
+                locationId,
+                routeValues,
+                apiVersion,
+                APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest);
+        return super.sendRequest(httpRequest, TaskLog.class);
     }
 
     /** 
@@ -194,9 +184,9 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @param endLine 
      *            
-     * @return Response
+     * @return List<String>
      */
-    public Response getLog(
+    public List<String> getLog(
         final UUID planId, 
         final int logId, 
         final Integer startLine, 
@@ -220,7 +210,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest);
+        return super.sendRequest(httpRequest, new GenericType<List<String>>() {});
     }
 
     /** 
@@ -249,9 +239,9 @@ public abstract class DistributedTaskHttpClientBase
     /** 
      * @param planId 
      *            
-     * @return Response
+     * @return TaskOrchestrationPlan
      */
-    public Response getPlan(
+    public TaskOrchestrationPlan getPlan(
         final UUID planId) {
 
         final UUID locationId = UUID.fromString("5cecd946-d704-471e-a45f-3b4064fcfaba"); //$NON-NLS-1$
@@ -266,7 +256,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            apiVersion,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest);
+        return super.sendRequest(httpRequest, TaskOrchestrationPlan.class);
     }
 
     /** 
@@ -398,9 +388,9 @@ public abstract class DistributedTaskHttpClientBase
      *            
      * @param includeRecords 
      *            
-     * @return Response
+     * @return Timeline
      */
-    public Response getTimeline(
+    public Timeline getTimeline(
         final UUID planId, 
         final UUID timelineId, 
         final Integer changeId, 
@@ -424,7 +414,7 @@ public abstract class DistributedTaskHttpClientBase
                                                            queryParameters,
                                                            APPLICATION_JSON_TYPE);
 
-        return super.sendRequest(httpRequest);
+        return super.sendRequest(httpRequest, Timeline.class);
     }
 
     /** 
