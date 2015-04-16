@@ -13,6 +13,7 @@
 
 package com.microsoft.teamfoundation.distributedtask.webapi;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +33,7 @@ import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.core.VssHttpClientBase;
 
-public abstract class DistributedTaskHttpClientBase 
+public abstract class TaskHttpClientBase 
     extends VssHttpClientBase {
 
     private final static Map<String, Class<? extends Exception>> TRANSLATED_EXCEPTIONS;
@@ -42,14 +43,14 @@ public abstract class DistributedTaskHttpClientBase
     }
 
     /**
-    * Create a new instance of DistributedTaskHttpClientBase
+    * Create a new instance of TaskHttpClientBase
     *
     * @param jaxrsClient
     *            an initialized instance of a JAX-RS Client implementation
     * @param baseUrl
     *            a TFS project collection URL
     */
-    public DistributedTaskHttpClientBase(final Client jaxrsClient, final URI baseUrl) {
+    public TaskHttpClientBase(final Client jaxrsClient, final URI baseUrl) {
         super(jaxrsClient, baseUrl);
     }
 
@@ -120,16 +121,17 @@ public abstract class DistributedTaskHttpClientBase
         super.sendRequest(httpRequest);
     }
 
-    /**
-     * @param planId
-     *
-     * @param logId
-     *
+    /** 
+     * @param planId 
+     *            
+     * @param logId 
+     *            
      * @return TaskLog
      */
     public TaskLog appendLog(
-            final UUID planId,
-            final int logId) {
+        final InputStream uploadStream,
+        final UUID planId, 
+        final int logId) {
 
         final UUID locationId = UUID.fromString("46f5667d-263a-4684-91b1-dff7fdcf64e2"); //$NON-NLS-1$
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
@@ -139,10 +141,12 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("logId", logId); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.POST,
-                locationId,
-                routeValues,
-                apiVersion,
-                APPLICATION_JSON_TYPE);
+                                                           locationId,
+                                                           routeValues,
+                                                           apiVersion,
+                                                           uploadStream,
+                                                           APPLICATION_OCTET_STREAM_TYPE,
+                                                           APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskLog.class);
     }

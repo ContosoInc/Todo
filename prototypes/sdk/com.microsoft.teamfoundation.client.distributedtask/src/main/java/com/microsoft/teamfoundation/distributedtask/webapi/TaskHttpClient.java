@@ -5,6 +5,7 @@ import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper
 import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
 
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +17,10 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-public class DistributedTaskHttpClient
-    extends DistributedTaskHttpClientBase {
+public class TaskHttpClient
+    extends TaskHttpClientBase {
 
-    public DistributedTaskHttpClient(final Client jaxrsClient, final URI baseUrl) {
+    public TaskHttpClient(final Client jaxrsClient, final URI baseUrl) {
         super(jaxrsClient, baseUrl);
     }
 
@@ -103,6 +104,7 @@ public class DistributedTaskHttpClient
      * @return TaskLog
      */
     public TaskLog appendLog(
+            final InputStream uploadStream,
             final UUID scopeIdentifier,
             final String hubName,
             final UUID planId,
@@ -121,6 +123,8 @@ public class DistributedTaskHttpClient
                 locationId,
                 routeValues,
                 apiVersion,
+                uploadStream,
+                APPLICATION_OCTET_STREAM_TYPE,
                 APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskLog.class);
@@ -136,6 +140,7 @@ public class DistributedTaskHttpClient
     @Deprecated
     @Override
     public TaskLog appendLog(
+            final InputStream uploadStream,
             final UUID planId,
             final int logId) {
 
@@ -150,6 +155,8 @@ public class DistributedTaskHttpClient
                 locationId,
                 routeValues,
                 apiVersion,
+                uploadStream,
+                APPLICATION_OCTET_STREAM_TYPE,
                 APPLICATION_JSON_TYPE);
 
         return super.sendRequest(httpRequest, TaskLog.class);

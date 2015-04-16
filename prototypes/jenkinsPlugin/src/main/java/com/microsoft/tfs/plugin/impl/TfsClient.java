@@ -2,7 +2,7 @@ package com.microsoft.tfs.plugin.impl;
 
 import com.microsoft.teamfoundation.build.webapi.BuildHttpClient;
 import com.microsoft.teamfoundation.core.webapi.CoreHttpClient;
-import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
+import com.microsoft.teamfoundation.distributedtask.webapi.TaskHttpClient;
 import hudson.Util;
 import hudson.util.Secret;
 import org.apache.http.auth.AuthScope;
@@ -40,7 +40,7 @@ public class TfsClient {
 
     private BuildHttpClient buildClient;
     private CoreHttpClient projectClient;
-    private DistributedTaskHttpClient distributedTaskHttpClient;
+    private TaskHttpClient taskHttpClient;
 
     /*
      * Creating a tfs client
@@ -50,7 +50,7 @@ public class TfsClient {
 
         projectClient = new CoreHttpClient(client, uri);
         buildClient = new BuildHttpClient(client, uri);
-        distributedTaskHttpClient = new DistributedTaskHttpClient(client, uri);
+        taskHttpClient = new TaskHttpClient(client, uri);
     }
 
     /**
@@ -70,8 +70,8 @@ public class TfsClient {
     /**
      * get DistributedTask subarea client
      */
-    public DistributedTaskHttpClient getDistributedTaskHttpClient() {
-        return distributedTaskHttpClient;
+    public TaskHttpClient getTaskHttpClient() {
+        return taskHttpClient;
     }
 
     /*

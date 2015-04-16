@@ -1,25 +1,32 @@
 package com.microsoft.tfs.plugin.impl;
 
-import com.microsoft.teamfoundation.build.webapi.model.Build;
-import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
-import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
-import com.microsoft.teamfoundation.distributedtask.webapi.DistributedTaskHttpClient;
-import com.microsoft.teamfoundation.distributedtask.webapi.model.*;
-import com.microsoft.tfs.plugin.TfsBuildFacade;
-import hudson.model.AbstractBuild;
-import hudson.plugins.git.Revision;
-import hudson.plugins.git.util.BuildData;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
-import static com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecordState.*;
-import static hudson.model.Result.*;
+import com.microsoft.teamfoundation.build.webapi.model.Build;
+import com.microsoft.teamfoundation.build.webapi.model.BuildResult;
+import com.microsoft.teamfoundation.build.webapi.model.BuildStatus;
+import com.microsoft.teamfoundation.distributedtask.webapi.TaskHttpClient;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskLog;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskOrchestrationPlan;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TaskResult;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecord;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineRecordState;
+import com.microsoft.teamfoundation.distributedtask.webapi.model.TimelineReference;
+import com.microsoft.tfs.plugin.TfsBuildFacade;
+
+import hudson.model.AbstractBuild;
+import hudson.plugins.git.Revision;
+import hudson.plugins.git.util.BuildData;
+import hudson.model.Result;
 
 /**
  * This class is a facade to update TFS build from Jenkins.
@@ -31,16 +38,16 @@ import static hudson.model.Result.*;
  */
 public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
-    private static Logger logger = Logger.getLogger(TfsBuildFacadeImpl.class.getName());
+    private static final Logger logger = Logger.getLogger(TfsBuildFacadeImpl.class.getName());
 
     /*
      * Constants
      */
-    private static String JOB_RECORD_TYPE = "Job";
-    private static String JOB_RECORD_NAME = "Build";
-    private static String JENKINS_RECORD_TYPE = "Task";
-    private static String JENKINS_RECORD_NAME = "Jenkins Build";
-    private static String JENKINS_WORKER_NAME = "Jenkins";
+    private static final String JOB_RECORD_TYPE = "Job";
+    private static final String JOB_RECORD_NAME = "Build";
+    private static final String JENKINS_RECORD_TYPE = "Task";
+    private static final String JENKINS_RECORD_NAME = "Jenkins Build";
+    private static final String JENKINS_WORKER_NAME = "Jenkins";
 
     /*
      * The Jenkins build which is running
@@ -84,20 +91,21 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
     /* should only be instantiated from TfsBuildFacadeFactoryImpl from same package */
     /* default */
-    TfsBuildFacadeImpl(final Build tfsBuild, final AbstractBuild jenkinsBuild, final TfsClient tfsClient) {
+    public TfsBuildFacadeImpl(final Build tfsBuild, final AbstractBuild jenkinsBuild, final TfsClient tfsClient) {
 
-        DistributedTaskHttpClient taskClient = tfsClient.getDistributedTaskHttpClient();
+        this.tfsBuildId = tfsBuild.getId();
+        this.jenkinsBuild = jenkinsBuild;
+        this.client = tfsClient;
+        this.planId = tfsBuild.getOrchestrationPlan().getPlanId();
+        this.projectId = tfsBuild.getProject().getId();
 
-        // populate timeline
-        UUID planId = tfsBuild.getOrchestrationPlan().getPlanId();
-        UUID projectId = tfsBuild.getProject().getId();
-        TaskOrchestrationPlan plan = taskClient.getPlan(projectId, "build", planId);
-        UUID timelineId = plan.getTimeline().getId();
-        Timeline timeline = taskClient.getTimeline(projectId, "build", planId, timelineId, true);
+        TaskOrchestrationPlan plan = getTaskClient().getPlan(projectId, "build", planId);
+
+        this.timelineId = plan.getTimeline().getId();
 
         // populate timeline record
-        List<TimelineRecord> records = timeline.getRecords();
-        if (records == null || records.isEmpty()) {
+        List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
+        if (records == null) {
             records = new ArrayList<TimelineRecord>();
         }
 
@@ -118,19 +126,14 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         }
 
         if (jenkinsTaskRecord == null) {
-            records.add(getTimelineJenkinsTaskRecord(jobRecord));
+            jenkinsTaskRecord = createTimelineJenkinsTaskRecord(jobRecord);
+            records.add(jenkinsTaskRecord);
         }
 
-        taskClient.updateRecords(projectId, "build", records, planId, timelineId);
+        updateRecords(records, timelineId);
 
-        // populate fields
-        this.tfsBuildId = tfsBuild.getId();
-        this.jenkinsBuild = jenkinsBuild;
-        this.planId = planId;
-        this.projectId = projectId;
+        // populate rest of the fields
         this.jobLogId = -1;
-        this.client = tfsClient;
-        this.timelineId = timeline.getId();
         this.jobRecordId = jobRecord.getId();
     }
 
@@ -163,17 +166,9 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         b.setFinishTime(new Date());
 
         AbstractBuild jenkinsBuild = getJenkinsBuild();
-        BuildResult jenkinsResult;
-        if (jenkinsBuild.getResult() == SUCCESS) {
-            jenkinsResult = BuildResult.SUCCEEDED;
-        } else if (jenkinsBuild.getResult() == ABORTED) {
-            jenkinsResult = BuildResult.CANCELED;
-        } else {
-            // Assume FAILURE (and other cases that aren't successful)
-            jenkinsResult = BuildResult.FAILED;
-        }
+        BuildResult tfsResult = convertToTfsBuildResult(jenkinsBuild.getResult());
 
-        b.setResult(jenkinsResult);
+        b.setResult(tfsResult);
         b.setStatus(BuildStatus.COMPLETED);
 
         String commitSha1 =  getSourceCommit();
@@ -188,15 +183,15 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      * Jenkins task at the moment.
      */
     public void startAllTaskRecords() {
-        List<TimelineRecord> records = queryTfsTimelineRecords();
+        List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
+
         for (TimelineRecord record : records) {
-            record.setState(IN_PROGRESS);
+            record.setState(TimelineRecordState.IN_PROGRESS);
             record.setStartTime(new Date());
             record.setWorkerName(JENKINS_WORKER_NAME);
         }
 
-        getClient().getDistributedTaskHttpClient()
-                .updateRecords(getProjectId(), "build", records, getPlanId(), getTimelineId());
+        updateRecords(records, getTimelineId());
     }
 
     /**
@@ -204,27 +199,35 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      * Jenkins task at the moment.
      */
     public void finishAllTaskRecords() {
-        List<TimelineRecord> records = queryTfsTimelineRecords();
+        List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
 
-        TaskResult result;
-        if (this.getJenkinsBuild().getResult() == SUCCESS) {
-            result = TaskResult.SUCCEEDED;
-        } else if (this.getJenkinsBuild().getResult() == FAILURE) {
-            result = TaskResult.FAILED;
-        } else if (this.getJenkinsBuild().getResult() == ABORTED) {
-            result = TaskResult.CANCELED;
-        } else {
-            result = TaskResult.ABANDONED;
-        }
+        TaskResult result = convertToTfsTaskResult(getJenkinsBuild().getResult());
 
         for (TimelineRecord record : records) {
-            record.setState(COMPLETED);
+            record.setState(TimelineRecordState.COMPLETED);
             record.setFinishTime(new Date());
             record.setResult(result);
+
+            TimelineReference detailsRef = record.getDetails();
+
+            if (detailsRef != null) {
+                List<TimelineRecord> detailRecords = queryTfsTimelineRecords(detailsRef.getId());
+
+                if (detailRecords != null) {
+                    for (TimelineRecord detailRecord : detailRecords) {
+                        if (detailRecord.getState() == TimelineRecordState.IN_PROGRESS) {
+                            detailRecord.setState(TimelineRecordState.COMPLETED);
+                            detailRecord.setFinishTime(new Date());
+                            detailRecord.setResult(result);
+                        }
+                    }
+
+                    updateRecords(detailRecords, detailsRef.getId());
+                }
+            }
         }
 
-        getClient().getDistributedTaskHttpClient()
-                .updateRecords(getProjectId(), "build", records, getPlanId(), getTimelineId());
+        updateRecords(records, getTimelineId());
     }
 
     /**
@@ -243,19 +246,16 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             this.jobLogId = createLogForJobRecord();
         }
 
-        DistributedTaskHttpClient taskClient = getClient().getDistributedTaskHttpClient();
-
         // post console feed
-        taskClient.postLines(getProjectId(), "build", lines, getPlanId(), getTimelineId(), getJobRecordId());
+        getTaskClient().postLines(getProjectId(), "build", lines, getPlanId(), getTimelineId(), getJobRecordId());
 
         // append the feed to its log
-        /* TODO: Need client fix
         try {
-            distributedTaskHttpClient.appendLog("build", getPlanId(), getJobLogId(), getByteArrayInputStream(lines));
+            getTaskClient().appendLog(getByteArrayInputStream(lines), getProjectId(), "build", getPlanId(), getJobLogId());
         } catch (IOException e) {
             logger.severe("Failed to send log to Microsoft TFS: "+e.getMessage());
         }
-        */
+        //
     }
 
     private InputStream getByteArrayInputStream(List<String> lines) throws IOException {
@@ -274,9 +274,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         return getClient().getBuildClient().getBuild(getTfsBuildId(), null);
     }
 
-    private List<TimelineRecord> queryTfsTimelineRecords() {
-        return getClient().getDistributedTaskHttpClient()
-                .getRecords(getProjectId(), "build", getPlanId(), getTimelineId());
+    private List<TimelineRecord> queryTfsTimelineRecords(UUID timelineId) {
+        return getTaskClient().getRecords(getProjectId(), "build", getPlanId(), timelineId);
     }
 
     /**
@@ -285,41 +284,56 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      * @return jobId
      */
     private int createLogForJobRecord() {
-        List<TaskLog> logs = getClient().getDistributedTaskHttpClient().getLogs(getProjectId(), "build", getPlanId());
-        TaskLog jobLog;
-        if (logs == null || logs.isEmpty()) {
-            // if log is not created, create it now
-            TaskLog log = new TaskLog();
-            log.setId(0);
-            log.setPath("logs\\\\" + UUID.randomUUID());
-            logger.info("There is no log defined. Creating log for plan: " + getPlanId());
-            getClient().getDistributedTaskHttpClient().createLog(getProjectId(), "build", log, getPlanId());
+        int jobLogId = 0;
 
-            logs = getClient().getDistributedTaskHttpClient().getLogs(getProjectId(), "build", getPlanId());
-        }
+        List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
 
-        if (logs == null || logs.size() < 1) {
-            throw new RuntimeException("Could not create a job log for this build.");
-        }
-
-        jobLog = logs.get(0);
-
-        // Should only patch log information for job record
-        List<TimelineRecord> records = queryTfsTimelineRecords();
-        TimelineRecord jobRecord = null;
         for (TimelineRecord record : records) {
-            if (record.getType().equalsIgnoreCase(JOB_RECORD_TYPE)) {
-                jobRecord = record;
-                jobRecord.setId(getJobRecordId());
-                jobRecord.setLog(jobLog);
-                logger.info("Setting up record log path: "+jobLog.getPath()+" log id: "+jobLog.getId());
+            // Should only patch log information for job record
+            if (record.getType().equalsIgnoreCase(JOB_RECORD_TYPE) && record.getLog() == null) {
+                TaskLog log = getTfsLog();
+                logger.info("Setting up record log path: " + log.getPath() + ", log id: " + jobLogId);
+
+                record.setLog(log);
+                jobLogId = log.getId();
+
+                break;
             }
         }
 
-        getClient().getDistributedTaskHttpClient()
-                .updateRecords(getProjectId(), "build", Collections.singletonList(jobRecord), getPlanId(), getTimelineId());
+        updateRecords(records, getTimelineId());
 
-        return jobLog.getId();
+        return jobLogId;
+    }
+
+    private TaskLog getTfsLog() {
+        List<TaskLog> logs = getTaskClient().getLogs(getProjectId(), "build", getPlanId());
+
+        // If the log has been already created, use it.
+        if (logs != null && !logs.isEmpty()) {
+            return logs.get(0);
+        }
+
+        // Create a new log
+        TaskLog log = new TaskLog();
+        log.setId(0);
+        log.setPath("logs\\\\" + UUID.randomUUID());
+        logger.info("There is no log defined. Creating log for plan: " + getPlanId());
+        getTaskClient().createLog(getProjectId(), "build", log, getPlanId());
+
+        // It could happen that while we've been creating a new log, the server was managed to
+        // create one in the same time and started to use it. We'll also will use the same log.
+        logs = getTaskClient().getLogs(getProjectId(), "build", getPlanId());
+
+        if (logs == null || logs.isEmpty()) {
+            throw new RuntimeException("Could not create a job log for this build.");
+        }
+
+        return logs.get(0);
+    }
+
+    private void updateRecords(List<TimelineRecord> timelineRecords, UUID timelineId) {
+        getTaskClient().updateRecords(getProjectId(), "build", timelineRecords, getPlanId(), timelineId);
     }
 
     private TimelineRecord createTimelineJobRecord() {
@@ -327,12 +341,12 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         jobRecord.setId(UUID.randomUUID());
         jobRecord.setType(JOB_RECORD_TYPE);
         jobRecord.setName(JOB_RECORD_NAME);
-        jobRecord.setState(PENDING);
+        jobRecord.setState(TimelineRecordState.PENDING);
 
         return jobRecord;
     }
 
-    private TimelineRecord getTimelineJenkinsTaskRecord(TimelineRecord jobRecord) {
+    private TimelineRecord createTimelineJenkinsTaskRecord(TimelineRecord jobRecord) {
         TimelineRecord jenkinsTaskRecord;
 
         jenkinsTaskRecord = new TimelineRecord();
@@ -340,32 +354,9 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         jenkinsTaskRecord.setType(JENKINS_RECORD_TYPE);
         jenkinsTaskRecord.setName(JENKINS_RECORD_NAME);
         jenkinsTaskRecord.setParentId(jobRecord.getId());
-        jenkinsTaskRecord.setState(PENDING);
+        jenkinsTaskRecord.setState(TimelineRecordState.PENDING);
 
         return jenkinsTaskRecord;
-    }
-
-    private Timeline getTimeline(TfsClient tfsClient, UUID planId) {
-        List<Timeline> timelines = tfsClient.getDistributedTaskHttpClient()
-                .getTimelines(getProjectId(), "build", planId);
-
-        if (timelines == null || timelines.isEmpty()) {
-            // create a new timeline if there is none
-            Timeline t = new Timeline();
-            t.setId(UUID.randomUUID());
-            t = tfsClient.getDistributedTaskHttpClient().createTimeline(getProjectId(), "build", t, planId);
-            timelines = Collections.singletonList(t);
-        }
-
-        for (Timeline timeline : timelines) {
-            logger.info(String.format("Timeline id: %s", timeline.getId()));
-        }
-
-        if (timelines.size() > 1) {
-            logger.warning("Multiple timelines found for this build, default to use the first timeline");
-        }
-
-        return timelines.get(0);
     }
 
     private String getSourceCommit() {
@@ -388,6 +379,32 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         }
 
         return null;
+    }
+
+    private BuildResult convertToTfsBuildResult(Result jenkinsResult) {
+        if (jenkinsResult == Result.SUCCESS) {
+            return BuildResult.SUCCEEDED;
+        }
+
+        if (jenkinsBuild.getResult() == Result.ABORTED) {
+            return BuildResult.CANCELED;
+        }
+
+        // Assume FAILURE (and other cases that aren't successful)
+        return BuildResult.FAILED;
+    }
+
+    private TaskResult convertToTfsTaskResult(Result jenkinsResult) {
+        if (jenkinsResult == Result.SUCCESS) {
+            return TaskResult.SUCCEEDED;
+        }
+
+        if (jenkinsBuild.getResult() == Result.ABORTED) {
+            return TaskResult.CANCELED;
+        }
+
+        // Assume FAILURE (and other cases that aren't successful)
+        return TaskResult.FAILED;
     }
 
     private boolean hasLogRecord() {
@@ -419,4 +436,8 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     }
 
     private TfsClient getClient() { return client; }
+
+    private TaskHttpClient getTaskClient() {
+        return getClient().getTaskHttpClient();
+    }
 }
