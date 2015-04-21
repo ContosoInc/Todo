@@ -138,12 +138,11 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
         String jobRecordName = "Jenkins Build";
         jobRecord.setName(jobRecordName);
-        createLogForJobRecord(jobRecord);
+        createLogForTimelineRecord(jobRecord);
 
         String jenkinsRecordName = jenkinsBuild.getFullDisplayName();
-//        String jenkinsRecordName = jenkinsBuild.getProject().getDisplayName()+ " " + jenkinsBuild.getDisplayName();
         jenkinsTaskRecord.setName(jenkinsRecordName);
-        createLogForJobRecord(jenkinsTaskRecord);
+        createLogForTimelineRecord(jenkinsTaskRecord);
 
         updateRecords(records, timelineId);
 
@@ -308,7 +307,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      *
      * @return jobId
      */
-    private void createLogForJobRecord(TimelineRecord record) {
+    private void createLogForTimelineRecord(TimelineRecord record) {
 
             TaskLog log = createTfsLog("logs\\" + record.getId().toString());
             logger.info("Setting up record " + record.getType() + " log path: " + log.getPath() + ", log id: " + log.getId());
