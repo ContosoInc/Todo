@@ -70,7 +70,7 @@ public class TfsBuildFacadeFactoryImpl implements TfsBuildFacadeFactory {
         b.setDefinition(definition);
         b.setProject(project);
 
-        b.setParameters("{}");
+        b.setParameters("{\"build.config\":\"Jenkins\"}");
         b.setDemands(Collections.<Demand>emptyList());
         b.setQueueOptions(QueueOptions.DO_NOT_RUN);
 

@@ -759,7 +759,6 @@ public class TaskHttpClient
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("scopeIdentifier", scopeIdentifier); //$NON-NLS-1$
-        routeValues.put("scopeIdentifier", scopeIdentifier); //$NON-NLS-1$
         routeValues.put("hubName", hubName); //$NON-NLS-1$
         routeValues.put("planId", planId); //$NON-NLS-1$
 
@@ -768,7 +767,6 @@ public class TaskHttpClient
                 routeValues,
                 apiVersion,
                 APPLICATION_JSON_TYPE);
-
         return super.sendRequest(httpRequest, TaskOrchestrationPlan.class);
     }
 

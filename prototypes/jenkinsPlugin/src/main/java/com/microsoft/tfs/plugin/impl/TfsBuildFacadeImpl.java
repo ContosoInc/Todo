@@ -5,10 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 import com.microsoft.teamfoundation.build.webapi.model.Build;
@@ -46,7 +43,6 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
     private static final String JOB_RECORD_TYPE = "Job";
     private static final String JOB_RECORD_NAME = "Build";
     private static final String JENKINS_RECORD_TYPE = "Task";
-    private static final String JENKINS_RECORD_NAME = "Jenkins Build";
     private static final String JENKINS_WORKER_NAME = "Jenkins";
 
     /*
@@ -83,6 +79,16 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      * The job log id for the job record
      */
     private int jobLogId;
+
+    /*
+     * The job log id for the jenkins task record
+     */
+    private int jenkinsLogId;
+
+    /*
+     * The name of the currently executed Jenkins Task
+     */
+    private String jenkinsTaskName;
 
     /*
      * The TFS REST client
@@ -126,15 +132,26 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         }
 
         if (jenkinsTaskRecord == null) {
-            jenkinsTaskRecord = createTimelineJenkinsTaskRecord(jobRecord);
+            jenkinsTaskRecord = createTimelineJenkinsTaskRecord(jobRecord, 1);
             records.add(jenkinsTaskRecord);
         }
+
+        String jobRecordName = "Jenkins Build";
+        jobRecord.setName(jobRecordName);
+        createLogForJobRecord(jobRecord);
+
+        String jenkinsRecordName = jenkinsBuild.getFullDisplayName();
+//        String jenkinsRecordName = jenkinsBuild.getProject().getDisplayName()+ " " + jenkinsBuild.getDisplayName();
+        jenkinsTaskRecord.setName(jenkinsRecordName);
+        createLogForJobRecord(jenkinsTaskRecord);
 
         updateRecords(records, timelineId);
 
         // populate rest of the fields
-        this.jobLogId = -1;
+        this.jobLogId = jobRecord.getLog().getId();;
+        this.jenkinsLogId = jenkinsTaskRecord.getLog().getId();
         this.jobRecordId = jobRecord.getId();
+        this.jenkinsTaskName = jenkinsRecordName;
     }
 
     /**
@@ -242,16 +259,24 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
             return;
         }
 
-        if (!hasLogRecord()) {
-            this.jobLogId = createLogForJobRecord();
-        }
-
         // post console feed
         getTaskClient().postLines(getProjectId(), "build", lines, getPlanId(), getTimelineId(), getJobRecordId());
 
-        // append the feed to its log
+        // append the feed to Jenkins Task log
         try {
-            getTaskClient().appendLog(getByteArrayInputStream(lines), getProjectId(), "build", getPlanId(), getJobLogId());
+            getTaskClient().appendLog(getByteArrayInputStream(lines), getProjectId(), "build", getPlanId(), getJenkinsLogId());
+        } catch (IOException e) {
+            logger.severe("Failed to send log to Microsoft TFS: "+e.getMessage());
+        }
+
+        List<String> jobLogLines = new ArrayList();
+        for (String line : lines) {
+            jobLogLines.add("[" + jenkinsTaskName + "] " + line);
+        }
+
+        // append the feed to Job log
+        try {
+            getTaskClient().appendLog(getByteArrayInputStream(jobLogLines), getProjectId(), "build", getPlanId(), getJobLogId());
         } catch (IOException e) {
             logger.severe("Failed to send log to Microsoft TFS: "+e.getMessage());
         }
@@ -283,53 +308,20 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      *
      * @return jobId
      */
-    private int createLogForJobRecord() {
-        int jobLogId = 0;
+    private void createLogForJobRecord(TimelineRecord record) {
 
-        List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
-
-        for (TimelineRecord record : records) {
-            // Should only patch log information for job record
-            if (record.getType().equalsIgnoreCase(JOB_RECORD_TYPE) && record.getLog() == null) {
-                TaskLog log = getTfsLog();
-                logger.info("Setting up record log path: " + log.getPath() + ", log id: " + jobLogId);
-
-                record.setLog(log);
-                jobLogId = log.getId();
-
-                break;
-            }
-        }
-
-        updateRecords(records, getTimelineId());
-
-        return jobLogId;
+            TaskLog log = createTfsLog("logs\\" + record.getId().toString());
+            logger.info("Setting up record " + record.getType() + " log path: " + log.getPath() + ", log id: " + log.getId());
+            record.setLog(log);
     }
 
-    private TaskLog getTfsLog() {
-        List<TaskLog> logs = getTaskClient().getLogs(getProjectId(), "build", getPlanId());
-
-        // If the log has been already created, use it.
-        if (logs != null && !logs.isEmpty()) {
-            return logs.get(0);
-        }
-
-        // Create a new log
+    private TaskLog createTfsLog(String path) {
         TaskLog log = new TaskLog();
-        log.setId(0);
-        log.setPath("logs\\\\" + UUID.randomUUID());
-        logger.info("There is no log defined. Creating log for plan: " + getPlanId());
-        getTaskClient().createLog(getProjectId(), "build", log, getPlanId());
+        log.setPath(path);
 
-        // It could happen that while we've been creating a new log, the server was managed to
-        // create one in the same time and started to use it. We'll also will use the same log.
-        logs = getTaskClient().getLogs(getProjectId(), "build", getPlanId());
-
-        if (logs == null || logs.isEmpty()) {
-            throw new RuntimeException("Could not create a job log for this build.");
-        }
-
-        return logs.get(0);
+        // Note that we should use the TaskLog object returned from the server,
+        // but not that we passed as the parameter.
+        return getTaskClient().createLog(getProjectId(), "build", log, getPlanId());
     }
 
     private void updateRecords(List<TimelineRecord> timelineRecords, UUID timelineId) {
@@ -340,20 +332,19 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
         TimelineRecord jobRecord = new TimelineRecord();
         jobRecord.setId(UUID.randomUUID());
         jobRecord.setType(JOB_RECORD_TYPE);
-        jobRecord.setName(JOB_RECORD_NAME);
         jobRecord.setState(TimelineRecordState.PENDING);
 
         return jobRecord;
     }
 
-    private TimelineRecord createTimelineJenkinsTaskRecord(TimelineRecord jobRecord) {
+    private TimelineRecord createTimelineJenkinsTaskRecord(TimelineRecord jobRecord, int orderNumber) {
         TimelineRecord jenkinsTaskRecord;
 
         jenkinsTaskRecord = new TimelineRecord();
         jenkinsTaskRecord.setId(UUID.randomUUID());
         jenkinsTaskRecord.setType(JENKINS_RECORD_TYPE);
-        jenkinsTaskRecord.setName(JENKINS_RECORD_NAME);
         jenkinsTaskRecord.setParentId(jobRecord.getId());
+        jenkinsTaskRecord.setOrder(orderNumber);
         jenkinsTaskRecord.setState(TimelineRecordState.PENDING);
 
         return jenkinsTaskRecord;
@@ -429,6 +420,10 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
 
     private int getJobLogId() {
         return jobLogId;
+    }
+
+    private int getJenkinsLogId() {
+        return jenkinsLogId;
     }
 
     private AbstractBuild getJenkinsBuild() {
