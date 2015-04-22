@@ -200,10 +200,11 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      */
     public void startAllTaskRecords() {
         List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
+        Date startTime = new Date();
 
         for (TimelineRecord record : records) {
             record.setState(TimelineRecordState.IN_PROGRESS);
-            record.setStartTime(new Date());
+            record.setStartTime(startTime);
             record.setWorkerName(JENKINS_WORKER_NAME);
         }
 
@@ -216,12 +217,12 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
      */
     public void finishAllTaskRecords() {
         List<TimelineRecord> records = queryTfsTimelineRecords(getTimelineId());
-
         TaskResult result = convertToTfsTaskResult(getJenkinsBuild().getResult());
+        Date finishTime = new Date();
 
         for (TimelineRecord record : records) {
             record.setState(TimelineRecordState.COMPLETED);
-            record.setFinishTime(new Date());
+            record.setFinishTime(finishTime);
             record.setResult(result);
 
             TimelineReference detailsRef = record.getDetails();
@@ -233,7 +234,7 @@ public class TfsBuildFacadeImpl implements TfsBuildFacade {
                     for (TimelineRecord detailRecord : detailRecords) {
                         if (detailRecord.getState() == TimelineRecordState.IN_PROGRESS) {
                             detailRecord.setState(TimelineRecordState.COMPLETED);
-                            detailRecord.setFinishTime(new Date());
+                            detailRecord.setFinishTime(finishTime);
                             detailRecord.setResult(result);
                         }
                     }
