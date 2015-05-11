@@ -18,7 +18,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microsoft.vss.client.core.model.VssJsonCollectionWrapper;
+import com.microsoft.visualstudio.services.webapi.model.VssJsonCollectionWrapper;
 import com.microsoft.vss.client.core.utils.JsonHelper;
 
 public class ApiResourceEntityProvider

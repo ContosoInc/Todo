@@ -33,7 +33,7 @@ import com.microsoft.vss.client.core.model.ApiResourceVersion;
 import com.microsoft.vss.client.core.model.NameValueCollection;
 import com.microsoft.vss.client.core.VssHttpClientBase;
 
-public abstract class DistributedTaskHttpClientBase 
+public abstract class TaskAgentHttpClientBase 
     extends VssHttpClientBase {
 
     private final static Map<String, Class<? extends Exception>> TRANSLATED_EXCEPTIONS;
@@ -43,14 +43,14 @@ public abstract class DistributedTaskHttpClientBase
     }
 
     /**
-    * Create a new instance of DistributedTaskHttpClientBase
+    * Create a new instance of TaskAgentHttpClientBase
     *
     * @param jaxrsClient
     *            an initialized instance of a JAX-RS Client implementation
     * @param baseUrl
     *            a TFS project collection URL
     */
-    public DistributedTaskHttpClientBase(final Client jaxrsClient, final URI baseUrl) {
+    public TaskAgentHttpClientBase(final Client jaxrsClient, final URI baseUrl) {
         super(jaxrsClient, baseUrl);
     }
 
@@ -355,7 +355,7 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("requestId", requestId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
+        queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
                                                            locationId,
@@ -447,7 +447,7 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("requestId", requestId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
+        queryParameters.addIfNotNull("lockToken", lockToken); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.PATCH,
                                                            locationId,
@@ -483,7 +483,7 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("messageId", messageId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
+        queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.DELETE,
                                                            locationId,
@@ -516,7 +516,7 @@ public abstract class DistributedTaskHttpClientBase
         routeValues.put("poolId", poolId); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
+        queryParameters.addIfNotNull("sessionId", sessionId); //$NON-NLS-1$
         queryParameters.addIfNotNull("lastMessageId", lastMessageId); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.GET,
@@ -824,7 +824,7 @@ public abstract class DistributedTaskHttpClientBase
         final ApiResourceVersion apiVersion = new ApiResourceVersion("2.0-preview.1"); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
-            queryParameters.addIfNotNull("visibility", visibility); //$NON-NLS-1$
+        queryParameters.addIfNotNull("visibility", visibility); //$NON-NLS-1$
 
         final Invocation httpRequest = super.createRequest(HttpMethod.GET,
                                                            locationId,
@@ -838,15 +838,12 @@ public abstract class DistributedTaskHttpClientBase
     /** 
      * @param taskId 
      *            
-     * @param versionString 
-     *            
      * @param overwrite 
      *            
      * @return Response
      */
-    public Response uploadTaskContent(
+    public Response uploadTaskDefinition(
         final UUID taskId, 
-        final String versionString, 
         final Boolean overwrite) {
 
         final UUID locationId = UUID.fromString("60aac929-f0cd-4bc8-9ce4-6b30e8f1b1bd"); //$NON-NLS-1$
@@ -854,7 +851,6 @@ public abstract class DistributedTaskHttpClientBase
 
         final Map<String, Object> routeValues = new HashMap<String, Object>();
         routeValues.put("taskId", taskId); //$NON-NLS-1$
-        routeValues.put("versionString", versionString); //$NON-NLS-1$
 
         final NameValueCollection queryParameters = new NameValueCollection();
         queryParameters.addIfNotNull("overwrite", overwrite); //$NON-NLS-1$

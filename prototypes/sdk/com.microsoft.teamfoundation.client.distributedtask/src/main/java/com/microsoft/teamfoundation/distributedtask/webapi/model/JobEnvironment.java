@@ -16,30 +16,21 @@ package com.microsoft.teamfoundation.distributedtask.webapi.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
-import com.microsoft.visualstudio.services.webapi.model.PropertiesCollection;
 
 public class JobEnvironment {
 
-    private PropertiesCollection data;
-    private JobEndpoint[] endpoints;
+    private List<ServiceEndpoint> endpoints;
     private List<MaskHint> mask;
     private HashMap<UUID,JobOption> options;
-    private HashMap<String,Object> secrets;
+    private ServiceEndpoint systemConnection;
+    private ServiceEndpoint userConnection;
     private HashMap<String,String> variables;
 
-    public PropertiesCollection getData() {
-        return data;
-    }
-
-    public void setData(final PropertiesCollection data) {
-        this.data = data;
-    }
-
-    public JobEndpoint[] getEndpoints() {
+    public List<ServiceEndpoint> getEndpoints() {
         return endpoints;
     }
 
-    public void setEndpoints(final JobEndpoint[] endpoints) {
+    public void setEndpoints(final List<ServiceEndpoint> endpoints) {
         this.endpoints = endpoints;
     }
 
@@ -59,12 +50,20 @@ public class JobEnvironment {
         this.options = options;
     }
 
-    public HashMap<String,Object> getSecrets() {
-        return secrets;
+    public ServiceEndpoint getSystemConnection() {
+        return systemConnection;
     }
 
-    public void setSecrets(final HashMap<String,Object> secrets) {
-        this.secrets = secrets;
+    public void setSystemConnection(final ServiceEndpoint systemConnection) {
+        this.systemConnection = systemConnection;
+    }
+
+    public ServiceEndpoint getUserConnection() {
+        return userConnection;
+    }
+
+    public void setUserConnection(final ServiceEndpoint userConnection) {
+        this.userConnection = userConnection;
     }
 
     public HashMap<String,String> getVariables() {

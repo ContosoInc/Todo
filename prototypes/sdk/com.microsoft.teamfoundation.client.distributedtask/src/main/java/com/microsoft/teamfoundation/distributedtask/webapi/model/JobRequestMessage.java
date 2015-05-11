@@ -19,7 +19,6 @@ import java.util.UUID;
 
 public class JobRequestMessage {
 
-    private JobAuthorization authorization;
     private JobEnvironment environment;
     private UUID jobId;
     private String jobName;
@@ -29,14 +28,6 @@ public class JobRequestMessage {
     private long requestId;
     private List<TaskInstance> tasks;
     private TimelineReference timeline;
-
-    public JobAuthorization getAuthorization() {
-        return authorization;
-    }
-
-    public void setAuthorization(final JobAuthorization authorization) {
-        this.authorization = authorization;
-    }
 
     public JobEnvironment getEnvironment() {
         return environment;

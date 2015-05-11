@@ -23,6 +23,7 @@ public class TaskInputDefinition {
     private String label;
     private String name;
     private HashMap<String,String> options;
+    private HashMap<String,String> properties;
     private boolean required;
     private String type;
     private String visibleRule;
@@ -73,6 +74,14 @@ public class TaskInputDefinition {
 
     public void setOptions(final HashMap<String,String> options) {
         this.options = options;
+    }
+
+    public HashMap<String,String> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(final HashMap<String,String> properties) {
+        this.properties = properties;
     }
 
     public boolean getRequired() {
