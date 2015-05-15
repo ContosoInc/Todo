@@ -1,6 +1,5 @@
 package com.contoso.services;
 
-
 public class TodoList {
 
 	public TodoList() {
