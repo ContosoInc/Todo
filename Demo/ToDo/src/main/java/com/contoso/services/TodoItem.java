@@ -2,6 +2,7 @@ package com.contoso.services;
 
 import java.util.Date;
 
+
 public class TodoItem {
 	
 	public TodoItem(String name) {
